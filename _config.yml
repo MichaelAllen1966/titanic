@@ -1,0 +1,11 @@
+# book settings
+title: Titanic Survical Machine Learning
+author: Michael Allen
+#logo: images/logo.png
+
+#only build files specified in table of contents file
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: cache #cache output from .ipynb files for faster build
+  timeout: -1 #no time restriction on notebook execution

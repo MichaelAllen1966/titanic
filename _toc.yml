@@ -1,0 +1,10 @@
+- file: front_page
+  numbered: false
+  
+- part: Data preprocessing
+  chapters:
+  - file: 01_preprocessing
+  
+- part: Basic methods
+  chapters:
+  - file: 02_logistic_regression
