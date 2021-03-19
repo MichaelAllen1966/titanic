@@ -1,6 +1,6 @@
 # Titanic Survival
 
-## Essential Machine Learning Classification Coding Tutorials
+Essential Machine Learning Classification Coding Tutorials
 
 ![](./images/titanic.png)
 
