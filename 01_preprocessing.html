@@ -102,16 +102,6 @@
    Kaggle Titanic survival - data preprocessing
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#load-data">
-   Load data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#sorting-out-cabin-data">
-   Sorting out cabin data
-  </a>
- </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -211,61 +201,50 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Kaggle Titanic survival - data preprocessing
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-modules">
-     Load modules
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data">
    Load data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#showing-a-summary-of-the-data">
-     Showing a summary of the data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#filling-in-imputing-missing-data">
-     Filling in (imputing) missing data
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#showing-a-summary-of-the-data">
+   Showing a summary of the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filling-in-imputing-missing-data">
+   Filling in (imputing) missing data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sorting-out-cabin-data">
    Sorting out cabin data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encoding-non-numerical-fields">
-     Encoding non-numerical fields.
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#drop-columns">
-     Drop columns
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#having-a-quick-look-at-differences-between-survived-and-non-survived-passengers">
-     Having a quick look at differences between survived and non-survived passengers
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#save-processed-data">
-     Save processed data
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encoding-non-numerical-fields">
+   Encoding non-numerical fields.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drop-columns">
+   Drop columns
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#having-a-quick-look-at-differences-between-survived-and-non-survived-passengers">
+   Having a quick look at differences between survived and non-survived passengers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-processed-data">
+   Save processed data
+  </a>
  </li>
 </ul>
 
@@ -346,9 +325,8 @@
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="load-data">
-<h1>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h1>
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>Data should be in a sub folder named data.</p>
 <p>It may be downloaded from:</p>
 <p><a class="reference external" href="https://gitlab.com/michaelallen1966/1908_coding_club_kaggle_titanic/tree/master/data">https://gitlab.com/michaelallen1966/1908_coding_club_kaggle_titanic/tree/master/data</a></p>
@@ -587,6 +565,7 @@ dtype: int64
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="showing-a-summary-of-the-data">
 <h2>Showing a summary of the data<a class="headerlink" href="#showing-a-summary-of-the-data" title="Permalink to this headline">¶</a></h2>
 <p>We can use the pandas <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method to show a summary of the data. Note that this only shows numerical data.</p>
@@ -767,9 +746,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="sorting-out-cabin-data">
-<h1>Sorting out cabin data<a class="headerlink" href="#sorting-out-cabin-data" title="Permalink to this headline">¶</a></h1>
+<h2>Sorting out cabin data<a class="headerlink" href="#sorting-out-cabin-data" title="Permalink to this headline">¶</a></h2>
 <p>Cabin data is messy! Some passengers have more than one cabin (in which case we will split out the multiple cabins and just use the first one). Cabin numbers are a letter followed by a number. We will separate out the letter and the number.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -997,6 +975,7 @@ CabinNumber           0
 CabinNumberImputed    0
 dtype: int64
 </pre></div>
+</div>
 </div>
 </div>
 </div>
