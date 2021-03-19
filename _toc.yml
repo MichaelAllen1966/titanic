@@ -3,8 +3,8 @@
   
 - part: Data preprocessing
   chapters:
-  - file: 01_preprocessing
+  - file: preprocessing
   
 - part: Basic methods
   chapters:
-  - file: 02_logistic_regression
+  - file: logistic_regression
