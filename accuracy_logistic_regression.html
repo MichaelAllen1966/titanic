@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accuracy measurements in machine learning &#8212; Titanic Survical Machine Learning</title>
+    <title>Application of alternative accuracy measurements to a logistic regression model &#8212; Titanic Survical Machine Learning</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,8 +55,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Application of alternative accuracy measurements to a logistic regression model" href="accuracy_logistic_regression.html" />
-    <link rel="prev" title="Avoiding over-fitting with regularisation" href="regularisation.html" />
+    <link rel="prev" title="Accuracy measurements in machine learning" href="accuracy_standalone.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -124,13 +123,13 @@
    Avoiding over-fitting with regularisation
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="accuracy_standalone.html">
    Accuracy measurements in machine learning
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="accuracy_logistic_regression.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Application of alternative accuracy measurements to a logistic regression model
   </a>
  </li>
@@ -174,7 +173,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/accuracy_standalone.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/accuracy_logistic_regression.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -199,7 +198,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/accuracy_standalone.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/accuracy_logistic_regression.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -222,13 +221,43 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#define-function">
-   Define function
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#demonstrate-method">
-   Demonstrate method
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-training-and-tets-sets">
+   Divide into training and tets sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standardise-data">
+   Standardise data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-logistic-regression-model">
+   Fit logistic regression model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-values">
+   Predict values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-accuracy">
+   Calculate accuracy
   </a>
  </li>
 </ul>
@@ -242,39 +271,170 @@
         
               <div>
                 
-  <div class="section" id="accuracy-measurements-in-machine-learning">
-<h1>Accuracy measurements in machine learning<a class="headerlink" href="#accuracy-measurements-in-machine-learning" title="Permalink to this headline">¶</a></h1>
-<p>The most common measurement in machine learning is ‘accuracy, that is the proportion of cases where the classification is correct. This may at times not be the best measurement. For example, imagine you wish to detect who is carrying the back death among people coming through an airport, by measuring a range of features (such as body temperature, or the presence of a particular skin rash pattern). Now imagine that one in a thousand people are carriers of black death, who if allowed through will start off a major epidemic. We may then optimise a machine learning algorithm and it reports 99.9% accuracy. Impressive! Or is it? The algorithm may have simply classed everybody as not having black death. It will be right 999 times out of 1,000. But at the same time it will miss every single case of black death that you intended to detect. This is an extreme example of where we need more sophisticated measurements of accuracy. In this particular case, we probably want to measure sensitivity and specificity. Sensitivity measures the proportion of positive cases (black death) correctly classified, while specificity measures the proportion of negative cases (no black death) correctly classified. We will later see how we might change machine learning thresholds to adjust the balance between sensitivity and specificity.</p>
-<p>Sensitivity and specificity are not the only measures (though they are common in health diagnosis problems). Below are a range of measures that our function will calculated (given the observed and predicted class values of a range of cases). In addition to sensitivity and specificity, common measures used in machine learning are precision, recall and f1 (a combination of precision and recall).</p>
-<p>The full list of measures that our function will return (in the form of a dictionary) is:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> 1) observed positive rate: proportion of observed cases that are +ve
- 2) predicted positive rate: proportion of predicted cases that are +ve
- 3) observed negative rate: proportion of observed cases that are -ve
- 4) predicted negative rate: proportion of predicted cases that are -ve  
- 5) accuracy: proportion of predicted results that are correct    
- 6) precision: proportion of predicted +ve that are correct
- 7) recall: proportion of true +ve correctly identified
- 8) f1: harmonic mean of precision and recall
- 9) sensitivity: Same as recall
-10) specificity: Proportion of true -ve identified:        
-11) positive likelihood: increased probability of true +ve if test +ve
-12) negative likelihood: reduced probability of true +ve if test -ve
-13) false positive rate: proportion of false +ves in true -ve patients
-14) false negative rate: proportion of false -ves in true +ve patients
-15) true positive rate: Same as recall
-16) true negative rate
-17) positive predictive value: chance of true +ve if test +ve
-18) negative predictive value: chance of true -ve if test -ve
-</pre></div>
-</div>
-<p>Please note that these measures are for a ‘binomial’ classification problem. That is where there are two alternatives for each case (e.g. survived or not-survived on the Titanic). Where there are more than two possible classes, a confusion matrix is most commonly used (e.g. see <a class="reference external" href="https://pythonhealthcare.org/2018/04/21/77-machine-learning-visualising-accuracy-and-error-in-a-classification-model-with-a-confusion-matrix/">https://pythonhealthcare.org/2018/04/21/77-machine-learning-visualising-accuracy-and-error-in-a-classification-model-with-a-confusion-matrix/</a>)</p>
-<div class="section" id="define-function">
-<h2>Define function<a class="headerlink" href="#define-function" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="application-of-alternative-accuracy-measurements-to-a-logistic-regression-model">
+<h1>Application of alternative accuracy measurements to a logistic regression model<a class="headerlink" href="#application-of-alternative-accuracy-measurements-to-a-logistic-regression-model" title="Permalink to this headline">¶</a></h1>
+<p>Here we will take the accuracy measurements described in the previous chapter and apply them to the logistic regression model.</p>
+<div class="section" id="load-modules">
+<h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
+<p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># Import machine learning methods</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
+If data has already been downloaded that cell may be skipped.</p>
+<p>Code that was used to pre-process the data ready for machine learning may be found at:
+<a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">download_required</span><span class="p">:</span>
+    
+    <span class="c1"># Download processed data:</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/MichaelAllen1966/&#39;</span> <span class="o">+</span> \
+                <span class="s1">&#39;1804_python_healthcare/master/titanic/data/processed_data.csv&#39;</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+
+    <span class="c1"># Create a data subfolder if one does not already exist</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">data_directory</span> <span class="o">=</span><span class="s1">&#39;./data/&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_directory</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+    <span class="c1"># Save data</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_directory</span> <span class="o">+</span> <span class="s1">&#39;processed_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Make all data &#39;float&#39; type</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first column is a passenger index number. We will remove this, as this is not part of the original Titanic passenger data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop Passengerid (axis=1 indicates we are removing a column rather than a row)</span>
+<span class="c1"># We drop passenger ID as it is not original data</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
+<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
+<p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
+By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="divide-into-training-and-tets-sets">
+<h2>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h2>
+<p>When we test a machine learning model we should always test it on data that has not been used to train the model.
+We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="standardise-data">
+<h2>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h2>
+<p>We want all of out features to be on roughly the same scale. This generally leads to a better model, and also allows us to more easily compare the importance of different features.</p>
+<p>One simple method is to scale all features 0-1 (by subtracting the minimum value for each value, and dividing by the new remaining maximum value).</p>
+<p>But a more common method used in many machine learning methods is standardisation, where we use the mean and standard deviation of the training set of data to normalise the data. We subtract the mean of the test set values, and divide by the standard deviation of the training data. Note that the mean and standard deviation of the training data are used to standardise the test set data as well.</p>
+<p>Here we will use sklearn’s <code class="docutils literal notranslate"><span class="pre">StandardScaler</span> <span class="pre">method</span></code>. This method also copes with problems we might otherwise have (such as if one feature has zero standard deviation in the training set).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+    
+    <span class="c1"># Initialise a new scaling object for normalising input data</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
+
+    <span class="c1"># Set up the scaler just on the training set</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># Apply the scaler to the training and test sets</span>
+    <span class="n">train_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">test_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_std</span><span class="p">,</span> <span class="n">test_std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fit-logistic-regression-model">
+<h2>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
+<p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method. Our machine learning model fitting is only two lines of code! By using the name <code class="docutils literal notranslate"><span class="pre">model</span></code> for our logistic regression model we will make our model more interchangeable later on.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LogisticRegression()
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="predict-values">
+<h2>Predict values<a class="headerlink" href="#predict-values" title="Permalink to this headline">¶</a></h2>
+<p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict training and test set labels</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="calculate-accuracy">
+<h2>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h2>
+<p>Here we define a function that will calculate a range of accuracy scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
     
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates a range of accuracy scores from observed and predicted classes.</span>
@@ -379,17 +539,10 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="demonstrate-method">
-<h2>Demonstrate method<a class="headerlink" href="#demonstrate-method" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create two lists to test function</span>
-<span class="n">observed</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">predicted</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Call calculate_accuracy function</span>
-<span class="n">accuracy</span> <span class="o">=</span> <span class="n">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call calculate_accuracy function</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">calculate_accuracy</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
 
 <span class="c1"># Print results up to three decimal places</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -398,28 +551,30 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>observed_positive_rate 0.4
-observed_negative_rate 0.6
-predicted_positive_rate 0.4
-predicted_negative_rate 0.6
-accuracy 0.8
-precision 0.75
-recall 0.75
-f1 0.75
-sensitivity 0.75
-specificity 0.833
-positive_likelihood 4.5
-negative_likelihood 0.3
-false_positive_rate 0.167
-false_negative_rate 0.25
-true_positive_rate 0.75
-true_negative_rate 0.833
-positive_predictive_value 0.75
-negative_predictive_value 1.25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>observed_positive_rate 0.408
+observed_negative_rate 0.592
+predicted_positive_rate 0.386
+predicted_negative_rate 0.614
+accuracy 0.807
+precision 0.779
+recall 0.736
+f1 0.757
+sensitivity 0.736
+specificity 0.856
+positive_likelihood 5.12
+negative_likelihood 0.308
+false_positive_rate 0.144
+false_negative_rate 0.264
+true_positive_rate 0.736
+true_negative_rate 0.856
+positive_predictive_value 0.736
+negative_predictive_value 1.24
 </pre></div>
 </div>
 </div>
 </div>
+<p>We can see from the accuracy scores that overall accuracy is about 80%, but that accuracy is imbalanced between survivors and non-survivors. We can see the model is biased towards predicting fewer survivors than actually occurred, and this gives higher specificity (the proportion of non-survivors correctly identified) than sensitivity (the proportion of survivors correctly identified). In the next notebook we will look at adjusting the balance between sensitivity and specificity.</p>
+<p>Note: To keep this example simple we have used a single random split between training and test data. A more thorough analysis would use repeated measurement using stratified k-fold validation (see <a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a>).</p>
 </div>
 </div>
 
@@ -451,8 +606,7 @@ negative_predictive_value 1.25
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="regularisation.html" title="previous page">Avoiding over-fitting with regularisation</a>
-    <a class='right-next' id="next-link" href="accuracy_logistic_regression.html" title="next page">Application of alternative accuracy measurements to a logistic regression model</a>
+    <a class='left-prev' id="prev-link" href="accuracy_standalone.html" title="previous page">Accuracy measurements in machine learning</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
