@@ -55,6 +55,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Measuring model accuracy with K-fold stratification" href="k_fold.html" />
     <link rel="prev" title="Kaggle Titanic survival - data preprocessing" href="preprocessing.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -111,6 +112,16 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="k_fold.html">
+   Measuring model accuracy with K-fold stratification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="k_fold.html#download-data">
+   Download data
   </a>
  </li>
 </ul>
@@ -1240,55 +1251,55 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Pclass                  0.827296
- Age                    13.307604
- SibSp                   1.123736
- Parch                   0.783203
- Fare                   51.956970
- AgeImputed              0.405160
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Pclass                  0.833368
+ Age                    13.016045
+ SibSp                   1.098563
+ Parch                   0.844429
+ Fare                   50.688612
+ AgeImputed              0.401864
  EmbarkedImputed         0.054677
- CabinLetterImputed      0.413581
- CabinNumber            26.071613
- CabinNumberImputed      0.408379
- male                    0.472459
- Embarked_C              0.382920
+ CabinLetterImputed      0.416606
+ CabinNumber            25.437793
+ CabinNumberImputed      0.410484
+ male                    0.481445
+ Embarked_C              0.389098
  Embarked_Q              0.288276
- Embarked_S              0.445556
+ Embarked_S              0.449306
  Embarked_missing        0.054677
- CabinLetter_A           0.127358
- CabinLetter_B           0.225974
- CabinLetter_C           0.231799
- CabinLetter_D           0.189943
+ CabinLetter_A           0.121524
+ CabinLetter_B           0.231799
+ CabinLetter_C           0.237443
+ CabinLetter_D           0.178598
  CabinLetter_E           0.186250
- CabinLetter_F           0.108859
+ CabinLetter_F           0.127358
  CabinLetter_G           0.066915
  CabinLetter_T           0.038691
- CabinLetter_missing     0.413581
+ CabinLetter_missing     0.416606
  dtype: float64,
- Pclass                  2.324850
- Age                    29.330973
- SibSp                   0.532934
- Parch                   0.366766
- Fare                   31.947180
- AgeImputed              0.206587
+ Pclass                  2.311377
+ Age                    29.279940
+ SibSp                   0.507485
+ Parch                   0.410180
+ Fare                   32.898827
+ AgeImputed              0.202096
  EmbarkedImputed         0.002994
- CabinLetterImputed      0.781437
- CabinNumber            10.392216
- CabinNumberImputed      0.788922
- male                    0.664671
- Embarked_C              0.178144
+ CabinLetterImputed      0.776946
+ CabinNumber            10.250000
+ CabinNumberImputed      0.785928
+ male                    0.636228
+ Embarked_C              0.185629
  Embarked_Q              0.091317
- Embarked_S              0.727545
+ Embarked_S              0.720060
  Embarked_missing        0.002994
- CabinLetter_A           0.016467
- CabinLetter_B           0.053892
- CabinLetter_C           0.056886
- CabinLetter_D           0.037425
+ CabinLetter_A           0.014970
+ CabinLetter_B           0.056886
+ CabinLetter_C           0.059880
+ CabinLetter_D           0.032934
  CabinLetter_E           0.035928
- CabinLetter_F           0.011976
+ CabinLetter_F           0.016467
  CabinLetter_G           0.004491
  CabinLetter_T           0.001497
- CabinLetter_missing     0.781437
+ CabinLetter_missing     0.776946
  dtype: float64)
 </pre></div>
 </div>
@@ -1351,36 +1362,36 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
   </thead>
   <tbody>
     <tr>
-      <th>856</th>
+      <th>763</th>
       <td>1.0</td>
-      <td>45.0</td>
+      <td>36.0</td>
       <td>1.0</td>
-      <td>1.0</td>
-      <td>164.8667</td>
+      <td>2.0</td>
+      <td>120.0000</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>96.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>864</th>
-      <td>2.0</td>
+      <th>127</th>
+      <td>3.0</td>
       <td>24.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>13.0000</td>
+      <td>7.1417</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1399,33 +1410,9 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>91</th>
-      <td>3.0</td>
-      <td>20.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7.8542</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>723</th>
+      <th>387</th>
       <td>2.0</td>
-      <td>50.0</td>
+      <td>36.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>13.0000</td>
@@ -1447,28 +1434,52 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>457</th>
+      <th>540</th>
       <td>1.0</td>
+      <td>36.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>71.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>22.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>648</th>
+      <td>3.0</td>
       <td>28.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.5500</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>51.8625</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>21.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1495,36 +1506,12 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>...</td>
     </tr>
     <tr>
-      <th>201</th>
-      <td>3.0</td>
-      <td>28.0</td>
-      <td>8.0</td>
+      <th>343</th>
       <td>2.0</td>
-      <td>69.5500</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
+      <td>25.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>852</th>
-      <td>3.0</td>
-      <td>9.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>15.2458</td>
+      <td>13.0000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1543,12 +1530,60 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>77</th>
+      <th>829</th>
+      <td>1.0</td>
+      <td>62.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>80.0000</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>28.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>385</th>
+      <td>2.0</td>
+      <td>18.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>73.5000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>533</th>
       <td>3.0</td>
       <td>28.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>8.0500</td>
+      <td>2.0</td>
+      <td>22.3583</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1567,37 +1602,13 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>579</th>
+      <th>873</th>
       <td>3.0</td>
-      <td>32.0</td>
+      <td>47.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>7.9250</td>
+      <td>9.0000</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>718</th>
-      <td>3.0</td>
-      <td>28.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>15.5000</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -1691,7 +1702,7 @@ By using the name <code class="docutils literal notranslate"><span class="pre">m
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.8248502994011976
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.8233532934131736
 Accuracy of predicting test data = 0.7757847533632287
 </pre></div>
 </div>
@@ -1713,12 +1724,11 @@ Accuracy of predicting test data = 0.7757847533632287
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-6.28208514e-01, -6.04425157e-01, -4.08163739e-01, -5.21672510e-02,
-        1.08818147e-01, -1.11936747e-01,  9.34259017e-02,  3.84963790e-04,
-       -1.56539704e-01, -5.46009688e-01, -1.32666669e+00,  1.26857925e-01,
-        3.24080299e-02, -1.41457157e-01,  9.34259017e-02, -3.04832508e-02,
-        5.27302978e-03, -1.14269255e-01,  9.71339366e-02,  9.64986972e-02,
-        5.20984180e-02, -1.12885500e-01, -1.42710334e-01,  3.84963790e-04])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.78668892, -0.55715825, -0.32401553, -0.14388051,  0.12807055,
+       -0.19354324,  0.10513342,  0.10354118,  0.0413684 , -0.47872753,
+       -1.36665536,  0.09083013,  0.0575849 , -0.12839912,  0.10513342,
+       -0.00691985, -0.10633656, -0.32416366,  0.04901626,  0.21082724,
+        0.20020157, -0.13205848, -0.13847198,  0.10354118])
 </pre></div>
 </div>
 </div>
@@ -1771,146 +1781,146 @@ Accuracy of predicting test data = 0.7757847533632287
     <tr>
       <th>10</th>
       <td>male</td>
-      <td>-1.326667</td>
-      <td>1.326667</td>
+      <td>-1.366655</td>
+      <td>1.366655</td>
     </tr>
     <tr>
       <th>0</th>
       <td>Pclass</td>
-      <td>-0.628209</td>
-      <td>0.628209</td>
+      <td>-0.786689</td>
+      <td>0.786689</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Age</td>
-      <td>-0.604425</td>
-      <td>0.604425</td>
+      <td>-0.557158</td>
+      <td>0.557158</td>
     </tr>
     <tr>
       <th>9</th>
       <td>CabinNumberImputed</td>
-      <td>-0.546010</td>
-      <td>0.546010</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>SibSp</td>
-      <td>-0.408164</td>
-      <td>0.408164</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CabinNumber</td>
-      <td>-0.156540</td>
-      <td>0.156540</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>CabinLetter_T</td>
-      <td>-0.142710</td>
-      <td>0.142710</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Embarked_S</td>
-      <td>-0.141457</td>
-      <td>0.141457</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Embarked_C</td>
-      <td>0.126858</td>
-      <td>0.126858</td>
+      <td>-0.478728</td>
+      <td>0.478728</td>
     </tr>
     <tr>
       <th>17</th>
       <td>CabinLetter_C</td>
-      <td>-0.114269</td>
-      <td>0.114269</td>
+      <td>-0.324164</td>
+      <td>0.324164</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>CabinLetter_G</td>
-      <td>-0.112885</td>
-      <td>0.112885</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>AgeImputed</td>
-      <td>-0.111937</td>
-      <td>0.111937</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Fare</td>
-      <td>0.108818</td>
-      <td>0.108818</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>CabinLetter_D</td>
-      <td>0.097134</td>
-      <td>0.097134</td>
+      <th>2</th>
+      <td>SibSp</td>
+      <td>-0.324016</td>
+      <td>0.324016</td>
     </tr>
     <tr>
       <th>19</th>
       <td>CabinLetter_E</td>
-      <td>0.096499</td>
-      <td>0.096499</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>EmbarkedImputed</td>
-      <td>0.093426</td>
-      <td>0.093426</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Embarked_missing</td>
-      <td>0.093426</td>
-      <td>0.093426</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Parch</td>
-      <td>-0.052167</td>
-      <td>0.052167</td>
+      <td>0.210827</td>
+      <td>0.210827</td>
     </tr>
     <tr>
       <th>20</th>
       <td>CabinLetter_F</td>
-      <td>0.052098</td>
-      <td>0.052098</td>
+      <td>0.200202</td>
+      <td>0.200202</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>Embarked_Q</td>
-      <td>0.032408</td>
-      <td>0.032408</td>
+      <th>5</th>
+      <td>AgeImputed</td>
+      <td>-0.193543</td>
+      <td>0.193543</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>CabinLetter_A</td>
-      <td>-0.030483</td>
-      <td>0.030483</td>
+      <th>3</th>
+      <td>Parch</td>
+      <td>-0.143881</td>
+      <td>0.143881</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>CabinLetter_T</td>
+      <td>-0.138472</td>
+      <td>0.138472</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>CabinLetter_G</td>
+      <td>-0.132058</td>
+      <td>0.132058</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Embarked_S</td>
+      <td>-0.128399</td>
+      <td>0.128399</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Fare</td>
+      <td>0.128071</td>
+      <td>0.128071</td>
     </tr>
     <tr>
       <th>16</th>
       <td>CabinLetter_B</td>
-      <td>0.005273</td>
-      <td>0.005273</td>
+      <td>-0.106337</td>
+      <td>0.106337</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>CabinLetterImputed</td>
-      <td>0.000385</td>
-      <td>0.000385</td>
+      <th>6</th>
+      <td>EmbarkedImputed</td>
+      <td>0.105133</td>
+      <td>0.105133</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Embarked_missing</td>
+      <td>0.105133</td>
+      <td>0.105133</td>
     </tr>
     <tr>
       <th>23</th>
       <td>CabinLetter_missing</td>
-      <td>0.000385</td>
-      <td>0.000385</td>
+      <td>0.103541</td>
+      <td>0.103541</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CabinLetterImputed</td>
+      <td>0.103541</td>
+      <td>0.103541</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Embarked_C</td>
+      <td>0.090830</td>
+      <td>0.090830</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Embarked_Q</td>
+      <td>0.057585</td>
+      <td>0.057585</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>CabinLetter_D</td>
+      <td>0.049016</td>
+      <td>0.049016</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CabinNumber</td>
+      <td>0.041368</td>
+      <td>0.041368</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>CabinLetter_A</td>
+      <td>-0.006920</td>
+      <td>0.006920</td>
     </tr>
   </tbody>
 </table>
@@ -1938,7 +1948,7 @@ Accuracy of predicting test data = 0.7757847533632287
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1., 0., 0., 1., 1., 1., 0., 0., 0.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 1., 0., 1., 1., 0., 0., 0., 0.])
 </pre></div>
 </div>
 </div>
@@ -1953,16 +1963,16 @@ Accuracy of predicting test data = 0.7757847533632287
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.1742069 , 0.8257931 ],
-       [0.15702569, 0.84297431],
-       [0.87071391, 0.12928609],
-       [0.72975123, 0.27024877],
-       [0.35090563, 0.64909437],
-       [0.43207163, 0.56792837],
-       [0.28123296, 0.71876704],
-       [0.906494  , 0.093506  ],
-       [0.92641911, 0.07358089],
-       [0.83017653, 0.16982347]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.90847092, 0.09152908],
+       [0.88432125, 0.11567875],
+       [0.30733123, 0.69266877],
+       [0.79423491, 0.20576509],
+       [0.07817368, 0.92182632],
+       [0.0316456 , 0.9683544 ],
+       [0.90109135, 0.09890865],
+       [0.69423264, 0.30576736],
+       [0.94976954, 0.05023046],
+       [0.76929649, 0.23070351]])
 </pre></div>
 </div>
 </div>
@@ -1999,6 +2009,7 @@ Accuracy of predicting test data = 0.7757847533632287
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="preprocessing.html" title="previous page">Kaggle Titanic survival - data preprocessing</a>
+    <a class='right-next' id="next-link" href="k_fold.html" title="next page">Measuring model accuracy with K-fold stratification</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
