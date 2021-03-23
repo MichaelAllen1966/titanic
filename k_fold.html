@@ -120,11 +120,6 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#download-data">
-   Download data
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="regularisation.html">
    Avoiding over-fitting with regularisation
   </a>
@@ -216,54 +211,45 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Measuring model accuracy with K-fold stratification
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-modules">
-     Load modules
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#download-data">
    Download data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data-and-cast-all-data-as-float-decimal">
-     Load data and cast all data as float (decimal)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-     Divide into X (features) and y (labels)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-to-standardise-data">
-     Define function to standardise data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-and-testing-the-model-for-all-k-fold-splits">
-     Training and testing the model for all k-fold splits
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-training-and-test-results">
-     Show training and test results
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-results-box-plot">
-     Plot results: Box Plot
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data-and-cast-all-data-as-float-decimal">
+   Load data and cast all data as float (decimal)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-standardise-data">
+   Define function to standardise data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-and-testing-the-model-for-all-k-fold-splits">
+   Training and testing the model for all k-fold splits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-training-and-test-results">
+   Show training and test results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-results-box-plot">
+   Plot results: Box Plot
+  </a>
  </li>
 </ul>
 
@@ -296,9 +282,8 @@
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="download-data">
-<h1>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h1>
+<h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -321,6 +306,7 @@
     <span class="c1"># Save data</span>
     <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_directory</span> <span class="o">+</span> <span class="s1">&#39;processed_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
