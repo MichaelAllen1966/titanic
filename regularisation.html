@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Measuring model accuracy with K-fold stratification &#8212; Titanic Survical Machine Learning</title>
+    <title>Avoiding over-fitting with regularisation &#8212; Titanic Survical Machine Learning</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,8 +55,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Avoiding over-fitting with regularisation" href="regularisation.html" />
-    <link rel="prev" title="Logistic regression model" href="logistic_regression.html" />
+    <link rel="prev" title="Measuring model accuracy with K-fold stratification" href="k_fold.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -114,18 +113,18 @@
    Logistic regression model
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="k_fold.html">
    Measuring model accuracy with K-fold stratification
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#download-data">
+  <a class="reference internal" href="k_fold.html#download-data">
    Download data
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="regularisation.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Avoiding over-fitting with regularisation
   </a>
  </li>
@@ -169,7 +168,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/k_fold.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/regularisation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -194,7 +193,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/k_fold.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/regularisation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -216,54 +215,40 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Measuring model accuracy with K-fold stratification
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-modules">
-     Load modules
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#download-data">
    Download data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data-and-cast-all-data-as-float-decimal">
-     Load data and cast all data as float (decimal)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-     Divide into X (features) and y (labels)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-function-to-standardise-data">
-     Define function to standardise data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-and-testing-the-model-for-all-k-fold-splits">
-     Training and testing the model for all k-fold splits
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-training-and-test-results">
-     Show training and test results
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-results-box-plot">
-     Plot results: Box Plot
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reduce-the-number-of-samples-and-increase-the-number-of-features">
+   Reduce the number of samples, and increase the number of features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-standardise-data">
+   Define function to standardise data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-and-testing-the-model-for-all-k-fold-splits">
+   Training and testing the model for all k-fold splits
+  </a>
  </li>
 </ul>
 
@@ -276,12 +261,19 @@
         
               <div>
                 
-  <div class="section" id="measuring-model-accuracy-with-k-fold-stratification">
-<h1>Measuring model accuracy with K-fold stratification<a class="headerlink" href="#measuring-model-accuracy-with-k-fold-stratification" title="Permalink to this headline">¶</a></h1>
-<p>In our previous example using logistic regression to classify passengers as likely to survive the Titanic, we used a random split for training and test data. But doing a single assessment like this may lead to an inaccurate assesment of the accuracy.</p>
-<p>We could use repeated random splits, but a more robust method is to use ‘stratified k-fold validation’. In this method the model is repeated k times, so that all the data is used once, but only once, as part of the test set. This, alone, is k-fold validation. Stratified k-fold validation adds an extra level of robustness by ensuring that in each of the k training/test splits, the balance of outcomes represents the balance of outcomes (between survivors and non-survivors)in the overall data set. Most commonly 5 or 10 different splits of the data are used.</p>
-<p>In a full project it is common to also have some hold-back test data that is used only at the end of model development (with k-fold validation used during model development).</p>
-<p><em>In this notebook we assume that you have run through the basic logistic regression example in the previous example. We will not explain all steps fully</em>.</p>
+  <div class="section" id="avoiding-over-fitting-with-regularisation">
+<h1>Avoiding over-fitting with regularisation<a class="headerlink" href="#avoiding-over-fitting-with-regularisation" title="Permalink to this headline">¶</a></h1>
+<p>A danger with complex models (many features) or small data sets (a low number of samples) is that the model can over-fit to the training data at the expense of previously unseen data (as in the test set). Most machine learning approaches allow for use of some kind of ‘regularisation’ which reduces the strength of the fit to the training data (e.g. by reducing the values of the model weights/coefficients). While this reduces the accuracy of the fit to the training data it can, perhaps surprisingly, increase the accuracy of predicting test (or other previously unseen) data.</p>
+<p>Over-fitting is usually spotted by the accuracy of prediction being significantly higher for the training set compared to the test set.</p>
+<p>Here we will deliberately reduce the number of samples in the Titanic data set, and increase the number of features with polynomial expansion*, to exaggerate the problem of over-fitting, and show how regularisation can help.</p>
+<p>Note: This workbook follows on from previous workbooks on logistic regression and stratified k-fold validation.</p>
+<p>*When we use polynomial expansion of features, we create new features that are the product of two features. For example if we had two features, A and B, we would produce the following extra features:</p>
+<ul class="simple">
+<li><p>A*A</p></li>
+<li><p>A*B</p></li>
+<li><p>B*A</p></li>
+<li><p>B*B</p></li>
+</ul>
 <div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -296,9 +288,8 @@
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="download-data">
-<h1>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h1>
+<h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -324,9 +315,9 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-data-and-cast-all-data-as-float-decimal">
-<h2>Load data and cast all data as float (decimal)<a class="headerlink" href="#load-data-and-cast-all-data-as-float-decimal" title="Permalink to this headline">¶</a></h2>
-<p>The loading of data assumes that data has been downloaded and saved.</p>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
@@ -339,8 +330,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop Passengerid (axis=1 indicates we are removing a column rather than a row)</span>
-<span class="c1"># We drop passenger ID as it is not original data</span>
-
 <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -349,7 +338,6 @@
 </div>
 <div class="section" id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
-<p>We will split into features (X) and label (y) and convert from a Pandas DataFrame to NumPy arrays. NumPy arrays are simpler to refer to by row/column index numbers, and sklearn’s k-fold method provides row indices for each set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split data into two DataFrames</span>
@@ -364,6 +352,30 @@
 </div>
 </div>
 </div>
+<div class="section" id="reduce-the-number-of-samples-and-increase-the-number-of-features">
+<h2>Reduce the number of samples, and increase the number of features<a class="headerlink" href="#reduce-the-number-of-samples-and-increase-the-number-of-features" title="Permalink to this headline">¶</a></h2>
+<p>Now we will reduce the size of the data set using random sampling (using Pandas <code class="docutils literal notranslate"><span class="pre">sample</span></code> method).
+We will increase the number of features using polynomial expansion (creating products of each pair of features).</p>
+<p>This is to help show the effect of over-fitting, as small data sets are more susceptible to over-fitting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reduce number of samples</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add polynomial features</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>Standardisation subtracts the mean and divides by the standard deviation, for each feature.
@@ -371,14 +383,6 @@ Here we use the sklearn built-in method for standardisation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Converts all data to a similar scale.</span>
-<span class="sd">    Standardisation subtracts mean and divides by standard deviation</span>
-<span class="sd">    for each feature.</span>
-<span class="sd">    Standardised data will have a mena of 0 and standard deviation of 1.</span>
-<span class="sd">    The training data mean and standard deviation is used to standardise both</span>
-<span class="sd">    training and test set data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="c1"># Initialise a new scaling object for normalising input data</span>
     <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
@@ -400,148 +404,126 @@ Here we use the sklearn built-in method for standardisation.</p>
 <h2>Training and testing the model for all k-fold splits<a class="headerlink" href="#training-and-testing-the-model-for-all-k-fold-splits" title="Permalink to this headline">¶</a></h2>
 <p>The following code:</p>
 <ul class="simple">
+<li><p>Defines a list of regularisation (lower values lead to greater regularisation)</p></li>
 <li><p>Sets up lists to hold results for each k-fold split</p></li>
+<li><p>Starts a loop for each regularisation value, and loops through:</p>
+<ul>
+<li><p>Print regularisation level (to show progress)</p></li>
+<li><p>Sets up lists to record replicates from k-fold stratification</p></li>
 <li><p>Sets up the k-fold splits using sklearn’s <code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> method</p></li>
 <li><p>Trains a logistic regression model, and test its it, for each k-fold split</p></li>
 <li><p>Adds each k-fold training/test accuracy to the lists</p></li>
 </ul>
-<p>Here wer are using a simple accuracy score, the proportion of predicts that are correct. K-fold validation may also be used for more complicated accuracy assessment.</p>
+</li>
+<li><p>Record average accuracy from k-fold stratification (so each regularisation level has one accuracy result recorded for training and test sets)</p></li>
+</ul>
+<p>We pass the regularisation to the model during fitting, it has the argument name <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up lists to hold results for each k-fold run</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="c1"># Set up lists to hold results</span>
 <span class="n">training_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">test_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Set up splits</span>
-<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">number_of_splits</span><span class="p">)</span>
+<span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="c1"># Loop through the k-fold splits</span>
-<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    
-    <span class="c1"># Get X and Y train/test</span>
-    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
-    <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
-    
-    <span class="c1"># Standardise X data</span>
-    <span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
-    
-    <span class="c1"># Set up and fit model</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-    
-    <span class="c1"># Predict training and test set labels</span>
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-    
-    <span class="c1"># Calculate accuracy of training and test sets</span>
-    <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
-    
-    <span class="c1"># Add accuracy to lists</span>
-    <span class="n">training_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
-    <span class="n">test_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="show-training-and-test-results">
-<h2>Show training and test results<a class="headerlink" href="#show-training-and-test-results" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show individual accuracies on training data</span>
-<span class="n">training_acc_results</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8164794007490637,
- 0.8067331670822943,
- 0.8179551122194514,
- 0.8029925187032418,
- 0.8179551122194514,
- 0.8154613466334164,
- 0.816708229426434,
- 0.8117206982543641,
- 0.8079800498753117,
- 0.8129675810473815]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show individual accuracies on test data</span>
-<span class="n">test_acc_results</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.7666666666666667,
- 0.8089887640449438,
- 0.7640449438202247,
- 0.8651685393258427,
- 0.7640449438202247,
- 0.7640449438202247,
- 0.7865168539325843,
- 0.797752808988764,
- 0.8202247191011236,
- 0.8089887640449438]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get mean results</span>
-<span class="n">mean_training</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">training_acc_results</span><span class="p">)</span>
-<span class="n">mean_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_acc_results</span><span class="p">)</span>
+<span class="c1"># Set up model type</span>
 
-<span class="c1"># Display each to three decimal places</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:.3f}</span><span class="s1">, </span><span class="si">{1:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_training</span><span class="p">,</span><span class="n">mean_test</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">reg_values</span><span class="p">:</span>
+    <span class="c1"># Show progress</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Set up lists for results for each of k splits</span>
+    <span class="n">training_k_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">test_k_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Loop through the k-fold splits</span>
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1"># Get X and Y train/test</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="c1"># Standardise X data</span>
+        <span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+        <span class="c1"># Fit model with regularisation (C)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">reg</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="c1"># Predict training and test set labels</span>
+        <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
+        <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+        <span class="c1"># Calculate accuracy of training and test sets</span>
+        <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="c1"># Record accuracy for each k-fold split</span>
+        <span class="n">training_k_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
+        <span class="n">test_k_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
+    <span class="c1"># Record average accuracy for each k-fold split</span>
+    <span class="n">training_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">training_k_results</span><span class="p">))</span>
+    <span class="n">test_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_k_results</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.813, 0.795
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001 0.003 0.01 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03 0.1 0.3 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 
 </pre></div>
 </div>
 </div>
 </div>
-<p>As expected, the average accuracy is better for the training than the test sets. This is due to the model being slightly ‘over-fitted’ to the training data, a topic we shall return to in a later notebook.</p>
-</div>
-<div class="section" id="plot-results-box-plot">
-<h2>Plot results: Box Plot<a class="headerlink" href="#plot-results-box-plot" title="Permalink to this headline">¶</a></h2>
-<p>Box plots show median (orange line), the second and third quartiles (the box), the range (excluding outliers), and any outliers as ‘whisker’ points. Outliers, by convention, are considerd to be any points outside of the quartiles +/- 1.5 times the interquartile range. The limit for outliers may be changed using the optional <code class="docutils literal notranslate"><span class="pre">whis</span></code> argument in the boxplot.</p>
-<p>Medians tend to be an easy reliable guide to the centre of a distribution (i.e. look at the medians to see whether a fit is improving or not, but also look at the box plot to see how much variability there is).</p>
-<p>Test sets tend to be more variable in their accuracy measures. Can you think why?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="c1"># Set up X data </span>
-<span class="n">x_for_box</span> <span class="o">=</span> <span class="p">[</span><span class="n">training_acc_results</span><span class="p">,</span> <span class="n">test_acc_results</span><span class="p">]</span>
-
-<span class="c1"># Set up X labels</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="s1">&#39;Test&#39;</span><span class="p">]</span> 
+<span class="c1"># Define data for chart</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">reg_values</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">training_acc_results</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">test_acc_results</span>
 
 <span class="c1"># Set up figure</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 
-<span class="c1"># Add subplot (can be used to define multiple plots in same figure)</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Plot training set accuracy</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Training set accuracy&#39;</span><span class="p">)</span>
 
-<span class="c1"># Define Box Plot (`widths` is optional)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x_for_box</span><span class="p">,</span> 
-            <span class="n">widths</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-            <span class="n">whis</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Plot test set accuracy</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+        <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Test set accuracy&#39;</span><span class="p">)</span>
 
-<span class="c1"># Set X and Y labels</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="c1"># Custimise axes</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Regularisation</span><span class="se">\n</span><span class="s1">(lower value = greater regularisation)&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="c1"># Show plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -549,9 +531,14 @@ Here we use the sklearn built-in method for standardisation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/k_fold_20_0.png" src="_images/k_fold_20_0.png" />
+<img alt="_images/regularisation_17_0.png" src="_images/regularisation_17_0.png" />
 </div>
 </div>
+<p>Note in the above figure that:</p>
+<ol class="simple">
+<li><p>Accuracy of training set is significantly higher than accuracy of test set (a common sign of over-fitting).</p></li>
+<li><p>There is an optimal value for the regularisation constant, C. In this case that value is about 0.1 (default if not specified is 1.0).</p></li>
+</ol>
 </div>
 </div>
 
@@ -583,8 +570,7 @@ Here we use the sklearn built-in method for standardisation.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="logistic_regression.html" title="previous page">Logistic regression model</a>
-    <a class='right-next' id="next-link" href="regularisation.html" title="next page">Avoiding over-fitting with regularisation</a>
+    <a class='left-prev' id="prev-link" href="k_fold.html" title="previous page">Measuring model accuracy with K-fold stratification</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
