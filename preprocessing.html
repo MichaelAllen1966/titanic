@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>Kaggle Titanic survival - data preprocessing &#8212; Titanic Survical Machine Learning</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -25,8 +26,8 @@
     href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -40,12 +41,11 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -91,7 +91,7 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p>
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -103,7 +103,7 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p>
  <span class="caption-text">
   Basic methods
  </span>
@@ -156,21 +156,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -188,16 +188,16 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -216,13 +216,14 @@
     </div>
 </div>
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -275,6 +276,7 @@
 
         </nav>
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -282,7 +284,7 @@
         
               <div>
                 
-  <div class="section" id="kaggle-titanic-survival-data-preprocessing">
+  <section id="kaggle-titanic-survival-data-preprocessing">
 <h1>Kaggle Titanic survival - data preprocessing<a class="headerlink" href="#kaggle-titanic-survival-data-preprocessing" title="Permalink to this headline">¶</a></h1>
 <p>Can we predict which passengers would survive the sinking of the Titanic?</p>
 <p>Original kaggle page:<a class="reference external" href="https://www.kaggle.com/c/titanic">https://www.kaggle.com/c/titanic</a></p>
@@ -339,7 +341,7 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -349,8 +351,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>Data should be in a sub folder named data.</p>
 <p>It may be downloaded from:</p>
@@ -590,8 +592,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="showing-a-summary-of-the-data">
+</section>
+<section id="showing-a-summary-of-the-data">
 <h2>Showing a summary of the data<a class="headerlink" href="#showing-a-summary-of-the-data" title="Permalink to this headline">¶</a></h2>
 <p>We can use the pandas <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method to show a summary of the data. Note that this only shows numerical data.</p>
 <div class="cell docutils container">
@@ -714,8 +716,8 @@ dtype: int64
 </div></div></div>
 </div>
 <p>Of most likely useful fields we are missing sex and whether a passenger embarked or not. So let’s code those numerically.</p>
-</div>
-<div class="section" id="filling-in-imputing-missing-data">
+</section>
+<section id="filling-in-imputing-missing-data">
 <h2>Filling in (imputing) missing data<a class="headerlink" href="#filling-in-imputing-missing-data" title="Permalink to this headline">¶</a></h2>
 <p>For numerical data we may commonly choose to impute missing values with zero, mean or median. We will use the median for age.</p>
 <p>We will also create a new column showing which values were imputed (this may be useful information in a machine learning model).</p>
@@ -770,8 +772,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="sorting-out-cabin-data">
+</section>
+<section id="sorting-out-cabin-data">
 <h2>Sorting out cabin data<a class="headerlink" href="#sorting-out-cabin-data" title="Permalink to this headline">¶</a></h2>
 <p>Cabin data is messy! Some passengers have more than one cabin (in which case we will split out the multiple cabins and just use the first one). Cabin numbers are a letter followed by a number. We will separate out the letter and the number.</p>
 <div class="cell docutils container">
@@ -1003,8 +1005,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="encoding-non-numerical-fields">
+</section>
+<section id="encoding-non-numerical-fields">
 <h2>Encoding non-numerical fields.<a class="headerlink" href="#encoding-non-numerical-fields" title="Permalink to this headline">¶</a></h2>
 <p>There are three types of non-numerical field:</p>
 <ul class="simple">
@@ -1766,8 +1768,8 @@ Name: Sex, dtype: object
 </div></div></div>
 </div>
 <p>Now we will drop the Name and Ticket column (they may perhaps be useful in some way, but we’ll simplify things by remiving them)</p>
-</div>
-<div class="section" id="drop-columns">
+</section>
+<section id="drop-columns">
 <h2>Drop columns<a class="headerlink" href="#drop-columns" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1945,8 +1947,8 @@ Name: Sex, dtype: object
 <p>5 rows × 26 columns</p>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="having-a-quick-look-at-differences-between-survived-and-non-survived-passengers">
+</section>
+<section id="having-a-quick-look-at-differences-between-survived-and-non-survived-passengers">
 <h2>Having a quick look at differences between survived and non-survived passengers<a class="headerlink" href="#having-a-quick-look-at-differences-between-survived-and-non-survived-passengers" title="Permalink to this headline">¶</a></h2>
 <p>Phew, the data-preprocessing is done! This is often a tedious and time-consuming stage with few ‘endorphin rush’ rewards to be had.</p>
 <p>Let’s split our data into survived and non-survived and have a quick look to see anything obvious.</p>
@@ -2126,8 +2128,8 @@ We’ll put them side by side in a new DataFrame.</p>
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="save-processed-data">
+</section>
+<section id="save-processed-data">
 <h2>Save processed data<a class="headerlink" href="#save-processed-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2136,8 +2138,8 @@ We’ll put them side by side in a new DataFrame.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2161,15 +2163,15 @@ We’ll put them side by side in a new DataFrame.</p>
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='left-prev' id="prev-link" href="front_page.html" title="previous page">Titanic Survival</a>
     <a class='right-next' id="next-link" href="logistic_regression.html" title="next page">Logistic regression model</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">

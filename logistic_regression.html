@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>Logistic regression model &#8212; Titanic Survical Machine Learning</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -25,8 +26,8 @@
     href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -40,12 +41,11 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -91,7 +91,7 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p>
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -103,7 +103,7 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p>
  <span class="caption-text">
   Basic methods
  </span>
@@ -156,21 +156,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -188,16 +188,16 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -216,13 +216,14 @@
     </div>
 </div>
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -295,6 +296,7 @@
 
         </nav>
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -302,7 +304,7 @@
         
               <div>
                 
-  <div class="section" id="logistic-regression-model">
+  <section id="logistic-regression-model">
 <h1>Logistic regression model<a class="headerlink" href="#logistic-regression-model" title="Permalink to this headline">¶</a></h1>
 <p>The data includes:</p>
 <table class="colwidths-auto table">
@@ -344,7 +346,7 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="logistic-regression">
+<section id="logistic-regression">
 <h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
 <p>In this example we will use logistic regression (see <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression">https://en.wikipedia.org/wiki/Logistic_regression</a>).</p>
 <p>For an introductory video on logistic regression see: <a class="reference external" href="https://www.youtube.com/watch?v=yIYKR4sgzI8">https://www.youtube.com/watch?v=yIYKR4sgzI8</a></p>
@@ -360,8 +362,8 @@
 <li><p>Review model coefficients (weights) to see importance of features</p></li>
 <li><p>Show probability of survival for passengers</p></li>
 </ul>
-</div>
-<div class="section" id="load-modules">
+</section>
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -376,8 +378,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -416,8 +418,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="examine-loaded-data">
+</section>
+<section id="examine-loaded-data">
 <h2>Examine loaded data<a class="headerlink" href="#examine-loaded-data" title="Permalink to this headline">¶</a></h2>
 <p>The data is in the form of a Pandas DataFrame, so we have column headers providing information of what is contained in each column.</p>
 <p>We will use the DataFrame <code class="docutils literal notranslate"><span class="pre">.head()</span></code> method to show the first few rows of the imported DataFrame. By default this shows the first 5 rows. Here we will look at the first 10.</p>
@@ -973,8 +975,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="looking-at-a-summary-of-passengers-who-survived-or-did-not-survive">
+</section>
+<section id="looking-at-a-summary-of-passengers-who-survived-or-did-not-survive">
 <h2>Looking at a summary of passengers who survived or did not survive<a class="headerlink" href="#looking-at-a-summary-of-passengers-who-survived-or-did-not-survive" title="Permalink to this headline">¶</a></h2>
 <p>Before running machine learning models, it is always good to have a look at your data. Here we will separate passengers who survived from those who died, and we will have a look at differences in features.</p>
 <p>We will use a <em>mask</em> to select and filter passengers.</p>
@@ -1234,8 +1236,8 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survived or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -1247,8 +1249,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-training-and-tets-sets">
+</section>
+<section id="divide-into-training-and-tets-sets">
 <h2>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h2>
 <p>When we test a machine learning model we should always test it on data that has not been used to train the model.
 We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
@@ -1266,62 +1268,62 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Pclass                  0.837029
- Age                    12.958649
- SibSp                   1.080651
- Parch                   0.796986
- Fare                   52.482783
- AgeImputed              0.405160
- EmbarkedImputed         0.000000
- CabinLetterImputed      0.421493
- CabinNumber            27.608086
- CabinNumberImputed      0.414597
- male                    0.474507
- Embarked_C              0.389098
- Embarked_Q              0.281791
- Embarked_S              0.445556
- Embarked_missing        0.000000
- CabinLetter_A           0.127358
- CabinLetter_B           0.219955
- CabinLetter_C           0.253410
- CabinLetter_D           0.193554
- CabinLetter_E           0.197088
- CabinLetter_F           0.101906
- CabinLetter_G           0.054677
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Pclass                  0.829952
+ Age                    13.317612
+ SibSp                   1.118510
+ Parch                   0.756510
+ Fare                   38.466564
+ AgeImputed              0.396197
+ EmbarkedImputed         0.054677
+ CabinLetterImputed      0.417599
+ CabinNumber            26.354689
+ CabinNumberImputed      0.411525
+ male                    0.467538
+ Embarked_C              0.385421
+ Embarked_Q              0.288276
+ Embarked_S              0.447075
+ Embarked_missing        0.054677
+ CabinLetter_A           0.132920
+ CabinLetter_B           0.207262
+ CabinLetter_C           0.242919
+ CabinLetter_D           0.178598
+ CabinLetter_E           0.203938
+ CabinLetter_F           0.121524
+ CabinLetter_G           0.077208
  CabinLetter_T           0.038691
- CabinLetter_missing     0.421493
+ CabinLetter_missing     0.417599
  dtype: float64,
- Pclass                  2.296407
- Age                    29.515973
- SibSp                   0.489521
- Parch                   0.369760
- Fare                   32.298459
- AgeImputed              0.206587
- EmbarkedImputed         0.000000
- CabinLetterImputed      0.769461
- CabinNumber            11.570359
- CabinNumberImputed      0.779940
- male                    0.658683
- Embarked_C              0.185629
- Embarked_Q              0.086826
- Embarked_S              0.727545
- Embarked_missing        0.000000
- CabinLetter_A           0.016467
- CabinLetter_B           0.050898
- CabinLetter_C           0.068862
- CabinLetter_D           0.038922
- CabinLetter_E           0.040419
- CabinLetter_F           0.010479
- CabinLetter_G           0.002994
+ Pclass                  2.320359
+ Age                    29.489895
+ SibSp                   0.528443
+ Parch                   0.348802
+ Fare                   28.723103
+ AgeImputed              0.194611
+ EmbarkedImputed         0.002994
+ CabinLetterImputed      0.775449
+ CabinNumber            10.729042
+ CabinNumberImputed      0.784431
+ male                    0.678144
+ Embarked_C              0.181138
+ Embarked_Q              0.091317
+ Embarked_S              0.724551
+ Embarked_missing        0.002994
+ CabinLetter_A           0.017964
+ CabinLetter_B           0.044910
+ CabinLetter_C           0.062874
+ CabinLetter_D           0.032934
+ CabinLetter_E           0.043413
+ CabinLetter_F           0.014970
+ CabinLetter_G           0.005988
  CabinLetter_T           0.001497
- CabinLetter_missing     0.769461
+ CabinLetter_missing     0.775449
  dtype: float64)
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="standardise-data">
+</section>
+<section id="standardise-data">
 <h2>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>We want all of out features to be on roughly the same scale. This generally leads to a better model, and also allows us to more easily compare the importance of different features.</p>
 <p>One simple method is to scale all features 0-1 (by subtracting the minimum value for each value, and dividing by the new remaining maximum value).</p>
@@ -1377,12 +1379,12 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
   </thead>
   <tbody>
     <tr>
-      <th>378</th>
+      <th>769</th>
       <td>3.0</td>
-      <td>20.0</td>
+      <td>32.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>4.0125</td>
+      <td>8.3625</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1401,13 +1403,61 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>295</th>
+      <th>209</th>
       <td>1.0</td>
-      <td>28.0</td>
+      <td>40.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>27.7208</td>
+      <td>31.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>31.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>707</th>
+      <td>1.0</td>
+      <td>42.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>26.2875</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>321</th>
+      <td>3.0</td>
+      <td>27.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.8958</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -1425,60 +1475,12 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>727</th>
+      <th>525</th>
       <td>3.0</td>
-      <td>28.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7.7375</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>560</th>
-      <td>3.0</td>
-      <td>28.0</td>
+      <td>40.5</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>7.7500</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>104</th>
-      <td>3.0</td>
-      <td>37.0</td>
-      <td>2.0</td>
-      <td>0.0</td>
-      <td>7.9250</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1521,12 +1523,12 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>...</td>
     </tr>
     <tr>
-      <th>442</th>
+      <th>59</th>
       <td>3.0</td>
-      <td>25.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>7.7750</td>
+      <td>11.0</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>46.9000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1545,13 +1547,61 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>256</th>
+      <th>471</th>
+      <td>3.0</td>
+      <td>38.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.6625</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>381</th>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>15.7417</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>756</th>
+      <td>3.0</td>
       <td>28.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>79.2000</td>
-      <td>1.0</td>
+      <td>7.7958</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -1569,40 +1619,16 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>1.0</td>
     </tr>
     <tr>
-      <th>690</th>
+      <th>377</th>
       <td>1.0</td>
-      <td>31.0</td>
-      <td>1.0</td>
+      <td>27.0</td>
       <td>0.0</td>
-      <td>57.0000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>20.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
+      <td>2.0</td>
+      <td>211.5000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>581</th>
-      <td>1.0</td>
-      <td>39.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>110.8833</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>68.0</td>
+      <td>82.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -1615,30 +1641,6 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-    </tr>
-    <tr>
-      <th>764</th>
-      <td>3.0</td>
-      <td>16.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7.7750</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
     </tr>
   </tbody>
 </table>
@@ -1671,8 +1673,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="fit-logistic-regression-model">
+</section>
+<section id="fit-logistic-regression-model">
 <h2>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
 <p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method. Our machine learning model fitting is only two lines of code!
 By using the name <code class="docutils literal notranslate"><span class="pre">model</span></code> for our logistic regression model we will make our model more interchangeable later on.</p>
@@ -1689,8 +1691,8 @@ By using the name <code class="docutils literal notranslate"><span class="pre">m
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="predict-values">
+</section>
+<section id="predict-values">
 <h2>Predict values<a class="headerlink" href="#predict-values" title="Permalink to this headline">¶</a></h2>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
 <div class="cell docutils container">
@@ -1702,8 +1704,8 @@ By using the name <code class="docutils literal notranslate"><span class="pre">m
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="calculate-accuracy">
+</section>
+<section id="calculate-accuracy">
 <h2>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h2>
 <p>In this example we will measure accuracy simply as the proportion of passengers where we make the correct prediction. In a later notebook we will look at other measures of accuracy which explore false positives and false negatives in more detail.</p>
 <div class="cell docutils container">
@@ -1717,15 +1719,15 @@ By using the name <code class="docutils literal notranslate"><span class="pre">m
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.8143712574850299
-Accuracy of predicting test data = 0.7892376681614349
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.8293413173652695
+Accuracy of predicting test data = 0.7443946188340808
 </pre></div>
 </div>
 </div>
 </div>
 <p>Not bad - about 80% accuracy. You will probably see that accuracy of predicting the training set is usually higher than the test set. Because we are only testing one random sample, you may occasionally see otherwise. In later note books we will look at the best way to repeat multiple tests, and look at what to do if the accuracy of the training set is significantly higher than the test set (a problem called ‘over-fitting’).</p>
-</div>
-<div class="section" id="examining-the-model-coefficients-weights">
+</section>
+<section id="examining-the-model-coefficients-weights">
 <h2>Examining the model coefficients (weights)<a class="headerlink" href="#examining-the-model-coefficients-weights" title="Permalink to this headline">¶</a></h2>
 <p>Not all features are equally important. And some may be of little or no use at all, unnecessarily increasing the complexity of the model. In a later notebook we will look at selecting features which add value to the model (or removing features that don’t).</p>
 <p>Here we will look at the importance of features – how they affect our estimation of survival. These are known as the model <em>coefficients</em> (if you come from a traditional statistics background), or model <em>weights</em> (if you come from a machine learning background).</p>
@@ -1739,11 +1741,11 @@ Accuracy of predicting test data = 0.7892376681614349
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.60631535, -0.56830319, -0.20683465, -0.04053121,  0.15481912,
-       -0.11422194,  0.        ,  0.028921  ,  0.08284647, -0.3418887 ,
-       -1.29286314,  0.12596648,  0.03516271, -0.13224336,  0.        ,
-        0.00569722, -0.08999659, -0.21217569,  0.10777975,  0.20729699,
-        0.10214128, -0.11267478, -0.13745163,  0.028921  ])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.88664986, -0.64332177, -0.30264438,  0.07442991, -0.30789257,
+       -0.06000015,  0.10785736,  0.03221936, -0.03439399, -0.45375276,
+       -1.42925311,  0.15090126,  0.02322218, -0.15825563,  0.10785736,
+       -0.03667803, -0.05527521, -0.07146949, -0.03483787,  0.18201551,
+        0.05762381, -0.15843359, -0.14034291,  0.03221936])
 </pre></div>
 </div>
 </div>
@@ -1796,146 +1798,146 @@ Accuracy of predicting test data = 0.7892376681614349
     <tr>
       <th>10</th>
       <td>male</td>
-      <td>-1.292863</td>
-      <td>1.292863</td>
+      <td>-1.429253</td>
+      <td>1.429253</td>
     </tr>
     <tr>
       <th>0</th>
       <td>Pclass</td>
-      <td>-0.606315</td>
-      <td>0.606315</td>
+      <td>-0.886650</td>
+      <td>0.886650</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Age</td>
-      <td>-0.568303</td>
-      <td>0.568303</td>
+      <td>-0.643322</td>
+      <td>0.643322</td>
     </tr>
     <tr>
       <th>9</th>
       <td>CabinNumberImputed</td>
-      <td>-0.341889</td>
-      <td>0.341889</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>CabinLetter_C</td>
-      <td>-0.212176</td>
-      <td>0.212176</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>CabinLetter_E</td>
-      <td>0.207297</td>
-      <td>0.207297</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>SibSp</td>
-      <td>-0.206835</td>
-      <td>0.206835</td>
+      <td>-0.453753</td>
+      <td>0.453753</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Fare</td>
-      <td>0.154819</td>
-      <td>0.154819</td>
+      <td>-0.307893</td>
+      <td>0.307893</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>CabinLetter_T</td>
-      <td>-0.137452</td>
-      <td>0.137452</td>
+      <th>2</th>
+      <td>SibSp</td>
+      <td>-0.302644</td>
+      <td>0.302644</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>Embarked_S</td>
-      <td>-0.132243</td>
-      <td>0.132243</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Embarked_C</td>
-      <td>0.125966</td>
-      <td>0.125966</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>AgeImputed</td>
-      <td>-0.114222</td>
-      <td>0.114222</td>
+      <th>19</th>
+      <td>CabinLetter_E</td>
+      <td>0.182016</td>
+      <td>0.182016</td>
     </tr>
     <tr>
       <th>21</th>
       <td>CabinLetter_G</td>
-      <td>-0.112675</td>
-      <td>0.112675</td>
+      <td>-0.158434</td>
+      <td>0.158434</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>CabinLetter_D</td>
-      <td>0.107780</td>
-      <td>0.107780</td>
+      <th>13</th>
+      <td>Embarked_S</td>
+      <td>-0.158256</td>
+      <td>0.158256</td>
     </tr>
     <tr>
-      <th>20</th>
-      <td>CabinLetter_F</td>
-      <td>0.102141</td>
-      <td>0.102141</td>
+      <th>11</th>
+      <td>Embarked_C</td>
+      <td>0.150901</td>
+      <td>0.150901</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>CabinLetter_B</td>
-      <td>-0.089997</td>
-      <td>0.089997</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CabinNumber</td>
-      <td>0.082846</td>
-      <td>0.082846</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Parch</td>
-      <td>-0.040531</td>
-      <td>0.040531</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Embarked_Q</td>
-      <td>0.035163</td>
-      <td>0.035163</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>CabinLetterImputed</td>
-      <td>0.028921</td>
-      <td>0.028921</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>CabinLetter_missing</td>
-      <td>0.028921</td>
-      <td>0.028921</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>CabinLetter_A</td>
-      <td>0.005697</td>
-      <td>0.005697</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Embarked_missing</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <th>22</th>
+      <td>CabinLetter_T</td>
+      <td>-0.140343</td>
+      <td>0.140343</td>
     </tr>
     <tr>
       <th>6</th>
       <td>EmbarkedImputed</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.107857</td>
+      <td>0.107857</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Embarked_missing</td>
+      <td>0.107857</td>
+      <td>0.107857</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Parch</td>
+      <td>0.074430</td>
+      <td>0.074430</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>CabinLetter_C</td>
+      <td>-0.071469</td>
+      <td>0.071469</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>AgeImputed</td>
+      <td>-0.060000</td>
+      <td>0.060000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>CabinLetter_F</td>
+      <td>0.057624</td>
+      <td>0.057624</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>CabinLetter_B</td>
+      <td>-0.055275</td>
+      <td>0.055275</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>CabinLetter_A</td>
+      <td>-0.036678</td>
+      <td>0.036678</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>CabinLetter_D</td>
+      <td>-0.034838</td>
+      <td>0.034838</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CabinNumber</td>
+      <td>-0.034394</td>
+      <td>0.034394</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>CabinLetter_missing</td>
+      <td>0.032219</td>
+      <td>0.032219</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CabinLetterImputed</td>
+      <td>0.032219</td>
+      <td>0.032219</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Embarked_Q</td>
+      <td>0.023222</td>
+      <td>0.023222</td>
     </tr>
   </tbody>
 </table>
@@ -1947,8 +1949,8 @@ Accuracy of predicting test data = 0.7892376681614349
 <li><p>Pclass (lower class passengers, who have a higher class number, reduces probability of survival)</p></li>
 <li><p>age (being older reduces probability of survival)</p></li>
 </ul>
-</div>
-<div class="section" id="show-predicted-probabilities">
+</section>
+<section id="show-predicted-probabilities">
 <h2>Show predicted probabilities<a class="headerlink" href="#show-predicted-probabilities" title="Permalink to this headline">¶</a></h2>
 <p>The predicted probabilities are for the two alternative classes 0 (does not survive) or 1 (survive).</p>
 <p>Ordinarily we do not see these probabilities - the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method used above applies a cut-off of 0.5 to classify passengers into survived or not, but we can see the individual probabilities for each passenger.</p>
@@ -1963,7 +1965,7 @@ Accuracy of predicting test data = 0.7892376681614349
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 1., 0., 1., 0., 1., 1., 1., 0., 0.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1., 1., 1., 1., 1., 0., 0., 0., 1.])
 </pre></div>
 </div>
 </div>
@@ -1978,22 +1980,22 @@ Accuracy of predicting test data = 0.7892376681614349
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.93136032, 0.06863968],
-       [0.22824561, 0.77175439],
-       [0.88940369, 0.11059631],
-       [0.40762824, 0.59237176],
-       [0.91746027, 0.08253973],
-       [0.34590085, 0.65409915],
-       [0.06444553, 0.93555447],
-       [0.36167603, 0.63832397],
-       [0.89984755, 0.10015245],
-       [0.9412955 , 0.0587045 ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.05315486, 0.94684514],
+       [0.48921148, 0.51078852],
+       [0.21981193, 0.78018807],
+       [0.1639568 , 0.8360432 ],
+       [0.07703667, 0.92296333],
+       [0.13674344, 0.86325656],
+       [0.59223264, 0.40776736],
+       [0.93531626, 0.06468374],
+       [0.95518805, 0.04481195],
+       [0.17410395, 0.82589605]])
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2017,15 +2019,15 @@ Accuracy of predicting test data = 0.7892376681614349
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='left-prev' id="prev-link" href="preprocessing.html" title="previous page">Kaggle Titanic survival - data preprocessing</a>
     <a class='right-next' id="next-link" href="k_fold.html" title="next page">Measuring model accuracy with K-fold stratification</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
