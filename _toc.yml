@@ -1,10 +1,16 @@
-- file: front_page
-  numbered: false
-  
-- part: Data preprocessing
+format: jb-book
+root: front_page
+parts:
+- caption: Data preprocessing
   chapters:
-  - file: preprocessing
-  
-- part: Basic methods
+  - file: 01_preprocessing
+- caption: Basic methods
   chapters:
-  - file: logistic_regression
+  - file: 02_logistic_regression
+  - file: 03_k_fold
+  - file: 04_regularisation
+  - file: 05_accuracy_standalone
+  - file: 06_accuracy_logistic_regression
+  - file: 07_learning_curve
+  - file: 08_roc
+  
