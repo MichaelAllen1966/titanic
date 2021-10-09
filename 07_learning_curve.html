@@ -51,7 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Application of alternative accuracy measurements to a logistic regression model" href="accuracy_logistic_regression.html" />
+    <link rel="next" title="Receiver Operator Characteristic (ROC) curve" href="08_roc.html" />
+    <link rel="prev" title="Application of alternative accuracy measurements to a logistic regression model" href="06_accuracy_logistic_regression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -93,7 +94,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="preprocessing.html">
+  <a class="reference internal" href="01_preprocessing.html">
    Kaggle Titanic survival - data preprocessing
   </a>
  </li>
@@ -105,33 +106,38 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="logistic_regression.html">
+  <a class="reference internal" href="02_logistic_regression.html">
    Logistic regression model
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="k_fold.html">
+  <a class="reference internal" href="03_k_fold.html">
    Measuring model accuracy with K-fold stratification
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="regularisation.html">
+  <a class="reference internal" href="04_regularisation.html">
    Avoiding over-fitting with regularisation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="accuracy_standalone.html">
+  <a class="reference internal" href="05_accuracy_standalone.html">
    Accuracy measurements in machine learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="accuracy_logistic_regression.html">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
    Application of alternative accuracy measurements to a logistic regression model
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_roc.html">
+   Receiver Operator Characteristic (ROC) curve
   </a>
  </li>
 </ul>
@@ -175,7 +181,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/learning_curve.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/07_learning_curve.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -200,7 +206,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/learning_curve.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/07_learning_curve.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -483,7 +489,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/learning_curve_18_0.png" src="_images/learning_curve_18_0.png" />
+<img alt="_images/07_learning_curve_18_0.png" src="_images/07_learning_curve_18_0.png" />
 </div>
 </div>
 <p>Accuracy appears to increase significantly up to 100 training points, and then appears to start to plateau in this model at 300-400 data points. It looks unlikely that collecting more data would significantly improve the model.</p>
@@ -520,7 +526,7 @@ By convention our features are called <code class="docutils literal notranslate"
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="accuracy_logistic_regression.html" title="previous page">
+        <a class="left-prev" href="06_accuracy_logistic_regression.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
@@ -528,6 +534,15 @@ By convention our features are called <code class="docutils literal notranslate"
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="08_roc.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Receiver Operator Characteristic (ROC) curve</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

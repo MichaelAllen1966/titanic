@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Measuring model accuracy with K-fold stratification &#8212; Titanic Survical Machine Learning</title>
+    <title>Receiver Operator Characteristic (ROC) curve &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Avoiding over-fitting with regularisation" href="regularisation.html" />
-    <link rel="prev" title="Logistic regression model" href="logistic_regression.html" />
+    <link rel="prev" title="Learning curves - how much data do we need?" href="07_learning_curve.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -94,7 +93,7 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="preprocessing.html">
+  <a class="reference internal" href="01_preprocessing.html">
    Kaggle Titanic survival - data preprocessing
   </a>
  </li>
@@ -106,33 +105,38 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="logistic_regression.html">
+  <a class="reference internal" href="02_logistic_regression.html">
    Logistic regression model
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_k_fold.html">
    Measuring model accuracy with K-fold stratification
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="regularisation.html">
+  <a class="reference internal" href="04_regularisation.html">
    Avoiding over-fitting with regularisation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="accuracy_standalone.html">
+  <a class="reference internal" href="05_accuracy_standalone.html">
    Accuracy measurements in machine learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="accuracy_logistic_regression.html">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
    Application of alternative accuracy measurements to a logistic regression model
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="learning_curve.html">
+  <a class="reference internal" href="07_learning_curve.html">
    Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Receiver Operator Characteristic (ROC) curve
   </a>
  </li>
 </ul>
@@ -176,7 +180,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/k_fold.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/08_roc.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -201,7 +205,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/k_fold.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/08_roc.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -249,18 +253,18 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-and-testing-the-model-for-all-k-fold-splits">
-   Training and testing the model for all k-fold splits
+  <a class="reference internal nav-link" href="#fir-the-model-for-each-k-fold">
+   Fir the model for each k-fold
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#show-training-and-test-results">
-   Show training and test results
+  <a class="reference internal nav-link" href="#get-receiver-operator-characteristic-roc-area-under-curve-auc">
+   Get Receiver Operator Characteristic (ROC) Area Under Curve (AUC)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-results-box-plot">
-   Plot results: Box Plot
+  <a class="reference internal nav-link" href="#plot-rocs">
+   Plot ROCs
   </a>
  </li>
 </ul>
@@ -274,11 +278,13 @@
         
               <div>
                 
-  <div class="section" id="measuring-model-accuracy-with-k-fold-stratification">
-<h1>Measuring model accuracy with K-fold stratification<a class="headerlink" href="#measuring-model-accuracy-with-k-fold-stratification" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="receiver-operator-characteristic-roc-curve">
+<h1>Receiver Operator Characteristic (ROC) curve<a class="headerlink" href="#receiver-operator-characteristic-roc-curve" title="Permalink to this headline">¶</a></h1>
+<p>Frequently in machine learning we wish to go beyond measuring raw accuracy. This is especially true when classes are unbalanced, where errors are often greater in one class than the other. The Receiver Operator Characteristic (ROC) curve allows us to better understand the trade-off between sensitivity (the ability to detect positives of a certain class) and specificity (the ability to detect negatives of a certain class). The area under the ROC curve is also often used to compare different models: a higher Area Under Curve (AUC) is frequently the sign of a better model.</p>
+<p>The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at various threshold settings. The true-positive rate is also known as sensitivity or recall. The false-positive rate can be calculated as (1 − specificity).# Measuring model accuracy with K-fold stratification</p>
 <p>In our previous example using logistic regression to classify passengers as likely to survive the Titanic, we used a random split for training and test data. But doing a single assessment like this may lead to an inaccurate assesment of the accuracy.</p>
 <p>We could use repeated random splits, but a more robust method is to use ‘stratified k-fold validation’. In this method the model is repeated k times, so that all the data is used once, but only once, as part of the test set. This, alone, is k-fold validation. Stratified k-fold validation adds an extra level of robustness by ensuring that in each of the k training/test splits, the balance of outcomes represents the balance of outcomes (between survivors and non-survivors)in the overall data set. Most commonly 5 or 10 different splits of the data are used.</p>
-<p>In a full project it is common to also have some hold-back test data that is used only at the end of model development (with k-fold validation used during model development).</p>
+<p>Here we use scikit-learn’s methods for ROCs.</p>
 <p><em>In this notebook we assume that you have run through the basic logistic regression example in the previous example. We will not explain all steps fully</em>.</p>
 <div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
@@ -286,9 +292,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
 </pre></div>
 </div>
 </div>
@@ -394,29 +403,25 @@ Here we use the sklearn built-in method for standardisation.</p>
 </div>
 </div>
 </div>
-<div class="section" id="training-and-testing-the-model-for-all-k-fold-splits">
-<h2>Training and testing the model for all k-fold splits<a class="headerlink" href="#training-and-testing-the-model-for-all-k-fold-splits" title="Permalink to this headline">¶</a></h2>
-<p>The following code:</p>
-<ul class="simple">
-<li><p>Sets up lists to hold results for each k-fold split</p></li>
-<li><p>Sets up the k-fold splits using sklearn’s <code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> method</p></li>
-<li><p>Trains a logistic regression model, and test its it, for each k-fold split</p></li>
-<li><p>Adds each k-fold training/test accuracy to the lists</p></li>
-</ul>
-<p>Here wer are using a simple accuracy score, the proportion of predicts that are correct. K-fold validation may also be used for more complicated accuracy assessment.</p>
+<div class="section" id="fir-the-model-for-each-k-fold">
+<h2>Fir the model for each k-fold<a class="headerlink" href="#fir-the-model-for-each-k-fold" title="Permalink to this headline">¶</a></h2>
+<p>We will fit the model and store the predicted probabilities for each run. alongisde the actual classificiation for each passenger.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up lists to hold results for each k-fold run</span>
-<span class="n">training_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">test_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up lists for observed and predicted</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">predicted_proba</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Set up splits</span>
-<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">number_of_splits</span><span class="p">)</span>
 <span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Loop through the k-fold splits</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
     
     <span class="c1"># Get X and Y train/test</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
@@ -429,125 +434,101 @@ Here we use the sklearn built-in method for standardisation.</p>
     <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">)</span>
     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
     
-    <span class="c1"># Predict training and test set labels</span>
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+    <span class="c1"># Get predicted probabilities</span>
+    <span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_class</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+    <span class="n">observed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="n">predicted_proba</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_probs</span><span class="p">)</span>
     
-    <span class="c1"># Calculate accuracy of training and test sets</span>
-    <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
-    
-    <span class="c1"># Add accuracy to lists</span>
-    <span class="n">training_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
-    <span class="n">test_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="show-training-and-test-results">
-<h2>Show training and test results<a class="headerlink" href="#show-training-and-test-results" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show individual accuracies on training data</span>
-<span class="n">training_acc_results</span>
+    <span class="c1"># Print accuracy</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_class</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Run </span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s1">, accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>    
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8164794007490637,
- 0.8077403245942572,
- 0.816708229426434,
- 0.8029925187032418,
- 0.816708229426434,
- 0.8154613466334164,
- 0.8154613466334164,
- 0.8117206982543641,
- 0.8092269326683291,
- 0.813200498132005]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 1, accuracy: 0.788
+Run 2, accuracy: 0.803
+Run 3, accuracy: 0.775
+Run 4, accuracy: 0.775
+Run 5, accuracy: 0.803
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="get-receiver-operator-characteristic-roc-area-under-curve-auc">
+<h2>Get Receiver Operator Characteristic (ROC) Area Under Curve (AUC)<a class="headerlink" href="#get-receiver-operator-characteristic-roc-area-under-curve-auc" title="Permalink to this headline">¶</a></h2>
+<p>Scikit-Learn’s ROC method will automatically test the rate of true postive rate (tpr) and false positive rate (fpr) at different thresholds of classification. It will return tpr, fpr for each threshold tested. We also use Scikit-Learn’s method for caluclating the area under the curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show individual accuracies on test data</span>
-<span class="n">test_acc_results</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up lists for results</span>
+<span class="n">k_fold_fpr</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># false positive rate</span>
+<span class="n">k_fold_tpr</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># true positive rate</span>
+<span class="n">k_fold_thresholds</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># threshold applied</span>
+<span class="n">k_fold_auc</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># area under curve</span>
+
+<span class="c1"># Loop through k fold predictions and get ROC results </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># Get fpr, tpr and thresholds foir each k-fold from scikit-learn&#39;s ROC method</span>
+    <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">observed</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">predicted_proba</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="c1"># Use scikit-learn&#39;s method for calulcating auc</span>
+    <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+    <span class="c1"># Store results</span>
+    <span class="n">k_fold_fpr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fpr</span><span class="p">)</span>
+    <span class="n">k_fold_tpr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tpr</span><span class="p">)</span>
+    <span class="n">k_fold_thresholds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thresholds</span><span class="p">)</span>
+    <span class="n">k_fold_auc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">)</span>
+    <span class="c1"># Print auc result</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Run </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> AUC </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show mean area under curve  </span>
+<span class="n">mean_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_fold_auc</span><span class="p">)</span>
+<span class="n">sd_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_fold_auc</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Mean AUC: </span><span class="si">{</span><span class="n">mean_auc</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SD AUC: </span><span class="si">{</span><span class="n">sd_auc</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.7666666666666667,
- 0.8,
- 0.7752808988764045,
- 0.8651685393258427,
- 0.7640449438202247,
- 0.7640449438202247,
- 0.7865168539325843,
- 0.797752808988764,
- 0.8314606741573034,
- 0.8068181818181818]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run 0 AUC 0.8308
+Run 1 AUC 0.8279
+Run 2 AUC 0.8632
+Run 3 AUC 0.8360
+Run 4 AUC 0.8724
+
+Mean AUC: 0.8461
+SD AUC: 0.0182
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="plot-rocs">
+<h2>Plot ROCs<a class="headerlink" href="#plot-rocs" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get mean results</span>
-<span class="n">mean_training</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">training_acc_results</span><span class="p">)</span>
-<span class="n">mean_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_acc_results</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
-<span class="c1"># Display each to three decimal places</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:.3f}</span><span class="s1">, </span><span class="si">{1:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_training</span><span class="p">,</span><span class="n">mean_test</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.813, 0.796
-</pre></div>
-</div>
-</div>
-</div>
-<p>As expected, the average accuracy is better for the training than the test sets. This is due to the model being slightly ‘over-fitted’ to the training data, a topic we shall return to in a later notebook.</p>
-</div>
-<div class="section" id="plot-results-box-plot">
-<h2>Plot results: Box Plot<a class="headerlink" href="#plot-results-box-plot" title="Permalink to this headline">¶</a></h2>
-<p>Box plots show median (orange line), the second and third quartiles (the box), the range (excluding outliers), and any outliers as ‘whisker’ points. Outliers, by convention, are considerd to be any points outside of the quartiles +/- 1.5 times the interquartile range. The limit for outliers may be changed using the optional <code class="docutils literal notranslate"><span class="pre">whis</span></code> argument in the boxplot.</p>
-<p>Medians tend to be an easy reliable guide to the centre of a distribution (i.e. look at the medians to see whether a fit is improving or not, but also look at the box plot to see how much variability there is).</p>
-<p>Test sets tend to be more variable in their accuracy measures. Can you think why?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># Set up X data </span>
-<span class="n">x_for_box</span> <span class="o">=</span> <span class="p">[</span><span class="n">training_acc_results</span><span class="p">,</span> <span class="n">test_acc_results</span><span class="p">]</span>
-
-<span class="c1"># Set up X labels</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="s1">&#39;Test&#39;</span><span class="p">]</span> 
-
-<span class="c1"># Set up figure</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># Add subplot (can be used to define multiple plots in same figure)</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Define Box Plot (`widths` is optional)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x_for_box</span><span class="p">,</span> 
-            <span class="n">widths</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-            <span class="n">whis</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="c1"># Set X and Y labels</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
-
-<span class="c1"># Show plot</span>
+<span class="c1"># Plot ROC</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_fold_fpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">k_fold_tpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Receiver Operator Characteristic Curve&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Mean AUC: </span><span class="si">{</span><span class="n">mean_auc</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.64</span><span class="p">,</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/k_fold_20_0.png" src="_images/k_fold_20_0.png" />
+<img alt="_images/08_roc_17_0.png" src="_images/08_roc_17_0.png" />
 </div>
 </div>
 </div>
@@ -583,23 +564,14 @@ Here we use the sklearn built-in method for standardisation.</p>
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="logistic_regression.html" title="previous page">
+        <a class="left-prev" href="07_learning_curve.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Logistic regression model</p>
+                <p class="prevnext-title">Learning curves - how much data do we need?</p>
             </div>
         </a>
     </div>
-     <div id="next">
-        <a class="right-next" href="regularisation.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Avoiding over-fitting with regularisation</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         
