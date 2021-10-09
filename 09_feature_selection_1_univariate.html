@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kaggle Titanic survival - feature selection 1 (univariate statistical selection) &#8212; Titanic Survical Machine Learning</title>
+    <title>Feature selection using univariate statistical selection &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Kaggle Titanic survival - feature selection 2 (model forward selection)" href="10_feature_selection_2_forward.html" />
+    <link rel="next" title="Feature selection using forward selection" href="10_feature_selection_2_forward.html" />
     <link rel="prev" title="Receiver Operator Characteristic (ROC) curve" href="08_roc.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -149,22 +149,22 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Kaggle Titanic survival - feature selection 1 (univariate statistical selection)
+   Feature selection using univariate statistical selection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_feature_selection_2_forward.html">
-   Kaggle Titanic survival - feature selection 2 (model forward selection)
+   Feature selection using forward selection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_feature_selection_3_backward.html">
-   Kaggle Titanic survival - feature selection 3 (model backward elimination)
+   Feature selection using backward elimination
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_feature_expansion.html">
-   Kaggle Titanic survival - Feature expansion
+   Feature expansion
   </a>
  </li>
 </ul>
@@ -274,8 +274,8 @@
         
               <div>
                 
-  <div class="section" id="kaggle-titanic-survival-feature-selection-1-univariate-statistical-selection">
-<h1>Kaggle Titanic survival - feature selection 1 (univariate statistical selection)<a class="headerlink" href="#kaggle-titanic-survival-feature-selection-1-univariate-statistical-selection" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="feature-selection-using-univariate-statistical-selection">
+<h1>Feature selection using univariate statistical selection<a class="headerlink" href="#feature-selection-using-univariate-statistical-selection" title="Permalink to this headline">¶</a></h1>
 <p>Reducing the number of features we use can have three benefits:</p>
 <ul class="simple">
 <li><p>Simplifies model explanation</p></li>
@@ -293,8 +293,6 @@
 <li><p>It may miss features which have little effect alone, but which are influential when combined</p></li>
 <li><p>It may include features which are highly correlated which could be reduced to choosing just one of the highly correlated features.</p></li>
 </ul>
-<p>The machine learning model we will use to test the feature selection is as previously described:</p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb</a></p>
 <p>We will go through the following steps:</p>
 <ul class="simple">
 <li><p>Download and save pre-processed data</p></li>
@@ -334,8 +332,6 @@
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
-<p>Code that was used to pre-process the data ready for machine learning may be found at:
-<a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
@@ -452,7 +448,7 @@ By convention our features are called <code class="docutils literal notranslate"
   </thead>
   <tbody>
     <tr>
-      <td>10</td>
+      <th>10</th>
       <td>male</td>
       <td>-0.543351</td>
       <td>0.543351</td>
@@ -460,7 +456,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>0</td>
+      <th>0</th>
       <td>Pclass</td>
       <td>-0.338481</td>
       <td>0.338481</td>
@@ -468,7 +464,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>9</td>
+      <th>9</th>
       <td>CabinNumberImputed</td>
       <td>-0.321842</td>
       <td>0.321842</td>
@@ -476,7 +472,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>7</td>
+      <th>7</th>
       <td>CabinLetterImputed</td>
       <td>-0.316912</td>
       <td>0.316912</td>
@@ -484,7 +480,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>23</td>
+      <th>23</th>
       <td>CabinLetter_missing</td>
       <td>-0.316912</td>
       <td>0.316912</td>
@@ -492,7 +488,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>4</td>
+      <th>4</th>
       <td>Fare</td>
       <td>0.257307</td>
       <td>0.257307</td>
@@ -500,7 +496,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>8</td>
+      <th>8</th>
       <td>CabinNumber</td>
       <td>0.235409</td>
       <td>0.235409</td>
@@ -508,7 +504,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>16</td>
+      <th>16</th>
       <td>CabinLetter_B</td>
       <td>0.175095</td>
       <td>0.175095</td>
@@ -516,7 +512,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>11</td>
+      <th>11</th>
       <td>Embarked_C</td>
       <td>0.168240</td>
       <td>0.168240</td>
@@ -524,7 +520,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>13</td>
+      <th>13</th>
       <td>Embarked_S</td>
       <td>-0.155660</td>
       <td>0.155660</td>
@@ -532,7 +528,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>18</td>
+      <th>18</th>
       <td>CabinLetter_D</td>
       <td>0.150716</td>
       <td>0.150716</td>
@@ -540,7 +536,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>19</td>
+      <th>19</th>
       <td>CabinLetter_E</td>
       <td>0.145321</td>
       <td>0.145321</td>
@@ -548,7 +544,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>17</td>
+      <th>17</th>
       <td>CabinLetter_C</td>
       <td>0.114652</td>
       <td>0.114652</td>
@@ -556,7 +552,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>5</td>
+      <th>5</th>
       <td>AgeImputed</td>
       <td>-0.092197</td>
       <td>0.092197</td>
@@ -564,7 +560,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>3</td>
+      <th>3</th>
       <td>Parch</td>
       <td>0.081629</td>
       <td>0.081629</td>
@@ -572,7 +568,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>True</td>
     </tr>
     <tr>
-      <td>1</td>
+      <th>1</th>
       <td>Age</td>
       <td>-0.064910</td>
       <td>0.064910</td>
@@ -580,7 +576,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>14</td>
+      <th>14</th>
       <td>Embarked_missing</td>
       <td>0.060095</td>
       <td>0.060095</td>
@@ -588,7 +584,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>6</td>
+      <th>6</th>
       <td>EmbarkedImputed</td>
       <td>0.060095</td>
       <td>0.060095</td>
@@ -596,7 +592,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>20</td>
+      <th>20</th>
       <td>CabinLetter_F</td>
       <td>0.057935</td>
       <td>0.057935</td>
@@ -604,7 +600,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>2</td>
+      <th>2</th>
       <td>SibSp</td>
       <td>-0.035322</td>
       <td>0.035322</td>
@@ -612,7 +608,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>22</td>
+      <th>22</th>
       <td>CabinLetter_T</td>
       <td>-0.026456</td>
       <td>0.026456</td>
@@ -620,7 +616,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>15</td>
+      <th>15</th>
       <td>CabinLetter_A</td>
       <td>0.022287</td>
       <td>0.022287</td>
@@ -628,7 +624,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>21</td>
+      <th>21</th>
       <td>CabinLetter_G</td>
       <td>0.016040</td>
       <td>0.016040</td>
@@ -636,7 +632,7 @@ By convention our features are called <code class="docutils literal notranslate"
       <td>False</td>
     </tr>
     <tr>
-      <td>12</td>
+      <th>12</th>
       <td>Embarked_Q</td>
       <td>0.003650</td>
       <td>0.003650</td>
@@ -860,7 +856,7 @@ By convention our features are called <code class="docutils literal notranslate"
         <a class="right-next" href="10_feature_selection_2_forward.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Kaggle Titanic survival - feature selection 2 (model forward selection)</p>
+                <p class="prevnext-title">Feature selection using forward selection</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

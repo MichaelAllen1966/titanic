@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kaggle Titanic survival - Feature expansion &#8212; Titanic Survical Machine Learning</title>
+    <title>Feature expansion &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Kaggle Titanic survival - feature selection 3 (model backward elimination)" href="11_feature_selection_3_backward.html" />
+    <link rel="prev" title="Feature selection using backward elimination" href="11_feature_selection_3_backward.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -148,22 +148,22 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="09_feature_selection_1_univariate.html">
-   Kaggle Titanic survival - feature selection 1 (univariate statistical selection)
+   Feature selection using univariate statistical selection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_feature_selection_2_forward.html">
-   Kaggle Titanic survival - feature selection 2 (model forward selection)
+   Feature selection using forward selection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_feature_selection_3_backward.html">
-   Kaggle Titanic survival - feature selection 3 (model backward elimination)
+   Feature selection using backward elimination
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Kaggle Titanic survival - Feature expansion
+   Feature expansion
   </a>
  </li>
 </ul>
@@ -239,7 +239,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Kaggle Titanic survival - Feature expansion
+   Feature expansion
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -287,8 +287,8 @@
         
               <div>
                 
-  <div class="section" id="kaggle-titanic-survival-feature-expansion">
-<h1>Kaggle Titanic survival - Feature expansion<a class="headerlink" href="#kaggle-titanic-survival-feature-expansion" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="feature-expansion">
+<h1>Feature expansion<a class="headerlink" href="#feature-expansion" title="Permalink to this headline">¶</a></h1>
 <p>Spoiler Alert! By combining feature expansion and feature selection we can increase our logistic regression model accuracy (on previously unseen data) from 79% to 84%!</p>
 <p>Simple models such as logistic regression do not incorporate complex interactions between features. If two features produce more than an additive effect, this will not be fitted in logistic regression. In order to allow for feature interaction we need to add terms that create new features by producing the product of each product pair.</p>
 <p>When we use polynomial expansion of features, we create new features that are the product of two features. For example if we had two features, A, B and C, a full polynomial expansion would produce the following extra features:</p>
@@ -307,11 +307,6 @@
 <li><p>Increase the regularisation strength in the model (reduce the value of <code class="docutils literal notranslate"><span class="pre">C</span></code> in the logistic regression model)</p></li>
 <li><p>Use feature selection to pick only the most important features (which now may include polynomial features)</p></li>
 </ul>
-<p>The methods described here build on previous notebooks, notably on logistic regression, k-fold, sampling, regularisation, and model-based forward feature selection</p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb</a></p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a></p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/04_regularisation.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/04_regularisation.ipynb</a></p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb</a></p>
 <div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -625,7 +620,7 @@ Shape of X_poly: (891, 300)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best accuracy for non-poly and poly were 0.789 and 0.816
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best accuracy for non-poly and poly were 0.789 and 0.817
 </pre></div>
 </div>
 </div>
@@ -786,104 +781,104 @@ Feature run 20 of 20
   </thead>
   <tbody>
     <tr>
-      <td>0</td>
+      <th>0</th>
       <td>x1 x10</td>
-      <td>0.792352</td>
+      <td>0.792361</td>
     </tr>
     <tr>
-      <td>1</td>
+      <th>1</th>
       <td>x0 x2</td>
-      <td>0.818170</td>
+      <td>0.818153</td>
     </tr>
     <tr>
-      <td>2</td>
-      <td>x13 x19</td>
-      <td>0.824924</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>x3 x12</td>
-      <td>0.828320</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>x4 x16</td>
-      <td>0.830568</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>x0 x3</td>
-      <td>0.831716</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>x5 x7</td>
-      <td>0.835081</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>x5 x18</td>
-      <td>0.836211</td>
-    </tr>
-    <tr>
-      <td>8</td>
+      <th>2</th>
       <td>x19</td>
-      <td>0.837335</td>
+      <td>0.824895</td>
     </tr>
     <tr>
-      <td>9</td>
+      <th>3</th>
+      <td>x3 x12</td>
+      <td>0.829402</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>x2 x16</td>
-      <td>0.838458</td>
+      <td>0.832760</td>
     </tr>
     <tr>
-      <td>10</td>
+      <th>5</th>
+      <td>x13</td>
+      <td>0.835001</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>x3 x10</td>
+      <td>0.836131</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>x0 x3</td>
+      <td>0.839489</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>x8 x19</td>
-      <td>0.838464</td>
+      <td>0.840619</td>
     </tr>
     <tr>
-      <td>11</td>
+      <th>9</th>
+      <td>x3 x5</td>
+      <td>0.841743</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>x5 x18</td>
+      <td>0.842866</td>
+    </tr>
+    <tr>
+      <th>11</th>
       <td>x2 x19</td>
-      <td>0.840712</td>
+      <td>0.843983</td>
     </tr>
     <tr>
-      <td>12</td>
-      <td>x11 x18</td>
-      <td>0.840718</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>x3 x16</td>
-      <td>0.841835</td>
-    </tr>
-    <tr>
-      <td>14</td>
+      <th>12</th>
       <td>x6</td>
-      <td>0.841835</td>
+      <td>0.843983</td>
     </tr>
     <tr>
-      <td>15</td>
+      <th>13</th>
       <td>x14</td>
-      <td>0.841835</td>
+      <td>0.843983</td>
     </tr>
     <tr>
-      <td>16</td>
+      <th>14</th>
       <td>x22</td>
-      <td>0.841835</td>
+      <td>0.843983</td>
     </tr>
     <tr>
-      <td>17</td>
+      <th>15</th>
       <td>x0 x6</td>
-      <td>0.841835</td>
+      <td>0.843983</td>
     </tr>
     <tr>
-      <td>18</td>
+      <th>16</th>
       <td>x0 x14</td>
-      <td>0.841835</td>
+      <td>0.843983</td>
     </tr>
     <tr>
-      <td>19</td>
+      <th>17</th>
       <td>x0 x22</td>
-      <td>0.841835</td>
+      <td>0.843983</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>x1 x6</td>
+      <td>0.843983</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>x1 x14</td>
+      <td>0.843983</td>
     </tr>
   </tbody>
 </table>
@@ -928,7 +923,7 @@ X10: male
 </div>
 </div>
 </div>
-<p>So looking at just the ages of male passengers is the best signle predictor of survival.</p>
+<p>So looking at just the ages of male passengers is the best single predictor of survival.</p>
 </div>
 </div>
 
@@ -966,7 +961,7 @@ X10: male
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Kaggle Titanic survival - feature selection 3 (model backward elimination)</p>
+                <p class="prevnext-title">Feature selection using backward elimination</p>
             </div>
         </a>
     </div>

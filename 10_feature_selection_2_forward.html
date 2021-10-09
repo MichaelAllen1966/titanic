@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kaggle Titanic survival - feature selection 2 (model forward selection) &#8212; Titanic Survical Machine Learning</title>
+    <title>Feature selection using forward selection &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Kaggle Titanic survival - feature selection 3 (model backward elimination)" href="11_feature_selection_3_backward.html" />
-    <link rel="prev" title="Kaggle Titanic survival - feature selection 1 (univariate statistical selection)" href="09_feature_selection_1_univariate.html" />
+    <link rel="next" title="Feature selection using backward elimination" href="11_feature_selection_3_backward.html" />
+    <link rel="prev" title="Feature selection using univariate statistical selection" href="09_feature_selection_1_univariate.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -149,22 +149,22 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="09_feature_selection_1_univariate.html">
-   Kaggle Titanic survival - feature selection 1 (univariate statistical selection)
+   Feature selection using univariate statistical selection
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Kaggle Titanic survival - feature selection 2 (model forward selection)
+   Feature selection using forward selection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_feature_selection_3_backward.html">
-   Kaggle Titanic survival - feature selection 3 (model backward elimination)
+   Feature selection using backward elimination
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_feature_expansion.html">
-   Kaggle Titanic survival - Feature expansion
+   Feature expansion
   </a>
  </li>
 </ul>
@@ -281,16 +281,15 @@
         
               <div>
                 
-  <div class="section" id="kaggle-titanic-survival-feature-selection-2-model-forward-selection">
-<h1>Kaggle Titanic survival - feature selection 2 (model forward selection)<a class="headerlink" href="#kaggle-titanic-survival-feature-selection-2-model-forward-selection" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="feature-selection-using-forward-selection">
+<h1>Feature selection using forward selection<a class="headerlink" href="#feature-selection-using-forward-selection" title="Permalink to this headline">¶</a></h1>
 <p>Reducing the number of features we use can have three benefits:</p>
 <ul class="simple">
 <li><p>Simplifies model explanation</p></li>
 <li><p>Model fit may be improved by the removal of features that add no value</p></li>
 <li><p>Model will be faster to fit</p></li>
 </ul>
-<p>In this notebook we will use a model-based approach whereby we incrementally add features that most increase model performance (we could use simple accuracy, but in this case we will use ROC Area Under Curve as a more thorough analysis of performance). If you are not familiar with ROC AUC, have a look at:</p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/06_roc_sensitivity_specificity.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/06_roc_sensitivity_specificity.ipynb</a></p>
+<p>In this notebook we will use a model-based approach whereby we incrementally add features that most increase model performance (we could use simple accuracy, but in this case we will use ROC Area Under Curve as a more thorough analysis of performance).</p>
 <p>Two key advantages of this method are:</p>
 <ul class="simple">
 <li><p>It is relatively simple.</p></li>
@@ -302,10 +301,6 @@
 <li><p>The selection of features may be dependent on model meta-parameters (such as level of regularisation).</p></li>
 <li><p>The selection of features may not transfer between models (e.g. a model that does not allow for feature interactions may not detect features which do not add much value independently).</p></li>
 </ul>
-<p>The machine learning model we will use to test the feature selection is as previously described:</p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb</a></p>
-<p>We will also assess performance using k-fold stratification for better measurement of performance. If you are not familiar with k-fold stratification, have a look at:</p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a></p>
 <p>We will go through the following steps:</p>
 <ul class="simple">
 <li><p>Download and save pre-processed data</p></li>
@@ -345,8 +340,6 @@
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
-<p>Code that was used to pre-process the data ready for machine learning may be found at:
-<a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
@@ -593,124 +586,124 @@ Feature run 24 of 24
   </thead>
   <tbody>
     <tr>
-      <td>0</td>
+      <th>0</th>
       <td>male</td>
-      <td>0.766733</td>
+      <td>0.766818</td>
     </tr>
     <tr>
-      <td>1</td>
+      <th>1</th>
       <td>Pclass</td>
-      <td>0.833036</td>
+      <td>0.833003</td>
     </tr>
     <tr>
-      <td>2</td>
+      <th>2</th>
       <td>Age</td>
-      <td>0.843055</td>
+      <td>0.843038</td>
     </tr>
     <tr>
-      <td>3</td>
+      <th>3</th>
       <td>SibSp</td>
-      <td>0.848686</td>
+      <td>0.848621</td>
     </tr>
     <tr>
-      <td>4</td>
+      <th>4</th>
       <td>Embarked_S</td>
-      <td>0.853125</td>
+      <td>0.853128</td>
     </tr>
     <tr>
-      <td>5</td>
+      <th>5</th>
       <td>CabinLetter_E</td>
-      <td>0.855740</td>
+      <td>0.856015</td>
     </tr>
     <tr>
-      <td>6</td>
+      <th>6</th>
       <td>CabinNumberImputed</td>
-      <td>0.856158</td>
+      <td>0.856436</td>
     </tr>
     <tr>
-      <td>7</td>
-      <td>CabinLetter_T</td>
-      <td>0.856160</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>CabinLetter_D</td>
-      <td>0.856167</td>
-    </tr>
-    <tr>
-      <td>9</td>
+      <th>7</th>
       <td>CabinLetter_F</td>
-      <td>0.856307</td>
+      <td>0.856244</td>
     </tr>
     <tr>
-      <td>10</td>
-      <td>EmbarkedImputed</td>
-      <td>0.856121</td>
+      <th>8</th>
+      <td>CabinLetter_D</td>
+      <td>0.856363</td>
     </tr>
     <tr>
-      <td>11</td>
-      <td>Embarked_missing</td>
-      <td>0.856094</td>
+      <th>9</th>
+      <td>CabinLetter_T</td>
+      <td>0.856470</td>
     </tr>
     <tr>
-      <td>12</td>
+      <th>10</th>
       <td>CabinLetterImputed</td>
-      <td>0.855637</td>
+      <td>0.856179</td>
     </tr>
     <tr>
-      <td>13</td>
+      <th>11</th>
       <td>CabinLetter_missing</td>
-      <td>0.855744</td>
+      <td>0.856205</td>
     </tr>
     <tr>
-      <td>14</td>
+      <th>12</th>
+      <td>EmbarkedImputed</td>
+      <td>0.855806</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Embarked_missing</td>
+      <td>0.855806</td>
+    </tr>
+    <tr>
+      <th>14</th>
       <td>Fare</td>
-      <td>0.855302</td>
+      <td>0.855255</td>
     </tr>
     <tr>
-      <td>15</td>
+      <th>15</th>
       <td>CabinLetter_A</td>
-      <td>0.854307</td>
+      <td>0.854322</td>
     </tr>
     <tr>
-      <td>16</td>
+      <th>16</th>
       <td>CabinLetter_B</td>
-      <td>0.853215</td>
+      <td>0.853133</td>
     </tr>
     <tr>
-      <td>17</td>
+      <th>17</th>
       <td>CabinNumber</td>
-      <td>0.852896</td>
+      <td>0.852493</td>
     </tr>
     <tr>
-      <td>18</td>
-      <td>Embarked_C</td>
-      <td>0.851377</td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td>Embarked_Q</td>
-      <td>0.851324</td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td>CabinLetter_C</td>
-      <td>0.849972</td>
-    </tr>
-    <tr>
-      <td>21</td>
+      <th>18</th>
       <td>AgeImputed</td>
-      <td>0.848673</td>
+      <td>0.851652</td>
     </tr>
     <tr>
-      <td>22</td>
+      <th>19</th>
+      <td>CabinLetter_C</td>
+      <td>0.850288</td>
+    </tr>
+    <tr>
+      <th>20</th>
       <td>CabinLetter_G</td>
-      <td>0.847432</td>
+      <td>0.849589</td>
     </tr>
     <tr>
-      <td>23</td>
+      <th>21</th>
+      <td>Embarked_C</td>
+      <td>0.847322</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Embarked_Q</td>
+      <td>0.847428</td>
+    </tr>
+    <tr>
+      <th>23</th>
       <td>Parch</td>
-      <td>0.845842</td>
+      <td>0.846065</td>
     </tr>
   </tbody>
 </table>
@@ -782,7 +775,7 @@ Feature run 24 of 24
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Kaggle Titanic survival - feature selection 1 (univariate statistical selection)</p>
+                <p class="prevnext-title">Feature selection using univariate statistical selection</p>
             </div>
         </a>
     </div>
@@ -790,7 +783,7 @@ Feature run 24 of 24
         <a class="right-next" href="11_feature_selection_3_backward.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Kaggle Titanic survival - feature selection 3 (model backward elimination)</p>
+                <p class="prevnext-title">Feature selection using backward elimination</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
