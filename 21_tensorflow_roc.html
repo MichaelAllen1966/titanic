@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dealing with imbalanced data by changing classification cut-off levels &#8212; Titanic Survical Machine Learning</title>
+    <title>TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)" href="16_imbalanced%20_data_smote.html" />
-    <link rel="prev" title="Dealing with imbalanced data by under or over sampling" href="14_imbalanced%20_data_sampling.html" />
+    <link rel="next" title="Checking model calibration" href="50_check_calibration.html" />
+    <link rel="prev" title="TensorFlow api-based neural net." href="20_tensorflow_api.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -173,7 +173,7 @@
   Working with imbalanced data sets
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="13_imbalanced%20_data_weighting.html">
    Dealing with imbalanced data by model weighting
@@ -184,8 +184,8 @@
    Dealing with imbalanced data by under or over sampling
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_imbalanced%20_data_threshold.html">
    Dealing with imbalanced data by changing classification cut-off levels
   </a>
  </li>
@@ -217,7 +217,7 @@
   TensorFlow neural nets
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="19_tensorflow_1.html">
    TensorFlow neural net
@@ -228,8 +228,8 @@
    TensorFlow api-based neural net.
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_tensorflow_roc.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification
   </a>
  </li>
@@ -286,7 +286,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/15_imbalanced _data_threshold.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/21_tensorflow_roc.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -322,46 +322,39 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-data-if-not-previously-downloaded">
+   Download data if not previously downloaded
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-calculate-accuracy-measurements">
+   Define function to calculate accuracy measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-scale-data">
+   Define function to scale data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data">
    Load data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
-   Artificially reduce the number of survivors (to make data set more imbalanced)
+  <a class="reference internal nav-link" href="#run-the-model-with-k-fold-validation-and-roc-calculation">
+   Run the model with k-fold validation and ROC calculation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#define-function-to-standardise-data">
-   Define function to standardise data
+  <a class="reference internal nav-link" href="#plot-roc-curve">
+   Plot ROC curve
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#define-function-to-measure-accuracy">
-   Define function to measure accuracy
+  <a class="reference internal nav-link" href="#plot-effects-of-changing-classification-probability-threshold">
+   Plot effects of changing classification probability threshold
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-   Divide into X (features) and y (labels)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assess-accuracy-precision-recall-and-f1-at-different-model-classification-thresholds">
-   Assess accuracy, precision, recall and f1 at different model classification thresholds
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-our-model-with-probability-cut-off-levels">
-   Run our model with probability cut-off levels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-results">
-     Plot results
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#observations">
@@ -379,16 +372,11 @@
         
               <div>
                 
-  <div class="section" id="dealing-with-imbalanced-data-by-changing-classification-cut-off-levels">
-<h1>Dealing with imbalanced data by changing classification cut-off levels<a class="headerlink" href="#dealing-with-imbalanced-data-by-changing-classification-cut-off-levels" title="Permalink to this headline">¶</a></h1>
-<p>A problem with machine learning models is that they may end up biased towards the majority class, and under-predict the minority class(es).</p>
-<p>Some models (including sklearn’s logistic regression) allow for thresholds of classification to be changed. This can help rebalance classification in models, especially where there is a binary classification (e.g. survived or not).</p>
-<p>Here we create a more imbalanced data set from the Titanic set, by dropping half the survivors.</p>
-<p>We vary the probability cut-off for a ‘survived’ classification, and examine the effect of classification probability cut-off on a range of accuracy measures.</p>
-<p>Note: You will need to look at the help files and documentation of other model types to find whether they have options to change classification cut-off levels.</p>
+  <div class="section" id="tensorflow-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
+<h1>TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification<a class="headerlink" href="#tensorflow-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide warnings (to keep notebook tidy; do not usually do this)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
@@ -397,25 +385,35 @@
 </div>
 <div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
-<p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="c1"># Import machine learning methods</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
+
+<span class="c1"># TensorFlow api model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="n">binary_crossentropy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 22:59:28.930243: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
-<p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
-If data has already been downloaded that cell may be skipped.</p>
+<div class="section" id="download-data-if-not-previously-downloaded">
+<h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
@@ -440,87 +438,9 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
-<span class="c1"># Make all data &#39;float&#39; type</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-</pre></div>
 </div>
-</div>
-</div>
-<p>The first column is a passenger index number. We will remove this, as this is not part of the original Titanic passenger data.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop Passengerid (axis=1 indicates we are removing a column rather than a row)</span>
-<span class="c1"># We drop passenger ID as it is not original data</span>
-
-<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
-<h2>Artificially reduce the number of survivors (to make data set more imbalanced)<a class="headerlink" href="#artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shuffle original data</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1"># Sampling with a fraction of 1.0 shuffles data</span>
-
-<span class="c1"># Create masks for filters</span>
-<span class="n">mask_died</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="n">mask_survived</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
-
-<span class="c1"># Filter data</span>
-<span class="n">died</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask_died</span><span class="p">]</span>
-<span class="n">survived</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask_survived</span><span class="p">]</span>
-
-<span class="c1"># Reduce survived by half</span>
-<span class="n">survived</span> <span class="o">=</span> <span class="n">survived</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-
-<span class="c1"># Recombine data and shuffle</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">died</span><span class="p">,</span> <span class="n">survived</span><span class="p">])</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> 
-
-<span class="c1"># Show average of survived</span>
-<span class="n">survival_rate</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Proportion survived:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">survival_rate</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion survived: 0.238
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="define-function-to-standardise-data">
-<h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
-    
-    <span class="c1"># Initialise a new scaling object for normalising input data</span>
-    <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
-
-    <span class="c1"># Set up the scaler just on the training set</span>
-    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-
-    <span class="c1"># Apply the scaler to the training and test sets</span>
-    <span class="n">train_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    <span class="n">test_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">train_std</span><span class="p">,</span> <span class="n">test_std</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="define-function-to-measure-accuracy">
-<h2>Define function to measure accuracy<a class="headerlink" href="#define-function-to-measure-accuracy" title="Permalink to this headline">¶</a></h2>
-<p>The following is a function for multiple accuracy measures.</p>
+<div class="section" id="define-function-to-calculate-accuracy-measurements">
+<h2>Define function to calculate accuracy measurements<a class="headerlink" href="#define-function-to-calculate-accuracy-measurements" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
@@ -629,39 +549,101 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-<div class="section" id="divide-into-x-features-and-y-labels">
-<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
-<p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
-By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="section" id="define-function-to-scale-data">
+<h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
+<p>In neural networks it is common to to scale input data 0-1 rather than use standardisation (subtracting mean and dividing by standard deviation) of each feature).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scale_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scale data 0-1 based on min and max in training set&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Initialise a new scaling object for normalising input data</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+    <span class="c1"># Set up the scaler just on the training set</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># Apply the scaler to the training and test sets</span>
+    <span class="n">train_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">test_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_sc</span><span class="p">,</span> <span class="n">test_sc</span>
+    
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="assess-accuracy-precision-recall-and-f1-at-different-model-classification-thresholds">
-<h2>Assess accuracy, precision, recall and f1 at different model classification thresholds<a class="headerlink" href="#assess-accuracy-precision-recall-and-f1-at-different-model-classification-thresholds" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="run-our-model-with-probability-cut-off-levels">
-<h2>Run our model with probability cut-off levels<a class="headerlink" href="#run-our-model-with-probability-cut-off-levels" title="Permalink to this headline">¶</a></h2>
-<p>We will use stratified k-fold verification to assess the model performance. If you are not familiar with this please see:</p>
-<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a></p>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create NumPy arrays of X and y (required for k-fold)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Make all data &#39;float&#39; type</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
+<span class="c1"># Convert to NumPy as required for k-fold splits</span>
 <span class="n">X_np</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span>
 <span class="n">y_np</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">values</span>
-
-<span class="c1"># Set up k-fold training/test splits</span>
-<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we use the api-based method to set up a TensorFlow neural network. This method allows us to more flexibly define the inputs for each layer, rather than assuming there is a simple sequence as with the <code class="docutils literal notranslate"><span class="pre">Sequential</span></code> method.</p>
+<p>We will put construction of the neural net into a separate function.</p>
+<p>The neural net is a relatively simple network. The inputs are connected to two hidden layers (of 240 and 50 nodes) before being connected to two output nodes corresponding to each class (died and survived). It also contains some useful additions (batch normalisation and dropout) as described below.</p>
+<p>The layers of the network are:</p>
+<ol class="simple">
+<li><p>An input layer (which <em>does</em> need to be defined)</p></li>
+<li><p>A fully-connected (dense) layer.This is defined by the number of inputs (the number of input features) and the number of outputs. We will expand out feature data set up to 240 outputs. The output of the layer uses ReLU  (rectified linear unit) activation. ReLU activation is most common for the inner layers of a neural network. Negative input values are set to zero. Positive input values are left unchanged.</p></li>
+<li><p>A batch normalisation layer. This is not usually used for small models, but can increase the speed of training for larger models. It is added here as an example of how to include it (in large models all dense layers would be followed by a batch normalisation layer). The layer definition includes the number of inputs to normalise.</p></li>
+<li><p>A dropout layer. This layer randomly sets outputs from the preceding layer to zero during training (a different set of outputs is zeroed for each training iteration). This helps prevent over-fitting of the model to the training data. Typically between 0.1 and 0.3 outputs are set to zero (<code class="docutils literal notranslate"><span class="pre">p=0.1</span></code> means 10% of outputs are set to zero).</p></li>
+<li><p>A second fully connected layer which reduces the network down to 50 nodes. This again uses ReLU activation and is followed by batch normalisation, and dropout layers.</p></li>
+<li><p>A final fully connected linear layer of one nodes (more nodes could be used for more classes, in which case use <code class="docutils literal notranslate"><span class="pre">softmax</span></code> activation and <code class="docutils literal notranslate"><span class="pre">categorical_crossentropy</span></code> in the loss function).</p></li>
+</ol>
+<p>The output of the net is the probability of surviving (usually a probability of &gt;= 0.5 will be classes as ‘survived’).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">):</span>
+    
+    <span class="c1"># Clear Tensorflow</span>
+    <span class="n">K</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+       
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">number_features</span><span class="p">)</span>
+    <span class="n">dense_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">norm_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">dense_1</span><span class="p">)</span>
+    <span class="n">dropout_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">norm_1</span><span class="p">)</span>
+    <span class="n">dense_2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">dropout_1</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">dense_2</span><span class="p">)</span>
+    
+    <span class="n">net</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+    
+    <span class="c1"># Compiling model</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    
+    <span class="n">net</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> 
+                <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> 
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">net</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-the-model-with-k-fold-validation-and-roc-calculation">
+<h2>Run the model with k-fold validation and ROC calculation<a class="headerlink" href="#run-the-model-with-k-fold-validation-and-roc-calculation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up k-fold training/test splits</span>
+<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">number_of_splits</span><span class="p">)</span>
 <span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">)</span>
 
 <span class="c1"># Set up thresholds</span>
-<span class="n">thresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">thresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
 
 <span class="c1"># Create arrays for overall results (rows=threshold, columns=k fold replicate)</span>
 <span class="n">results_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
@@ -669,6 +651,10 @@ By convention our features are called <code class="docutils literal notranslate"
 <span class="n">results_recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
 <span class="n">results_f1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
 <span class="n">results_predicted_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_observed_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_true_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_false_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_auc</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Loop through the k-fold splits</span>
 <span class="n">loop_index</span> <span class="o">=</span> <span class="mi">0</span>
@@ -680,22 +666,32 @@ By convention our features are called <code class="docutils literal notranslate"
     <span class="n">threshold_recall</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">threshold_f1</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">threshold_predicted_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_observed_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_true_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_false_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># Get X and Y train/test</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
     <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
 
-    <span class="c1"># Get X and Y train/test</span>
-    <span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
-
     <span class="c1"># Set up and fit model</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="n">X_train_sc</span><span class="p">,</span> <span class="n">X_test_sc</span> <span class="o">=</span> <span class="n">scale_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="c1"># Define network</span>
+    <span class="n">number_features</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
+    
+    <span class="c1">### Train model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span>
+             <span class="n">y_train</span><span class="p">,</span>
+             <span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+             <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+             <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
     
     <span class="c1"># Get probability of non-survive and survive</span>
-    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-    <span class="c1"># Take just the survival probabilities (column 1)</span>
-    <span class="n">probability_survival</span> <span class="o">=</span> <span class="n">probabilities</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">probability_survival</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">)</span>
+    <span class="n">probability_survival</span> <span class="o">=</span> <span class="n">probability_survival</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
     
     <span class="c1"># Loop through increments in probability of survival</span>
     <span class="k">for</span> <span class="n">cutoff</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span> <span class="c1">#  loop 0 --&gt; 1 on steps of 0.1</span>
@@ -708,38 +704,143 @@ By convention our features are called <code class="docutils literal notranslate"
         <span class="n">threshold_precision</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">])</span>
         <span class="n">threshold_recall</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">])</span>
         <span class="n">threshold_f1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">])</span>
-        <span class="n">threshold_predicted_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_predicted_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_observed_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_true_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;true_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_false_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;false_positive_rate&#39;</span><span class="p">])</span>
     
     <span class="c1"># Add results to results arrays</span>
     <span class="n">results_accuracy</span><span class="p">[:,</span><span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_accuracy</span>
     <span class="n">results_precision</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_precision</span>
     <span class="n">results_recall</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_recall</span>
     <span class="n">results_f1</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_f1</span>
-    <span class="n">results_predicted_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_predicted_positive_rate</span>
+    <span class="n">results_predicted_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> \
+        <span class="n">threshold_predicted_positive_rate</span>
+    <span class="n">results_observed_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> \
+        <span class="n">threshold_observed_positive_rate</span>
+    <span class="n">results_true_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_true_positive_rate</span>
+    <span class="n">results_false_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_false_positive_rate</span>
+    
+    <span class="c1"># Calculate ROC AUC</span>
+    <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">threshold_false_positive_rate</span><span class="p">,</span> <span class="n">threshold_true_positive_rate</span><span class="p">)</span>
+    <span class="n">results_auc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">)</span>
     
     <span class="c1"># Increment loop index</span>
     <span class="n">loop_index</span> <span class="o">+=</span> <span class="mi">1</span>
     
 
-<span class="c1"># Transfer results to dataframe</span>
+<span class="c1"># Transfer summary results to dataframe</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">thresholds</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">])</span>
 <span class="n">results</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_accuracy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">results</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_precision</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">results</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_recall</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">results</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_predicted_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">results_predicted_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">results_observed_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;true_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_true_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;false_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_false_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_auc</span><span class="p">)</span>
+
+<span class="n">mean_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_auc</span><span class="p">)</span>
+<span class="n">mean_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mean_auc</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 22:59:30.215274: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-10-09 22:59:30.216085: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2021-10-09 22:59:31.844287: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:31.844612: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: NVIDIA GeForce GTX 1650 Ti computeCapability: 7.5
+coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 178.84GiB/s
+2021-10-09 22:59:31.844644: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2021-10-09 22:59:31.845975: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2021-10-09 22:59:31.846023: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2021-10-09 22:59:31.847198: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-10-09 22:59:31.847400: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-10-09 22:59:31.848510: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-10-09 22:59:31.849174: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2021-10-09 22:59:31.851973: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2021-10-09 22:59:31.852064: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:31.852353: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:31.852566: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-10-09 22:59:31.853218: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-10-09 22:59:31.854399: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:31.854669: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: NVIDIA GeForce GTX 1650 Ti computeCapability: 7.5
+coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 178.84GiB/s
+2021-10-09 22:59:31.854695: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2021-10-09 22:59:31.854712: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2021-10-09 22:59:31.854727: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2021-10-09 22:59:31.854741: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-10-09 22:59:31.854756: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-10-09 22:59:31.854770: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-10-09 22:59:31.854786: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2021-10-09 22:59:31.854801: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2021-10-09 22:59:31.854846: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:31.855144: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:31.855355: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-10-09 22:59:31.855382: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2021-10-09 22:59:32.249803: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-10-09 22:59:32.249822: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2021-10-09 22:59:32.249827: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2021-10-09 22:59:32.249990: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:32.250279: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:32.250528: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 22:59:32.250760: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3409 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA GeForce GTX 1650 Ti, pci bus id: 0000:01:00.0, compute capability: 7.5)
+2021-10-09 22:59:32.251006: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-10-09 22:59:32.346529: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-10-09 22:59:32.363132: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2599990000 Hz
+2021-10-09 22:59:32.868977: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="plot-results">
-<h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="plot-roc-curve">
+<h2>Plot ROC curve<a class="headerlink" href="#plot-roc-curve" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="n">chart_x</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_splits</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_false_positive_rate</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+             <span class="n">results_true_positive_rate</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+             <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span>
+             <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_false_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">results_true_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate (1 - Specificity)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate (Sensitivity)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver Operator Characteristic (ROC) Curve&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;wheat&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Mean AUC = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean_auc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/21_tensorflow_roc_17_0.png" src="_images/21_tensorflow_roc_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="plot-effects-of-changing-classification-probability-threshold">
+<h2>Plot effects of changing classification probability threshold<a class="headerlink" href="#plot-effects-of-changing-classification-probability-threshold" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chart_x</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
          <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
@@ -761,19 +862,16 @@ By convention our features are called <code class="docutils literal notranslate"
          <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
          <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Predicted positive rate&#39;</span><span class="p">)</span>
 
-<span class="n">actual_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">chart_x</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">actual_positive_rate</span><span class="p">,</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">],</span>
          <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span>
          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
-         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Actual positive rate&#39;</span><span class="p">)</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Observed positive rate&#39;</span><span class="p">)</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Probability threshold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Probability cutoff for classifcation&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -781,18 +879,15 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15_imbalanced _data_threshold_21_0.png" src="_images/15_imbalanced _data_threshold_21_0.png" />
-</div>
+<img alt="_images/21_tensorflow_roc_19_0.png" src="_images/21_tensorflow_roc_19_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Accuracy is maximised with a probability threshold of 0.5</p></li>
-<li><p>When the threshold is set at 0.5 (the default threshold for classification) minority class (‘survived’) is under-predicted.</p></li>
-<li><p>A threshold of 0.4 balances precision and recall and correctly estimates the proportion of passengers who survive.</p></li>
-<li><p>There is a marginal reduction in overall accuracy in order to balance accuracy of the classes.</p></li>
+<li><p>Using the default values for probability cut-off, the TensorFlow model under-predicts the proportion of passengers who survive (the minority class).</p></li>
+<li><p>Without rebalancing of classes (under-sampling of the majority class, or over-sampling of the minority class) the model may be rebalanced by adjusting the probability threshold for classification (at the cost of a small reduction in overall accuracy).</p></li>
 </ul>
 </div>
 </div>
@@ -827,19 +922,19 @@ By convention our features are called <code class="docutils literal notranslate"
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="14_imbalanced%20_data_sampling.html" title="previous page">
+        <a class="left-prev" href="20_tensorflow_api.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Dealing with imbalanced data by under or over sampling</p>
+                <p class="prevnext-title">TensorFlow api-based neural net.</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="16_imbalanced%20_data_smote.html" title="next page">
+        <a class="right-next" href="50_check_calibration.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)</p>
+                <p class="prevnext-title">Checking model calibration</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

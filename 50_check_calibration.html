@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checking model calibration &#8212; Titanic Survical Machine Learning</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification" href="21_tensorflow_roc.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="front_page.html">
+   Titanic Survival
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_preprocessing.html">
+   Kaggle Titanic survival - data preprocessing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_logistic_regression.html">
+   Logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_k_fold.html">
+   Measuring model accuracy with K-fold stratification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_regularisation.html">
+   Avoiding over-fitting with regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_accuracy_standalone.html">
+   Accuracy measurements in machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
+   Application of alternative accuracy measurements to a logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_learning_curve.html">
+   Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_roc.html">
+   Receiver Operator Characteristic (ROC) curve
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Feature selection and expansion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_feature_selection_1_univariate.html">
+   Feature selection using univariate statistical selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_feature_selection_2_forward.html">
+   Feature selection using forward selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_feature_selection_3_backward.html">
+   Feature selection using backward elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_feature_expansion.html">
+   Feature expansion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Working with imbalanced data sets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_imbalanced%20_data_weighting.html">
+   Dealing with imbalanced data by model weighting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_imbalanced%20_data_sampling.html">
+   Dealing with imbalanced data by under or over sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_imbalanced%20_data_threshold.html">
+   Dealing with imbalanced data by changing classification cut-off levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_imbalanced%20_data_smote.html">
+   Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Random forest model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_random_forest.html">
+   A Random Forest model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_random_forest_roc.html">
+   Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  TensorFlow neural nets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_tensorflow_1.html">
+   TensorFlow neural net
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_tensorflow_api.html">
+   TensorFlow api-based neural net.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_tensorflow_roc.html">
+   TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extras
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Checking model calibration
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/50_check_calibration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+     Divide into X (features) and y (labels)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-run-method">
+   Single run method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-training-and-calibration-test-sets">
+     Divide into training and calibration test sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-random-forest-model">
+     Fit Random Forest model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-probabilities-for-calibration">
+     Predict probabilities for calibration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reliablity-plot">
+     Reliablity plot
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method">
+   Using stratfied k-fold validation and sklearn’s calibration curve method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-results">
+     Plot results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observations">
+     Observations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-do-do-if-a-model-is-poorly-calibrated">
+   What do do if a model is poorly calibrated
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="checking-model-calibration">
+<h1>Checking model calibration<a class="headerlink" href="#checking-model-calibration" title="Permalink to this headline">¶</a></h1>
+<p>As well as classifying a case into a specific class (e.g. survived or died), it may be useful to look at the probability that the model assigns to a case being a specific class. Examples of when probability may be important include:</p>
+<ul class="simple">
+<li><p>High risk models (e.g. medical) – to be clear on risk being taken</p></li>
+<li><p>When probability thresholds are important to decision-making (e.g. screening when a relatively low probability may still signify further action should be taken).</p></li>
+<li><p>Improving our models - focussing on mistakes with v.high or v.low probabilities.</p></li>
+</ul>
+<p>When we are interested in probabilities, it is important to be able to trust the probabilities reported by the model. This involves two steps:</p>
+<ol class="simple">
+<li><p>Check whether model probabilities are well calibrated</p></li>
+<li><p>If necessary re-calibrate the model</p></li>
+</ol>
+<p>In this work book we will look at checking model calibration. We will first perform a single run working through the steps ‘manually’, and then put it in to a stratified k-fold loop using sklearn’s <code class="docutils literal notranslate"><span class="pre">calibration_curve</span></code> method.</p>
+<p>When checking probability calibration it is important, just like when check accuracy, that we test calibration on a test set that has not been used to train the model. Like checking accuracy, we can also use stratified k-fold validation to get a more accurate assessment of calibration (which we will use when we use sklearn’s built-in methods).</p>
+<p>In this example we will use a random forest model.</p>
+<div class="section" id="load-modules">
+<h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># Import machine learning methods</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
+If data has already been downloaded that cell may be skipped.</p>
+<p>Code that was used to pre-process the data ready for machine learning may be found at:</p>
+<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">download_required</span><span class="p">:</span>
+    
+    <span class="c1"># Download processed data:</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/MichaelAllen1966/&#39;</span> <span class="o">+</span> \
+                <span class="s1">&#39;1804_python_healthcare/master/titanic/data/processed_data.csv&#39;</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+
+    <span class="c1"># Create a data subfolder if one does not already exist</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">data_directory</span> <span class="o">=</span><span class="s1">&#39;./data/&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_directory</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+    <span class="c1"># Save data</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_directory</span> <span class="o">+</span> <span class="s1">&#39;processed_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once downloaded, load data and remove passenger index number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Make all data &#39;float&#39; type</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop Passengerid (axis=1 indicates we are removing a column rather than a row)</span>
+<span class="c1"># We drop passenger ID as it is not original data</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
+<h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
+<p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
+By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="single-run-method">
+<h2>Single run method<a class="headerlink" href="#single-run-method" title="Permalink to this headline">¶</a></h2>
+<p>Here we will go through the steps of calibration to illustrate how it is performed. We will then put this code inside a stratified k-fold loop below.</p>
+<div class="section" id="divide-into-training-and-calibration-test-sets">
+<h3>Divide into training and calibration test sets<a class="headerlink" href="#divide-into-training-and-calibration-test-sets" title="Permalink to this headline">¶</a></h3>
+<p>We will divide the data in training and calibration test sets (75:25 split).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fit-random-forest-model">
+<h3>Fit Random Forest model<a class="headerlink" href="#fit-random-forest-model" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up and fit model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomForestClassifier()
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="predict-probabilities-for-calibration">
+<h3>Predict probabilities for calibration<a class="headerlink" href="#predict-probabilities-for-calibration" title="Permalink to this headline">¶</a></h3>
+<p>Now we can use the trained model to predict the probability of survival using the model’s <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_calibrate_probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reliablity-plot">
+<h3>Reliablity plot<a class="headerlink" href="#reliablity-plot" title="Permalink to this headline">¶</a></h3>
+<p>In the reliability plot we will bin cases by their predicted probability, into 10 bins of probability of surviving.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bin data with numpy digitize (this will assign a bin to each case)</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mf">0.10</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">step</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="n">digitized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">y_calibrate_probabilities</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+
+<span class="c1"># Put data in DataFrame</span>
+<span class="n">reliability</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">reliability</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">digitized</span>
+<span class="n">reliability</span><span class="p">[</span><span class="s1">&#39;probability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_calibrate_probabilities</span>
+<span class="n">reliability</span><span class="p">[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Summarise data by bin in new dataframe</span>
+<span class="n">reliability_summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="c1"># Add bins to summary</span>
+<span class="n">reliability_summary</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bins</span>
+
+<span class="c1"># Calculate mean of predicted probability of survival for each bin</span>
+<span class="n">reliability_summary</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">reliability</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bin&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;probability&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculate the proportion of passengers who survive in each bin</span>
+<span class="n">reliability_summary</span><span class="p">[</span><span class="s1">&#39;fraction_positive&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">reliability</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bin&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;observed&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reliability_summary</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bin</th>
+      <th>confidence</th>
+      <th>fraction_positive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.1</td>
+      <td>0.025473</td>
+      <td>0.117647</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.2</td>
+      <td>0.145274</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.3</td>
+      <td>0.255915</td>
+      <td>0.076923</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.4</td>
+      <td>0.352867</td>
+      <td>0.466667</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.5</td>
+      <td>0.444744</td>
+      <td>0.533333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.6</td>
+      <td>0.560417</td>
+      <td>0.375000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.7</td>
+      <td>0.640903</td>
+      <td>0.333333</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.8</td>
+      <td>0.751204</td>
+      <td>0.857143</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.9</td>
+      <td>0.852500</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1.0</td>
+      <td>0.945500</td>
+      <td>0.950000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Plot results:</p>
+<p>In a perfectly calibrated model, the fraction of passengers who survive should be the same as the average probability of survival in each bin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reliability_summary</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">],</span> 
+         <span class="n">reliability_summary</span><span class="p">[</span><span class="s1">&#39;fraction_positive&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;theoretical&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction positive&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Reliability plot&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/50_check_calibration_21_0.png" src="_images/50_check_calibration_21_0.png" />
+</div>
+</div>
+<p>What to look for in a Reliability Plot:</p>
+<ul class="simple">
+<li><p>Run the plot multiple times - is there a consistent pattern? See below for code using sklearn methods that allows for easy replication of reliability plots.</p></li>
+<li><p>Points below the diagonal: The model has over-forecast - the calculated probabilities are too large.</p></li>
+<li><p>Points above the diagonal: The model has under-forecast - the calculated probabilities are too small.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method">
+<h2>Using stratfied k-fold validation and sklearn’s calibration curve method<a class="headerlink" href="#using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method" title="Permalink to this headline">¶</a></h2>
+<p>The method below will take the output probabilities from the Random Forest model and use sklearn’s <code class="docutils literal notranslate"><span class="pre">calibration_curve</span></code> method to create bins of model probability and the fraction positive in each bin. We will use ‘quantile’ binning which creates bins of equal size. Use of uniform bins (bins of uniform width) can cause problems if a bin is empty.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+
+<span class="c1"># Convert data to NumPy arrays (required for stratified k-fold)</span>
+<span class="n">X_np</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_np</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Set up k-fold splits</span>
+<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">number_of_splits</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                      <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">)</span>
+
+<span class="c1"># Define bins</span>
+<span class="n">number_of_bins</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Set up results DataFrames (to get results from each run)</span>
+<span class="n">results_model_probability</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">results_fraction_positive</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through the k-fold splits</span>
+<span class="n">loop_counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">):</span>    
+        
+    <span class="c1"># Get X and Y train/test</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    
+    <span class="c1"># Set up and fit model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="c1"># Get test set proabilities</span>
+    <span class="n">y_calibrate_probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Get calibration curve (use quantile to make sure all bins exist)</span>
+    <span class="n">fraction_pos</span><span class="p">,</span> <span class="n">model_prob</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span>
+        <span class="n">y_test</span><span class="p">,</span> <span class="n">y_calibrate_probabilities</span><span class="p">,</span> 
+        <span class="n">n_bins</span><span class="o">=</span><span class="n">number_of_bins</span><span class="p">,</span>
+        <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;quantile&#39;</span><span class="p">)</span>    
+
+    <span class="c1"># record run results</span>
+    <span class="n">results_model_probability</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model_prob</span><span class="p">)</span>
+    <span class="n">results_fraction_positive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fraction_pos</span><span class="p">)</span>
+    
+    <span class="c1"># Increment loop counter</span>
+    <span class="n">loop_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+<span class="c1"># Convert results to DataFrame</span>
+<span class="n">results_model_probability</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_model_probability</span><span class="p">)</span>
+<span class="n">results_fraction_positive</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_fraction_positive</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-results">
+<h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
+<p>Plot individual runs and means for bins.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Add individual k-fold runs</span>
+<span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_splits</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_model_probability</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">run</span><span class="p">],</span>
+             <span class="n">results_fraction_positive</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">run</span><span class="p">],</span>
+             <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+             <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">)</span>
+    
+<span class="c1"># Add mean</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_model_probability</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+         <span class="n">results_fraction_positive</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add diagonal</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;theoretical&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction positive&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Reliability plot&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/50_check_calibration_26_0.png" src="_images/50_check_calibration_26_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Using k-fold splits and taking the mean we can see our model probability is reasonably well calibrated.</p></li>
+<li><p>Testing the model calibration gives us confidence that the probabilities reported by the model are reasonable.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="what-do-do-if-a-model-is-poorly-calibrated">
+<h2>What do do if a model is poorly calibrated<a class="headerlink" href="#what-do-do-if-a-model-is-poorly-calibrated" title="Permalink to this headline">¶</a></h2>
+<p>If a model is poorly calibrated (if the calibration curve is significantly offset from the diagonal) then the model may be recalibrated. The most common method of recalibration is to take the probability output of the calibration data set(s) and fit a logistic regression model using those outputs and the known <code class="docutils literal notranslate"><span class="pre">y</span></code> values (survived or not) for those probabilities. This is known as <em>Platt scaling</em>. Another method is known as isotonic scaling, but is prone to over-fitting, so is only suitable for large data sets.</p>
+<p>Platt scaling may be easily implemented by adding in a logistic regression model fitted to the output of the calibration test. Platt scaling and isotonic scaling may also be performed by using the <code class="docutils literal notranslate"><span class="pre">CalibratedClassifier</span></code> method built in to sklearn:</p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html">https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="21_tensorflow_roc.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Allen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
