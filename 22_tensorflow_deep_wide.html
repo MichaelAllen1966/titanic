@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TensorFlow Bagging &#8212; Titanic Survical Machine Learning</title>
+    <title>TensorFlow ‘Wide and Deep’ neural nets &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Checking model calibration" href="50_check_calibration.html" />
-    <link rel="prev" title="TensorFlow ‘Wide and Deep’ neural nets" href="22_tensorflow_deep_wide.html" />
+    <link rel="next" title="TensorFlow Bagging" href="25_tensorflow_bagging.html" />
+    <link rel="prev" title="TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification" href="21_tensorflow_roc.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -233,13 +233,13 @@
    TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_tensorflow_deep_wide.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    TensorFlow ‘Wide and Deep’ neural nets
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_tensorflow_bagging.html">
    TensorFlow Bagging
   </a>
  </li>
@@ -296,7 +296,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/25_tensorflow_bagging.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/22_tensorflow_deep_wide.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -328,7 +328,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   TensorFlow Bagging
+   TensorFlow ‘Wide and Deep’ neural nets
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -363,21 +363,9 @@
      Show summary of the model structure
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-single-model">
-   Training a single model
-  </a>
-  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-an-ensemble-of-models">
-     Training an ensemble of models
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#show-variation-in-prediction-between-models-depending-on-probability-of-survival">
-     Show variation in prediction between models depending on probability of survival.
+    <a class="reference internal nav-link" href="#training-the-model">
+     Training the model
     </a>
    </li>
   </ul>
@@ -393,12 +381,11 @@
         
               <div>
                 
-  <div class="section" id="tensorflow-bagging">
-<h1>TensorFlow Bagging<a class="headerlink" href="#tensorflow-bagging" title="Permalink to this headline">¶</a></h1>
-<p>‘Bagging’ (bootstrap aggregation’) is a simple but powerful method for improving accuracy of a model, and for getting a measure of model uncertainty.</p>
-<p>The principle is simple: we train <em>n</em> neural nets all using different bootstrapped samples (sampling with replacement) from the training set. We then use the mean probability of classification from the ensemble of models.</p>
-<p>Breiman, L. Bagging Predictors. Machine Learning 24, 123–140 (1996). <a class="reference external" href="https://doi.org/10.1023/A:1018054314350">https://doi.org/10.1023/A:1018054314350</a></p>
-<p>This method may provide better performance than Monte-Carlo Dropout (see separate notebook), but is signficantly more computationally expensive as training needs to be repeated for each net in the ensemble.</p>
+  <div class="section" id="tensorflow-wide-and-deep-neural-nets">
+<h1>TensorFlow ‘Wide and Deep’ neural nets<a class="headerlink" href="#tensorflow-wide-and-deep-neural-nets" title="Permalink to this headline">¶</a></h1>
+<p>One modification to a standard sequential model is to use a ‘Wide and Deep’ model as described by Cheng et al. (<a class="reference external" href="https://arxiv.org/abs/1606.07792">https://arxiv.org/abs/1606.07792</a>).</p>
+<p>In this model structure the input layer is brought back in to the model just prior to the output layer. This may be of use if both ‘shallow’ and ‘deep’ learning may be of use. Here we will demonstrate how this is performed in Keras, which will also demonstrate how Keras can be used to easily build more complex model structures.</p>
+<p>We will focus just on the essential code here (not, for example, using k-fold validation) for simplicity. <em>Please see our previous TensorFlow examples first</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
@@ -414,7 +401,6 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># sklearn for pre-processing</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
@@ -431,7 +417,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 23:23:40.163259: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 23:10:07.870756: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
 </pre></div>
 </div>
 </div>
@@ -510,6 +496,21 @@
 </div>
 <div class="section" id="set-up-neural-net">
 <h1>Set up neural net<a class="headerlink" href="#set-up-neural-net" title="Permalink to this headline">¶</a></h1>
+<p>Here we use the api-based method to set up a TensorFlow neural network. This method allows us
+to more flexibly define the inputs for each layer, rather than assuming there is a simple sequence as with the Sequential method.</p>
+<p>We will put construction of the neural net into a separate function.</p>
+<p>The neural net is a relatively simple network. The inputs are connected to two hidden layers (of 240 and 50 nodes) before being connected to two output nodes corresponding to each class (died and survived). It also contains some useful additions (batch normalisation and dropout) as described below.</p>
+<p>The only difference to our previous example is that we add in an extra concatenation layer that combines the last deep layer with the orginal input layer.</p>
+<p>The layers of the network are:</p>
+<ol class="simple">
+<li><p>An input layer (which does need to be defined)</p></li>
+<li><p>A fully-connected (dense) layer.This is defined by the number of inputs (the number of input features) and the number of outputs. We will expand out feature data set up to 240 outputs. The output of the layer uses ReLU (rectified linear unit) activation. ReLU activation is most common for the inner layers of a neural network. Negative input values are set to zero. Positive input values are left unchanged.</p></li>
+<li><p>A batch normalisation layer. This is not usually used for small models, but can increase the speed of training for larger models. It is added here as an example of how to include it (in large models all dense layers would be followed by a batch normalisation layer). The layer definition includes the number of inputs to normalise.</p></li>
+<li><p>A dropout layer. This layer randomly sets outputs from the preceding layer to zero during training (a different set of outputs is zeroed for each training iteration). This helps prevent over-fitting of the model to the training data. Typically between 0.1 and 0.3 outputs are set to zero (p=0.1 means 10% of outputs are set to zero).</p></li>
+<li><p>A second fully connected layer which reduces the network down to 50 nodes. This again uses ReLU activation and is followed by batch normalisation, and dropout layers.</p></li>
+<li><p>A concetnation layer which combines the last deep layer with the original input layer.</p></li>
+<li><p>A final fully connected linear layer of one nodes (more nodes could be used for more classes, in which case use softmax activation and categorical_crossentropy in the loss function). The output of the net is the probability of surviving (usually a probability of &gt;= 0.5 will be classes as ‘survived’).</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">):</span>
@@ -519,17 +520,16 @@
     
     <span class="c1"># Define layers</span>
     <span class="n">inputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">number_features</span><span class="p">)</span>
-    <span class="n">dropout_0</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
-    
-    <span class="n">dense_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">dropout_0</span><span class="p">)</span>
-    <span class="n">dropout_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">dense_1</span><span class="p">)</span>
-    
+    <span class="n">dense_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">norm_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">dense_1</span><span class="p">)</span>
+    <span class="n">dropout_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">norm_1</span><span class="p">)</span>
     <span class="n">dense_2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">dropout_1</span><span class="p">)</span>
-    <span class="n">dropout_2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">dense_2</span><span class="p">)</span>
-  
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">dropout_2</span><span class="p">)</span>
     
+    <span class="c1"># Create a layer that concatenates last dense layer and the input layer</span>
+    <span class="n">concat</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Concatenate</span><span class="p">()([</span><span class="n">inputs</span><span class="p">,</span> <span class="n">dense_2</span><span class="p">])</span>
     
+    <span class="c1"># Base output on concatenated layer</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">concat</span><span class="p">)</span>
     <span class="n">net</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
     
     <span class="c1"># Compiling model</span>
@@ -554,72 +554,73 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-input_1 (InputLayer)         [(None, 10)]              0         
-_________________________________________________________________
-dropout (Dropout)            (None, 10)                0         
-_________________________________________________________________
-dense (Dense)                (None, 240)               2640      
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 240)               0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 50)                12050     
-_________________________________________________________________
-dropout_2 (Dropout)          (None, 50)                0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 1)                 51        
-=================================================================
-Total params: 14,741
-Trainable params: 14,741
-Non-trainable params: 0
-_________________________________________________________________
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            [(None, 10)]         0                                            
+__________________________________________________________________________________________________
+dense (Dense)                   (None, 240)          2640        input_1[0][0]                    
+__________________________________________________________________________________________________
+batch_normalization (BatchNorma (None, 240)          960         dense[0][0]                      
+__________________________________________________________________________________________________
+dropout (Dropout)               (None, 240)          0           batch_normalization[0][0]        
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 50)           12050       dropout[0][0]                    
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 60)           0           input_1[0][0]                    
+                                                                 dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 1)            61          concatenate[0][0]                
+==================================================================================================
+Total params: 15,711
+Trainable params: 15,231
+Non-trainable params: 480
+__________________________________________________________________________________________________
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 23:23:41.731319: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2021-10-09 23:23:41.732159: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
-2021-10-09 23:23:41.806731: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:41.807059: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 23:10:09.185338: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-10-09 23:10:09.186067: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2021-10-09 23:10:10.817928: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:10.818210: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
 pciBusID: 0000:01:00.0 name: NVIDIA GeForce GTX 1650 Ti computeCapability: 7.5
 coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 178.84GiB/s
-2021-10-09 23:23:41.807093: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2021-10-09 23:23:41.808435: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2021-10-09 23:23:41.808494: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2021-10-09 23:23:41.809704: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2021-10-09 23:23:41.809980: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2021-10-09 23:23:41.811301: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2021-10-09 23:23:41.811963: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2021-10-09 23:23:41.816013: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2021-10-09 23:23:41.816232: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:41.816833: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:41.817243: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2021-10-09 23:23:41.817641: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+2021-10-09 23:10:10.818239: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2021-10-09 23:10:10.819371: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2021-10-09 23:10:10.819409: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2021-10-09 23:10:10.820407: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-10-09 23:10:10.820587: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-10-09 23:10:10.821580: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-10-09 23:10:10.822077: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2021-10-09 23:10:10.824647: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2021-10-09 23:10:10.824736: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:10.825029: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:10.825246: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-10-09 23:10:10.825510: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2021-10-09 23:23:41.818586: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:41.819069: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+2021-10-09 23:10:10.826394: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:10.826625: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
 pciBusID: 0000:01:00.0 name: NVIDIA GeForce GTX 1650 Ti computeCapability: 7.5
 coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 178.84GiB/s
-2021-10-09 23:23:41.819179: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2021-10-09 23:23:41.819234: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2021-10-09 23:23:41.819269: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2021-10-09 23:23:41.819300: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2021-10-09 23:23:41.819333: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2021-10-09 23:23:41.819363: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2021-10-09 23:23:41.819395: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2021-10-09 23:23:41.819424: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2021-10-09 23:23:41.819560: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:41.820106: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:41.820523: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2021-10-09 23:23:41.820606: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2021-10-09 23:23:42.362063: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
-2021-10-09 23:23:42.362088: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
-2021-10-09 23:23:42.362097: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
-2021-10-09 23:23:42.362318: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:42.362726: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:42.363063: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-10-09 23:23:42.363348: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3409 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA GeForce GTX 1650 Ti, pci bus id: 0000:01:00.0, compute capability: 7.5)
-2021-10-09 23:23:42.363580: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-10-09 23:10:10.826647: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2021-10-09 23:10:10.826663: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2021-10-09 23:10:10.826677: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2021-10-09 23:10:10.826690: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-10-09 23:10:10.826704: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-10-09 23:10:10.826717: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-10-09 23:10:10.826731: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2021-10-09 23:10:10.826744: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2021-10-09 23:10:10.826787: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:10.827058: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:10.827276: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-10-09 23:10:10.827304: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2021-10-09 23:10:11.278234: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-10-09 23:10:11.278256: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2021-10-09 23:10:11.278262: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2021-10-09 23:10:11.278457: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:11.278814: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:11.279188: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-10-09 23:10:11.279444: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3409 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA GeForce GTX 1650 Ti, pci bus id: 0000:01:00.0, compute capability: 7.5)
+2021-10-09 23:10:11.279652: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
 </pre></div>
 </div>
 </div>
@@ -627,19 +628,18 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <p>Note that the plot of the model shows how the imput layer is connected to both the first dense layer and the concatenation layer prior to the output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If necessary conda install pydot and graphviz</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If necessary pip or conda install pydot and graphviz</span>
 <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;titanic_tf_model.png&quot;</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/25_tensorflow_bagging_15_0.png" src="_images/25_tensorflow_bagging_15_0.png" />
+<img alt="_images/22_tensorflow_deep_wide_15_0.png" src="_images/22_tensorflow_deep_wide_15_0.png" />
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="training-a-single-model">
-<h1>Training a single model<a class="headerlink" href="#training-a-single-model" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="training-the-model">
+<h2>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -653,167 +653,63 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 
 <span class="c1"># Define network</span>
 <span class="n">number_features</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">single_model</span> <span class="o">=</span> <span class="n">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
 
 <span class="c1"># Train model</span>
-<span class="n">single_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span>
-            <span class="n">y_train</span><span class="p">,</span>
-            <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-            <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span>
+                    <span class="n">y_train</span><span class="p">,</span>
+                    <span class="n">epochs</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+                    <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+                    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 23:23:42.646058: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2021-10-09 23:23:42.646409: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2599990000 Hz
-2021-10-09 23:23:43.090159: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x7fae641c9be0&gt;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-09 23:10:11.598142: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-10-09 23:10:11.615090: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2599990000 Hz
+2021-10-09 23:10:12.076774: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="training-an-ensemble-of-models">
-<h2>Training an ensemble of models<a class="headerlink" href="#training-an-ensemble-of-models" title="Permalink to this headline">¶</a></h2>
-<p>Training is as a single model, but we use bootstrap sampling (sampling with replacement) to create different training sets.</p>
-<p>Here we will use a fixed number (25) of nets. In practice this number should be a adjusted until a plateau in performance is reached. It is also possible to vary the bottstrap saple size - here we fix the sample size to be the same size as the training set.</p>
+<p><code class="docutils literal notranslate"><span class="pre">history</span></code> is a dictionary containing data collected during training. Let’s take a look at the keys in this dictionary (these are the metrics monitored during training):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_nets</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="n">training_set_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">)</span>
-<span class="n">sample_size</span> <span class="o">=</span> <span class="n">training_set_size</span>
-
-<span class="c1"># Define save checkpoint callback (only save if new best validation results)</span>
-<span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span>
-    <span class="s1">&#39;model_checkpoint.h5&#39;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Define early stopping callback</span>
-<span class="c1"># Stop when no validation improvement for 25 epochs</span>
-<span class="c1"># Restore weights to best validation accuracy</span>
-<span class="n">early_stopping_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span>
-    <span class="n">patience</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Create and train models</span>
-<span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">number_features</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">number_of_nets</span><span class="p">):</span>
-    <span class="c1"># Set up models</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training model </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> of </span><span class="si">{</span><span class="n">number_of_nets</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
-    <span class="c1"># Get samples of training data</span>
-    <span class="n">indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">training_set_size</span><span class="p">),</span> <span class="n">sample_size</span><span class="p">)</span>
-    <span class="n">resampled_X_train_sc</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="p">[</span><span class="n">indexes</span><span class="p">]</span>
-    <span class="n">resampled_y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">indexes</span><span class="p">]</span>
-    <span class="c1"># Fit model</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">resampled_X_train_sc</span><span class="p">,</span>
-            <span class="n">resampled_y_train</span><span class="p">,</span>
-            <span class="n">epochs</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
-            <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-            <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
-            <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">,</span> <span class="n">early_stopping_cb</span><span class="p">],</span>
-            <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># Add model to list of models</span>
-    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_dict</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span>
+<span class="n">history_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training model 1 of 25
-Training model 2 of 25
-Training model 3 of 25
-Training model 4 of 25
-Training model 5 of 25
-Training model 6 of 25
-Training model 7 of 25
-Training model 8 of 25
-Training model 9 of 25
-Training model 10 of 25
-Training model 11 of 25
-Training model 12 of 25
-Training model 13 of 25
-Training model 14 of 25
-Training model 15 of 25
-Training model 16 of 25
-Training model 17 of 25
-Training model 18 of 25
-Training model 19 of 25
-Training model 20 of 25
-Training model 21 of 25
-Training model 22 of 25
-Training model 23 of 25
-Training model 24 of 25
-Training model 25 of 25
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;loss&#39;, &#39;accuracy&#39;, &#39;val_loss&#39;, &#39;val_accuracy&#39;])
 </pre></div>
 </div>
 </div>
 </div>
+<p>Plot training history:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_probas_bagging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">models</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">X_test_sc</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">number_of_nets</span><span class="p">)])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Get mean probabilities, and classify those with mean &gt;= 0.5 as surviving.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba_bagging</span> <span class="o">=</span> <span class="n">y_probas_bagging</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">y_predict_bagging</span> <span class="o">=</span> <span class="n">y_proba_bagging</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
-<span class="n">y_predict_bagging</span> <span class="o">=</span> <span class="n">y_predict_bagging</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Get normal predictions from single model</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get normal predictions (single model) </span>
-<span class="n">y_proba</span> <span class="o">=</span> <span class="n">single_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">)</span>
-<span class="n">y_predict</span> <span class="o">=</span> <span class="n">y_proba</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
-<span class="n">y_predict</span> <span class="o">=</span> <span class="n">y_predict</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Show accuracy scores (we are doing a single test set here; in practice k-fold validation should be used).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_predict</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">accuracy_bagging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_predict_bagging</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of single net </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of bagged nets </span><span class="si">{</span><span class="n">accuracy_bagging</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of single net 0.86
-Accuracy of bagged nets 0.87
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="show-variation-in-prediction-between-models-depending-on-probability-of-survival">
-<h2>Show variation in prediction between models depending on probability of survival.<a class="headerlink" href="#show-variation-in-prediction-between-models-depending-on-probability-of-survival" title="Permalink to this headline">¶</a></h2>
-<p>Here we will use standard error of the mean as one measure of uncertainty. Note how uncertainty is not even - there is less variation in prediction of those with high probability of survival compared with those with lower probability of survival.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_error</span> <span class="o">=</span> <span class="n">y_probas_bagging</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">number_of_nets</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_proba</span><span class="p">,</span> <span class="n">y_error</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Probability survival&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Standard Error of Survival Probability&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">acc_values</span> <span class="o">=</span> <span class="n">history_dict</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+<span class="n">val_acc_values</span> <span class="o">=</span> <span class="n">history_dict</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">]</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">acc_values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">acc_values</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training acc&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_acc_values</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training and validation accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epochs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/25_tensorflow_bagging_28_0.png" src="_images/25_tensorflow_bagging_28_0.png" />
+<img alt="_images/22_tensorflow_deep_wide_21_0.png" src="_images/22_tensorflow_deep_wide_21_0.png" />
 </div>
 </div>
 </div>
@@ -849,19 +745,19 @@ Accuracy of bagged nets 0.87
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="22_tensorflow_deep_wide.html" title="previous page">
+        <a class="left-prev" href="21_tensorflow_roc.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">TensorFlow ‘Wide and Deep’ neural nets</p>
+                <p class="prevnext-title">TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="50_check_calibration.html" title="next page">
+        <a class="right-next" href="25_tensorflow_bagging.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Checking model calibration</p>
+                <p class="prevnext-title">TensorFlow Bagging</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
