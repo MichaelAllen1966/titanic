@@ -25,5 +25,18 @@ parts:
   - file: 14_imbalanced _data_sampling
   - file: 15_imbalanced _data_threshold
   - file: 16_imbalanced _data_smote
-  
+- caption: Random forest model
+  chapters:
+  - file: 17_random_forest
+  - file: 18_random_forest_roc
+- caption: TensorFlow neural nets
+  chapters:
+  - file: 19_tensorflow_1
+  - file: 20_tensorflow_api
+  - file: 21_tensorflow_roc
+  - file: 22_tensorflow_deep_wide
+  - file: 25_tensorflow_bagging
+- caption: Extras
+  chapters:
+  - file: 50_check_calibration  
   
