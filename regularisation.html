@@ -4,11 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Avoiding over-fitting with regularisation &#8212; Titanic Survical Machine Learning</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -20,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -35,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -45,8 +41,8 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -57,14 +53,14 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Accuracy measurements in machine learning" href="accuracy_standalone.html" />
     <link rel="prev" title="Measuring model accuracy with K-fold stratification" href="k_fold.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -73,42 +69,42 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="front_page.html">
    Titanic Survival
   </a>
  </li>
 </ul>
-<p>
+<p class="caption">
  <span class="caption-text">
   Data preprocessing
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="preprocessing.html">
    Kaggle Titanic survival - data preprocessing
   </a>
  </li>
 </ul>
-<p>
+<p class="caption">
  <span class="caption-text">
   Basic methods
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="logistic_regression.html">
    Logistic regression model
@@ -136,11 +132,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="learning_curve.html">
-   Learning curves - hopw much data do we need?
+   Learning curves - how much data do we need?
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -190,12 +187,12 @@
 
             <!-- Source interaction buttons -->
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -221,12 +218,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-modules">
    Load modules
@@ -264,8 +260,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -274,9 +269,9 @@
         
               <div>
                 
-  <section id="avoiding-over-fitting-with-regularisation">
+  <div class="section" id="avoiding-over-fitting-with-regularisation">
 <h1>Avoiding over-fitting with regularisation<a class="headerlink" href="#avoiding-over-fitting-with-regularisation" title="Permalink to this headline">¶</a></h1>
-<p>A danger with complex models (many features) or small data sets (a low number of samples) is that the model can over-fit to the training data at the expense of previously unseen data (as in the test set). Most machine learning approaches allow for use of some kind of ‘regularisation’ which reduces the strength of the fit to the training data (e.g. by reducing the values of the model weights/coefficients). While this reduces the accuracy of the fit to the training data it can, perhaps surprisingly, increase the accuracy of predicting test (or other previously unseen) data.</p>
+<p>A danger with complex models (many features) or small data sets (a low number of samples) is that the model can over-fit to the training data at the expense of previously unseen data (as in the test set). Most machine learning approaches allow for use of some kind of ‘regularisation’ which reduces the strength of the fit to the training data (e.g. by reducing the values of the model weights/coefficients, and pulling all values closer to the overall mean value). While this reduces the accuracy of the fit to the training data it can, perhaps surprisingly, increase the accuracy of predicting test (or other previously unseen) data.</p>
 <p>Over-fitting is usually spotted by the accuracy of prediction being significantly higher for the training set compared to the test set.</p>
 <p>Here we will deliberately reduce the number of samples in the Titanic data set, and increase the number of features with polynomial expansion*, to exaggerate the problem of over-fitting, and show how regularisation can help.</p>
 <p>Note: This workbook follows on from previous workbooks on logistic regression and stratified k-fold validation.</p>
@@ -287,7 +282,8 @@
 <li><p>B*A</p></li>
 <li><p>B*B</p></li>
 </ul>
-<section id="load-modules">
+<p>(In the above example we have A<em>B and B</em>A, which will result in the same value, so sklearn’s polynomial expansion method will keep just one value among replicates)</p>
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -300,8 +296,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="download-data">
+</div>
+<div class="section" id="download-data">
 <h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
@@ -328,8 +324,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -348,8 +344,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-x-features-and-y-labels">
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -364,8 +360,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="reduce-the-number-of-samples-and-increase-the-number-of-features">
+</div>
+<div class="section" id="reduce-the-number-of-samples-and-increase-the-number-of-features">
 <h2>Reduce the number of samples, and increase the number of features<a class="headerlink" href="#reduce-the-number-of-samples-and-increase-the-number-of-features" title="Permalink to this headline">¶</a></h2>
 <p>Now we will reduce the size of the data set using random sampling (using Pandas <code class="docutils literal notranslate"><span class="pre">sample</span></code> method).
 We will increase the number of features using polynomial expansion (creating products of each pair of features).</p>
@@ -388,8 +384,8 @@ We will increase the number of features using polynomial expansion (creating pro
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-standardise-data">
+</div>
+<div class="section" id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>Standardisation subtracts the mean and divides by the standard deviation, for each feature.
 Here we use the sklearn built-in method for standardisation.</p>
@@ -412,8 +408,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="training-and-testing-the-model-for-all-k-fold-splits">
+</div>
+<div class="section" id="training-and-testing-the-model-for-all-k-fold-splits">
 <h2>Training and testing the model for all k-fold splits<a class="headerlink" href="#training-and-testing-the-model-for-all-k-fold-splits" title="Permalink to this headline">¶</a></h2>
 <p>The following code:</p>
 <ul class="simple">
@@ -433,7 +429,7 @@ Here we use the sklearn built-in method for standardisation.</p>
 <p>We pass the regularisation to the model during fitting, it has the argument name <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
 
 <span class="c1"># Set up lists to hold results</span>
 <span class="n">training_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -443,12 +439,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 <span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="c1"># Set up model type</span>
-
+<span class="c1"># Loop through regularisation</span>
 <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">reg_values</span><span class="p">:</span>
-    <span class="c1"># Show progress</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-    
     <span class="c1"># Set up lists for results for each of k splits</span>
     <span class="n">training_k_results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">test_k_results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -477,24 +469,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001 0.003 0.01 
-</pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03 0.1 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3 1 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 
-</pre></div>
-</div>
-</div>
-</div>
+<p>Plot results</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -530,7 +506,7 @@ Here we use the sklearn built-in method for standardisation.</p>
         <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Test set accuracy&#39;</span><span class="p">)</span>
 
 <span class="c1"># Custimise axes</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Regularisation</span><span class="se">\n</span><span class="s1">(lower value = greater regularisation)&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
@@ -544,7 +520,7 @@ Here we use the sklearn built-in method for standardisation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regularisation_17_0.png" src="_images/regularisation_17_0.png" />
+<img alt="_images/regularisation_18_0.png" src="_images/regularisation_18_0.png" />
 </div>
 </div>
 <p>Note in the above figure that:</p>
@@ -552,8 +528,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 <li><p>Accuracy of training set is significantly higher than accuracy of test set (a common sign of over-fitting).</p></li>
 <li><p>There is an optimal value for the regularisation constant, C. In this case that value is about 0.1 (default if not specified is 1.0).</p></li>
 </ol>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -578,12 +554,32 @@ Here we use the sklearn built-in method for standardisation.</p>
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="k_fold.html" title="previous page">Measuring model accuracy with K-fold stratification</a>
-    <a class='right-next' id="next-link" href="accuracy_standalone.html" title="next page">Accuracy measurements in machine learning</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="k_fold.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Measuring model accuracy with K-fold stratification</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="accuracy_standalone.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Accuracy measurements in machine learning</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
@@ -593,7 +589,7 @@ Here we use the sklearn built-in method for standardisation.</p>
         
           By Michael Allen<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -602,11 +598,9 @@ Here we use the sklearn built-in method for standardisation.</p>
 
       </div>
     </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

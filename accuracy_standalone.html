@@ -4,11 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accuracy measurements in machine learning &#8212; Titanic Survical Machine Learning</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -20,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -35,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -45,8 +41,8 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -57,14 +53,14 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Application of alternative accuracy measurements to a logistic regression model" href="accuracy_logistic_regression.html" />
     <link rel="prev" title="Avoiding over-fitting with regularisation" href="regularisation.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -73,42 +69,42 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="front_page.html">
    Titanic Survival
   </a>
  </li>
 </ul>
-<p>
+<p class="caption">
  <span class="caption-text">
   Data preprocessing
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="preprocessing.html">
    Kaggle Titanic survival - data preprocessing
   </a>
  </li>
 </ul>
-<p>
+<p class="caption">
  <span class="caption-text">
   Basic methods
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="logistic_regression.html">
    Logistic regression model
@@ -136,11 +132,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="learning_curve.html">
-   Learning curves - hopw much data do we need?
+   Learning curves - how much data do we need?
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -190,12 +187,12 @@
 
             <!-- Source interaction buttons -->
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -221,12 +218,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#define-function">
    Define function
@@ -239,8 +235,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -249,7 +244,7 @@
         
               <div>
                 
-  <section id="accuracy-measurements-in-machine-learning">
+  <div class="section" id="accuracy-measurements-in-machine-learning">
 <h1>Accuracy measurements in machine learning<a class="headerlink" href="#accuracy-measurements-in-machine-learning" title="Permalink to this headline">¶</a></h1>
 <p>The most common measurement in machine learning is ‘accuracy, that is the proportion of cases where the classification is correct. This may at times not be the best measurement. For example, imagine you wish to detect who is carrying the back death among people coming through an airport, by measuring a range of features (such as body temperature, or the presence of a particular skin rash pattern). Now imagine that one in a thousand people are carriers of black death, who if allowed through will start off a major epidemic. We may then optimise a machine learning algorithm and it reports 99.9% accuracy. Impressive! Or is it? The algorithm may have simply classed everybody as not having black death. It will be right 999 times out of 1,000. But at the same time it will miss every single case of black death that you intended to detect. This is an extreme example of where we need more sophisticated measurements of accuracy. In this particular case, we probably want to measure sensitivity and specificity. Sensitivity measures the proportion of positive cases (black death) correctly classified, while specificity measures the proportion of negative cases (no black death) correctly classified. We will later see how we might change machine learning thresholds to adjust the balance between sensitivity and specificity.</p>
 <p>Sensitivity and specificity are not the only measures (though they are common in health diagnosis problems). Below are a range of measures that our function will calculated (given the observed and predicted class values of a range of cases). In addition to sensitivity and specificity, common measures used in machine learning are precision, recall and f1 (a combination of precision and recall).</p>
@@ -275,7 +270,7 @@
 </pre></div>
 </div>
 <p>Please note that these measures are for a ‘binomial’ classification problem. That is where there are two alternatives for each case (e.g. survived or not-survived on the Titanic). Where there are more than two possible classes, a confusion matrix is most commonly used (e.g. see <a class="reference external" href="https://pythonhealthcare.org/2018/04/21/77-machine-learning-visualising-accuracy-and-error-in-a-classification-model-with-a-confusion-matrix/">https://pythonhealthcare.org/2018/04/21/77-machine-learning-visualising-accuracy-and-error-in-a-classification-model-with-a-confusion-matrix/</a>)</p>
-<section id="define-function">
+<div class="section" id="define-function">
 <h2>Define function<a class="headerlink" href="#define-function" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -386,8 +381,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="demonstrate-method">
+</div>
+<div class="section" id="demonstrate-method">
 <h2>Demonstrate method<a class="headerlink" href="#demonstrate-method" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -427,8 +422,8 @@ negative_predictive_value 1.25
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -453,12 +448,32 @@ negative_predictive_value 1.25
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="regularisation.html" title="previous page">Avoiding over-fitting with regularisation</a>
-    <a class='right-next' id="next-link" href="accuracy_logistic_regression.html" title="next page">Application of alternative accuracy measurements to a logistic regression model</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="regularisation.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Avoiding over-fitting with regularisation</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="accuracy_logistic_regression.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Application of alternative accuracy measurements to a logistic regression model</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
@@ -468,7 +483,7 @@ negative_predictive_value 1.25
         
           By Michael Allen<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -477,11 +492,9 @@ negative_predictive_value 1.25
 
       </div>
     </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

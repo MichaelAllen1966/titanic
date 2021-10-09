@@ -4,11 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Application of alternative accuracy measurements to a logistic regression model &#8212; Titanic Survical Machine Learning</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -20,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -35,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -45,8 +41,8 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -55,16 +51,16 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Learning curves - hopw much data do we need?" href="learning_curve.html" />
+    <link rel="next" title="Learning curves - how much data do we need?" href="learning_curve.html" />
     <link rel="prev" title="Accuracy measurements in machine learning" href="accuracy_standalone.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -73,42 +69,42 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="front_page.html">
    Titanic Survival
   </a>
  </li>
 </ul>
-<p>
+<p class="caption">
  <span class="caption-text">
   Data preprocessing
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="preprocessing.html">
    Kaggle Titanic survival - data preprocessing
   </a>
  </li>
 </ul>
-<p>
+<p class="caption">
  <span class="caption-text">
   Basic methods
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="logistic_regression.html">
    Logistic regression model
@@ -136,11 +132,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="learning_curve.html">
-   Learning curves - hopw much data do we need?
+   Learning curves - how much data do we need?
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -190,12 +187,12 @@
 
             <!-- Source interaction buttons -->
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -221,12 +218,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-modules">
    Load modules
@@ -269,8 +265,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -279,10 +274,10 @@
         
               <div>
                 
-  <section id="application-of-alternative-accuracy-measurements-to-a-logistic-regression-model">
+  <div class="section" id="application-of-alternative-accuracy-measurements-to-a-logistic-regression-model">
 <h1>Application of alternative accuracy measurements to a logistic regression model<a class="headerlink" href="#application-of-alternative-accuracy-measurements-to-a-logistic-regression-model" title="Permalink to this headline">¶</a></h1>
 <p>Here we will take the accuracy measurements described in the previous chapter and apply them to the logistic regression model.</p>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -297,8 +292,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -348,8 +343,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-x-features-and-y-labels">
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -361,8 +356,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-training-and-tets-sets">
+</div>
+<div class="section" id="divide-into-training-and-tets-sets">
 <h2>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h2>
 <p>When we test a machine learning model we should always test it on data that has not been used to train the model.
 We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
@@ -373,8 +368,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="standardise-data">
+</div>
+<div class="section" id="standardise-data">
 <h2>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>We want all of out features to be on roughly the same scale. This generally leads to a better model, and also allows us to more easily compare the importance of different features.</p>
 <p>One simple method is to scale all features 0-1 (by subtracting the minimum value for each value, and dividing by the new remaining maximum value).</p>
@@ -406,8 +401,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="fit-logistic-regression-model">
+</div>
+<div class="section" id="fit-logistic-regression-model">
 <h2>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
 <p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method. Our machine learning model fitting is only two lines of code! By using the name <code class="docutils literal notranslate"><span class="pre">model</span></code> for our logistic regression model we will make our model more interchangeable later on.</p>
 <div class="cell docutils container">
@@ -423,8 +418,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="predict-values">
+</div>
+<div class="section" id="predict-values">
 <h2>Predict values<a class="headerlink" href="#predict-values" title="Permalink to this headline">¶</a></h2>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
 <div class="cell docutils container">
@@ -436,8 +431,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="calculate-accuracy">
+</div>
+<div class="section" id="calculate-accuracy">
 <h2>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h2>
 <p>Here we define a function that will calculate a range of accuracy scores.</p>
 <div class="cell docutils container">
@@ -559,32 +554,32 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>observed_positive_rate 0.413
-observed_negative_rate 0.587
-predicted_positive_rate 0.35
-predicted_negative_rate 0.65
-accuracy 0.785
-precision 0.782
-recall 0.663
-f1 0.718
-sensitivity 0.663
-specificity 0.87
-positive_likelihood 5.11
-negative_likelihood 0.387
-false_positive_rate 0.13
-false_negative_rate 0.337
-true_positive_rate 0.663
-true_negative_rate 0.87
-positive_predictive_value 0.663
-negative_predictive_value 1.24
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>observed_positive_rate 0.363
+observed_negative_rate 0.637
+predicted_positive_rate 0.327
+predicted_negative_rate 0.673
+accuracy 0.803
+precision 0.753
+recall 0.679
+f1 0.714
+sensitivity 0.679
+specificity 0.873
+positive_likelihood 5.36
+negative_likelihood 0.368
+false_positive_rate 0.127
+false_negative_rate 0.321
+true_positive_rate 0.679
+true_negative_rate 0.873
+positive_predictive_value 0.679
+negative_predictive_value 1.53
 </pre></div>
 </div>
 </div>
 </div>
 <p>We can see from the accuracy scores that overall accuracy is about 80%, but that accuracy is imbalanced between survivors and non-survivors. We can see the model is biased towards predicting fewer survivors than actually occurred, and this gives higher specificity (the proportion of non-survivors correctly identified) than sensitivity (the proportion of survivors correctly identified). In the next notebook we will look at adjusting the balance between sensitivity and specificity.</p>
 <p>Note: To keep this example simple we have used a single random split between training and test data. A more thorough analysis would use repeated measurement using stratified k-fold validation (see <a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a>).</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -609,12 +604,32 @@ negative_predictive_value 1.24
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="accuracy_standalone.html" title="previous page">Accuracy measurements in machine learning</a>
-    <a class='right-next' id="next-link" href="learning_curve.html" title="next page">Learning curves - hopw much data do we need?</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="accuracy_standalone.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Accuracy measurements in machine learning</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="learning_curve.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Learning curves - how much data do we need?</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
@@ -624,7 +639,7 @@ negative_predictive_value 1.24
         
           By Michael Allen<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -633,11 +648,9 @@ negative_predictive_value 1.24
 
       </div>
     </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>
