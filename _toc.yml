@@ -13,4 +13,11 @@ parts:
   - file: 06_accuracy_logistic_regression
   - file: 07_learning_curve
   - file: 08_roc
+- caption: Feature selection and expansion
+  chapters:
+  - file: 09_feature_selection_1_univariate
+  - file: 10_feature_selection_2_forward
+  - file: 11_feature_selection_3_backward
+  - file: 12_feature_expansion
+  
   
