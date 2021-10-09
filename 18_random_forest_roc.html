@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification &#8212; Titanic Survical Machine Learning</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="A Random Forest model" href="17_random_forest.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="front_page.html">
+   Titanic Survival
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_preprocessing.html">
+   Kaggle Titanic survival - data preprocessing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_logistic_regression.html">
+   Logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_k_fold.html">
+   Measuring model accuracy with K-fold stratification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_regularisation.html">
+   Avoiding over-fitting with regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_accuracy_standalone.html">
+   Accuracy measurements in machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
+   Application of alternative accuracy measurements to a logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_learning_curve.html">
+   Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_roc.html">
+   Receiver Operator Characteristic (ROC) curve
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Feature selection and expansion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_feature_selection_1_univariate.html">
+   Feature selection using univariate statistical selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_feature_selection_2_forward.html">
+   Feature selection using forward selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_feature_selection_3_backward.html">
+   Feature selection using backward elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_feature_expansion.html">
+   Feature expansion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Working with imbalanced data sets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_imbalanced%20_data_weighting.html">
+   Dealing with imbalanced data by model weighting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_imbalanced%20_data_sampling.html">
+   Dealing with imbalanced data by under or over sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_imbalanced%20_data_threshold.html">
+   Dealing with imbalanced data by changing classification cut-off levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_imbalanced%20_data_smote.html">
+   Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Random Forest model
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_random_forest.html">
+   A Random Forest model
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/18_random_forest_roc.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-data-if-not-previously-downloaded">
+   Download data if not previously downloaded
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-calculate-accuracy-measurements">
+   Define function to calculate accuracy measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-model-and-collect-results">
+   Run model and collect results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-roc-curve">
+   Plot ROC curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-effects-of-changing-classification-probability-threshold">
+   Plot effects of changing classification probability threshold
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
+<h1>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification<a class="headerlink" href="#random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification" title="Permalink to this headline">¶</a></h1>
+<p>In this model we apply ROC to a Random Forest model. As these components have been previously described, we’ll keep comments to a minimum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide warnings (to keep notebook tidy; do not usually do this)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="load-modules">
+<h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="download-data-if-not-previously-downloaded">
+<h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">download_required</span><span class="p">:</span>
+    
+    <span class="c1"># Download processed data:</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/MichaelAllen1966/&#39;</span> <span class="o">+</span> \
+                <span class="s1">&#39;1804_python_healthcare/master/titanic/data/processed_data.csv&#39;</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+
+    <span class="c1"># Create a data subfolder if one does not already exist</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">data_directory</span> <span class="o">=</span><span class="s1">&#39;./data/&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_directory</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+    <span class="c1"># Save data</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_directory</span> <span class="o">+</span> <span class="s1">&#39;processed_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-function-to-calculate-accuracy-measurements">
+<h2>Define function to calculate accuracy measurements<a class="headerlink" href="#define-function-to-calculate-accuracy-measurements" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates a range of accuracy scores from observed and predicted classes.</span>
+<span class="sd">    </span>
+<span class="sd">    Takes two list or NumPy arrays (observed class values, and predicted class </span>
+<span class="sd">    values), and returns a dictionary of results.</span>
+<span class="sd">    </span>
+<span class="sd">     1) observed positive rate: proportion of observed cases that are +ve</span>
+<span class="sd">     2) Predicted positive rate: proportion of predicted cases that are +ve</span>
+<span class="sd">     3) observed negative rate: proportion of observed cases that are -ve</span>
+<span class="sd">     4) Predicted negative rate: proportion of predicted cases that are -ve  </span>
+<span class="sd">     5) accuracy: proportion of predicted results that are correct    </span>
+<span class="sd">     6) precision: proportion of predicted +ve that are correct</span>
+<span class="sd">     7) recall: proportion of true +ve correctly identified</span>
+<span class="sd">     8) f1: harmonic mean of precision and recall</span>
+<span class="sd">     9) sensitivity: Same as recall</span>
+<span class="sd">    10) specificity: Proportion of true -ve identified:        </span>
+<span class="sd">    11) positive likelihood: increased probability of true +ve if test +ve</span>
+<span class="sd">    12) negative likelihood: reduced probability of true +ve if test -ve</span>
+<span class="sd">    13) false positive rate: proportion of false +ves in true -ve patients</span>
+<span class="sd">    14) false negative rate: proportion of false -ves in true +ve patients</span>
+<span class="sd">    15) true positive rate: Same as recall</span>
+<span class="sd">    16) true negative rate</span>
+<span class="sd">    17) positive predictive value: chance of true +ve if test +ve</span>
+<span class="sd">    18) negative predictive value: chance of true -ve if test -ve</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Converts list to NumPy arrays</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">predicted</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predicted</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate accuracy scores</span>
+    <span class="n">observed_positives</span> <span class="o">=</span> <span class="n">observed</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">observed_negatives</span> <span class="o">=</span> <span class="n">observed</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">predicted_positives</span> <span class="o">=</span> <span class="n">predicted</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">predicted_negatives</span> <span class="o">=</span> <span class="n">predicted</span> <span class="o">==</span> <span class="mi">0</span>
+    
+    <span class="n">true_positives</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted_positives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">observed_positives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">false_positives</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted_positives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">observed_positives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">true_negatives</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted_negatives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">observed_negatives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">observed</span><span class="p">)</span>
+    
+    <span class="n">precision</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_positives</span><span class="p">)</span> <span class="o">/</span>
+                 <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_positives</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">false_positives</span><span class="p">)))</span>
+        
+    <span class="n">recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_positives</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed_positives</span><span class="p">)</span>
+    
+    <span class="n">sensitivity</span> <span class="o">=</span> <span class="n">recall</span>
+    
+    <span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">))</span>
+    
+    <span class="n">specificity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_negatives</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed_negatives</span><span class="p">)</span>
+    
+    <span class="n">positive_likelihood</span> <span class="o">=</span> <span class="n">sensitivity</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">specificity</span><span class="p">)</span>
+    
+    <span class="n">negative_likelihood</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sensitivity</span><span class="p">)</span> <span class="o">/</span> <span class="n">specificity</span>
+    
+    <span class="n">false_positive_rate</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">specificity</span>
+    
+    <span class="n">false_negative_rate</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sensitivity</span>
+    
+    <span class="n">true_positive_rate</span> <span class="o">=</span> <span class="n">sensitivity</span>
+    
+    <span class="n">true_negative_rate</span> <span class="o">=</span> <span class="n">specificity</span>
+    
+    <span class="n">positive_predictive_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_positives</span><span class="p">)</span> <span class="o">/</span> 
+                                 <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed_positives</span><span class="p">))</span>
+    
+    <span class="n">negative_predictive_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_negatives</span><span class="p">)</span> <span class="o">/</span> 
+                                  <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed_positives</span><span class="p">))</span>
+    
+    <span class="c1"># Create dictionary for results, and add results</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">observed_positives</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;observed_negative_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">observed_negatives</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_positives</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;predicted_negative_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_negatives</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">precision</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">recall</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f1</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;sensitivity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sensitivity</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;specificity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">specificity</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;positive_likelihood&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">positive_likelihood</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;negative_likelihood&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">negative_likelihood</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;false_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">false_positive_rate</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;false_negative_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">false_negative_rate</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;true_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">true_positive_rate</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;true_negative_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">true_negative_rate</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;positive_predictive_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">positive_predictive_value</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;negative_predictive_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">negative_predictive_value</span>
+    
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Make all data &#39;float&#39; type</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
+<span class="c1"># Convert to NumPy as required for k-fold splits</span>
+<span class="n">X_np</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_np</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-model-and-collect-results">
+<h2>Run model and collect results<a class="headerlink" href="#run-model-and-collect-results" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up k-fold training/test splits</span>
+<span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">number_of_splits</span><span class="p">)</span>
+<span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">)</span>
+
+<span class="c1"># Set up thresholds</span>
+<span class="n">thresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># Create arrays for overall results (rows=threshold, columns=k fold replicate)</span>
+<span class="n">results_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_precision</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_f1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_predicted_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_observed_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_true_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_false_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">),</span><span class="n">number_of_splits</span><span class="p">))</span>
+<span class="n">results_auc</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through the k-fold splits</span>
+<span class="n">loop_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">):</span>
+    
+    <span class="c1"># Create lists for k-fold results</span>
+    <span class="n">threshold_accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_precision</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_recall</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_f1</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_predicted_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_observed_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_true_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_false_positive_rate</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Get X and Y train/test</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+
+    <span class="c1"># Set up and fit model (n_jobs=-1 uses all cores on a computer)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="c1"># Get probability of non-survive and survive</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="c1"># Take just the survival probabilities (column 1)</span>
+    <span class="n">probability_survival</span> <span class="o">=</span> <span class="n">probabilities</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Loop through increments in probability of survival</span>
+    <span class="k">for</span> <span class="n">cutoff</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span> <span class="c1">#  loop 0 --&gt; 1 on steps of 0.1</span>
+        <span class="c1"># Get whether passengers survive using cutoff</span>
+        <span class="n">predicted_survived</span> <span class="o">=</span> <span class="n">probability_survival</span> <span class="o">&gt;=</span> <span class="n">cutoff</span>
+        <span class="c1"># Call accuracy measures function</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">calculate_accuracy</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predicted_survived</span><span class="p">)</span>
+        <span class="c1"># Add accuracy scores to lists</span>
+        <span class="n">threshold_accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+        <span class="n">threshold_precision</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">])</span>
+        <span class="n">threshold_recall</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">])</span>
+        <span class="n">threshold_f1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">])</span>
+        <span class="n">threshold_predicted_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_observed_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_true_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;true_positive_rate&#39;</span><span class="p">])</span>
+        <span class="n">threshold_false_positive_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="s1">&#39;false_positive_rate&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Add results to results arrays</span>
+    <span class="n">results_accuracy</span><span class="p">[:,</span><span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_accuracy</span>
+    <span class="n">results_precision</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_precision</span>
+    <span class="n">results_recall</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_recall</span>
+    <span class="n">results_f1</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_f1</span>
+    <span class="n">results_predicted_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> \
+        <span class="n">threshold_predicted_positive_rate</span>
+    <span class="n">results_observed_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> \
+        <span class="n">threshold_observed_positive_rate</span>
+    <span class="n">results_true_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_true_positive_rate</span>
+    <span class="n">results_false_positive_rate</span><span class="p">[:,</span> <span class="n">loop_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold_false_positive_rate</span>
+    
+    <span class="c1"># Calculate ROC AUC</span>
+    <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">threshold_false_positive_rate</span><span class="p">,</span> <span class="n">threshold_true_positive_rate</span><span class="p">)</span>
+    <span class="n">results_auc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">)</span>
+    
+    <span class="c1"># Increment loop index</span>
+    <span class="n">loop_index</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+
+<span class="c1"># Transfer summary results to dataframe</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">thresholds</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">])</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_accuracy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_precision</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_recall</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">results_predicted_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="n">results_observed_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;true_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_true_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;false_positive_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_false_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_auc</span><span class="p">)</span>
+
+<span class="n">mean_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_auc</span><span class="p">)</span>
+<span class="n">mean_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mean_auc</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-roc-curve">
+<h2>Plot ROC curve<a class="headerlink" href="#plot-roc-curve" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_splits</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_false_positive_rate</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+             <span class="n">results_true_positive_rate</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+             <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span>
+             <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_false_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">results_true_positive_rate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver Operator Characteristic (ROC) Curve&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;wheat&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Mean AUC = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean_auc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-effects-of-changing-classification-probability-threshold">
+<h2>Plot effects of changing classification probability threshold<a class="headerlink" href="#plot-effects-of-changing-classification-probability-threshold" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chart_x</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;F1&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;predicted_positive_rate&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Predicted positive rate&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;observed_positive_rate&#39;</span><span class="p">],</span>
+         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Observed positive rate&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Probability cutoff for classifcation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The Random Forest model, with default settings, has an ROC AUC of 0.85.</p></li>
+<li><p>Unlike the logistic regression model, the default probability threshold of 0.5 produces a balanced model, where precision = recall, and where the predicted survival rate is the same as the observed survival rate.</p></li>
+<li><p>If needed, the probability threshold of the Random Forest model could be adjust to change the model characteristics, such as for use in screening where recall (the detection of true positives) needs to be minimised at the accepted cost of lower precision (the detection of true negatives). In a screening situation false positives are generally accepted (as they will be eliminated later), but false negatives (where a condition is missed in screening) is much less acceptable.</p></li>
+<li><p>You will see that many aspects of machine learning models are directly transferable between model types.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="17_random_forest.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">A Random Forest model</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Allen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
