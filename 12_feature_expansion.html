@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaggle Titanic survival - Feature expansion &#8212; Titanic Survical Machine Learning</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Kaggle Titanic survival - feature selection 3 (model backward elimination)" href="11_feature_selection_3_backward.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survical Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="front_page.html">
+   Titanic Survival
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_preprocessing.html">
+   Kaggle Titanic survival - data preprocessing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Basic methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_logistic_regression.html">
+   Logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_k_fold.html">
+   Measuring model accuracy with K-fold stratification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_regularisation.html">
+   Avoiding over-fitting with regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_accuracy_standalone.html">
+   Accuracy measurements in machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
+   Application of alternative accuracy measurements to a logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_learning_curve.html">
+   Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_roc.html">
+   Receiver Operator Characteristic (ROC) curve
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Feature selection and expansion
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_feature_selection_1_univariate.html">
+   Kaggle Titanic survival - feature selection 1 (univariate statistical selection)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_feature_selection_2_forward.html">
+   Kaggle Titanic survival - feature selection 2 (model forward selection)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_feature_selection_3_backward.html">
+   Kaggle Titanic survival - feature selection 3 (model backward elimination)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Kaggle Titanic survival - Feature expansion
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/12_feature_expansion.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Kaggle Titanic survival - Feature expansion
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-modules">
+     Load modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-data">
+   Download data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+     Divide into X (features) and y (labels)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-and-testing-normal-and-expanded-models-with-varying-regularisation">
+     Training and testing normal and expanded models with varying regularisation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feature-reduction-after-feature-expansion">
+     Feature reduction after feature expansion
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="kaggle-titanic-survival-feature-expansion">
+<h1>Kaggle Titanic survival - Feature expansion<a class="headerlink" href="#kaggle-titanic-survival-feature-expansion" title="Permalink to this headline">¶</a></h1>
+<p>Spoiler Alert! By combining feature expansion and feature selection we can increase our logistic regression model accuracy (on previously unseen data) from 79% to 84%!</p>
+<p>Simple models such as logistic regression do not incorporate complex interactions between features. If two features produce more than an additive effect, this will not be fitted in logistic regression. In order to allow for feature interaction we need to add terms that create new features by producing the product of each product pair.</p>
+<p>When we use polynomial expansion of features, we create new features that are the product of two features. For example if we had two features, A, B and C, a full polynomial expansion would produce the following extra features:</p>
+<ul class="simple">
+<li><p>A.A, A.B, A.C</p></li>
+<li><p>B.A, B.B, B.C</p></li>
+<li><p>C.A, C.B, C.C</p></li>
+</ul>
+<p>But we will reduce this in two ways:</p>
+<ul class="simple">
+<li><p>Remove duplicate terms (e.g. A.B and B.A are the same, so we only need A.B)</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">interaction_only</span></code> argument to remove powers of single features (e.g. A.A, B.B)</p></li>
+</ul>
+<p>A danger of polynomial expansion is that the model may start to over-fit to the training data. This may be dealt with in one (or both of two ways):</p>
+<ul class="simple">
+<li><p>Increase the regularisation strength in the model (reduce the value of <code class="docutils literal notranslate"><span class="pre">C</span></code> in the logistic regression model)</p></li>
+<li><p>Use feature selection to pick only the most important features (which now may include polynomial features)</p></li>
+</ul>
+<p>The methods described here build on previous notebooks, notably on logistic regression, k-fold, sampling, regularisation, and model-based forward feature selection</p>
+<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/02_logistic_regression.ipynb</a></p>
+<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a></p>
+<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/04_regularisation.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/04_regularisation.ipynb</a></p>
+<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb</a></p>
+<div class="section" id="load-modules">
+<h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="download-data">
+<h1>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h1>
+<p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">download_required</span><span class="p">:</span>
+    
+    <span class="c1"># Download processed data:</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/MichaelAllen1966/&#39;</span> <span class="o">+</span> \
+                <span class="s1">&#39;1804_python_healthcare/master/titanic/data/processed_data.csv&#39;</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+
+    <span class="c1"># Create a data subfolder if one does not already exist</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">data_directory</span> <span class="o">=</span><span class="s1">&#39;./data/&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_directory</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+    <span class="c1"># Save data</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_directory</span> <span class="o">+</span> <span class="s1">&#39;processed_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Make all data &#39;float&#39; type</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop Passengerid (axis=1 indicates we are removing a column rather than a row)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
+<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split data into two DataFrames</span>
+<span class="n">X_df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span>
+
+<span class="c1"># Convert to NumPy arrays</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y_df</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add polynomial features</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">interaction_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">X_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the shape of our data sets (the first value is the number of samples, and the second value is the number of features):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Shape of X:&#39;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Shape of X_poly:&#39;</span><span class="p">,</span> <span class="n">X_poly</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of X: (891, 24)
+Shape of X_poly: (891, 300)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Woah - we’ve gone from 24 features to 301! But are they any use?</p>
+</div>
+<div class="section" id="training-and-testing-normal-and-expanded-models-with-varying-regularisation">
+<h2>Training and testing normal and expanded models with varying regularisation<a class="headerlink" href="#training-and-testing-normal-and-expanded-models-with-varying-regularisation" title="Permalink to this headline">¶</a></h2>
+<p>The following code:</p>
+<ul class="simple">
+<li><p>Defines a list of regularisation (lower values lead to greater regularisation)</p></li>
+<li><p>Sets up lists to hold results for each k-fold split</p></li>
+<li><p>Starts a loop for each regularisation value, and loops through:</p>
+<ul>
+<li><p>Print regularisation level (to show progress)</p></li>
+<li><p>Sets up lists to record replicates from k-fold stratification</p></li>
+<li><p>Sets up the k-fold splits using sklearn’s <code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> method</p></li>
+<li><p>Trains two logistic regression models (regular and polynomial), and test its it, for each k-fold split</p></li>
+<li><p>Adds each k-fold training/test accuracy to the lists</p></li>
+</ul>
+</li>
+<li><p>Record average accuracy from k-fold stratification (so each regularisation level has one accuracy result recorded for training and test sets)</p></li>
+</ul>
+<p>We pass the regularisation to the model during fitting, it has the argument name <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define function to standardise data</span>
+
+<span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+    
+    <span class="c1"># Initialise a new scaling object for normalising input data</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
+
+    <span class="c1"># Set up the scaler just on the training set</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># Apply the scaler to the training and test sets</span>
+    <span class="n">train_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">test_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_std</span><span class="p">,</span> <span class="n">test_std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training and testing normal and polynomial models</span>
+
+<span class="n">reg_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="c1"># Set up lists to hold results</span>
+<span class="n">training_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_acc_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">training_acc_results_poly</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_acc_results_poly</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Set up splits</span>
+<span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Set up model type</span>
+
+<span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">reg_values</span><span class="p">:</span>
+    <span class="c1"># Show progress</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Set up lists for results for each of k splits</span>
+    <span class="n">training_k_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">test_k_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">training_k_results_poly</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">test_k_results_poly</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Loop through the k-fold splits</span>
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        
+        <span class="c1"># Normal (non-polynomial model)</span>
+        
+        <span class="c1"># Get X and Y train/test</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="c1"># Standardise X data</span>
+        <span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+        <span class="c1"># Fit model with regularisation (C)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">reg</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="c1"># Predict training and test set labels</span>
+        <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
+        <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+        <span class="c1"># Calculate accuracy of training and test sets</span>
+        <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="c1"># Record accuracy for each k-fold split</span>
+        <span class="n">training_k_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
+        <span class="n">test_k_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
+        
+        <span class="c1"># Polynomial model (same as above except use X with polynomial features)</span>
+        
+        <span class="c1"># Get X and Y train/test</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_poly</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X_poly</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="c1"># Standardise X data</span>
+        <span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+        <span class="c1"># Fit model with regularisation (C)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">reg</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="c1"># Predict training and test set labels</span>
+        <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
+        <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+        <span class="c1"># Calculate accuracy of training and test sets</span>
+        <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="c1"># Record accuracy for each k-fold split</span>
+        <span class="n">training_k_results_poly</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
+        <span class="n">test_k_results_poly</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
+        
+    <span class="c1"># Record average accuracy for each k-fold split</span>
+    <span class="n">training_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">training_k_results</span><span class="p">))</span>
+    <span class="n">test_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_k_results</span><span class="p">))</span>
+    <span class="n">training_acc_results_poly</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">training_k_results_poly</span><span class="p">))</span>
+    <span class="n">test_acc_results_poly</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_k_results_poly</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001 0.003 0.01 0.03 0.1 0.3 1 3 10 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Define data for chart</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">reg_values</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">training_acc_results</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">test_acc_results</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">training_acc_results_poly</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="n">test_acc_results_poly</span>
+
+<span class="c1"># Set up figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="c1"># Plot training set accuracy</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Training set accuracy&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot test set accuracy</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+        <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Test set accuracy&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot training set accuracy (poly model)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+        <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Training set accuracy (poly)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot test set accuracy (poly model)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+        <span class="n">label</span>  <span class="o">=</span> <span class="s1">&#39;Test set accuracy (poly)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Customise axes</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Regularisation</span><span class="se">\n</span><span class="s1">(lower value = greater regularisation)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12_feature_expansion_17_0.png" src="_images/12_feature_expansion_17_0.png" />
+</div>
+</div>
+<p>Show best test set accuracy measured.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_test_non_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">test_acc_results</span><span class="p">)</span>
+<span class="n">best_test_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">test_acc_results_poly</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Best accuracy for non-poly and poly were </span><span class="si">{0:0.3f}</span><span class="s1"> and </span><span class="si">{1:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">best_test_non_poly</span><span class="p">,</span> <span class="n">best_test_poly</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best accuracy for non-poly and poly were 0.789 and 0.816
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note in the above figure that:</p>
+<ul class="simple">
+<li><p>Polynomial expansion has increased the accuracy of both training and test sets. Test set accuracy was increased over 2%</p></li>
+<li><p>We do not know which polynomial terms are most useful (below we will use feature reduction to identify those)</p></li>
+<li><p>The polynomial X data suffers from more over-fitting than the non-polynomial set (there is a larger difference between training and test set accuracies)</p></li>
+</ul>
+</div>
+<div class="section" id="feature-reduction-after-feature-expansion">
+<h2>Feature reduction after feature expansion<a class="headerlink" href="#feature-reduction-after-feature-expansion" title="Permalink to this headline">¶</a></h2>
+<p>We will revisit the code we have used previously to pick the best features.</p>
+<p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb</a></p>
+<p>In the previous method we ranked all features in their ability to improve model performance. Here, because there are many more features we will look at the influence of the top 20 (and if we see model performance is still increasing with additional features we could come back and change that limit).</p>
+<p>We will amend the previous code as well to use simple accuracy (rather than the ROC Area Under Curve in our previous example).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transfer polynomial X into a pandas DataFrame (as method use Pandas)</span>
+<span class="n">X_poly_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+
+<span class="c1"># Create list to store accuracies and chosen features</span>
+<span class="n">accuracy_by_feature_number</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">chosen_features</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Initialise chosen features list and run tracker</span>
+<span class="n">available_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="n">run</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">number_of_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="c1"># Loop through feature list to select next feature</span>
+<span class="n">maximum_features_to_choose</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maximum_features_to_choose</span><span class="p">):</span>
+
+    <span class="c1"># Track and pront progress</span>
+    <span class="n">run</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Feature run </span><span class="si">{}</span><span class="s1"> of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">maximum_features_to_choose</span><span class="p">))</span>
+    
+    <span class="c1"># Reset best feature and accuracy</span>
+    <span class="n">best_result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">best_feature</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Loop through available features</span>
+    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">available_features</span><span class="p">:</span>
+
+        <span class="c1"># Create copy of already chosen features to avoid original being changed</span>
+        <span class="n">features_to_use</span> <span class="o">=</span> <span class="n">chosen_features</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Create a list of features from features already chosen + 1 new feature</span>
+        <span class="n">features_to_use</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+        <span class="c1"># Get data for features, and convert to NumPy array</span>
+        <span class="n">X_np</span> <span class="o">=</span> <span class="n">X_poly_df</span><span class="p">[</span><span class="n">features_to_use</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        
+        <span class="c1"># Set up lists to hold results for each selected features</span>
+        <span class="n">test_accuracy_results</span> <span class="o">=</span> <span class="p">[]</span>
+    
+        <span class="c1"># Set up k-fold training/test splits</span>
+        <span class="n">number_of_splits</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">number_of_splits</span><span class="p">)</span>
+        <span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    
+        <span class="c1"># Loop through the k-fold splits</span>
+        <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            
+            <span class="c1"># Get X and Y train/test</span>
+            <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_np</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X_np</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+            <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    
+            <span class="c1"># Get X and Y train/test</span>
+            <span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+    
+            <span class="c1"># Set up and fit model</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">)</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+    
+            <span class="c1"># Predict test set labels</span>
+            <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+                        
+            <span class="c1"># Calculate accuracy of test sets</span>
+            <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+            <span class="n">test_accuracy_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
+          
+        <span class="c1"># Get average result from all k-fold splits</span>
+        <span class="n">feature_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_accuracy_results</span><span class="p">)</span>
+    
+        <span class="c1"># Update chosen feature and result if this feature is a new best</span>
+        <span class="k">if</span> <span class="n">feature_accuracy</span> <span class="o">&gt;</span> <span class="n">best_result</span><span class="p">:</span>
+            <span class="n">best_result</span> <span class="o">=</span> <span class="n">feature_accuracy</span>
+            <span class="n">best_feature</span> <span class="o">=</span> <span class="n">feature</span>
+    
+    <span class="c1"># k-fold splits are complete    </span>
+    <span class="c1"># Add mean accuracy and AUC to record of accuracy by feature number</span>
+    <span class="n">accuracy_by_feature_number</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_result</span><span class="p">)</span>
+    <span class="n">chosen_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_feature</span><span class="p">)</span>
+    <span class="n">available_features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">best_feature</span><span class="p">)</span>
+
+<span class="c1"># Put results in DataFrame</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;feature to add&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chosen_features</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_by_feature_number</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature run 1 of 20
+Feature run 2 of 20
+Feature run 3 of 20
+Feature run 4 of 20
+Feature run 5 of 20
+Feature run 6 of 20
+Feature run 7 of 20
+Feature run 8 of 20
+Feature run 9 of 20
+Feature run 10 of 20
+Feature run 11 of 20
+Feature run 12 of 20
+Feature run 13 of 20
+Feature run 14 of 20
+Feature run 15 of 20
+Feature run 16 of 20
+Feature run 17 of 20
+Feature run 18 of 20
+Feature run 19 of 20
+Feature run 20 of 20
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature to add</th>
+      <th>accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>x1 x10</td>
+      <td>0.792352</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>x0 x2</td>
+      <td>0.818170</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>x13 x19</td>
+      <td>0.824924</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>x3 x12</td>
+      <td>0.828320</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>x4 x16</td>
+      <td>0.830568</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>x0 x3</td>
+      <td>0.831716</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>x5 x7</td>
+      <td>0.835081</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>x5 x18</td>
+      <td>0.836211</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>x19</td>
+      <td>0.837335</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>x2 x16</td>
+      <td>0.838458</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>x8 x19</td>
+      <td>0.838464</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>x2 x19</td>
+      <td>0.840712</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>x11 x18</td>
+      <td>0.840718</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>x3 x16</td>
+      <td>0.841835</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>x6</td>
+      <td>0.841835</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>x14</td>
+      <td>0.841835</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>x22</td>
+      <td>0.841835</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>x0 x6</td>
+      <td>0.841835</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>x0 x14</td>
+      <td>0.841835</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>x0 x22</td>
+      <td>0.841835</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">chart_x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maximum_features_to_choose</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart_x</span><span class="p">,</span> <span class="n">accuracy_by_feature_number</span><span class="p">,</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of features&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12_feature_expansion_25_0.png" src="_images/12_feature_expansion_25_0.png" />
+</div>
+</div>
+<p>Neat! By selecting our best features from our expanded model we now have a little over 84% accuracy! It looks like we need about 15 features for our optimum model, nearly all of which are polynomial terms. Note that sklearn’s polynomial method outputs features names in relation to the original X index. Our ‘best’ feature is a product of X1 and X10. Let’s see what those are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_index_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_df</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;X1:&#39;</span><span class="p">,</span><span class="n">X_index_names</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;X10:&#39;</span><span class="p">,</span><span class="n">X_index_names</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X1: Age
+X10: male
+</pre></div>
+</div>
+</div>
+</div>
+<p>So looking at just the ages of male passengers is the best signle predictor of survival.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="11_feature_selection_3_backward.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Kaggle Titanic survival - feature selection 3 (model backward elimination)</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Allen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
