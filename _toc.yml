@@ -19,5 +19,11 @@ parts:
   - file: 10_feature_selection_2_forward
   - file: 11_feature_selection_3_backward
   - file: 12_feature_expansion
+- caption: Working with imbalanced data sets
+  chapters:
+  - file: 13_imbalanced _data_weighting
+  - file: 14_imbalanced _data_sampling
+  - file: 15_imbalanced _data_threshold
+  - file: 16_imbalanced _data_smote
   
   
