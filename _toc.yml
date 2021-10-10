@@ -1,6 +1,9 @@
 format: jb-book
 root: front_page
 parts:
+- caption: Setting up an environment file to run these notebooks
+  chapters:
+  - file: setup
 - caption: Data preprocessing
   chapters:
   - file: 01_preprocessing

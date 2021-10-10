@@ -1,5 +1,5 @@
 # book settings
-title: Titanic Survical Machine Learning
+title: Titanic Survival Machine Learning
 author: Michael Allen
 #logo: images/logo.png
 
@@ -11,4 +11,5 @@ execute:
   timeout: -1 #no time restriction on notebook execution
   
 launch_buttons:
-  binderhub_url             : https://mybinder.org/v2/gh/MichaelAllen1966/titanic/main
+  notebook_interface        : classic  
+  binderhub_url             : ""
