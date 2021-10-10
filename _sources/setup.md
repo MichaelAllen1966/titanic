@@ -4,7 +4,7 @@
 
 To get the correct libraries and versions it is recommended that the provided conda environment is used. To create and activate the titanic environment:
 
-1. 2Download the environment.yml file from https://github.com/MichaelAllen1966/titanic/tree/main/binder
+1. Download the environment.yml file from https://github.com/MichaelAllen1966/titanic/tree/main/binder
 
 2. Windows -> Open Anaconda prompt. Mac/linux -> Open a terminal
 
@@ -22,7 +22,9 @@ This will fetch and install the libraries in a conda environment 'titanic'
 2. Activate environment with `conda activate titanic`
 
 3. Install rerquired packages with:
+
     `conda install pandas numpy matplotlib jupyterlab tensorflow scikit-learn`
+    
     `pip install imblearn pydot graphviz`
     
 ## Download files
