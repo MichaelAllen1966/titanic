@@ -330,6 +330,36 @@
    DATA PREPROCESSING
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-methods">
+   BASIC METHODS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-selection-and-expansion">
+   FEATURE SELECTION AND EXPANSION
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-with-imbalanced-data-sets">
+   WORKING WITH IMBALANCED DATA SETS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-forest-model">
+   RANDOM FOREST MODEL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow-neural-nets">
+   TENSORFLOW NEURAL NETS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extras">
+   EXTRAS
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -352,7 +382,65 @@
 <div class="section" id="data-preprocessing">
 <h2>DATA PREPROCESSING<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Kaggle Titanic survival - data preprocessing: Getting our data in a form suitable for machine learning</p></li>
+<li><p><em>Kaggle Titanic survival</em>: data preprocessing: Getting our data in a form suitable for machine learning</p></li>
+</ul>
+</div>
+<div class="section" id="basic-methods">
+<h2>BASIC METHODS<a class="headerlink" href="#basic-methods" title="Permalink to this headline">¶</a></h2>
+<p>The ‘essentials’ of machine learning, using a logistic regression model as our example model.</p>
+<ul class="simple">
+<li><p><em>Logistic regression model</em>: A basic logistic regression model to predict survival.</p></li>
+<li><p><em>Measuring model accuracy with K-fold stratification</em>: The best way to manage train/test data splits. Trains multiple models where all the data is used once, but only once, across the test sets.</p></li>
+<li><p><em>Avoiding over-fitting with regularisation</em>: Prevent a model over-fitting to training data.</p></li>
+<li><p><em>Accuracy measurements in machine learning</em>: Go beyond simply measuring the proportion of predictions that are right.</p></li>
+<li><p><em>Application of alternative accuracy measurements to a logistic regression model</em>: See how different accuracy measurements are applied to Titanic survival data.</p></li>
+<li><p><em>Learning curves - how much data do we need?</em>: Would gathering more data improve your accuracy. Do you need to use all the data you have?</p></li>
+<li><p><em>Receiver Operator Characteristic (ROC) curve</em>: Many consider the ROC the ‘gold standard’ of measuring model performance.</p></li>
+</ul>
+</div>
+<div class="section" id="feature-selection-and-expansion">
+<h2>FEATURE SELECTION AND EXPANSION<a class="headerlink" href="#feature-selection-and-expansion" title="Permalink to this headline">¶</a></h2>
+<p>Should you use all features? Is it useful to create extra polynomial features?</p>
+<ul class="simple">
+<li><p><em>Feature selection using univariate statistical selection</em>: Select features based on how well they correlate with our target label.</p></li>
+<li><p><em>Feature selection using forward selection</em>: Select features based on progressively selecting features that increase model accuracy most.</p></li>
+<li><p><em>Feature selection using backward elimination</em>: Remove features based on progressively removing those that can be removed with the smallest loss in accuracy:</p></li>
+<li><p><em>Feature expansion</em>: Add polynomial features (interactions between features) coupled with feature selection using forward selection.</p></li>
+</ul>
+</div>
+<div class="section" id="working-with-imbalanced-data-sets">
+<h2>WORKING WITH IMBALANCED DATA SETS<a class="headerlink" href="#working-with-imbalanced-data-sets" title="Permalink to this headline">¶</a></h2>
+<p>Methods that help you manage data sets where there is not an even balance between classes.</p>
+<ul class="simple">
+<li><p><em>Dealing with imbalanced data by model weighting</em>: Manage imbalance by adjusted the weight (influence) of different classes.</p></li>
+<li><p><em>Dealing with imbalanced data by under or over sampling</em>: Sample the minority class more, or sample the majority class less.</p></li>
+<li><p><em>Dealing with imbalanced data by changing classification cut-off levels</em>: Adjust the probability threshold used to classify data.</p></li>
+<li><p><em>Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)</em>: Create synthetic examples of the minority class.</p></li>
+</ul>
+</div>
+<div class="section" id="random-forest-model">
+<h2>RANDOM FOREST MODEL<a class="headerlink" href="#random-forest-model" title="Permalink to this headline">¶</a></h2>
+<p>A popular model type for structured data.</p>
+<ul class="simple">
+<li><p><em>A Random *  Forest model</em>: Setting up a Random Forest model.</p></li>
+<li><p><em>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification</em>: Performing a ROC analysis for Random Forest, and looking at the effect of adjusting classification threshold.</p></li>
+</ul>
+</div>
+<div class="section" id="tensorflow-neural-nets">
+<h2>TENSORFLOW NEURAL NETS<a class="headerlink" href="#tensorflow-neural-nets" title="Permalink to this headline">¶</a></h2>
+<p>A popular framework for building neural networks.</p>
+<ul class="simple">
+<li><p><em>TensorFlow neural net</em>: AN example taking you through the basics of setting up a neural network in TensorFlow including regularisation of neural networks, and automatically stopping training when the model is at peak performance.</p></li>
+<li><p><em>TensorFlow api-based neural net</em>: A second, more versatile way, to build TensorFlow neural networks.</p></li>
+<li><p><em>TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification</em>: Performing a ROC analysis for a neural network, and looking at the effect of adjusting classification threshold.</p></li>
+<li><p><em>TensorFlow ‘Wide and Deep’ neural nets</em>: Combining ‘shallow’ and ‘deep’ learning in one neural network.</p></li>
+<li><p><em>TensorFlow Bagging</em>: Train multiple networks to improve accuracy and/or get a measure of prediction uncertainty.</p></li>
+</ul>
+</div>
+<div class="section" id="extras">
+<h2>EXTRAS<a class="headerlink" href="#extras" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><em>Checking model calibration</em>: Check that the model output probabilities are well calibrated.</p></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
