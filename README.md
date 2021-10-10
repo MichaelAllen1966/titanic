@@ -34,6 +34,7 @@ This will fetch and install the libraries in a conda environment 'titanic'
 2. Activate environment with `conda activate titanic`
 
 3. Install rerquired packages with:
-    `conda install pandas numpy matplotlib jupyterlab tensorflow scikit-learn`
-    `pip install imblearn pydot graphviz`
-    
+
+    `conda install pandas=1.3 numpy=1.20 matplotlib=3.4 jupyterlab tensorflow=2.4 scikit-learn=0.24`
+
+    `pip install imblearn==0.0 pydot==1.4 graphviz==0.17`
