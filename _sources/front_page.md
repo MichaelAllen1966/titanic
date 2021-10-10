@@ -12,6 +12,10 @@ These examples will use Kaggle’s Titanic Survival data to explore machine lear
 
 The contents of this book are:
 
+## SETTING UP AN ENVIRONMENT TO RUN THESE NOTEBOOKS
+
+* *Setting up an environment*: Setting up an environment using an `environment.yml` file, or setting up manually.
+
 ## DATA PREPROCESSING
 
 * *Kaggle Titanic survival*: data preprocessing: Getting our data in a form suitable for machine learning

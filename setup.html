@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Titanic Survical Machine Learning</title>
+    <title>Setting up an environment &#8212; Titanic Survical Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,8 +42,17 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Kaggle Titanic survival - data preprocessing" href="01_preprocessing.html" />
+    <link rel="prev" title="Titanic Survival" href="front_page.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -83,9 +92,9 @@
   Setting up an environment file to run these notebooks
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="setup.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Setting up an environment
   </a>
  </li>
@@ -291,6 +300,23 @@
             </button>
             
             
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/setup.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
             <!-- Source interaction buttons -->
 
             <!-- Full screen (wrap in <a> to have style consistency -->
@@ -307,6 +333,29 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-environment-locally-using-a-conda-environment-file">
+   Set up environment locally using a conda environment file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-environment-locally-manually">
+   Set up environment locally manually
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-files">
+   Download files
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -315,13 +364,57 @@
         
               <div>
                 
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="setting-up-an-environment">
+<h1>Setting up an environment<a class="headerlink" href="#setting-up-an-environment" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="set-up-environment-locally-using-a-conda-environment-file">
+<h2>Set up environment locally using a conda environment file<a class="headerlink" href="#set-up-environment-locally-using-a-conda-environment-file" title="Permalink to this headline">¶</a></h2>
+<p>To get the correct libraries and versions it is recommended that the provided conda environment is used. To create and activate the titanic environment:</p>
+<ol class="simple">
+<li><p>2Download the environment.yml file from <a class="reference external" href="https://github.com/MichaelAllen1966/titanic/tree/main/binder">https://github.com/MichaelAllen1966/titanic/tree/main/binder</a></p></li>
+<li><p>Windows -&gt; Open Anaconda prompt. Mac/linux -&gt; Open a terminal</p></li>
+<li><p>Run the following command: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">environment.yml</span></code></p></li>
+</ol>
+<p>This will fetch and install the libraries in a conda environment ‘titanic’</p>
+<ol class="simple">
+<li><p>To activate the enviroment run the following command:
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">titanic</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="set-up-environment-locally-manually">
+<h2>Set up environment locally manually<a class="headerlink" href="#set-up-environment-locally-manually" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Create a new environemnt with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">-n</span> <span class="pre">titanic</span> <span class="pre">python=3.8</span></code></p></li>
+<li><p>Activate environment with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">titanic</span></code></p></li>
+<li><p>Install rerquired packages with:
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pandas</span> <span class="pre">numpy</span> <span class="pre">matplotlib</span> <span class="pre">jupyterlab</span> <span class="pre">tensorflow</span> <span class="pre">scikit-learn</span></code>
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">imblearn</span> <span class="pre">pydot</span> <span class="pre">graphviz</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="download-files">
+<h2>Download files<a class="headerlink" href="#download-files" title="Permalink to this headline">¶</a></h2>
+<p>Jupyter Notebooks may be downloaded individually from the book pages here, or may be downloaded together from <a class="reference external" href="https://github.com/MichaelAllen1966/titanic">https://github.com/MichaelAllen1966/titanic</a></p>
+</div>
 </div>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -332,6 +425,24 @@
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="front_page.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Titanic Survival</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="01_preprocessing.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Kaggle Titanic survival - data preprocessing</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
