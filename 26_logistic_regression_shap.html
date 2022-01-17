@@ -1,0 +1,1169 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Explaining model predictions with Shapley values &#8212; Titanic Survival Machine Learning</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="TensorFlow Bagging" href="25_tensorflow_bagging.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survival Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="front_page.html">
+   Titanic Survival
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Setting up an environment file to run these notebooks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Setting up an environment
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Data preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_preprocessing.html">
+   Kaggle Titanic survival - data preprocessing
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Basic methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_logistic_regression.html">
+   Logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_k_fold.html">
+   Measuring model accuracy with K-fold stratification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_regularisation.html">
+   Avoiding over-fitting with regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_accuracy_standalone.html">
+   Accuracy measurements in machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
+   Application of alternative accuracy measurements to a logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_learning_curve.html">
+   Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_roc.html">
+   Receiver Operator Characteristic (ROC) curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="50_check_calibration.html">
+   Checking model calibration
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Feature selection and expansion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_feature_selection_1_univariate.html">
+   Feature selection using univariate statistical selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_feature_selection_2_forward.html">
+   Feature selection using forward selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_feature_selection_3_backward.html">
+   Feature selection using backward elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_feature_expansion.html">
+   Feature expansion
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Working with imbalanced data sets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_imbalanced%20_data_weighting.html">
+   Dealing with imbalanced data by model weighting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_imbalanced%20_data_sampling.html">
+   Dealing with imbalanced data by under or over sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_imbalanced%20_data_threshold.html">
+   Dealing with imbalanced data by changing classification cut-off levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_imbalanced%20_data_smote.html">
+   Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Random forest model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_random_forest.html">
+   A Random Forest model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_random_forest_roc.html">
+   Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  TensorFlow neural nets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_tensorflow_1.html">
+   TensorFlow neural net
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_tensorflow_api.html">
+   TensorFlow api-based neural net.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_tensorflow_roc.html">
+   TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_tensorflow_deep_wide.html">
+   TensorFlow ‘Wide and Deep’ neural nets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_tensorflow_bagging.html">
+   TensorFlow Bagging
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Model explainability
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Explaining model predictions with Shapley values
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/26_logistic_regression_shap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-training-and-tets-sets">
+   Divide into training and tets sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standardise-data">
+   Standardise data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-logistic-regression-model">
+   Fit logistic regression model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-values-and-get-probabilities-of-survival">
+   Predict values and get probabilities of survival
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-accuracy">
+   Calculate accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examining-the-model-coefficients-weights">
+   Examining the model coefficients (weights)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-shapley-values">
+   Get Shapley values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots-of-shapley-values">
+   Plots of Shapley values
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#beeswarm-plot">
+     Beeswarm plot
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#waterfall-plot">
+   Waterfall plot
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scatter-plot">
+   Scatter plot
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values">
+<h1>Explaining model predictions with Shapley values<a class="headerlink" href="#explaining-model-predictions-with-shapley-values" title="Permalink to this headline">¶</a></h1>
+<p>Shapley values provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
+<p>Shapley values may be used across model types, and so provide a <em>model-agnostic</em> measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows <em>black box</em> models like neural networks to be explained, at least in part.</p>
+<p>Here we will demonstrate Shapley values with logistic regression.</p>
+<p>For more on Shapley values in general see Chris Molner’s excellent book chapter:</p>
+<p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shapley.html">https://christophm.github.io/interpretable-ml-book/shapley.html</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">shap</span></code> package is installed if you have used the Titanic environment yasml file, but otherwise may be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code>.</p>
+<p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, inclusiong lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
+<p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with logistic regression. Logistic regression is the model type which least needs an <em>explainer</em> but it provides a useful example for learning about <code class="docutils literal notranslate"><span class="pre">shap</span></code> as Shapley values may be compared with model coefficients.</p>
+<section id="load-modules">
+<h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># Import machine learning methods</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="c1"># Import shap for shapley values</span>
+<span class="kn">import</span> <span class="nn">shap</span> <span class="c1"># `pip install shap` if neeed</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
+If data has already been downloaded that cell may be skipped.</p>
+<p>Code that was used to pre-process the data ready for machine learning may be found at:
+<a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/01_preprocessing.ipynb</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_required</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">download_required</span><span class="p">:</span>
+    
+    <span class="c1"># Download processed data:</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/MichaelAllen1966/&#39;</span> <span class="o">+</span> \
+                <span class="s1">&#39;1804_python_healthcare/master/titanic/data/processed_data.csv&#39;</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+
+    <span class="c1"># Create a data subfolder if one does not already exist</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">data_directory</span> <span class="o">=</span><span class="s1">&#39;./data/&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_directory</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+    <span class="c1"># Save data</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_directory</span> <span class="o">+</span> <span class="s1">&#39;processed_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Make all data &#39;float&#39; type</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="divide-into-x-features-and-y-labels">
+<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
+<p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
+By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survived or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use `survived` field as y, and drop for X</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
+
+<span class="c1"># Drop PassengerId</span>
+<span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="divide-into-training-and-tets-sets">
+<h2>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h2>
+<p>When we test a machine learning model we should always test it on data that has not been used to train the model.
+We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standardise-data">
+<h2>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h2>
+<p>Use SciKit learn method for standardising data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+    
+    <span class="c1"># Initialise a new scaling object for normalising input data</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
+
+    <span class="c1"># Set up the scaler just on the training set</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># Apply the scaler to the training and test sets</span>
+    <span class="n">train_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">test_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_std</span><span class="p">,</span> <span class="n">test_std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-logistic-regression-model">
+<h2>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
+<p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LogisticRegression(random_state=42)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="predict-values-and-get-probabilities-of-survival">
+<h2>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">¶</a></h2>
+<p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict training and test set labels</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+
+<span class="c1"># Predict probabilities of survival</span>
+<span class="n">y_prob_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
+<span class="n">y_prob_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-accuracy">
+<h2>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h2>
+<p>In this example we will measure accuracy simply as the proportion of passengers where we make the correct prediction. In a later notebook we will look at other measures of accuracy which explore false positives and false negatives in more detail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of predicting training data = </span><span class="si">{</span><span class="n">accuracy_train</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy of predicting test data = </span><span class="si">{</span><span class="n">accuracy_test</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.808
+Accuracy of predicting test data = 0.798
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="examining-the-model-coefficients-weights">
+<h2>Examining the model coefficients (weights)<a class="headerlink" href="#examining-the-model-coefficients-weights" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get model co_efficients</span>
+<span class="n">co_eff</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Put in DataFrame and sort by effect size</span>
+<span class="n">co_eff_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1"># Get feature names from X</span>
+<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;co_eff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co_eff</span>
+<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">co_eff</span><span class="p">)</span>
+<span class="n">co_eff_df_sorted</span> <span class="o">=</span> \
+    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co_eff_df_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>co_eff</th>
+      <th>abs_co_eff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>male</td>
+      <td>-1.285766</td>
+      <td>1.285766</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Pclass</td>
+      <td>-0.599109</td>
+      <td>0.599109</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Age</td>
+      <td>-0.443450</td>
+      <td>0.443450</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CabinNumberImputed</td>
+      <td>-0.383161</td>
+      <td>0.383161</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SibSp</td>
+      <td>-0.326892</td>
+      <td>0.326892</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>So are three most influential features are:</p>
+<ul class="simple">
+<li><p><em>male</em> (being male reduces probability of survival)</p></li>
+<li><p><em>Pclass</em> (lower class passengers, who have a higher class number, reduces probability of survival)</p></li>
+<li><p><em>age</em> (being older reduces probability of survival)</p></li>
+</ul>
+</section>
+<section id="get-shapley-values">
+<h2>Get Shapley values<a class="headerlink" href="#get-shapley-values" title="Permalink to this headline">¶</a></h2>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">shap_values</span></code> method from the SHAP library to get Shapley values.
+We use the <code class="docutils literal notranslate"><span class="pre">explainer</span></code> method from the SHAP library to get Shapley values along with other data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_shapley_values</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_values</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    We use the `explainer(X)` method to get objects with shap values, base</span>
+<span class="sd">    value*, and feature data. *The base value is “the value that would be </span>
+<span class="sd">    predicted if we did not know any features for the current output.” </span>
+<span class="sd">    In other words, it is the mean prediction, or mean(yhat).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Train explainer on Training set</span>
+    <span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_values</span><span class="p">)</span>
+    
+    <span class="c1"># To get Shapley values alone:</span>
+    <span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_values</span><span class="p">)</span>
+
+    <span class="c1"># Get Shapley values along with base, and features</span>
+    <span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_values</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="n">shap_values_extended</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get list of features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># Get Shapley values for training data</span>
+<span class="p">(</span><span class="n">shapley_values_train</span><span class="p">,</span> <span class="n">shapley_values_train_extended</span><span class="p">)</span> <span class="o">=</span> \
+    <span class="n">calculate_shapley_values</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_std</span><span class="p">)</span>
+
+<span class="c1"># Calculate mean Shapley value for each feature</span>
+<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Calculate mean absolute Shapley value for each feature</span>
+<span class="c1"># This will give us the average importance of each feature</span>
+<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shapley_values_train</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Get Shapley values for test data</span>
+<span class="p">(</span><span class="n">shapley_values_test</span><span class="p">,</span> <span class="n">shapley_values_test_extended</span><span class="p">)</span> <span class="o">=</span> \
+    <span class="n">calculate_shapley_values</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_test_std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add Shapley values to coefficient table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">co_eff_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>co_eff</th>
+      <th>abs_co_eff</th>
+      <th>mean_shapley_values</th>
+      <th>mean_abs_shapley_values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Pclass</td>
+      <td>-0.599109</td>
+      <td>0.599109</td>
+      <td>-0.075577</td>
+      <td>0.553688</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Age</td>
+      <td>-0.443450</td>
+      <td>0.443450</td>
+      <td>0.021086</td>
+      <td>0.321889</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SibSp</td>
+      <td>-0.326892</td>
+      <td>0.326892</td>
+      <td>0.021006</td>
+      <td>0.215346</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Parch</td>
+      <td>-0.120718</td>
+      <td>0.120718</td>
+      <td>0.008693</td>
+      <td>0.091400</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Fare</td>
+      <td>0.201812</td>
+      <td>0.201812</td>
+      <td>0.017323</td>
+      <td>0.103516</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>AgeImputed</td>
+      <td>-0.209965</td>
+      <td>0.209965</td>
+      <td>-0.025102</td>
+      <td>0.152032</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>EmbarkedImputed</td>
+      <td>0.098489</td>
+      <td>0.098489</td>
+      <td>0.005397</td>
+      <td>0.005397</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CabinLetterImputed</td>
+      <td>0.080356</td>
+      <td>0.080356</td>
+      <td>0.010992</td>
+      <td>0.072992</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CabinNumber</td>
+      <td>0.121569</td>
+      <td>0.121569</td>
+      <td>-0.021160</td>
+      <td>0.092512</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CabinNumberImputed</td>
+      <td>-0.383161</td>
+      <td>0.383161</td>
+      <td>-0.061586</td>
+      <td>0.349546</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Get top 10 influenctial features by co-effieceints or Shapley</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get top 10 features</span>
+<span class="n">co_eff_top_10</span> <span class="o">=</span> \
+    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
+
+<span class="n">shapley_top_10</span> <span class="o">=</span> \
+    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="n">by</span><span class="o">=</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
+
+<span class="c1"># Add to DataFrame</span>
+<span class="n">top_10_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Coefficients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co_eff_top_10</span><span class="o">.</span><span class="n">values</span>
+<span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Shapley&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shapley_top_10</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Display</span>
+<span class="n">top_10_features</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coefficients</th>
+      <th>Shapley</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>male</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Pclass</td>
+      <td>Pclass</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Age</td>
+      <td>CabinNumberImputed</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CabinNumberImputed</td>
+      <td>Age</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SibSp</td>
+      <td>SibSp</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CabinLetter_C</td>
+      <td>AgeImputed</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>AgeImputed</td>
+      <td>CabinLetter_C</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Fare</td>
+      <td>Embarked_S</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CabinLetter_E</td>
+      <td>Fare</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CabinLetter_T</td>
+      <td>CabinLetter_E</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can see a lot of overlap between the most import fatures as estimated by coefficients and those estimated using mean absolute Shapley values. But they are not identical.</p>
+<p>Plot comparison of Shapley and mode coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="c1"># Plot points</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Shapley value vs model weight (coefficient) for each feature&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mean absolute Shapley value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Feature co-efficent (abs)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/26_logistic_regression_shap_32_0.png" src="_images/26_logistic_regression_shap_32_0.png" />
+</div>
+</div>
+</section>
+<section id="plots-of-shapley-values">
+<h2>Plots of Shapley values<a class="headerlink" href="#plots-of-shapley-values" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> using a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code> gives us the overall importance of each feature across the population.</p>
+<p>Here we limit the num,ber of features shown to 15 (default is 20).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="p">,</span> 
+                  <span class="n">features</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                  <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                  <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+                  <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                  <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/26_logistic_regression_shap_34_0.png" src="_images/26_logistic_regression_shap_34_0.png" />
+</div>
+</div>
+<section id="beeswarm-plot">
+<h3>Beeswarm plot<a class="headerlink" href="#beeswarm-plot" title="Permalink to this headline">¶</a></h3>
+<p>Without specifying a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> gives us a <em>beeswarm</em> plot, showing the Shapley values for all instances.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="p">,</span> 
+                  <span class="n">features</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                  <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                  <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                  <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/26_logistic_regression_shap_36_0.png" src="_images/26_logistic_regression_shap_36_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="waterfall-plot">
+<h2>Waterfall plot<a class="headerlink" href="#waterfall-plot" title="Permalink to this headline">¶</a></h2>
+<p>Waterfall plots show the influence of  individual features on model prediction. These are shown as the effect on <em>log odds ratio</em> of survival. <em>Log odds ratio</em> are usually shown as these are additive, whereas probabilities are not.</p>
+<p>Waterfall plots put the most influential features at the top.</p>
+<p>Waterfall plot for passenger with lowest probability of survival:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+
+<span class="c1"># For waterfall plot with feature names shap needs a df with feature names</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+
+<span class="c1"># Fit explainer model and get Shap values</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Get probability of survival</span>
+<span class="n">y_probs_survive</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">df</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Get index of lowest survival probability</span>
+<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_probs</span> <span class="o">==</span> <span class="n">y_probs_survive</span><span class="o">.</span><span class="n">min</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Waterfall plot</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X has feature names, but LogisticRegression was fitted without feature names
+</pre></div>
+</div>
+<img alt="_images/26_logistic_regression_shap_39_1.png" src="_images/26_logistic_regression_shap_39_1.png" />
+</div>
+</div>
+<p>Waterfall plot for passenger with highest probability of survival:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get index of lowest survival probability</span>
+<span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_probs</span> <span class="o">==</span> <span class="n">y_probs_survive</span><span class="o">.</span><span class="n">max</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Waterfall plot</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/26_logistic_regression_shap_41_0.png" src="_images/26_logistic_regression_shap_41_0.png" />
+</div>
+</div>
+</section>
+<section id="scatter-plot">
+<h2>Scatter plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h2>
+<p>A scattter plot for one or more features shows the relationship between the feature value and the Shap value, along with a histogram of the frequency of the feature values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[:,[</span><span class="s1">&#39;Fare&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/26_logistic_regression_shap_43_0.png" src="_images/26_logistic_regression_shap_43_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="25_tensorflow_bagging.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">TensorFlow Bagging</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Michael Allen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
