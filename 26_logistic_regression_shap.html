@@ -400,21 +400,26 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary-plot">
+     Summary plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#beeswarm-plot">
      Beeswarm plot
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#waterfall-plot">
+     Waterfall plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scatter-plot">
+     Scatter plot
+    </a>
+   </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#waterfall-plot">
-   Waterfall plot
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scatter-plot">
-   Scatter plot
-  </a>
  </li>
 </ul>
 
@@ -994,6 +999,8 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </section>
 <section id="plots-of-shapley-values">
 <h2>Plots of Shapley values<a class="headerlink" href="#plots-of-shapley-values" title="Permalink to this headline">¶</a></h2>
+<section id="summary-plot">
+<h3>Summary plot<a class="headerlink" href="#summary-plot" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> using a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code> gives us the overall importance of each feature across the population.</p>
 <p>Here we limit the num,ber of features shown to 15 (default is 20).</p>
 <div class="cell docutils container">
@@ -1015,6 +1022,7 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_34_0.png" src="_images/26_logistic_regression_shap_34_0.png" />
 </div>
 </div>
+</section>
 <section id="beeswarm-plot">
 <h3>Beeswarm plot<a class="headerlink" href="#beeswarm-plot" title="Permalink to this headline">¶</a></h3>
 <p>Without specifying a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> gives us a <em>beeswarm</em> plot, showing the Shapley values for all instances.</p>
@@ -1037,9 +1045,8 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </div>
 </section>
-</section>
 <section id="waterfall-plot">
-<h2>Waterfall plot<a class="headerlink" href="#waterfall-plot" title="Permalink to this headline">¶</a></h2>
+<h3>Waterfall plot<a class="headerlink" href="#waterfall-plot" title="Permalink to this headline">¶</a></h3>
 <p>Waterfall plots show the influence of  individual features on model prediction. These are shown as the effect on <em>log odds ratio</em> of survival. <em>Log odds ratio</em> are usually shown as these are additive, whereas probabilities are not.</p>
 <p>Waterfall plots put the most influential features at the top.</p>
 <p>Waterfall plot for passenger with lowest probability of survival:</p>
@@ -1088,7 +1095,7 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </section>
 <section id="scatter-plot">
-<h2>Scatter plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h2>
+<h3>Scatter plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h3>
 <p>A scattter plot for one or more features shows the relationship between the feature value and the Shap value, along with a histogram of the frequency of the feature values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1100,6 +1107,7 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_43_0.png" src="_images/26_logistic_regression_shap_43_0.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 
