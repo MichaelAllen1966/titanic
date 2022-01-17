@@ -345,44 +345,51 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-modules">
-   Load modules
+  <a class="reference internal nav-link" href="#load-data-and-fit-model">
+   Load data and fit model
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
-   Divide into X (features) and y (labels)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#divide-into-training-and-tets-sets">
-   Divide into training and tets sets
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#standardise-data">
-   Standardise data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-logistic-regression-model">
-   Fit logistic regression model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#predict-values-and-get-probabilities-of-survival">
-   Predict values and get probabilities of survival
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calculate-accuracy">
-   Calculate accuracy
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-modules">
+     Load modules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+     Divide into X (features) and y (labels)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-training-and-tets-sets">
+     Divide into training and tets sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standardise-data">
+     Standardise data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-logistic-regression-model">
+     Fit logistic regression model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-values-and-get-probabilities-of-survival">
+     Predict values and get probabilities of survival
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-accuracy">
+     Calculate accuracy
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#examining-the-model-coefficients-weights">
@@ -442,8 +449,10 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">shap</span></code> package is installed if you have used the Titanic environment yasml file, but otherwise may be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code>.</p>
 <p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, inclusiong lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
 <p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with logistic regression. Logistic regression is the model type which least needs an <em>explainer</em> but it provides a useful example for learning about <code class="docutils literal notranslate"><span class="pre">shap</span></code> as Shapley values may be compared with model coefficients.</p>
+<section id="load-data-and-fit-model">
+<h2>Load data and fit model<a class="headerlink" href="#load-data-and-fit-model" title="Permalink to this headline">¶</a></h2>
 <section id="load-modules">
-<h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
+<h3>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -461,7 +470,7 @@
 </div>
 </section>
 <section id="load-data">
-<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<h3>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h3>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
 <p>Code that was used to pre-process the data ready for machine learning may be found at:
@@ -501,7 +510,7 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </section>
 <section id="divide-into-x-features-and-y-labels">
-<h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
+<h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survived or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell docutils container">
@@ -518,7 +527,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </section>
 <section id="divide-into-training-and-tets-sets">
-<h2>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h2>
+<h3>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h3>
 <p>When we test a machine learning model we should always test it on data that has not been used to train the model.
 We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
 <div class="cell docutils container">
@@ -530,7 +539,7 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </section>
 <section id="standardise-data">
-<h2>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h2>
+<h3>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h3>
 <p>Use SciKit learn method for standardising data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -560,7 +569,7 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </section>
 <section id="fit-logistic-regression-model">
-<h2>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
+<h3>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h3>
 <p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -577,7 +586,7 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </section>
 <section id="predict-values-and-get-probabilities-of-survival">
-<h2>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">¶</a></h2>
+<h3>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">¶</a></h3>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -594,7 +603,7 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </section>
 <section id="calculate-accuracy">
-<h2>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h2>
+<h3>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h3>
 <p>In this example we will measure accuracy simply as the proportion of passengers where we make the correct prediction. In a later notebook we will look at other measures of accuracy which explore false positives and false negatives in more detail.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -613,6 +622,7 @@ Accuracy of predicting test data = 0.798
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="examining-the-model-coefficients-weights">
 <h2>Examining the model coefficients (weights)<a class="headerlink" href="#examining-the-model-coefficients-weights" title="Permalink to this headline">¶</a></h2>
