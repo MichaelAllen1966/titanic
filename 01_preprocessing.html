@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Kaggle Titanic survival - data preprocessing &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -33,17 +34,17 @@
     
   <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -72,6 +73,7 @@
     <a class="navbar-brand text-wrap" href="index.html">
       
       
+      
       <h1 class="site-logo" id="site-title">Titanic Survival Machine Learning</h1>
       
     </a>
@@ -87,7 +89,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -99,7 +101,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -111,7 +113,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -153,7 +155,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -180,7 +182,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -207,7 +209,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -224,7 +226,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -256,7 +258,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Extras
  </span>
@@ -394,7 +396,7 @@
         
               <div>
                 
-  <div class="section" id="kaggle-titanic-survival-data-preprocessing">
+  <section class="tex2jax_ignore mathjax_ignore" id="kaggle-titanic-survival-data-preprocessing">
 <h1>Kaggle Titanic survival - data preprocessing<a class="headerlink" href="#kaggle-titanic-survival-data-preprocessing" title="Permalink to this headline">¶</a></h1>
 <p>Can we predict which passengers would survive the sinking of the Titanic?</p>
 <p>Original kaggle page:<a class="reference external" href="https://www.kaggle.com/c/titanic">https://www.kaggle.com/c/titanic</a></p>
@@ -451,7 +453,7 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -461,8 +463,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>Data should be in a sub folder named data.</p>
 <p>It may be downloaded from:</p>
@@ -702,8 +704,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="showing-a-summary-of-the-data">
+</section>
+<section id="showing-a-summary-of-the-data">
 <h2>Showing a summary of the data<a class="headerlink" href="#showing-a-summary-of-the-data" title="Permalink to this headline">¶</a></h2>
 <p>We can use the pandas <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method to show a summary of the data. Note that this only shows numerical data.</p>
 <div class="cell docutils container">
@@ -826,8 +828,8 @@ dtype: int64
 </div></div></div>
 </div>
 <p>Of most likely useful fields we are missing sex and whether a passenger embarked or not. So let’s code those numerically.</p>
-</div>
-<div class="section" id="filling-in-imputing-missing-data">
+</section>
+<section id="filling-in-imputing-missing-data">
 <h2>Filling in (imputing) missing data<a class="headerlink" href="#filling-in-imputing-missing-data" title="Permalink to this headline">¶</a></h2>
 <p>For numerical data we may commonly choose to impute missing values with zero, mean or median. We will use the median for age.</p>
 <p>We will also create a new column showing which values were imputed (this may be useful information in a machine learning model).</p>
@@ -882,8 +884,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="sorting-out-cabin-data">
+</section>
+<section id="sorting-out-cabin-data">
 <h2>Sorting out cabin data<a class="headerlink" href="#sorting-out-cabin-data" title="Permalink to this headline">¶</a></h2>
 <p>Cabin data is messy! Some passengers have more than one cabin (in which case we will split out the multiple cabins and just use the first one). Cabin numbers are a letter followed by a number. We will separate out the letter and the number.</p>
 <div class="cell docutils container">
@@ -1115,8 +1117,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="encoding-non-numerical-fields">
+</section>
+<section id="encoding-non-numerical-fields">
 <h2>Encoding non-numerical fields.<a class="headerlink" href="#encoding-non-numerical-fields" title="Permalink to this headline">¶</a></h2>
 <p>There are three types of non-numerical field:</p>
 <ul class="simple">
@@ -1878,8 +1880,8 @@ Name: Sex, dtype: object
 </div></div></div>
 </div>
 <p>Now we will drop the Name and Ticket column (they may perhaps be useful in some way, but we’ll simplify things by remiving them)</p>
-</div>
-<div class="section" id="drop-columns">
+</section>
+<section id="drop-columns">
 <h2>Drop columns<a class="headerlink" href="#drop-columns" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2057,8 +2059,8 @@ Name: Sex, dtype: object
 <p>5 rows × 26 columns</p>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="having-a-quick-look-at-differences-between-survived-and-non-survived-passengers">
+</section>
+<section id="having-a-quick-look-at-differences-between-survived-and-non-survived-passengers">
 <h2>Having a quick look at differences between survived and non-survived passengers<a class="headerlink" href="#having-a-quick-look-at-differences-between-survived-and-non-survived-passengers" title="Permalink to this headline">¶</a></h2>
 <p>Phew, the data-preprocessing is done! This is often a tedious and time-consuming stage with few ‘endorphin rush’ rewards to be had.</p>
 <p>Let’s split our data into survived and non-survived and have a quick look to see anything obvious.</p>
@@ -2238,8 +2240,8 @@ We’ll put them side by side in a new DataFrame.</p>
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="save-processed-data">
+</section>
+<section id="save-processed-data">
 <h2>Save processed data<a class="headerlink" href="#save-processed-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2248,8 +2250,8 @@ We’ll put them side by side in a new DataFrame.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2303,7 +2305,7 @@ We’ll put them side by side in a new DataFrame.</p>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

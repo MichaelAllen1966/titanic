@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>TensorFlow Bagging &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -33,17 +34,17 @@
     
   <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -72,6 +73,7 @@
     <a class="navbar-brand text-wrap" href="index.html">
       
       
+      
       <h1 class="site-logo" id="site-title">Titanic Survival Machine Learning</h1>
       
     </a>
@@ -87,7 +89,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -99,7 +101,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -111,7 +113,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -153,7 +155,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -180,7 +182,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -207,7 +209,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -224,7 +226,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -256,7 +258,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Extras
  </span>
@@ -405,7 +407,7 @@
         
               <div>
                 
-  <div class="section" id="tensorflow-bagging">
+  <section class="tex2jax_ignore mathjax_ignore" id="tensorflow-bagging">
 <h1>TensorFlow Bagging<a class="headerlink" href="#tensorflow-bagging" title="Permalink to this headline">¶</a></h1>
 <p>‘Bagging’ (bootstrap aggregation’) is a simple but powerful method for improving accuracy of a model, and for getting a measure of model uncertainty.</p>
 <p>The principle is simple: we train <em>n</em> neural nets all using different bootstrapped samples (sampling with replacement) from the training set. We then use the mean probability of classification from the ensemble of models.</p>
@@ -420,7 +422,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -448,8 +450,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="download-data-if-not-previously-downloaded">
+</section>
+<section id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -475,8 +477,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-scale-data">
+</section>
+<section id="define-function-to-scale-data">
 <h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
 <p>In neural networks it is common to to scale input data 0-1 rather than use standardisation (subtracting mean and dividing by standard deviation) of each feature).</p>
 <div class="cell docutils container">
@@ -500,8 +502,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -518,9 +520,9 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="set-up-neural-net">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="set-up-neural-net">
 <h1>Set up neural net<a class="headerlink" href="#set-up-neural-net" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -554,7 +556,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="show-summary-of-the-model-structure">
+<section id="show-summary-of-the-model-structure">
 <h2>Show summary of the model structure<a class="headerlink" href="#show-summary-of-the-model-structure" title="Permalink to this headline">¶</a></h2>
 <p>Here we will create a model with 10 input features and show the structure of the model as  atable and as a graph.</p>
 <div class="cell docutils container">
@@ -648,9 +650,9 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <img alt="_images/25_tensorflow_bagging_15_0.png" src="_images/25_tensorflow_bagging_15_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="training-a-single-model">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="training-a-single-model">
 <h1>Training a single model<a class="headerlink" href="#training-a-single-model" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -687,7 +689,7 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 </div>
 </div>
 </div>
-<div class="section" id="training-an-ensemble-of-models">
+<section id="training-an-ensemble-of-models">
 <h2>Training an ensemble of models<a class="headerlink" href="#training-an-ensemble-of-models" title="Permalink to this headline">¶</a></h2>
 <p>Training is as a single model, but we use bootstrap sampling (sampling with replacement) to create different training sets.</p>
 <p>Here we will use a fixed number (25) of nets. In practice this number should be a adjusted until a plateau in performance is reached. It is also possible to vary the bottstrap saple size - here we fix the sample size to be the same size as the training set.</p>
@@ -807,8 +809,8 @@ Accuracy of bagged nets 0.87
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="show-variation-in-prediction-between-models-depending-on-probability-of-survival">
+</section>
+<section id="show-variation-in-prediction-between-models-depending-on-probability-of-survival">
 <h2>Show variation in prediction between models depending on probability of survival.<a class="headerlink" href="#show-variation-in-prediction-between-models-depending-on-probability-of-survival" title="Permalink to this headline">¶</a></h2>
 <p>Here we will use standard error of the mean as one measure of uncertainty. Note how uncertainty is not even - there is less variation in prediction of those with high probability of survival compared with those with lower probability of survival.</p>
 <div class="cell docutils container">
@@ -828,8 +830,8 @@ Accuracy of bagged nets 0.87
 <img alt="_images/25_tensorflow_bagging_28_0.png" src="_images/25_tensorflow_bagging_28_0.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -883,7 +885,7 @@ Accuracy of bagged nets 0.87
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

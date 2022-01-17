@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Avoiding over-fitting with regularisation &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -33,17 +34,17 @@
     
   <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -72,6 +73,7 @@
     <a class="navbar-brand text-wrap" href="index.html">
       
       
+      
       <h1 class="site-logo" id="site-title">Titanic Survival Machine Learning</h1>
       
     </a>
@@ -87,7 +89,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -99,7 +101,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -111,7 +113,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -153,7 +155,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -180,7 +182,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -207,7 +209,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -224,7 +226,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -256,7 +258,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Extras
  </span>
@@ -384,7 +386,7 @@
         
               <div>
                 
-  <div class="section" id="avoiding-over-fitting-with-regularisation">
+  <section class="tex2jax_ignore mathjax_ignore" id="avoiding-over-fitting-with-regularisation">
 <h1>Avoiding over-fitting with regularisation<a class="headerlink" href="#avoiding-over-fitting-with-regularisation" title="Permalink to this headline">¶</a></h1>
 <p>A danger with complex models (many features) or small data sets (a low number of samples) is that the model can over-fit to the training data at the expense of previously unseen data (as in the test set). Most machine learning approaches allow for use of some kind of ‘regularisation’ which reduces the strength of the fit to the training data (e.g. by reducing the values of the model weights/coefficients, and pulling all values closer to the overall mean value). While this reduces the accuracy of the fit to the training data it can, perhaps surprisingly, increase the accuracy of predicting test (or other previously unseen) data.</p>
 <p>Over-fitting is usually spotted by the accuracy of prediction being significantly higher for the training set compared to the test set.</p>
@@ -398,7 +400,7 @@
 <li><p>B*B</p></li>
 </ul>
 <p>(In the above example we have A<em>B and B</em>A, which will result in the same value, so sklearn’s polynomial expansion method will keep just one value among replicates)</p>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -411,8 +413,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="download-data">
+</section>
+<section id="download-data">
 <h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
@@ -439,8 +441,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -459,8 +461,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -475,8 +477,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="reduce-the-number-of-samples-and-increase-the-number-of-features">
+</section>
+<section id="reduce-the-number-of-samples-and-increase-the-number-of-features">
 <h2>Reduce the number of samples, and increase the number of features<a class="headerlink" href="#reduce-the-number-of-samples-and-increase-the-number-of-features" title="Permalink to this headline">¶</a></h2>
 <p>Now we will reduce the size of the data set using random sampling (using Pandas <code class="docutils literal notranslate"><span class="pre">sample</span></code> method).
 We will increase the number of features using polynomial expansion (creating products of each pair of features).</p>
@@ -499,8 +501,8 @@ We will increase the number of features using polynomial expansion (creating pro
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-standardise-data">
+</section>
+<section id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>Standardisation subtracts the mean and divides by the standard deviation, for each feature.
 Here we use the sklearn built-in method for standardisation.</p>
@@ -523,8 +525,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="training-and-testing-the-model-for-all-k-fold-splits">
+</section>
+<section id="training-and-testing-the-model-for-all-k-fold-splits">
 <h2>Training and testing the model for all k-fold splits<a class="headerlink" href="#training-and-testing-the-model-for-all-k-fold-splits" title="Permalink to this headline">¶</a></h2>
 <p>The following code:</p>
 <ul class="simple">
@@ -643,8 +645,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 <li><p>Accuracy of training set is significantly higher than accuracy of test set (a common sign of over-fitting).</p></li>
 <li><p>There is an optimal value for the regularisation constant, C. In this case that value is about 0.1 (default if not specified is 1.0).</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -698,7 +700,7 @@ Here we use the sklearn built-in method for standardisation.</p>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

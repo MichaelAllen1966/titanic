@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique) &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -33,17 +34,17 @@
     
   <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -72,6 +73,7 @@
     <a class="navbar-brand text-wrap" href="index.html">
       
       
+      
       <h1 class="site-logo" id="site-title">Titanic Survival Machine Learning</h1>
       
     </a>
@@ -87,7 +89,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -99,7 +101,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -111,7 +113,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -153,7 +155,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -180,7 +182,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -207,7 +209,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -224,7 +226,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -256,7 +258,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Extras
  </span>
@@ -433,7 +435,7 @@
         
               <div>
                 
-  <div class="section" id="dealing-with-imbalanced-data-by-enhancing-the-minority-class-with-synthetic-data-smote-synthetic-minority-over-sampling-technique">
+  <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-imbalanced-data-by-enhancing-the-minority-class-with-synthetic-data-smote-synthetic-minority-over-sampling-technique">
 <h1>Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)<a class="headerlink" href="#dealing-with-imbalanced-data-by-enhancing-the-minority-class-with-synthetic-data-smote-synthetic-minority-over-sampling-technique" title="Permalink to this headline">¶</a></h1>
 <p>A problem with machine learning models is that they may end up biased towards the majority class, and under-predict the minority class(es).</p>
 <p>Some models (including sklearn’s logistic regression) allow for thresholds of classification to be changed. This can help rebalance classification in models, especially where there is a binary classification (e.g. survived or not).</p>
@@ -459,7 +461,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -475,8 +477,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -524,8 +526,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
+</section>
+<section id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
 <h2>Artificially reduce the number of survivors (to make data set more imbalanced)<a class="headerlink" href="#artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -559,8 +561,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-standardise-data">
+</section>
+<section id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -581,8 +583,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-measure-accuracy">
+</section>
+<section id="define-function-to-measure-accuracy">
 <h2>Define function to measure accuracy<a class="headerlink" href="#define-function-to-measure-accuracy" title="Permalink to this headline">¶</a></h2>
 <p>The following is a function for multiple accuracy measures.</p>
 <div class="cell docutils container">
@@ -692,8 +694,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -705,8 +707,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="set-up-dataframe-to-hold-results">
+</section>
+<section id="set-up-dataframe-to-hold-results">
 <h2>Set up DataFrame to hold results`<a class="headerlink" href="#set-up-dataframe-to-hold-results" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -718,8 +720,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="convert-data-from-pandas-dataframe-to-numpy">
+</section>
+<section id="convert-data-from-pandas-dataframe-to-numpy">
 <h2>Convert data from Pandas DataFrame to NumPy<a class="headerlink" href="#convert-data-from-pandas-dataframe-to-numpy" title="Permalink to this headline">¶</a></h2>
 <p>This is required for k-fold validation.</p>
 <p>If you are unfamiliar with k-fold validation please see:</p>
@@ -733,8 +735,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="logistic-regression-without-smote">
+</section>
+<section id="logistic-regression-without-smote">
 <h2>Logistic regression without SMOTE<a class="headerlink" href="#logistic-regression-without-smote" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -807,10 +809,10 @@ observed positive rate    0.237500
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="logistic-regression-with-smote">
+</section>
+<section id="logistic-regression-with-smote">
 <h2>Logistic regression with SMOTE<a class="headerlink" href="#logistic-regression-with-smote" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="create-an-array-to-show-which-features-are-categorical">
+<section id="create-an-array-to-show-which-features-are-categorical">
 <h3>Create an array to show which features are categorical<a class="headerlink" href="#create-an-array-to-show-which-features-are-categorical" title="Permalink to this headline">¶</a></h3>
 <p>In our data set only age and fare are continuous variables. All the other are categorical - that is they are one of a list of descrete values.</p>
 <p>So we shall create a series from feature names, set all of then original to categorical, and then change age and fair to categorical.</p>
@@ -848,8 +850,8 @@ Categorical features
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="run-model">
+</section>
+<section id="run-model">
 <h3>Run model<a class="headerlink" href="#run-model" title="Permalink to this headline">¶</a></h3>
 <p>Convert X &amp; y to NumPy arrays (required for k-fold stratification)</p>
 <div class="cell docutils container">
@@ -938,9 +940,9 @@ observed positive rate    0.237500  0.237500
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="observations">
+</section>
+</section>
+<section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Accuracy is highest with non-enhanced data</p></li>
@@ -949,8 +951,8 @@ observed positive rate    0.237500  0.237500
 <li><p>SMOTE is useful if detection of the minority class is important, but may lead to more false positives.</p></li>
 <li><p>SMOTE may be fined-tuned by passing a dictionary of the required numbers for each class. This will help to prevent a bias towards the minority class occurring. We demonstrate this below.</p></li>
 </ul>
-</div>
-<div class="section" id="fine-tuning-smote">
+</section>
+<section id="fine-tuning-smote">
 <h2>Fine tuning SMOTE<a class="headerlink" href="#fine-tuning-smote" title="Permalink to this headline">¶</a></h2>
 <p>By default, SMOTE rebalances the data set, synthetically enhancing the minority class so that the number of minority examples are increased to match the number of majority samples. Following on from the observation above that SMOTE may over-compensate and lead to over-estimation of the occurrence of the minority class, here we will fine-tune SMOTE by passing a dictionary of values for both the majority class (died), and the minority class (died). We will fix SMOTE to return 500 passengers who died, and vary the number of passengers who survived.</p>
 <div class="cell docutils container">
@@ -982,7 +984,7 @@ observed positive rate    0.237500  0.237500
 </div>
 </div>
 </div>
-<div class="section" id="run-smote-with-alternative-sampling-schemas">
+<section id="run-smote-with-alternative-sampling-schemas">
 <h3>Run SMOTE with alternative sampling schemas<a class="headerlink" href="#run-smote-with-alternative-sampling-schemas" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1192,8 +1194,8 @@ observed positive rate    0.237500  0.237500
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="plot-results">
+</section>
+<section id="plot-results">
 <h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1243,9 +1245,9 @@ observed positive rate    0.237500  0.237500
 </div>
 </div>
 <p>From the above we can see that we can adjust the SMOTE enhancement to return 250 minority class (‘survived’) samples in order to balance precision and recall, and to create a model that correctly predicts the proportion of passengers surviving.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1299,7 +1301,7 @@ observed positive rate    0.237500  0.237500
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
