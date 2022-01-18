@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learning curves - how much data do we need? &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -391,7 +390,7 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="learning-curves-how-much-data-do-we-need">
+  <div class="tex2jax_ignore mathjax_ignore section" id="learning-curves-how-much-data-do-we-need">
 <h1>Learning curves - how much data do we need?<a class="headerlink" href="#learning-curves-how-much-data-do-we-need" title="Permalink to this headline">¶</a></h1>
 <p>How much data do we need? Do we have enough?</p>
 <p>One simple method is to examine how accuracy increases with training set size. Does accuracy plateau before we hit the limit to how much data we have? In that case, getting more data will not help the model significantly. Is accuracy still increasing as we reach the limit to our data size? If so we would likely benefit from more data, if we can get it.</p>
@@ -414,7 +413,7 @@
 </li>
 <li><p>Plot the relationship between training set size and accuracy</p></li>
 </ul>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -429,8 +428,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -480,8 +479,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-x-features-and-y-labels">
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -493,8 +492,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="standardise-data">
+</div>
+<div class="section" id="standardise-data">
 <h2>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>We want all of out features to be on roughly the same scale. This generally leads to a better model, and also allows us to more easily compare the importance of different features. A common method used in many machine learning methods is standardisation, where we use the mean and standard deviation of the training set of data to normalise the data. We subtract the mean of the test set values, and divide by the standard deviation of the training data. Note that the mean and standard deviation of the training data are used to standardise the test set data as well. Here we will use sklearn’s <code class="docutils literal notranslate"><span class="pre">StandardScaler</span> <span class="pre">method</span></code>. This method also copes with problems we might otherwise have (such as if one feature has zero standard deviation in the training set).</p>
 <div class="cell docutils container">
@@ -516,8 +515,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="calculate-the-maximum-training-set-size-we-can-use">
+</div>
+<div class="section" id="calculate-the-maximum-training-set-size-we-can-use">
 <h2>Calculate the maximum training set size we can use<a class="headerlink" href="#calculate-the-maximum-training-set-size-we-can-use" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -534,8 +533,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="loop-through-increasing-training-set-sizes">
+</div>
+<div class="section" id="loop-through-increasing-training-set-sizes">
 <h2>Loop through increasing training set sizes<a class="headerlink" href="#loop-through-increasing-training-set-sizes" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -576,8 +575,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="plot-learning-curve">
+</div>
+<div class="section" id="plot-learning-curve">
 <h2>Plot learning curve<a class="headerlink" href="#plot-learning-curve" title="Permalink to this headline">¶</a></h2>
 <p>We will plot the learning curve, including a moving average (the mean of 5 points). Moving averages can help show trends when data is noisy.</p>
 <div class="cell docutils container">
@@ -610,8 +609,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 <p>Accuracy appears to increase significantly up to 100 training points, and then appears to start to plateau in this model at 300-400 data points. It looks unlikely that collecting more data would significantly improve the model.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -669,7 +668,7 @@ By convention our features are called <code class="docutils literal notranslate"
     <div class="container">
       <p>
         
-          By Michael Allen<br/>
+          By Michael Allen & Kerry Pearn<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

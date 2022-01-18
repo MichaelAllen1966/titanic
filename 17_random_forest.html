@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A Random Forest model &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -391,7 +390,7 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="a-random-forest-model">
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-random-forest-model">
 <h1>A Random Forest model<a class="headerlink" href="#a-random-forest-model" title="Permalink to this headline">¶</a></h1>
 <p>Our previous work has all been based on logistic regression, which is the most common ‘standard model’ against which all other models are compared.</p>
 <p>In this notebook we swap out the logistic regression model for a Random Forest model. Random Forests are often chosen for classification based on structured data (i.e. when we have specific features of data, rather than unstructured data like a picture or a sound file).</p>
@@ -403,7 +402,7 @@
 <li><p>Rather than having coefficients, we output model ‘importances’ which reflect how influential a feature is in deciding classification. This is accessed through examining <code class="docutils literal notranslate"><span class="pre">model.feature_importances_</span></code>.</p></li>
 </ul>
 <p>Here we will again use stratified K-fold validation to test the model performance. We will use default settings for the Random Forest model.</p>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -415,8 +414,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="download-data">
+</div>
+<div class="section" id="download-data">
 <h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
@@ -443,8 +442,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -467,8 +466,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-calculate-accuracy">
+</div>
+<div class="section" id="define-function-to-calculate-accuracy">
 <h2>Define function to calculate accuracy<a class="headerlink" href="#define-function-to-calculate-accuracy" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -577,8 +576,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="run-the-model-with-k-fold-validation">
+</div>
+<div class="section" id="run-the-model-with-k-fold-validation">
 <h2>Run the model with k-fold validation<a class="headerlink" href="#run-the-model-with-k-fold-validation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -648,8 +647,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="show-results-and-feature-importance">
+</div>
+<div class="section" id="show-results-and-feature-importance">
 <h2>Show results and feature importance<a class="headerlink" href="#show-results-and-feature-importance" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -705,8 +704,8 @@ dtype: float64
 </div>
 </div>
 </div>
-</section>
-<section id="observations">
+</div>
+<div class="section" id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Without any optimisation we observe accuracy similar to, or a little higher than, logistic regression.</p></li>
@@ -715,8 +714,8 @@ dtype: float64
 </ul>
 <p>For further notes on the sklearn Random Forest model (and which parameters may be fine-tuned, e.g. with random search or grid search as we did with the logistic regression model) please see the help pages for the Random Forest model, or refer to:</p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html</a></p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -774,7 +773,7 @@ dtype: float64
     <div class="container">
       <p>
         
-          By Michael Allen<br/>
+          By Michael Allen & Kerry Pearn<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

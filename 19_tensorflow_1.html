@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TensorFlow neural net &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -509,31 +508,31 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="tensorflow-neural-net">
+  <div class="tex2jax_ignore mathjax_ignore section" id="tensorflow-neural-net">
 <h1>TensorFlow neural net<a class="headerlink" href="#tensorflow-neural-net" title="Permalink to this headline">¶</a></h1>
 <p>In this workbook we build a neural network to predict survival. The two common frameworks used for neural networks (as of 2020) are TensorFlow and PyTorch. Both are excellent frameworks. TensorFlow frequently requires fewer lines of code, but PyTorch is more natively Python in its syntax. Here we use TensorFlow and keras’ which is integrated into TensorFlow and makes it simpler and faster to build TensorFlow models.</p>
-<section id="installing-tensorflow">
+<div class="section" id="installing-tensorflow">
 <h2>Installing TensorFlow<a class="headerlink" href="#installing-tensorflow" title="Permalink to this headline">¶</a></h2>
 <p>To install TensorFlow as a new environment in Anaconda type the following from a terminal (if you have already set up o the ‘Titanic’ environment you do not need to do this - use the Titanic environment. Also if you are using Colab then you need not do anything as Colab also has everything you need already built in).</p>
 <p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">-n</span> <span class="pre">tensorflow</span> <span class="pre">tensorflow</span> <span class="pre">&amp;&amp;</span> <span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-n</span> <span class="pre">tensorflow</span> <span class="pre">scikit-learn</span> <span class="pre">pandas</span> <span class="pre">matplotlib</span></code></p>
 <p>Or PIP install with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow</span></code></p>
 <p>Then from Anaconda Navigator, select the Titanic or TensorFlow environment.</p>
-</section>
-<section id="the-neural-network-unit-a-neuron-or-perceptron">
+</div>
+<div class="section" id="the-neural-network-unit-a-neuron-or-perceptron">
 <h2>The neural network unit - a neuron or perceptron<a class="headerlink" href="#the-neural-network-unit-a-neuron-or-perceptron" title="Permalink to this headline">¶</a></h2>
 <p>The building block of a neural network is a neuron, which is essentially the same as the ‘perceptron’ described by Frank Rosenblatt in 1958.</p>
 <p>The neuron, or perceptron, takes inputs <em>X</em> and weights <em>W</em> (each individual input has a weight; a bias weight is also introduced by creating a dummy input with value 1). The neuron sums the <em>input x weight</em> and passes the output to an activation function. The simplest activation function is a step function, whereby if the output is &gt;0 the output of the activation function is 1, otherwise the output is 0.</p>
 <p><img alt="" src="_images/perceptron.jpeg" /></p>
-</section>
-<section id="neural-networks">
+</div>
+<div class="section" id="neural-networks">
 <h2>Neural networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">¶</a></h2>
 <p>Having understood a neuron - which calculates the weighted sum of its inputs and passes it through an activation function, neural networks are easy(ish)!</p>
 <p>They are ‘just’ a network of such neurons, where the output of one becomes one of the inputs to the neurons in the next layer.</p>
 <p>This allows any complexity of function to be mimicked by a neural network (so long as the network includes a non-linear activation function, like ReLU - see below).</p>
 <p>Note the output layer may be composed of a single neuron, to predict a single value or single probability, or may be multiple neurons, to predict multiple values or multiple probabilities.</p>
 <p><img alt="" src="_images/net_1.png" /></p>
-</section>
-<section id="activation-functions">
+</div>
+<div class="section" id="activation-functions">
 <h2>Activation functions<a class="headerlink" href="#activation-functions" title="Permalink to this headline">¶</a></h2>
 <p>Each neuron calculates the weighted sum of its inputs and passes that sum to an activation function. The two simplest functions are:</p>
 <ul class="simple">
@@ -550,8 +549,8 @@
 <li><p><em>SoftMax</em>: SoftMax is the final layer to use if you wish to normalise probability outputs from a network which has multiple class outputs.</p></li>
 </ul>
 <p><img alt="" src="_images/activation.png" /></p>
-</section>
-<section id="loss-functions">
+</div>
+<div class="section" id="loss-functions">
 <h2>Loss functions<a class="headerlink" href="#loss-functions" title="Permalink to this headline">¶</a></h2>
 <p>Loss functions are critical to neural networks as they provide the measure by which the neural network is in error, allowing modification of the network to reduce error.</p>
 <p>The most common loss functions are:</p>
@@ -559,8 +558,8 @@
 <li><p><em>Mean Squared Error Loss</em>: Common loss function for regression (predicting values rather than class).</p></li>
 <li><p><em>Cross Entropy Loss</em>: Common loss function for classification. <em>Binary Cross Entropy Loss</em> is used when the output is a binary classifier (like survive/die in the Titanic model).</p></li>
 </ul>
-</section>
-<section id="how-do-neural-networks-learn-backpropagation-and-optimisation">
+</div>
+<div class="section" id="how-do-neural-networks-learn-backpropagation-and-optimisation">
 <h2>How do neural networks learn? Backpropagation and optimisation<a class="headerlink" href="#how-do-neural-networks-learn-backpropagation-and-optimisation" title="Permalink to this headline">¶</a></h2>
 <p><em>Backpropagation</em> is the process by which the final loss is distributed back through the network, allowing each weight to be updated in proportion to its contribution to the final error.</p>
 <p>For more on backpropagation see: <a class="reference external" href="https://youtu.be/Ilg3gGewQ5U">https://youtu.be/Ilg3gGewQ5U</a></p>
@@ -574,8 +573,8 @@
 </ul>
 <p>For more on optimisers see: <a class="reference external" href="https://youtu.be/mdKjMPmcWjY">https://youtu.be/mdKjMPmcWjY</a></p>
 <p>For a short video on momentum see: <a class="reference external" href="https://youtu.be/6iwvtzXZ4Mo">https://youtu.be/6iwvtzXZ4Mo</a></p>
-</section>
-<section id="training-a-neural-network-the-practicalities">
+</div>
+<div class="section" id="training-a-neural-network-the-practicalities">
 <h2>Training a neural network - the practicalities<a class="headerlink" href="#training-a-neural-network-the-practicalities" title="Permalink to this headline">¶</a></h2>
 <p>The training process of a neural network consists of three general phases which are repeated across all the data. All of the data is passed through the network multiple times (the number of iterations, which may be as few as 3-5 or may be 1000+). The three phases are:</p>
 <ol class="simple">
@@ -584,8 +583,8 @@
 <li><p>Backpropagate the loss and update the weights (the job of the optimiser).</p></li>
 </ol>
 <p>The learning is repeated until maximum accuracy is achieved (but keep an eye on accuracy of test data as well as training data as the network may develop significant over-fitting to training data unless steps are taken to offset the potential for over-fitting, such as use of ‘drop-out’ layers described below).</p>
-</section>
-<section id="architectures">
+</div>
+<div class="section" id="architectures">
 <h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this headline">¶</a></h2>
 <p>The most common fully connected architecture design is to have the same number of neurons in each layer, and adjust that number and the number of layers. This makes exploring the size of the neural net relatively easy (if sometimes slow).</p>
 <p>As a rough guide - the size of the neural net should be increased until it over-fits data (increasing accuracy of training data with reducing accuracy of test data), and then use a form of <em>regularisation</em> to reduce the over-fitting (we will go through this process below).</p>
@@ -599,12 +598,12 @@
 <li><p><em>Encoding</em>: Reduce many input features to fewer. This ‘compresses’ the data. De-coding layers may convert back to the original data.</p></li>
 <li><p><em>Generative</em>: Rather than regression, or classification, generative networks output some form of synthetic data (such as fake images; see <a class="reference external" href="https://www.thispersondoesnotexist.com/">https://www.thispersondoesnotexist.com/</a>).</p></li>
 </ul>
-</section>
-<section id="additional-resources">
+</div>
+<div class="section" id="additional-resources">
 <h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
 <p>Also see the excellent introductory video (20 minutes) from 3brown1blue: <a class="reference external" href="https://youtu.be/aircAruvnKk">https://youtu.be/aircAruvnKk</a></p>
-</section>
-<section id="let-s-go">
+</div>
+<div class="section" id="let-s-go">
 <h2>Let’s go !!!!!!!!!!!!!<a class="headerlink" href="#let-s-go" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -615,8 +614,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-modules">
+</div>
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -645,8 +644,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="download-data-if-not-previously-downloaded">
+</div>
+<div class="section" id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,8 +671,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-scale-data">
+</div>
+<div class="section" id="define-function-to-scale-data">
 <h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
 <p>In neural networks it is common to to scale input data 0-1 rather than use standardisation (subtracting mean and dividing by standard deviation) of each feature).</p>
 <div class="cell docutils container">
@@ -696,8 +695,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -714,9 +713,9 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="set-up-neural-net">
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="set-up-neural-net">
 <h1>Set up neural net<a class="headerlink" href="#set-up-neural-net" title="Permalink to this headline">¶</a></h1>
 <p>Here we use the <code class="docutils literal notranslate"><span class="pre">sequential</span></code> method to set up a TensorFlow neural network. This simpler method assumes each layer occurs in sequence. Though simpler, it lacks some flexibility.</p>
 <p>We will put construction of the neural net into a separate function.</p>
@@ -770,7 +769,7 @@
 </div>
 </div>
 </div>
-<section id="show-summary-of-the-model-structure">
+<div class="section" id="show-summary-of-the-model-structure">
 <h2>Show summary of the model structure<a class="headerlink" href="#show-summary-of-the-model-structure" title="Permalink to this headline">¶</a></h2>
 <p>Here we will create a model with 10 input features and show the structure of the model.</p>
 <div class="cell docutils container">
@@ -852,8 +851,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 </div>
 </div>
 </div>
-</section>
-<section id="split-and-scale-data">
+</div>
+<div class="section" id="split-and-scale-data">
 <h2>Split and Scale data<a class="headerlink" href="#split-and-scale-data" title="Permalink to this headline">¶</a></h2>
 <p>For simplicity, here we will use a single train/test split rather than k-fold validation.</p>
 <div class="cell docutils container">
@@ -868,8 +867,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 </div>
 </div>
 </div>
-</section>
-<section id="function-to-calculate-accuracy">
+</div>
+<div class="section" id="function-to-calculate-accuracy">
 <h2>Function to calculate accuracy<a class="headerlink" href="#function-to-calculate-accuracy" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -914,8 +913,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 </div>
 </div>
 </div>
-</section>
-<section id="run-the-model">
+</div>
+<div class="section" id="run-the-model">
 <h2>Run the model<a class="headerlink" href="#run-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -955,7 +954,7 @@ Test accuracy 0.776
 </div>
 </div>
 </div>
-<section id="get-training-history">
+<div class="section" id="get-training-history">
 <h3>Get training history<a class="headerlink" href="#get-training-history" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">history</span></code> is a dictionary containing data collected suring training. Let’s take a look at the keys in this dictionary (these are the metrics monitored during training):</p>
 <div class="cell docutils container">
@@ -971,8 +970,8 @@ Test accuracy 0.776
 </div>
 </div>
 </div>
-</section>
-<section id="plot-training-history">
+</div>
+<div class="section" id="plot-training-history">
 <h3>Plot training history<a class="headerlink" href="#plot-training-history" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -984,11 +983,11 @@ Test accuracy 0.776
 <img alt="_images/19_tensorflow_1_35_0.png" src="_images/19_tensorflow_1_35_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="improving-fit-by-avoiding-or-reducing-over-fitting">
+</div>
+</div>
+<div class="section" id="improving-fit-by-avoiding-or-reducing-over-fitting">
 <h2>Improving fit by avoiding or reducing-over fitting<a class="headerlink" href="#improving-fit-by-avoiding-or-reducing-over-fitting" title="Permalink to this headline">¶</a></h2>
-<section id="reduce-complexity-of-model">
+<div class="section" id="reduce-complexity-of-model">
 <h3>1) Reduce complexity of model<a class="headerlink" href="#reduce-complexity-of-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1033,8 +1032,8 @@ Test accuracy 0.825
 <img alt="_images/19_tensorflow_1_40_0.png" src="_images/19_tensorflow_1_40_0.png" />
 </div>
 </div>
-</section>
-<section id="reduce-training-time">
+</div>
+<div class="section" id="reduce-training-time">
 <h3>2) Reduce training time<a class="headerlink" href="#reduce-training-time" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1076,8 +1075,8 @@ Test accuracy 0.798
 <img alt="_images/19_tensorflow_1_44_0.png" src="_images/19_tensorflow_1_44_0.png" />
 </div>
 </div>
-</section>
-<section id="add-dropout">
+</div>
+<div class="section" id="add-dropout">
 <h3>3) Add dropout<a class="headerlink" href="#add-dropout" title="Permalink to this headline">¶</a></h3>
 <p>Using dropout, in each trainign epoch a random selection of weights are not used (the sleection changes from epoch to epoch). When predicting, after fitting, all weights are used.</p>
 <p>Dropout values of 0.2 to 0.5 are common.</p>
@@ -1123,14 +1122,14 @@ Test accuracy 0.803
 <img alt="_images/19_tensorflow_1_48_0.png" src="_images/19_tensorflow_1_48_0.png" />
 </div>
 </div>
-</section>
-<section id="l1-and-l2-regularisation">
+</div>
+<div class="section" id="l1-and-l2-regularisation">
 <h3>4) L1 and L2 regularisation<a class="headerlink" href="#l1-and-l2-regularisation" title="Permalink to this headline">¶</a></h3>
 <p>A regression model that uses L1 regularization technique is called Lasso Regression and model which uses L2 is called Ridge Regression.</p>
 <p>Both reduce the weights associated with features in the network, and increase the weight of the bias so that all values are pulled closer to the average. L1 regularisation tends to pull fewer weights down, but reduces them to a greater degree, whereas L2 regularisation reduces all weights.</p>
 <p>L1 and L2 regularisation are commonly used in regression. They are now less commonly used in neural networks. Here we will just mention them rather than use them.</p>
-</section>
-<section id="combination-of-the-above-and-with-automatic-early-stopping">
+</div>
+<div class="section" id="combination-of-the-above-and-with-automatic-early-stopping">
 <h3>5) Combination of the above and with automatic early stopping<a class="headerlink" href="#combination-of-the-above-and-with-automatic-early-stopping" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1188,9 +1187,9 @@ Test accuracy 0.803
 <img alt="_images/19_tensorflow_1_53_0.png" src="_images/19_tensorflow_1_53_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="saving-and-reloading-model">
+</div>
+</div>
+<div class="section" id="saving-and-reloading-model">
 <h2>Saving and reloading model<a class="headerlink" href="#saving-and-reloading-model" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1227,8 +1226,8 @@ Test accuracy 0.803
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1286,7 +1285,7 @@ Test accuracy 0.803
     <div class="container">
       <p>
         
-          By Michael Allen<br/>
+          By Michael Allen & Kerry Pearn<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

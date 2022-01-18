@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -401,7 +400,7 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="tensorflow-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
+  <div class="tex2jax_ignore mathjax_ignore section" id="tensorflow-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
 <h1>TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification<a class="headerlink" href="#tensorflow-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -412,7 +411,7 @@
 </div>
 </div>
 </div>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -440,8 +439,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="download-data-if-not-previously-downloaded">
+</div>
+<div class="section" id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -467,8 +466,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-calculate-accuracy-measurements">
+</div>
+<div class="section" id="define-function-to-calculate-accuracy-measurements">
 <h2>Define function to calculate accuracy measurements<a class="headerlink" href="#define-function-to-calculate-accuracy-measurements" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -577,8 +576,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-scale-data">
+</div>
+<div class="section" id="define-function-to-scale-data">
 <h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
 <p>In neural networks it is common to to scale input data 0-1 rather than use standardisation (subtracting mean and dividing by standard deviation) of each feature).</p>
 <div class="cell docutils container">
@@ -602,8 +601,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -661,8 +660,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="run-the-model-with-k-fold-validation-and-roc-calculation">
+</div>
+<div class="section" id="run-the-model-with-k-fold-validation-and-roc-calculation">
 <h2>Run the model with k-fold validation and ROC calculation<a class="headerlink" href="#run-the-model-with-k-fold-validation-and-roc-calculation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -830,8 +829,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 </div>
 </div>
 </div>
-</section>
-<section id="plot-roc-curve">
+</div>
+<div class="section" id="plot-roc-curve">
 <h2>Plot ROC curve<a class="headerlink" href="#plot-roc-curve" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -864,8 +863,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <img alt="_images/21_tensorflow_roc_17_0.png" src="_images/21_tensorflow_roc_17_0.png" />
 </div>
 </div>
-</section>
-<section id="plot-effects-of-changing-classification-probability-threshold">
+</div>
+<div class="section" id="plot-effects-of-changing-classification-probability-threshold">
 <h2>Plot effects of changing classification probability threshold<a class="headerlink" href="#plot-effects-of-changing-classification-probability-threshold" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -911,15 +910,15 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <img alt="_images/21_tensorflow_roc_19_0.png" src="_images/21_tensorflow_roc_19_0.png" />
 </div>
 </div>
-</section>
-<section id="observations">
+</div>
+<div class="section" id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Using the default values for probability cut-off, the TensorFlow model under-predicts the proportion of passengers who survive (the minority class).</p></li>
 <li><p>Without rebalancing of classes (under-sampling of the majority class, or over-sampling of the minority class) the model may be rebalanced by adjusting the probability threshold for classification (at the cost of a small reduction in overall accuracy).</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -977,7 +976,7 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
     <div class="container">
       <p>
         
-          By Michael Allen<br/>
+          By Michael Allen & Kerry Pearn<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

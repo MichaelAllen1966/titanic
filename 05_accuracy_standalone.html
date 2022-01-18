@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accuracy measurements in machine learning &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -366,7 +365,7 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="accuracy-measurements-in-machine-learning">
+  <div class="tex2jax_ignore mathjax_ignore section" id="accuracy-measurements-in-machine-learning">
 <h1>Accuracy measurements in machine learning<a class="headerlink" href="#accuracy-measurements-in-machine-learning" title="Permalink to this headline">¶</a></h1>
 <p>The most common measurement in machine learning is ‘accuracy, that is the proportion of cases where the classification is correct. This may at times not be the best measurement. For example, imagine you wish to detect who is carrying the back death among people coming through an airport, by measuring a range of features (such as body temperature, or the presence of a particular skin rash pattern). Now imagine that one in a thousand people are carriers of black death, who if allowed through will start off a major epidemic. We may then optimise a machine learning algorithm and it reports 99.9% accuracy. Impressive! Or is it? The algorithm may have simply classed everybody as not having black death. It will be right 999 times out of 1,000. But at the same time it will miss every single case of black death that you intended to detect. This is an extreme example of where we need more sophisticated measurements of accuracy. In this particular case, we probably want to measure sensitivity and specificity. Sensitivity measures the proportion of positive cases (black death) correctly classified, while specificity measures the proportion of negative cases (no black death) correctly classified. We will later see how we might change machine learning thresholds to adjust the balance between sensitivity and specificity.</p>
 <p>Sensitivity and specificity are not the only measures (though they are common in health diagnosis problems). Below are a range of measures that our function will calculated (given the observed and predicted class values of a range of cases). In addition to sensitivity and specificity, common measures used in machine learning are precision, recall and f1 (a combination of precision and recall).</p>
@@ -392,7 +391,7 @@
 </pre></div>
 </div>
 <p>Please note that these measures are for a ‘binomial’ classification problem. That is where there are two alternatives for each case (e.g. survived or not-survived on the Titanic). Where there are more than two possible classes, a confusion matrix is most commonly used (e.g. see <a class="reference external" href="https://pythonhealthcare.org/2018/04/21/77-machine-learning-visualising-accuracy-and-error-in-a-classification-model-with-a-confusion-matrix/">https://pythonhealthcare.org/2018/04/21/77-machine-learning-visualising-accuracy-and-error-in-a-classification-model-with-a-confusion-matrix/</a>)</p>
-<section id="define-function">
+<div class="section" id="define-function">
 <h2>Define function<a class="headerlink" href="#define-function" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -503,8 +502,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="demonstrate-method">
+</div>
+<div class="section" id="demonstrate-method">
 <h2>Demonstrate method<a class="headerlink" href="#demonstrate-method" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -544,8 +543,8 @@ negative_predictive_value 1.25
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -603,7 +602,7 @@ negative_predictive_value 1.25
     <div class="container">
       <p>
         
-          By Michael Allen<br/>
+          By Michael Allen & Kerry Pearn<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

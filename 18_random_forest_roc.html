@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -396,7 +395,7 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
+  <div class="tex2jax_ignore mathjax_ignore section" id="random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
 <h1>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification<a class="headerlink" href="#random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification" title="Permalink to this headline">¶</a></h1>
 <p>In this model we apply ROC to a Random Forest model. As these components have been previously described, we’ll keep comments to a minimum.</p>
 <div class="cell docutils container">
@@ -408,7 +407,7 @@
 </div>
 </div>
 </div>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -422,8 +421,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="download-data-if-not-previously-downloaded">
+</div>
+<div class="section" id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -449,8 +448,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-calculate-accuracy-measurements">
+</div>
+<div class="section" id="define-function-to-calculate-accuracy-measurements">
 <h2>Define function to calculate accuracy measurements<a class="headerlink" href="#define-function-to-calculate-accuracy-measurements" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -559,8 +558,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -577,8 +576,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="run-model-and-collect-results">
+</div>
+<div class="section" id="run-model-and-collect-results">
 <h2>Run model and collect results<a class="headerlink" href="#run-model-and-collect-results" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -686,8 +685,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="plot-roc-curve">
+</div>
+<div class="section" id="plot-roc-curve">
 <h2>Plot ROC curve<a class="headerlink" href="#plot-roc-curve" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -718,8 +717,8 @@
 <img alt="_images/18_random_forest_roc_13_0.png" src="_images/18_random_forest_roc_13_0.png" />
 </div>
 </div>
-</section>
-<section id="plot-effects-of-changing-classification-probability-threshold">
+</div>
+<div class="section" id="plot-effects-of-changing-classification-probability-threshold">
 <h2>Plot effects of changing classification probability threshold<a class="headerlink" href="#plot-effects-of-changing-classification-probability-threshold" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -765,8 +764,8 @@
 <img alt="_images/18_random_forest_roc_15_0.png" src="_images/18_random_forest_roc_15_0.png" />
 </div>
 </div>
-</section>
-<section id="observations">
+</div>
+<div class="section" id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>The Random Forest model, with default settings, has an ROC AUC of 0.85.</p></li>
@@ -774,8 +773,8 @@
 <li><p>If needed, the probability threshold of the Random Forest model could be adjust to change the model characteristics, such as for use in screening where recall (the detection of true positives) needs to be minimised at the accepted cost of lower precision (the detection of true negatives). In a screening situation false positives are generally accepted (as they will be eliminated later), but false negatives (where a condition is missed in screening) is much less acceptable.</p></li>
 <li><p>You will see that many aspects of machine learning models are directly transferable between model types.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -833,7 +832,7 @@
     <div class="container">
       <p>
         
-          By Michael Allen<br/>
+          By Michael Allen & Kerry Pearn<br/>
         
             &copy; Copyright 2021.<br/>
       </p>
