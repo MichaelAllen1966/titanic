@@ -43,4 +43,7 @@ parts:
 - caption: Model explainability
   chapters:
   - file: 26_logistic_regression_shap
+- caption: Creating synthetic data
+  chapters:
+  - file: 30_synthetic_data _SMOTE
   
