@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Feature selection using backward elimination &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -274,6 +275,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -387,7 +400,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="feature-selection-using-backward-elimination">
+  <section class="tex2jax_ignore mathjax_ignore" id="feature-selection-using-backward-elimination">
 <h1>Feature selection using backward elimination<a class="headerlink" href="#feature-selection-using-backward-elimination" title="Permalink to this headline">¶</a></h1>
 <p>Reducing the number of features we use can have three benefits:</p>
 <ul class="simple">
@@ -425,7 +438,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -442,8 +455,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -493,8 +506,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -506,8 +519,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="forward-feature-selection">
+</section>
+<section id="forward-feature-selection">
 <h2>Forward feature selection<a class="headerlink" href="#forward-feature-selection" title="Permalink to this headline">¶</a></h2>
 <p>Define data standardisation function.</p>
 <div class="cell docutils container">
@@ -673,7 +686,7 @@ Feature run 23 of 23
 </div>
 </div>
 </div>
-<div class="section" id="show-results">
+<section id="show-results">
 <h3>Show results<a class="headerlink" href="#show-results" title="Permalink to this headline">¶</a></h3>
 <p>The table is now in the order of preferred features, though our code worked in the reverse direction, incrementally removing the feature that made least difference to the model.</p>
 <div class="cell docutils container">
@@ -830,8 +843,8 @@ Feature run 23 of 23
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="plot-results">
+</section>
+<section id="plot-results">
 <h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -857,9 +870,9 @@ Feature run 23 of 23
 </div>
 </div>
 <p>From the above results it looks like we could eliminate all but 5-6 features in this model. It may also be worth examining the same method using other performance scores (such as simple accuracy, or f1) in place of ROC AUC.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

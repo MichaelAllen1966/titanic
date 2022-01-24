@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>TensorFlow ‘Wide and Deep’ neural nets &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -274,6 +275,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -399,7 +412,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="tensorflow-wide-and-deep-neural-nets">
+  <section class="tex2jax_ignore mathjax_ignore" id="tensorflow-wide-and-deep-neural-nets">
 <h1>TensorFlow ‘Wide and Deep’ neural nets<a class="headerlink" href="#tensorflow-wide-and-deep-neural-nets" title="Permalink to this headline">¶</a></h1>
 <p>One modification to a standard sequential model is to use a ‘Wide and Deep’ model as described by Cheng et al. (<a class="reference external" href="https://arxiv.org/abs/1606.07792">https://arxiv.org/abs/1606.07792</a>).</p>
 <p>In this model structure the input layer is brought back in to the model just prior to the output layer. This may be of use if both ‘shallow’ and ‘deep’ learning may be of use. Here we will demonstrate how this is performed in Keras, which will also demonstrate how Keras can be used to easily build more complex model structures.</p>
@@ -413,7 +426,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -440,8 +453,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="download-data-if-not-previously-downloaded">
+</section>
+<section id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -467,8 +480,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-scale-data">
+</section>
+<section id="define-function-to-scale-data">
 <h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
 <p>In neural networks it is common to to scale input data 0-1 rather than use standardisation (subtracting mean and dividing by standard deviation) of each feature).</p>
 <div class="cell docutils container">
@@ -492,8 +505,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -510,9 +523,9 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="set-up-neural-net">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="set-up-neural-net">
 <h1>Set up neural net<a class="headerlink" href="#set-up-neural-net" title="Permalink to this headline">¶</a></h1>
 <p>Here we use the api-based method to set up a TensorFlow neural network. This method allows us
 to more flexibly define the inputs for each layer, rather than assuming there is a simple sequence as with the Sequential method.</p>
@@ -560,7 +573,7 @@ to more flexibly define the inputs for each layer, rather than assuming there is
 </div>
 </div>
 </div>
-<div class="section" id="show-summary-of-the-model-structure">
+<section id="show-summary-of-the-model-structure">
 <h2>Show summary of the model structure<a class="headerlink" href="#show-summary-of-the-model-structure" title="Permalink to this headline">¶</a></h2>
 <p>Here we will create a model with 10 input features and show the structure of the model as  atable and as a graph.</p>
 <div class="cell docutils container">
@@ -655,8 +668,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <img alt="_images/22_tensorflow_deep_wide_15_0.png" src="_images/22_tensorflow_deep_wide_15_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="training-the-model">
+</section>
+<section id="training-the-model">
 <h2>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -730,8 +743,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <img alt="_images/22_tensorflow_deep_wide_21_0.png" src="_images/22_tensorflow_deep_wide_21_0.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

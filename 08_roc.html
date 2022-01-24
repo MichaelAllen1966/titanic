@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Receiver Operator Characteristic (ROC) curve &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -274,6 +275,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -395,7 +408,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="receiver-operator-characteristic-roc-curve">
+  <section class="tex2jax_ignore mathjax_ignore" id="receiver-operator-characteristic-roc-curve">
 <h1>Receiver Operator Characteristic (ROC) curve<a class="headerlink" href="#receiver-operator-characteristic-roc-curve" title="Permalink to this headline">¶</a></h1>
 <p>Frequently in machine learning we wish to go beyond measuring raw accuracy. This is especially true when classes are unbalanced, where errors are often greater in one class than the other. The Receiver Operator Characteristic (ROC) curve allows us to better understand the trade-off between sensitivity (the ability to detect positives of a certain class) and specificity (the ability to detect negatives of a certain class). The area under the ROC curve is also often used to compare different models: a higher Area Under Curve (AUC) is frequently the sign of a better model.</p>
 <p>The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at various threshold settings. The true-positive rate is also known as sensitivity or recall. The false-positive rate can be calculated as (1 − specificity).# Measuring model accuracy with K-fold stratification</p>
@@ -403,7 +416,7 @@
 <p>We could use repeated random splits, but a more robust method is to use ‘stratified k-fold validation’. In this method the model is repeated k times, so that all the data is used once, but only once, as part of the test set. This, alone, is k-fold validation. Stratified k-fold validation adds an extra level of robustness by ensuring that in each of the k training/test splits, the balance of outcomes represents the balance of outcomes (between survivors and non-survivors)in the overall data set. Most commonly 5 or 10 different splits of the data are used.</p>
 <p>Here we use scikit-learn’s methods for ROCs.</p>
 <p><em>In this notebook we assume that you have run through the basic logistic regression example in the previous example. We will not explain all steps fully</em>.</p>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -419,8 +432,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="download-data">
+</section>
+<section id="download-data">
 <h2>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h2>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
@@ -447,8 +460,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data-and-cast-all-data-as-float-decimal">
+</section>
+<section id="load-data-and-cast-all-data-as-float-decimal">
 <h2>Load data and cast all data as float (decimal)<a class="headerlink" href="#load-data-and-cast-all-data-as-float-decimal" title="Permalink to this headline">¶</a></h2>
 <p>The loading of data assumes that data has been downloaded and saved.</p>
 <div class="cell docutils container">
@@ -470,8 +483,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will split into features (X) and label (y) and convert from a Pandas DataFrame to NumPy arrays. NumPy arrays are simpler to refer to by row/column index numbers, and sklearn’s k-fold method provides row indices for each set.</p>
 <div class="cell docutils container">
@@ -487,8 +500,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-standardise-data">
+</section>
+<section id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <p>Standardisation subtracts the mean and divides by the standard deviation, for each feature.
 Here we use the sklearn built-in method for standardisation.</p>
@@ -519,8 +532,8 @@ Here we use the sklearn built-in method for standardisation.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="fir-the-model-for-each-k-fold">
+</section>
+<section id="fir-the-model-for-each-k-fold">
 <h2>Fir the model for each k-fold<a class="headerlink" href="#fir-the-model-for-each-k-fold" title="Permalink to this headline">¶</a></h2>
 <p>We will fit the model and store the predicted probabilities for each run. alongisde the actual classificiation for each passenger.</p>
 <div class="cell docutils container">
@@ -574,8 +587,8 @@ Run 5, accuracy: 0.803
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="get-receiver-operator-characteristic-roc-area-under-curve-auc">
+</section>
+<section id="get-receiver-operator-characteristic-roc-area-under-curve-auc">
 <h2>Get Receiver Operator Characteristic (ROC) Area Under Curve (AUC)<a class="headerlink" href="#get-receiver-operator-characteristic-roc-area-under-curve-auc" title="Permalink to this headline">¶</a></h2>
 <p>Scikit-Learn’s ROC method will automatically test the rate of true postive rate (tpr) and false positive rate (fpr) at different thresholds of classification. It will return tpr, fpr for each threshold tested. We also use Scikit-Learn’s method for caluclating the area under the curve.</p>
 <div class="cell docutils container">
@@ -621,8 +634,8 @@ SD AUC: 0.0182
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-rocs">
+</section>
+<section id="plot-rocs">
 <h2>Plot ROCs<a class="headerlink" href="#plot-rocs" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -648,8 +661,8 @@ SD AUC: 0.0182
 <img alt="_images/08_roc_17_0.png" src="_images/08_roc_17_0.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

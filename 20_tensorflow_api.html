@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>TensorFlow api-based neural net. &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -274,6 +275,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -429,7 +442,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="tensorflow-api-based-neural-net">
+  <section class="tex2jax_ignore mathjax_ignore" id="tensorflow-api-based-neural-net">
 <h1>TensorFlow api-based neural net.<a class="headerlink" href="#tensorflow-api-based-neural-net" title="Permalink to this headline">¶</a></h1>
 <p>In this workbook we build a neural network to predict survival. The two common frameworks used for neural networks (as of 2020) are TensorFlow and PyTorch. Both are excellent frameworks. TensorFlow frequently requires fewer lines of code, but PyTorch is more natively Python in its syntax, and also allows for easier debugging as the model may be interrupted, with a breakpoint, and debugged as necessary. This makes PyTorch particularly suitable for research and experimentation. A disadvantage of using PyTorch is that, compared with TensorFlow, there are fewer training materials and examples available.</p>
 <p>Here we use ‘keras’ which is integrated into TensorFlow and makes it simpler and faster to build TensorFlow models.</p>
@@ -461,7 +474,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -488,8 +501,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="download-data-if-not-previously-downloaded">
+</section>
+<section id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -515,8 +528,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-calculate-accuracy-measurements">
+</section>
+<section id="define-function-to-calculate-accuracy-measurements">
 <h2>Define function to calculate accuracy measurements<a class="headerlink" href="#define-function-to-calculate-accuracy-measurements" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -625,8 +638,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-scale-data">
+</section>
+<section id="define-function-to-scale-data">
 <h2>Define function to scale data<a class="headerlink" href="#define-function-to-scale-data" title="Permalink to this headline">¶</a></h2>
 <p>In neural networks it is common to to scale input data 0-1 rather than use standardisation (subtracting mean and dividing by standard deviation) of each feature).</p>
 <div class="cell docutils container">
@@ -650,8 +663,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -668,9 +681,9 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="set-up-neural-net">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="set-up-neural-net">
 <h1>Set up neural net<a class="headerlink" href="#set-up-neural-net" title="Permalink to this headline">¶</a></h1>
 <p>Here we use the api-based method to set up a TensorFlow neural network. This method allows us
 to more flexibly define the inputs for each layer, rather than assuming there is a simple sequence as with the Sequential method.</p>
@@ -711,7 +724,7 @@ The layers of the network are:</p>
 </div>
 </div>
 </div>
-<div class="section" id="show-summary-of-the-model-structure">
+<section id="show-summary-of-the-model-structure">
 <h2>Show summary of the model structure<a class="headerlink" href="#show-summary-of-the-model-structure" title="Permalink to this headline">¶</a></h2>
 <p>Here we will create a model with 10 input features and show the structure of the model as  atable and as a graph.</p>
 <div class="cell docutils container">
@@ -802,8 +815,8 @@ coreClock: 1.485GHz coreCount: 16 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <img alt="_images/20_tensorflow_api_16_0.png" src="_images/20_tensorflow_api_16_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="run-the-model-with-k-fold-validation">
+</section>
+<section id="run-the-model-with-k-fold-validation">
 <h2>Run the model with k-fold validation<a class="headerlink" href="#run-the-model-with-k-fold-validation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -872,8 +885,8 @@ K_fold 5
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="show-training-and-test-results">
+</section>
+<section id="show-training-and-test-results">
 <h2>Show training and test results<a class="headerlink" href="#show-training-and-test-results" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -903,8 +916,8 @@ K_fold 5
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-results-box-plot">
+</section>
+<section id="plot-results-box-plot">
 <h2>Plot results: Box Plot<a class="headerlink" href="#plot-results-box-plot" title="Permalink to this headline">¶</a></h2>
 <p>Box plots show median (orange line), the second and third quartiles (the box), the range (excluding outliers), and any outliers as ‘whisker’ points. Outliers, by convention, are conisiered to be any points outside of the quartiles +/- 1.5 times the interquartile range. The limit for outliers may be changed using the optional <code class="docutils literal notranslate"><span class="pre">whis</span></code> argument in the boxplot.</p>
 <p>Medians tend to be an easy reliable guide to the centre of a distribution (i.e. look at the medians to see whether a fit is improving or not, but also look at the box plot to see how much variability there is).</p>
@@ -941,8 +954,8 @@ K_fold 5
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="using-tensorflow-s-training-history">
+</section>
+<section id="using-tensorflow-s-training-history">
 <h2>Using TensorFlow’s training history<a class="headerlink" href="#using-tensorflow-s-training-history" title="Permalink to this headline">¶</a></h2>
 <p>TensorFlow can track the history of training, enabling us to examine performance against training and test sets over time. Here we will use the same model as above, but without k-fold validation and with history tracking.</p>
 <div class="cell docutils container">
@@ -1010,8 +1023,8 @@ K_fold 5
 <img alt="_images/20_tensorflow_api_30_0.png" src="_images/20_tensorflow_api_30_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="getting-model-weights">
+</section>
+<section id="getting-model-weights">
 <h2>Getting model weights<a class="headerlink" href="#getting-model-weights" title="Permalink to this headline">¶</a></h2>
 <p>Here we show how weights for a layer can be extracted from the model if required.</p>
 <div class="cell docutils container">
@@ -1064,8 +1077,8 @@ K_fold 5
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="evaluating-model">
+</section>
+<section id="evaluating-model">
 <h2>Evaluating model<a class="headerlink" href="#evaluating-model" title="Permalink to this headline">¶</a></h2>
 <p>If a test set is not used to evaluate in training, or if there is an independnent test set, evaluation may be quickly performed using the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> method.</p>
 <div class="cell docutils container">
@@ -1083,8 +1096,8 @@ K_fold 5
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

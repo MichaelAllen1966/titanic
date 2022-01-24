@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Dealing with imbalanced data by changing classification cut-off levels &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -274,6 +275,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -407,7 +420,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="dealing-with-imbalanced-data-by-changing-classification-cut-off-levels">
+  <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-imbalanced-data-by-changing-classification-cut-off-levels">
 <h1>Dealing with imbalanced data by changing classification cut-off levels<a class="headerlink" href="#dealing-with-imbalanced-data-by-changing-classification-cut-off-levels" title="Permalink to this headline">¶</a></h1>
 <p>A problem with machine learning models is that they may end up biased towards the majority class, and under-predict the minority class(es).</p>
 <p>Some models (including sklearn’s logistic regression) allow for thresholds of classification to be changed. This can help rebalance classification in models, especially where there is a binary classification (e.g. survived or not).</p>
@@ -423,7 +436,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -439,8 +452,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
+</section>
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -488,8 +501,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
+</section>
+<section id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
 <h2>Artificially reduce the number of survivors (to make data set more imbalanced)<a class="headerlink" href="#artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -523,8 +536,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-standardise-data">
+</section>
+<section id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -545,8 +558,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-function-to-measure-accuracy">
+</section>
+<section id="define-function-to-measure-accuracy">
 <h2>Define function to measure accuracy<a class="headerlink" href="#define-function-to-measure-accuracy" title="Permalink to this headline">¶</a></h2>
 <p>The following is a function for multiple accuracy measures.</p>
 <div class="cell docutils container">
@@ -656,8 +669,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -669,11 +682,11 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="assess-accuracy-precision-recall-and-f1-at-different-model-classification-thresholds">
+</section>
+<section id="assess-accuracy-precision-recall-and-f1-at-different-model-classification-thresholds">
 <h2>Assess accuracy, precision, recall and f1 at different model classification thresholds<a class="headerlink" href="#assess-accuracy-precision-recall-and-f1-at-different-model-classification-thresholds" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="run-our-model-with-probability-cut-off-levels">
+</section>
+<section id="run-our-model-with-probability-cut-off-levels">
 <h2>Run our model with probability cut-off levels<a class="headerlink" href="#run-our-model-with-probability-cut-off-levels" title="Permalink to this headline">¶</a></h2>
 <p>We will use stratified k-fold verification to assess the model performance. If you are not familiar with this please see:</p>
 <p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/03_k_fold.ipynb</a></p>
@@ -760,7 +773,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-<div class="section" id="plot-results">
+<section id="plot-results">
 <h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -812,9 +825,9 @@ By convention our features are called <code class="docutils literal notranslate"
 <img alt="_images/15_imbalanced _data_threshold_21_0.png" src="_images/15_imbalanced _data_threshold_21_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="observations">
+</section>
+</section>
+<section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Accuracy is maximised with a probability threshold of 0.5</p></li>
@@ -822,8 +835,8 @@ By convention our features are called <code class="docutils literal notranslate"
 <li><p>A threshold of 0.4 balances precision and recall and correctly estimates the proportion of passengers who survive.</p></li>
 <li><p>There is a marginal reduction in overall accuracy in order to balance accuracy of the classes.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

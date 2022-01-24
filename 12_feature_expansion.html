@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Feature expansion &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -274,6 +275,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -394,7 +407,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="feature-expansion">
+  <section class="tex2jax_ignore mathjax_ignore" id="feature-expansion">
 <h1>Feature expansion<a class="headerlink" href="#feature-expansion" title="Permalink to this headline">¶</a></h1>
 <p>Spoiler Alert! By combining feature expansion and feature selection we can increase our logistic regression model accuracy (on previously unseen data) from 79% to 84%!</p>
 <p>Simple models such as logistic regression do not incorporate complex interactions between features. If two features produce more than an additive effect, this will not be fitted in logistic regression. In order to allow for feature interaction we need to add terms that create new features by producing the product of each product pair.</p>
@@ -414,7 +427,7 @@
 <li><p>Increase the regularisation strength in the model (reduce the value of <code class="docutils literal notranslate"><span class="pre">C</span></code> in the logistic regression model)</p></li>
 <li><p>Use feature selection to pick only the most important features (which now may include polynomial features)</p></li>
 </ul>
-<div class="section" id="load-modules">
+<section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -427,9 +440,9 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="download-data">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="download-data">
 <h1>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline">¶</a></h1>
 <p>Run the following code if data for Titanic survival has not been previously downloaded.</p>
 <div class="cell docutils container">
@@ -456,7 +469,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-data">
+<section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -475,8 +488,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-x-features-and-y-labels">
+</section>
+<section id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -517,8 +530,8 @@ Shape of X_poly: (891, 300)
 </div>
 </div>
 <p>Woah - we’ve gone from 24 features to 301! But are they any use?</p>
-</div>
-<div class="section" id="training-and-testing-normal-and-expanded-models-with-varying-regularisation">
+</section>
+<section id="training-and-testing-normal-and-expanded-models-with-varying-regularisation">
 <h2>Training and testing normal and expanded models with varying regularisation<a class="headerlink" href="#training-and-testing-normal-and-expanded-models-with-varying-regularisation" title="Permalink to this headline">¶</a></h2>
 <p>The following code:</p>
 <ul class="simple">
@@ -738,8 +751,8 @@ Shape of X_poly: (891, 300)
 <li><p>We do not know which polynomial terms are most useful (below we will use feature reduction to identify those)</p></li>
 <li><p>The polynomial X data suffers from more over-fitting than the non-polynomial set (there is a larger difference between training and test set accuracies)</p></li>
 </ul>
-</div>
-<div class="section" id="feature-reduction-after-feature-expansion">
+</section>
+<section id="feature-reduction-after-feature-expansion">
 <h2>Feature reduction after feature expansion<a class="headerlink" href="#feature-reduction-after-feature-expansion" title="Permalink to this headline">¶</a></h2>
 <p>We will revisit the code we have used previously to pick the best features.</p>
 <p><a class="reference external" href="https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb">https://github.com/MichaelAllen1966/1804_python_healthcare/blob/master/titanic/08_feature_selection_2_forward.ipynb</a></p>
@@ -1031,8 +1044,8 @@ X10: male
 </div>
 </div>
 <p>So looking at just the ages of male passengers is the best single predictor of survival.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
