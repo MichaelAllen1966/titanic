@@ -496,11 +496,16 @@
      Sample from synthetic data to get same size/balance as the original data
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examine-distances-bewteen-synthetic-real-and-real-real-near-neighbours">
+     Examine distances bewteen synthetic-real and real-real near neighbours
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comparison-of-real-and-synthetic-data">
-   Comparison of real and synthetic data
+  <a class="reference internal nav-link" href="#comparison-of-means-and-standard-deviations-of-real-and-synthetic-data">
+   Comparison of means and standard deviations of real and synthetic data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -764,36 +769,12 @@ If data has already been downloaded that cell may be skipped.</p>
   </thead>
   <tbody>
     <tr>
-      <th>519</th>
-      <td>3.0</td>
-      <td>32.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7.8958</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>634</th>
-      <td>3.0</td>
-      <td>9.0</td>
-      <td>3.0</td>
+      <th>666</th>
       <td>2.0</td>
-      <td>27.9000</td>
+      <td>25.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.0000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -812,12 +793,12 @@ If data has already been downloaded that cell may be skipped.</p>
       <td>1.0</td>
     </tr>
     <tr>
-      <th>721</th>
+      <th>860</th>
       <td>3.0</td>
-      <td>17.0</td>
-      <td>1.0</td>
+      <td>41.0</td>
+      <td>2.0</td>
       <td>0.0</td>
-      <td>7.0542</td>
+      <td>14.1083</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -836,12 +817,12 @@ If data has already been downloaded that cell may be skipped.</p>
       <td>1.0</td>
     </tr>
     <tr>
-      <th>395</th>
+      <th>814</th>
       <td>3.0</td>
-      <td>22.0</td>
+      <td>30.5</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>7.7958</td>
+      <td>8.0500</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -860,13 +841,37 @@ If data has already been downloaded that cell may be skipped.</p>
       <td>1.0</td>
     </tr>
     <tr>
-      <th>502</th>
-      <td>3.0</td>
-      <td>28.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7.6292</td>
+      <th>662</th>
       <td>1.0</td>
+      <td>47.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25.5875</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>58.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>810</th>
+      <td>3.0</td>
+      <td>26.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.8875</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -966,8 +971,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.820
-Accuracy of predicting test data = 0.798
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.823
+Accuracy of predicting test data = 0.758
 </pre></div>
 </div>
 </div>
@@ -1196,41 +1201,17 @@ Accuracy of predicting test data = 0.798
   </thead>
   <tbody>
     <tr>
-      <th>1488</th>
-      <td>3.0</td>
-      <td>51.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>8.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1862</th>
-      <td>3.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <th>820</th>
       <td>2.0</td>
+      <td>34.0</td>
+      <td>1.000000</td>
+      <td>0.0</td>
       <td>21.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.950279</td>
-      <td>0.099442</td>
-      <td>0.950279</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1241,37 +1222,13 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>1529</th>
-      <td>1.0</td>
-      <td>41.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>26.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>24.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1464</th>
+      <th>1332</th>
       <td>3.0</td>
-      <td>43.0</td>
-      <td>0.0</td>
+      <td>20.0</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>8.0</td>
       <td>0.0</td>
@@ -1292,12 +1249,60 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
     </tr>
     <tr>
-      <th>873</th>
+      <th>1953</th>
       <td>2.0</td>
-      <td>30.0</td>
+      <td>2.0</td>
+      <td>1.000000</td>
+      <td>1.0</td>
+      <td>26.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>13.0</td>
+      <td>0.926149</td>
+      <td>0.147702</td>
+      <td>0.926149</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1567</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>0.765561</td>
+      <td>1.0</td>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1148</th>
+      <td>3.0</td>
+      <td>18.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>14.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.000000</td>
@@ -1395,41 +1400,17 @@ Accuracy of predicting test data = 0.798
   </thead>
   <tbody>
     <tr>
-      <th>1488</th>
-      <td>3.0</td>
-      <td>51.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>8.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.889512</td>
-      <td>428</td>
-    </tr>
-    <tr>
-      <th>1862</th>
-      <td>3.0</td>
-      <td>1.0</td>
-      <td>1.000000</td>
+      <th>820</th>
       <td>2.0</td>
+      <td>34.0</td>
+      <td>1.000000</td>
+      <td>0.0</td>
       <td>21.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.950279</td>
-      <td>0.099442</td>
-      <td>0.950279</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1438,38 +1419,14 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
-      <td>0.669802</td>
-      <td>499</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>226</td>
     </tr>
     <tr>
-      <th>1529</th>
-      <td>1.0</td>
-      <td>41.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>26.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>24.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.000535</td>
-      <td>523</td>
-    </tr>
-    <tr>
-      <th>1464</th>
+      <th>1332</th>
       <td>3.0</td>
-      <td>43.0</td>
+      <td>20.0</td>
       <td>0.000000</td>
       <td>0.0</td>
       <td>8.0</td>
@@ -1487,16 +1444,64 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.460805</td>
-      <td>35</td>
+      <td>4.110835</td>
+      <td>434</td>
     </tr>
     <tr>
-      <th>873</th>
+      <th>1953</th>
       <td>2.0</td>
-      <td>30.0</td>
+      <td>2.0</td>
+      <td>1.000000</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.926149</td>
+      <td>0.147702</td>
+      <td>0.926149</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.238864</td>
+      <td>581</td>
+    </tr>
+    <tr>
+      <th>1567</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>0.765561</td>
+      <td>1.0</td>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.720928</td>
+      <td>570</td>
+    </tr>
+    <tr>
+      <th>1148</th>
+      <td>3.0</td>
+      <td>18.0</td>
       <td>0.000000</td>
       <td>0.0</td>
-      <td>13.0</td>
+      <td>14.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.000000</td>
@@ -1511,8 +1516,8 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>1.665661</td>
-      <td>631</td>
+      <td>0.516709</td>
+      <td>872</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1539,36 +1544,12 @@ Accuracy of predicting test data = 0.798
       <td>...</td>
     </tr>
     <tr>
-      <th>1979</th>
-      <td>1.0</td>
-      <td>34.0</td>
-      <td>0.383562</td>
-      <td>1.0</td>
-      <td>480.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>1834</th>
+      <td>2.0</td>
+      <td>47.0</td>
       <td>0.000000</td>
-      <td>47.420085</td>
-      <td>0.000000</td>
-      <td>...</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>3.294178</td>
-      <td>664</td>
-    </tr>
-    <tr>
-      <th>796</th>
-      <td>3.0</td>
-      <td>39.0</td>
-      <td>1.000000</td>
-      <td>5.0</td>
-      <td>31.0</td>
+      <td>12.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.000000</td>
@@ -1582,42 +1563,18 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.514649</td>
-      <td>656</td>
+      <td>1.0</td>
+      <td>0.753809</td>
+      <td>114</td>
     </tr>
     <tr>
-      <th>1509</th>
-      <td>3.0</td>
-      <td>28.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>56.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.814126</td>
-      <td>46</td>
-    </tr>
-    <tr>
-      <th>1229</th>
+      <th>1338</th>
       <td>3.0</td>
       <td>28.0</td>
       <td>0.000000</td>
       <td>0.0</td>
       <td>8.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
@@ -1631,16 +1588,40 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>1.231771</td>
-      <td>97</td>
+      <td>0.002648</td>
+      <td>591</td>
     </tr>
     <tr>
-      <th>1178</th>
-      <td>2.0</td>
-      <td>35.0</td>
-      <td>1.000000</td>
+      <th>1546</th>
+      <td>1.0</td>
+      <td>40.0</td>
+      <td>0.505813</td>
+      <td>1.0</td>
+      <td>134.0</td>
       <td>0.0</td>
-      <td>25.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>36.965120</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.309213</td>
+      <td>255</td>
+    </tr>
+    <tr>
+      <th>1017</th>
+      <td>3.0</td>
+      <td>33.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>9.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.000000</td>
@@ -1655,8 +1636,32 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.440027</td>
-      <td>367</td>
+      <td>1.475366</td>
+      <td>723</td>
+    </tr>
+    <tr>
+      <th>731</th>
+      <td>2.0</td>
+      <td>18.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>11.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.045091</td>
+      <td>587</td>
     </tr>
   </tbody>
 </table>
@@ -1677,7 +1682,7 @@ Accuracy of predicting test data = 0.798
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of data points identical to real data points = 0.200
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of data points identical to real data points = 0.227
 </pre></div>
 </div>
 </div>
@@ -1765,41 +1770,41 @@ Accuracy of predicting test data = 0.798
   <tbody>
     <tr>
       <th>Pclass</th>
-      <td>3.0</td>
       <td>1.0</td>
-      <td>3.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>2.0</td>
-      <td>3.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
       <td>1.0</td>
       <td>3.0</td>
-      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
     </tr>
     <tr>
       <th>Age</th>
-      <td>2.0</td>
+      <td>69.0</td>
+      <td>35.0</td>
+      <td>49.0</td>
+      <td>33.0</td>
+      <td>13.0</td>
+      <td>1.0</td>
+      <td>69.0</td>
+      <td>70.0</td>
       <td>28.0</td>
-      <td>26.0</td>
-      <td>55.0</td>
-      <td>27.0</td>
-      <td>31.0</td>
-      <td>41.0</td>
-      <td>39.0</td>
-      <td>36.0</td>
-      <td>28.0</td>
+      <td>25.0</td>
     </tr>
     <tr>
       <th>SibSp</th>
-      <td>4.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -1807,31 +1812,30 @@ Accuracy of predicting test data = 0.798
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>Fare</th>
-      <td>40.0</td>
-      <td>31.0</td>
-      <td>58.0</td>
-      <td>16.0</td>
+      <td>69.0</td>
+      <td>90.0</td>
+      <td>27.0</td>
+      <td>26.0</td>
+      <td>120.0</td>
+      <td>19.0</td>
+      <td>35.0</td>
+      <td>71.0</td>
+      <td>7.0</td>
       <td>8.0</td>
-      <td>50.0</td>
-      <td>54.0</td>
-      <td>80.0</td>
-      <td>24.0</td>
-      <td>13.0</td>
     </tr>
     <tr>
       <th>AgeImputed</th>
       <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1840,6 +1844,7 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>EmbarkedImputed</th>
@@ -1856,38 +1861,38 @@ Accuracy of predicting test data = 0.798
     </tr>
     <tr>
       <th>CabinLetterImputed</th>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>CabinNumber</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>24.0</td>
-      <td>57.0</td>
-      <td>67.0</td>
+      <td>93.0</td>
+      <td>14.0</td>
+      <td>0.0</td>
+      <td>96.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>22.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CabinNumberImputed</th>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1896,25 +1901,25 @@ Accuracy of predicting test data = 0.798
     <tr>
       <th>male</th>
       <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>Embarked_C</th>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1935,12 +1940,12 @@ Accuracy of predicting test data = 0.798
     <tr>
       <th>Embarked_S</th>
       <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1965,29 +1970,29 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CabinLetter_B</th>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CabinLetter_C</th>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2014,12 +2019,12 @@ Accuracy of predicting test data = 0.798
       <th>CabinLetter_E</th>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
@@ -2034,7 +2039,7 @@ Accuracy of predicting test data = 0.798
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>CabinLetter_G</th>
@@ -2064,16 +2069,16 @@ Accuracy of predicting test data = 0.798
     </tr>
     <tr>
       <th>CabinLetter_missing</th>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
     </tr>
   </tbody>
 </table>
@@ -2117,9 +2122,140 @@ Number of synthetic data died:  549
 </div>
 </div>
 </section>
+<section id="examine-distances-bewteen-synthetic-real-and-real-real-near-neighbours">
+<h3>Examine distances bewteen synthetic-real and real-real near neighbours<a class="headerlink" href="#examine-distances-bewteen-synthetic-real-and-real-real-near-neighbours" title="Permalink to this headline">¶</a></h3>
+<p>Distance are Cartesian distance betwwn standardised data points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get nearest neighbour distances in real data</span>
+<span class="n">nn</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_real_std</span><span class="p">)</span>
+<span class="n">dists</span><span class="p">,</span> <span class="n">idxs</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">()</span>
+<span class="n">dist_real_real</span> <span class="o">=</span> <span class="n">dists</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="c1"># Get closest real data point to synthetic data points</span>
+<span class="n">dist_synthetic_real</span> <span class="o">=</span> <span class="n">synth_df</span><span class="p">[</span><span class="s1">&#39;distance_to_closest_real&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Plot histogram of distances to nearest real data point</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dist_real_real</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> 
+        <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;real-real&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dist_synthetic_real</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> 
+        <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;synthetic-real&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance to nearest neighbour&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/30_synthetic_data _SMOTE_51_0.png" src="_images/30_synthetic_data _SMOTE_51_0.png" />
+</div>
+</div>
+<p>Show general statistics</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">statistics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">statistics</span><span class="p">[</span><span class="s1">&#39;real-real data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist_real_real</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">statistics</span><span class="p">[</span><span class="s1">&#39;real-synthetic data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist_synthetic_real</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">statistics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>real-real data</th>
+      <th>real-synthetic data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>891.000000</td>
+      <td>891.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.540284</td>
+      <td>1.122204</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.810622</td>
+      <td>1.318624</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.037157</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.001604</td>
+      <td>0.342842</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.152798</td>
+      <td>0.771272</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.875672</td>
+      <td>1.496522</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.405094</td>
+      <td>17.805561</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Note: In this case the average distance from a synthetic data point to it’s nearest neighbour real data point is greater than the average distance from a real data point to it’s nearest neighbour real data point.</p>
+<p>Show counts of where there are nearest neighbour in real data is identical to points in real data or synthetic data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist_real_real</span> <span class="o">&lt;</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of data points in real data with identical nearest neighbour: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist_synthetic_real</span> <span class="o">&lt;</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of data points in synthetic data with identical real data nearest neighbour: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of data points in real data with identical nearest neighbour: 213
+Number of data points in synthetic data with identical real data nearest neighbour: 0
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="comparison-of-real-and-synthetic-data">
-<h2>Comparison of real and synthetic data<a class="headerlink" href="#comparison-of-real-and-synthetic-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="comparison-of-means-and-standard-deviations-of-real-and-synthetic-data">
+<h2>Comparison of means and standard deviations of real and synthetic data<a class="headerlink" href="#comparison-of-means-and-standard-deviations-of-real-and-synthetic-data" title="Permalink to this headline">¶</a></h2>
 <p>The charts below compare means and standard deviations of real and synthetic data, comparing passengers who survived or died separately.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2200,7 +2336,7 @@ Number of synthetic data died:  549
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/30_synthetic_data _SMOTE_51_0.png" src="_images/30_synthetic_data _SMOTE_51_0.png" />
+<img alt="_images/30_synthetic_data _SMOTE_58_0.png" src="_images/30_synthetic_data _SMOTE_58_0.png" />
 </div>
 </div>
 </section>
@@ -2232,8 +2368,8 @@ Number of synthetic data died:  549
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting test data from model trained on real data = 0.798
-Accuracy of predicting test data from model trained on synthetic data = 0.780
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting test data from model trained on real data = 0.758
+Accuracy of predicting test data from model trained on synthetic data = 0.762
 </pre></div>
 </div>
 </div>
@@ -2261,8 +2397,8 @@ Accuracy of predicting test data from model trained on synthetic data = 0.780
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC real training data: 0.86
-ROC AUC synthetic training data: 0.83
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC real training data: 0.83
+ROC AUC synthetic training data: 0.81
 </pre></div>
 </div>
 </div>
@@ -2291,7 +2427,7 @@ ROC AUC synthetic training data: 0.83
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/30_synthetic_data _SMOTE_57_0.png" src="_images/30_synthetic_data _SMOTE_57_0.png" />
+<img alt="_images/30_synthetic_data _SMOTE_64_0.png" src="_images/30_synthetic_data _SMOTE_64_0.png" />
 </div>
 </div>
 </section>
