@@ -599,7 +599,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 9, &#39;max_depth&#39;: 9.9826363
 </div>
 </div>
 </div>
-<p>It is possible to condition hyperparameters using Python <code class="docutils literal notranslate"><span class="pre">if</span></code> statements. We can for instance include another classifier, a support vector machine, in our HPO and define hyperparameters specific to the random forest model and the support vector machine.</p>
+<p>It is possible to condition hyperparameters using Python <code class="docutils literal notranslate"><span class="pre">if</span></code> statements. We can for instance include another classifier, a logistic regression classifier, in our hyperparameter optimsation and define hyperparameters specific to the random forest model and the logistic regression models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
