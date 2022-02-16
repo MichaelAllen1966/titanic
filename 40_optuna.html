@@ -444,6 +444,16 @@
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make images folder if it does not already exist</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="optimize-a-simple-problem">
 <h2>Optimize a simple problem<a class="headerlink" href="#optimize-a-simple-problem" title="Permalink to this headline">¶</a></h2>
 <p>Find <em>x</em> that minmises <em>(x-2)^2</em></p>
@@ -466,7 +476,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.9982153246056207}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.989560270993534}
 </pre></div>
 </div>
 </div>
@@ -551,7 +561,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.731
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.754
 </pre></div>
 </div>
 </div>
@@ -593,8 +603,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
-Best hyperparameters: {&#39;n_estimators&#39;: 16, &#39;max_depth&#39;: 11.2229414088489}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.826
+Best hyperparameters: {&#39;n_estimators&#39;: 12, &#39;max_depth&#39;: 7.816413645105429}
 </pre></div>
 </div>
 </div>
@@ -645,8 +655,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 16, &#39;max_depth&#39;: 11.22294
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
-Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 19, &#39;max_depth&#39;: 8.28482636032743}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.825
+Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 9.415337491027332}
 </pre></div>
 </div>
 </div>
@@ -669,7 +679,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_16_0.jpg" src="_images/40_optuna_16_0.jpg" />
+<img alt="_images/40_optuna_17_0.jpg" src="_images/40_optuna_17_0.jpg" />
 </div>
 </div>
 <p>Plotting the accuracies for each hyperparameter for each trial.</p>
@@ -687,7 +697,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_18_0.jpg" src="_images/40_optuna_18_0.jpg" />
+<img alt="_images/40_optuna_19_0.jpg" src="_images/40_optuna_19_0.jpg" />
 </div>
 </div>
 <p>Plotting the accuracy surface for the hyperparameters involved in the random forest model.</p>
@@ -705,7 +715,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_20_0.jpg" src="_images/40_optuna_20_0.jpg" />
+<img alt="_images/40_optuna_21_0.jpg" src="_images/40_optuna_21_0.jpg" />
 </div>
 </div>
 </section>
@@ -759,8 +769,8 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.822
-Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.614644549925947}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.828
+Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467596311454}
 </pre></div>
 </div>
 </div>
@@ -779,7 +789,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.614644
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_24_0.jpg" src="_images/40_optuna_24_0.jpg" />
+<img alt="_images/40_optuna_25_0.jpg" src="_images/40_optuna_25_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -796,7 +806,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.614644
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_25_0.jpg" src="_images/40_optuna_25_0.jpg" />
+<img alt="_images/40_optuna_26_0.jpg" src="_images/40_optuna_26_0.jpg" />
 </div>
 </div>
 </section>
@@ -842,8 +852,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.614644
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.826
-Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.816
+Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
 </pre></div>
 </div>
 </div>
@@ -862,7 +872,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_28_0.jpg" src="_images/40_optuna_28_0.jpg" />
+<img alt="_images/40_optuna_29_0.jpg" src="_images/40_optuna_29_0.jpg" />
 </div>
 </div>
 </section>
