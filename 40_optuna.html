@@ -423,7 +423,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="an-introduction-to-optuna-for-optimising-machine-learning-models">
 <h1>An introduction to Optuna for optimising machine learning models<a class="headerlink" href="#an-introduction-to-optuna-for-optimising-machine-learning-models" title="Permalink to this headline">¶</a></h1>
 <p>This Jupyter notebook goes through the basic usage of Optuna (<a class="reference external" href="http://optuna.org">optuna.org</a>). Optuna is a machine learning model optimizer that may be used on any machine learning model type. Optuna uses heuristic (searching) algorithms to find the best model hyperparameters.</p>
-<p>To install optuna (if not installed as part of the Titanic environment’: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">optuna</span></code>. The visualisations require plotly (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">poltly</span></code>).</p>
+<p>To install optuna (if not installed as part of the Titanic environment’: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">optuna</span></code>. The visualisations require plotly (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">plotly</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
@@ -433,10 +433,11 @@
 <span class="kn">import</span> <span class="nn">sklearn.model_selection</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span>
-
 <span class="c1"># The following are needed only to show Optuna images in a Jupyter Book</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="c1"># Turn off optuna progress reporting</span>
+<span class="n">optuna</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">optuna</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
 
 <span class="c1"># To save images you will also need to `pip install kaleido`</span>
 </pre></div>
@@ -459,16 +460,13 @@
 <span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">()</span>
 <span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="c1"># To remove optimisation output after complete</span>
-<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
 <span class="c1"># Run optimisation (default is to minimise objective)</span>
 <span class="n">study</span><span class="o">.</span><span class="n">best_params</span>  
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 2.000377873175757}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.9982153246056207}
 </pre></div>
 </div>
 </div>
@@ -548,13 +546,12 @@
     
     <span class="k">return</span> <span class="n">accuracy</span> 
 
-<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">objective</span><span class="p">()</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.754
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.731
 </pre></div>
 </div>
 </div>
@@ -590,16 +587,14 @@
 <span class="c1"># Get best model run</span>
 <span class="n">trial</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
 
-<span class="c1"># Clear optimisation output and display output</span>
-<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.826
-Best hyperparameters: {&#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 7.617015904773285}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
+Best hyperparameters: {&#39;n_estimators&#39;: 16, &#39;max_depth&#39;: 11.2229414088489}
 </pre></div>
 </div>
 </div>
@@ -609,7 +604,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 7.617015
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
     
-    <span class="c1"># All Optuna to choose classifier (Random Forest or Support Vector Macgine)</span>
+    <span class="c1"># All Optuna to choose classifier (Random Forest or logistic regression)</span>
     <span class="n">classifier</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_categorical</span><span class="p">(</span>
         <span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span> <span class="s1">&#39;LogisticRegression&#39;</span><span class="p">])</span>
     
@@ -622,7 +617,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 7.617015
         <span class="n">clf</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
             <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
     
-    <span class="c1"># Otherwsie set Optuna trial parameters for logistic regression</span>
+    <span class="c1"># Otherwise set Optuna trial parameters for logistic regression</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;lr_c&#39;</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mf">1e10</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
@@ -644,8 +639,6 @@ Best hyperparameters: {&#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 7.617015
 <span class="c1"># Get best model run</span>
 <span class="n">trial</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
 
-<span class="c1"># Clear optimisation output and display output</span>
-<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
@@ -653,7 +646,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 7.617015
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
-Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 13, &#39;max_depth&#39;: 7.458236639151244}
+Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 19, &#39;max_depth&#39;: 8.28482636032743}
 </pre></div>
 </div>
 </div>
@@ -666,7 +659,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_optimization_history</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show`</span>
+<span class="c1"># To display fig in an ordinary notebook use `fig.show()`</span>
 
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
@@ -684,7 +677,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show`</span>
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
 
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
@@ -702,7 +695,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span><span class="n">study</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show`</span>
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
 
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
@@ -760,16 +753,14 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
 <span class="c1"># Get best model run</span>
 <span class="n">trial</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
 
-<span class="c1"># Clear optimisation output and display output</span>
-<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
-Best hyperparameters: {&#39;n_estimators&#39;: 13, &#39;max_depth&#39;: 7.229106704170908}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.822
+Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.614644549925947}
 </pre></div>
 </div>
 </div>
@@ -845,16 +836,14 @@ Best hyperparameters: {&#39;n_estimators&#39;: 13, &#39;max_depth&#39;: 7.229106
 <span class="c1"># Get best model run</span>
 <span class="n">trial</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
 
-<span class="c1"># Clear optimisation output and display output</span>
-<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.810
-Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.826
+Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
 </pre></div>
 </div>
 </div>
