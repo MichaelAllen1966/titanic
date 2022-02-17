@@ -393,6 +393,17 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-in-conditional-if-statements">
+     Building in conditional
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       if
+      </span>
+     </code>
+     statements
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plotting-the-study">
      Plotting the study
     </a>
@@ -461,7 +472,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
-    <span class="c1"># Set study paramter to vary</span>
+    
+    <span class="c1"># Set study parameter to vary</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     
     <span class="c1"># Return value for optimisation</span>
@@ -476,7 +488,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.989560270993534}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 2.000566905286}
 </pre></div>
 </div>
 </div>
@@ -547,12 +559,12 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">():</span>
 
     <span class="c1"># Define model</span>
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>    
         <span class="n">n_estimators</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span> 
 
@@ -561,7 +573,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.754
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.747
 </pre></div>
 </div>
 </div>
@@ -569,7 +581,7 @@
 </section>
 <section id="optimize-hyperparameters-of-the-model">
 <h3>Optimize hyperparameters of the model<a class="headerlink" href="#optimize-hyperparameters-of-the-model" title="Permalink to this headline">¶</a></h3>
-<p>The hyperparameters of the above algorithm are <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> and <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> for which we can try different values to see if the model accuracy can be improved. The <code class="docutils literal notranslate"><span class="pre">objective</span></code> function is modified to accept a trial object. This trial has several methods for sampling hyperparameters. We create a study to run the hyperparameter optimization and finally read the best hyperparameters.</p>
+<p>The hyperparameters of the above algorithm are <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> and <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> for which we can try different values to see if the model accuracy can be improved.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
@@ -579,16 +591,16 @@
     <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     
     <span class="c1"># Set up model</span>
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
         <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
-<span class="c1"># Set up Optuna study</span>
+<span class="c1"># Set up Optuna study - we need to specifiy that we wish to maximise objective</span>
 <span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;maximize&#39;</span><span class="p">)</span>
 
 <span class="c1"># Run optimisation</span>
@@ -603,12 +615,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.826
-Best hyperparameters: {&#39;n_estimators&#39;: 12, &#39;max_depth&#39;: 7.816413645105429}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.823
+Best hyperparameters: {&#39;n_estimators&#39;: 10, &#39;max_depth&#39;: 8.14641804345839}
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> is a float. This is because we asked for it to be varied over a log scale, and that requires a float. The actual <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> used is the corresponding integer of that flaot.</p>
+</section>
+<section id="building-in-conditional-if-statements">
+<h3>Building in conditional <code class="docutils literal notranslate"><span class="pre">if</span></code> statements<a class="headerlink" href="#building-in-conditional-if-statements" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to condition hyperparameters using Python <code class="docutils literal notranslate"><span class="pre">if</span></code> statements. We can for instance include another classifier, a logistic regression classifier, in our hyperparameter optimsation and define hyperparameters specific to the random forest model and the logistic regression models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -624,7 +640,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 12, &#39;max_depth&#39;: 7.816413
         <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
         <span class="c1"># Set up model</span>
-        <span class="n">clf</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
             <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
     
     <span class="c1"># Otherwise set Optuna trial parameters for logistic regression</span>
@@ -632,11 +648,11 @@ Best hyperparameters: {&#39;n_estimators&#39;: 12, &#39;max_depth&#39;: 7.816413
         <span class="n">c</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;lr_c&#39;</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mf">1e10</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
         <span class="c1"># Set up model</span>
-        <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
         
     <span class="c1"># Run selected model        </span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">accuracy</span>
 
@@ -655,8 +671,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 12, &#39;max_depth&#39;: 7.816413
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.825
-Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 18, &#39;max_depth&#39;: 9.415337491027332}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.822
+Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10.236497057952999}
 </pre></div>
 </div>
 </div>
@@ -670,26 +686,9 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_optimization_history</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 
 <span class="c1"># To display fig in an ordinary notebook use `fig.show()`</span>
-
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/40_optuna_17_0.jpg" src="_images/40_optuna_17_0.jpg" />
-</div>
-</div>
-<p>Plotting the accuracies for each hyperparameter for each trial.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
+<span class="c1"># Or is you wish to save the figure</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
-
-<span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
@@ -700,14 +699,15 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 <img alt="_images/40_optuna_19_0.jpg" src="_images/40_optuna_19_0.jpg" />
 </div>
 </div>
-<p>Plotting the accuracy surface for the hyperparameters involved in the random forest model.</p>
+<p>Plotting the accuracies for each hyperparameter for each trial.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span><span class="n">study</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 
 <span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
-
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
+<span class="c1"># Or is you wish to save the figure</span>
+
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
@@ -716,6 +716,25 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/40_optuna_21_0.jpg" src="_images/40_optuna_21_0.jpg" />
+</div>
+</div>
+<p>Plotting the accuracy surface for the hyperparameters involved in the random forest model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span><span class="n">study</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
+
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
+<span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
+<span class="c1"># Or is you wish to save the figure</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/40_optuna_23_0.jpg" src="_images/40_optuna_23_0.jpg" />
 </div>
 </div>
 </section>
@@ -769,8 +788,8 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.828
-Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467596311454}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
+Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 10.136241659576292}
 </pre></div>
 </div>
 </div>
@@ -779,9 +798,10 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_optimization_history</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show`</span>
-
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
+<span class="c1"># Or is you wish to save the figure</span>
+
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
@@ -789,16 +809,17 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_25_0.jpg" src="_images/40_optuna_25_0.jpg" />
+<img alt="_images/40_optuna_27_0.jpg" src="_images/40_optuna_27_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span><span class="n">study</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show`</span>
-
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
+<span class="c1"># Or is you wish to save the figure</span>
+
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
@@ -806,7 +827,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_26_0.jpg" src="_images/40_optuna_26_0.jpg" />
+<img alt="_images/40_optuna_28_0.jpg" src="_images/40_optuna_28_0.jpg" />
 </div>
 </div>
 </section>
@@ -834,7 +855,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467
 <span class="c1"># Define search space: this will over-ride the suggestions in the objective fnc.</span>
 <span class="n">search_space</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> 
-    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]}</span>
+    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]}</span>
 
 <span class="c1"># Set up Optuna study</span>
 <span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;maximize&#39;</span><span class="p">,</span> 
@@ -852,7 +873,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 8.185467
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.816
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.814
 Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
 </pre></div>
 </div>
@@ -862,9 +883,10 @@ Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span><span class="n">study</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
 
-<span class="c1"># To display fig in an orinary norebook use `fig.show`</span>
-
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
 <span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
+<span class="c1"># Or is you wish to save the figure</span>
+
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
@@ -872,7 +894,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_29_0.jpg" src="_images/40_optuna_29_0.jpg" />
+<img alt="_images/40_optuna_31_0.jpg" src="_images/40_optuna_31_0.jpg" />
 </div>
 </div>
 </section>
