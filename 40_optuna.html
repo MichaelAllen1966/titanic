@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>An introduction to Optuna for optimising machine learning models &#8212; Titanic Survival Machine Learning</title>
+    <title>Optimising machine learning models with Optuna &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -156,7 +156,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   An introduction to Optuna for optimising machine learning models
+   Optimising machine learning models with Optuna
   </a>
  </li>
  <li class="toctree-l1">
@@ -420,6 +420,11 @@
    Grid search
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-search">
+   Random search
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -431,9 +436,9 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="an-introduction-to-optuna-for-optimising-machine-learning-models">
-<h1>An introduction to Optuna for optimising machine learning models<a class="headerlink" href="#an-introduction-to-optuna-for-optimising-machine-learning-models" title="Permalink to this headline">¶</a></h1>
-<p>This Jupyter notebook goes through the basic usage of Optuna (<a class="reference external" href="http://optuna.org">optuna.org</a>). Optuna is a machine learning model optimizer that may be used on any machine learning model type. Optuna uses heuristic (searching) algorithms to find the best model hyperparameters.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="optimising-machine-learning-models-with-optuna">
+<h1>Optimising machine learning models with Optuna<a class="headerlink" href="#optimising-machine-learning-models-with-optuna" title="Permalink to this headline">¶</a></h1>
+<p>This Jupyter notebook goes through the basic usage of Optuna (<a class="reference external" href="http://optuna.org">optuna.org</a>). Optuna is a machine learning model optimizer that may be used on any machine learning model type. Optuna uses heuristic (searching) algorithms to find the best model hyperparameters. It also allows more traditional alternatives to heuristic algorithms, such as grid dearch and random serach.</p>
 <p>To install optuna (if not installed as part of the Titanic environment’: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">optuna</span></code>. The visualisations require plotly (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">plotly</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -488,7 +493,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 2.000566905286}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.9990161436479945}
 </pre></div>
 </div>
 </div>
@@ -573,7 +578,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.747
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.738
 </pre></div>
 </div>
 </div>
@@ -616,7 +621,7 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.823
-Best hyperparameters: {&#39;n_estimators&#39;: 10, &#39;max_depth&#39;: 8.14641804345839}
+Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 8.587639351884242}
 </pre></div>
 </div>
 </div>
@@ -672,7 +677,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 10, &#39;max_depth&#39;: 8.146418
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.822
-Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10.236497057952999}
+Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 9, &#39;max_depth&#39;: 8.124323445767212}
 </pre></div>
 </div>
 </div>
@@ -788,8 +793,8 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
-Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 10.136241659576292}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.827
+Best hyperparameters: {&#39;n_estimators&#39;: 10, &#39;max_depth&#39;: 7.610730760452772}
 </pre></div>
 </div>
 </div>
@@ -833,7 +838,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 10.13624
 </section>
 <section id="grid-search">
 <h2>Grid search<a class="headerlink" href="#grid-search" title="Permalink to this headline">¶</a></h2>
-<p>With grid search, the defined search space over-rides the trial suggestions in the objective.</p>
+<p>With grid search, the defined search space over-rides the trial suggestions in the objective. Grid seach can be effective when there are not too many hyperparamters and options to chose from. A broad grid search may be followed by a narrower one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
@@ -843,19 +848,20 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 10.13624
     <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     
     <span class="c1"># Set up model</span>
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
         <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
-<span class="c1"># Define search space: this will over-ride the suggestions in the objective fnc.</span>
+<span class="c1"># Define search space: this will over-ride the suggestions in the objective </span>
+<span class="c1">#  function, but must be within the limits set by the suggestions</span>
 <span class="n">search_space</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> 
-    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]}</span>
+    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">32</span><span class="p">]}</span>
 
 <span class="c1"># Set up Optuna study</span>
 <span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;maximize&#39;</span><span class="p">,</span> 
@@ -873,8 +879,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 11, &#39;max_depth&#39;: 10.13624
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.814
-Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
+Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
 </pre></div>
 </div>
 </div>
@@ -895,6 +901,68 @@ Best hyperparameters: {&#39;n_estimators&#39;: 15, &#39;max_depth&#39;: 10}
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/40_optuna_31_0.jpg" src="_images/40_optuna_31_0.jpg" />
+</div>
+</div>
+</section>
+<section id="random-search">
+<h2>Random search<a class="headerlink" href="#random-search" title="Permalink to this headline">¶</a></h2>
+<p>Random search may be a ueful starting point for exploring hyperparamter optimisation. It may be followed by a grid search or one of the heuristic methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
+
+    <span class="c1"># Set Optuna trial parameters and ranges</span>
+    <span class="n">n_estimators</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    
+    <span class="c1"># Set up model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
+    
+    <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">accuracy</span>
+
+<span class="c1"># Set up Optuna study</span>
+<span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;maximize&#39;</span><span class="p">,</span> 
+                            <span class="n">sampler</span><span class="o">=</span><span class="n">optuna</span><span class="o">.</span><span class="n">samplers</span><span class="o">.</span><span class="n">RandomSampler</span><span class="p">())</span>
+
+<span class="c1"># Run optimisation</span>
+<span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Get best model run</span>
+<span class="n">trial</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.825
+Best hyperparameters: {&#39;n_estimators&#39;: 19, &#39;max_depth&#39;: 9.454201787163411}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">plot_contour</span><span class="p">(</span><span class="n">study</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
+
+<span class="c1"># To display fig in an orinary norebook use `fig.show()`</span>
+<span class="c1"># The following is needed only to display the image in an online Jupyter Book</span>
+<span class="c1"># Or is you wish to save the figure</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;./images/temp.jpg&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/40_optuna_34_0.jpg" src="_images/40_optuna_34_0.jpg" />
 </div>
 </div>
 </section>
