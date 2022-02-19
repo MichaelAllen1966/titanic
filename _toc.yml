@@ -16,7 +16,10 @@ parts:
   - file: 06_accuracy_logistic_regression
   - file: 07_learning_curve
   - file: 08_roc
-  - file: 50_check_calibration  
+  - file: 50_check_calibration
+- caption: Optimising machine learning models
+  chapters:
+  - file: 40_optuna
 - caption: Feature selection and expansion
   chapters:
   - file: 09_feature_selection_1_univariate
