@@ -586,7 +586,9 @@ If data has already been downloaded that cell may be skipped.</p>
 <p>The following is a function for multiple accuracy measures.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">calculate_accuracy</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
     
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates a range of accuracy scores from observed and predicted classes.</span>
@@ -609,7 +611,7 @@ If data has already been downloaded that cell may be skipped.</p>
 <span class="sd">    13) false positive rate: proportion of false +ves in true -ve patients</span>
 <span class="sd">    14) false negative rate: proportion of false -ves in true +ve patients</span>
 <span class="sd">    15) true positive rate: Same as recall</span>
-<span class="sd">    16) true negative rate</span>
+<span class="sd">    16) true negative rate: Same as specificity</span>
 <span class="sd">    17) positive predictive value: chance of true +ve if test +ve</span>
 <span class="sd">    18) negative predictive value: chance of true -ve if test -ve</span>
 <span class="sd">    </span>
@@ -632,6 +634,8 @@ If data has already been downloaded that cell may be skipped.</p>
     <span class="n">false_positives</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted_positives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">observed_positives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
     
     <span class="n">true_negatives</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted_negatives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">observed_negatives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">false_negatives</span> <span class="o">=</span> <span class="p">(</span><span class="n">predicted_negatives</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">observed_negatives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
     
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">observed</span><span class="p">)</span>
     
@@ -659,10 +663,10 @@ If data has already been downloaded that cell may be skipped.</p>
     <span class="n">true_negative_rate</span> <span class="o">=</span> <span class="n">specificity</span>
     
     <span class="n">positive_predictive_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_positives</span><span class="p">)</span> <span class="o">/</span> 
-                                 <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed_positives</span><span class="p">))</span>
+                            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_positives</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">false_positives</span><span class="p">)))</span>
     
     <span class="n">negative_predictive_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_negatives</span><span class="p">)</span> <span class="o">/</span> 
-                                  <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">observed_negatives</span><span class="p">))</span>
+                            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_negatives</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">false_negatives</span><span class="p">)))</span>
     
     <span class="c1"># Create dictionary for results, and add results</span>
     <span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
