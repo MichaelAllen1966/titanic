@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Titanic Survival &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -32,17 +31,20 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -54,7 +56,10 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Setting up an environment" href="setup.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -88,7 +93,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -100,7 +105,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -112,7 +117,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -159,7 +164,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Optimising machine learning models
  </span>
@@ -171,7 +176,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -198,7 +203,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -225,7 +230,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -242,7 +247,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -274,7 +279,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Model explainability
  </span>
@@ -291,7 +296,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Creating synthetic data
  </span>
@@ -348,7 +353,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -366,7 +371,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -426,10 +431,73 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Titanic Survival</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-an-environment-to-run-these-notebooks">
+   SETTING UP AN ENVIRONMENT TO RUN THESE NOTEBOOKS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preprocessing">
+   DATA PREPROCESSING
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-methods">
+   BASIC METHODS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimising-machine-learning-models">
+   OPTIMISING MACHINE LEARNING MODELS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-selection-and-expansion">
+   FEATURE SELECTION AND EXPANSION
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-with-imbalanced-data-sets">
+   WORKING WITH IMBALANCED DATA SETS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-forest-model">
+   RANDOM FOREST MODEL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow-neural-nets">
+   TENSORFLOW NEURAL NETS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-explainability">
+   MODEL EXPLAINABILITY
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="titanic-survival">
+  <div class="tex2jax_ignore mathjax_ignore section" id="titanic-survival">
 <h1>Titanic Survival<a class="headerlink" href="#titanic-survival" title="Permalink to this headline">¶</a></h1>
 <p>Essential Machine Learning Classification Coding Tutorials</p>
 <p><img alt="" src="_images/titanic.png" /></p>
@@ -437,19 +505,19 @@
 <p>This is a classic classification problem, and we will use this problem to explore methods of machine learning, from logistic regression and Random Forests through to ‘Deep Learning’ using TensorFlow. Along the way we’ll look at processing data, how to run replicates, measuring accuracy, avoiding over-fitting with regularisation, trading off false positives and false negatives, feature selection and expansion, finding out how much data you need, optimising model parameters, dealing with imbalanced data, and more!</p>
 <p>These examples will use Kaggle’s Titanic Survival data to explore machine learning. The Kaggle page may be found at: <a class="reference external" href="https://www.kaggle.com/c/titanic">https://www.kaggle.com/c/titanic</a>.</p>
 <p>The contents of this book are:</p>
-<section id="setting-up-an-environment-to-run-these-notebooks">
+<div class="section" id="setting-up-an-environment-to-run-these-notebooks">
 <h2>SETTING UP AN ENVIRONMENT TO RUN THESE NOTEBOOKS<a class="headerlink" href="#setting-up-an-environment-to-run-these-notebooks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><em>Setting up an environment</em>: Setting up an environment using an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file, or setting up manually.</p></li>
 </ul>
-</section>
-<section id="data-preprocessing">
+</div>
+<div class="section" id="data-preprocessing">
 <h2>DATA PREPROCESSING<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><em>Kaggle Titanic survival</em>: data preprocessing: Getting our data in a form suitable for machine learning</p></li>
 </ul>
-</section>
-<section id="basic-methods">
+</div>
+<div class="section" id="basic-methods">
 <h2>BASIC METHODS<a class="headerlink" href="#basic-methods" title="Permalink to this headline">¶</a></h2>
 <p>The ‘essentials’ of machine learning, using a logistic regression model as our example model.</p>
 <ul class="simple">
@@ -462,14 +530,14 @@
 <li><p><em>Receiver Operator Characteristic (ROC) curve</em>: Many consider the ROC the ‘gold standard’ of measuring model performance.</p></li>
 <li><p><em>Checking model calibration</em>: Check that the model output probabilities are well calibrated.</p></li>
 </ul>
-</section>
-<section id="optimising-machine-learning-models">
+</div>
+<div class="section" id="optimising-machine-learning-models">
 <h2>OPTIMISING MACHINE LEARNING MODELS<a class="headerlink" href="#optimising-machine-learning-models" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><em>Optimising machine learning models with Optuna</em>. A modern easy-to-use machine learning hyperparamter optimiser.</p></li>
 </ul>
-</section>
-<section id="feature-selection-and-expansion">
+</div>
+<div class="section" id="feature-selection-and-expansion">
 <h2>FEATURE SELECTION AND EXPANSION<a class="headerlink" href="#feature-selection-and-expansion" title="Permalink to this headline">¶</a></h2>
 <p>Should you use all features? Is it useful to create extra polynomial features?</p>
 <ul class="simple">
@@ -478,8 +546,8 @@
 <li><p><em>Feature selection using backward elimination</em>: Remove features based on progressively removing those that can be removed with the smallest loss in accuracy:</p></li>
 <li><p><em>Feature expansion</em>: Add polynomial features (interactions between features) coupled with feature selection using forward selection.</p></li>
 </ul>
-</section>
-<section id="working-with-imbalanced-data-sets">
+</div>
+<div class="section" id="working-with-imbalanced-data-sets">
 <h2>WORKING WITH IMBALANCED DATA SETS<a class="headerlink" href="#working-with-imbalanced-data-sets" title="Permalink to this headline">¶</a></h2>
 <p>Methods that help you manage data sets where there is not an even balance between classes.</p>
 <ul class="simple">
@@ -488,16 +556,16 @@
 <li><p><em>Dealing with imbalanced data by changing classification cut-off levels</em>: Adjust the probability threshold used to classify data.</p></li>
 <li><p><em>Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)</em>: Create synthetic examples of the minority class.</p></li>
 </ul>
-</section>
-<section id="random-forest-model">
+</div>
+<div class="section" id="random-forest-model">
 <h2>RANDOM FOREST MODEL<a class="headerlink" href="#random-forest-model" title="Permalink to this headline">¶</a></h2>
 <p>A popular model type for structured data.</p>
 <ul class="simple">
 <li><p><em>A Random *  Forest model</em>: Setting up a Random Forest model.</p></li>
 <li><p><em>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification</em>: Performing a ROC analysis for Random Forest, and looking at the effect of adjusting classification threshold.</p></li>
 </ul>
-</section>
-<section id="tensorflow-neural-nets">
+</div>
+<div class="section" id="tensorflow-neural-nets">
 <h2>TENSORFLOW NEURAL NETS<a class="headerlink" href="#tensorflow-neural-nets" title="Permalink to this headline">¶</a></h2>
 <p>A popular framework for building neural networks.</p>
 <ul class="simple">
@@ -507,15 +575,13 @@
 <li><p><em>TensorFlow ‘Wide and Deep’ neural nets</em>: Combining ‘shallow’ and ‘deep’ learning in one neural network.</p></li>
 <li><p><em>TensorFlow Bagging</em>: Train multiple networks to improve accuracy and/or get a measure of prediction uncertainty.</p></li>
 </ul>
-</section>
-<section id="model-explainability">
+</div>
+<div class="section" id="model-explainability">
 <h2>MODEL EXPLAINABILITY<a class="headerlink" href="#model-explainability" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><em>Explaining model predictions with Shapley values - Logistic Regression</em>: Shapley values provide the contribution of each feature to predictions (either for individual predictions or for the model as a whole). Here we provide an example using logistic regression.</p></li>
 <li><p><em>Explaining model predictions with Shapley values - Random Forest</em>: An example of using Shap with Random Forests, which requires a slightly different syntax to logistic regression.</p></li>
 </ul>
-</section>
-<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -535,7 +601,9 @@
 </div>
 <div class="toctree-wrapper compound">
 </div>
-</section>
+<div class="toctree-wrapper compound">
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -559,45 +627,35 @@
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-     <div id="next">
-        <a class="right-next" href="setup.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Setting up an environment</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="setup.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Setting up an environment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Michael Allen<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

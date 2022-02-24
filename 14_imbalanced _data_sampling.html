@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dealing with imbalanced data by under or over sampling &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -32,17 +31,20 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -55,7 +57,10 @@
     <link rel="next" title="Dealing with imbalanced data by changing classification cut-off levels" href="15_imbalanced%20_data_threshold.html" />
     <link rel="prev" title="Dealing with imbalanced data by model weighting" href="13_imbalanced%20_data_weighting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -89,7 +94,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -101,7 +106,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -113,7 +118,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -160,7 +165,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Optimising machine learning models
  </span>
@@ -172,7 +177,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -199,7 +204,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -226,7 +231,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -243,7 +248,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -275,7 +280,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Model explainability
  </span>
@@ -283,11 +288,16 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="26_logistic_regression_shap.html">
-   Explaining model predictions with Shapley values
+   Explaining model predictions with Shapley values - Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_random_forest_shap.html">
+   Explaining model predictions with Shapley values - Random Forest
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Creating synthetic data
  </span>
@@ -344,7 +354,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -362,7 +372,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -436,10 +446,87 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Dealing with imbalanced data by under or over sampling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
+   Artificially reduce the number of survivors (to make data set more imbalanced)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-standardise-data">
+   Define function to standardise data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-measure-accuracy">
+   Define function to measure accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+   Divide into X (features) and y (labels)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#under-sampling-of-majority-class">
+   Under-sampling of majority class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observations">
+     Observations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#over-sampling-of-minority-class">
+   Over-sampling of minority class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Observations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overall-observations">
+   Overall observations
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-imbalanced-data-by-under-or-over-sampling">
+  <div class="tex2jax_ignore mathjax_ignore section" id="dealing-with-imbalanced-data-by-under-or-over-sampling">
 <h1>Dealing with imbalanced data by under or over sampling<a class="headerlink" href="#dealing-with-imbalanced-data-by-under-or-over-sampling" title="Permalink to this headline">¶</a></h1>
 <p>A problem with machine learning models is that they may end up biased towards the majority class, and under-predict the minority class(es).</p>
 <p>Here we look at two basic methods to correct for bias towards a majority class:</p>
@@ -459,7 +546,7 @@
 </div>
 </div>
 </div>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <p>A standard Anaconda install of Python (<a class="reference external" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>) contains all the necessary modules.</p>
 <div class="cell docutils container">
@@ -474,8 +561,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -523,8 +610,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
+</div>
+<div class="section" id="artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced">
 <h2>Artificially reduce the number of survivors (to make data set more imbalanced)<a class="headerlink" href="#artificially-reduce-the-number-of-survivors-to-make-data-set-more-imbalanced" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -558,8 +645,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-standardise-data">
+</div>
+<div class="section" id="define-function-to-standardise-data">
 <h2>Define function to standardise data<a class="headerlink" href="#define-function-to-standardise-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -580,8 +667,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-measure-accuracy">
+</div>
+<div class="section" id="define-function-to-measure-accuracy">
 <h2>Define function to measure accuracy<a class="headerlink" href="#define-function-to-measure-accuracy" title="Permalink to this headline">¶</a></h2>
 <p>The following is a function for multiple accuracy measures.</p>
 <div class="cell docutils container">
@@ -695,8 +782,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-x-features-and-y-labels">
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h2>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h2>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -708,8 +795,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="under-sampling-of-majority-class">
+</div>
+<div class="section" id="under-sampling-of-majority-class">
 <h2>Under-sampling of majority class<a class="headerlink" href="#under-sampling-of-majority-class" title="Permalink to this headline">¶</a></h2>
 <p>Here we will progressively reduce the size of the majority class examples (‘died’) in the training set, and look at the effect on various measures of accuracy.</p>
 <p>Define function to reduce size of majority class.</p>
@@ -902,16 +989,16 @@ By convention our features are called <code class="docutils literal notranslate"
 <img alt="_images/14_imbalanced _data_sampling_23_0.png" src="_images/14_imbalanced _data_sampling_23_0.png" />
 </div>
 </div>
-<section id="observations">
+<div class="section" id="observations">
 <h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Without under-sampling of the majority class, the minority class (‘survived’) is under-predicted.</p></li>
 <li><p>By under-sampling the majority class in the training data set the model becomes more balanced, and correctly predicts the proportion of passengers who survive.</p></li>
 <li><p>Balancing the model by under-sampling in this example caused a small reduction in accuracy of the model.</p></li>
 </ul>
-</section>
-</section>
-<section id="over-sampling-of-minority-class">
+</div>
+</div>
+<div class="section" id="over-sampling-of-minority-class">
 <h2>Over-sampling of minority class<a class="headerlink" href="#over-sampling-of-minority-class" title="Permalink to this headline">¶</a></h2>
 <p>Here we will progressively increase the size of the minority class examples (‘survived’) in the training set, and look at the effect on various measures of accuracy. Over-sampling is achieved by repeatedly re-sampling from the original data.</p>
 <p>Define function to over-sample minority class.</p>
@@ -1103,20 +1190,20 @@ By convention our features are called <code class="docutils literal notranslate"
 <img alt="_images/14_imbalanced _data_sampling_30_0.png" src="_images/14_imbalanced _data_sampling_30_0.png" />
 </div>
 </div>
-<section id="id1">
+<div class="section" id="id1">
 <h3>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Without over-sampling of the minority class, the minority class (‘survived’) is under-predicted.</p></li>
 <li><p>By over-sampling the majority class in the training data set the model becomes more balanced, and correctly predicts the proportion of passengers who survive.</p></li>
 <li><p>Balancing the model by over-sampling in this example had little effect of accuracy.</p></li>
 </ul>
-</section>
-</section>
-<section id="overall-observations">
+</div>
+</div>
+<div class="section" id="overall-observations">
 <h2>Overall observations<a class="headerlink" href="#overall-observations" title="Permalink to this headline">¶</a></h2>
 <p>Both under-sampling of the majority class, or over-sampling of the minority class, can balance the performance of the model across different classes. Balancing the model leads to better prediction of the proportion in each class (e.g. ‘survived’ or ‘died’), but this may come at a small loss in overall accuracy.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1140,54 +1227,42 @@ By convention our features are called <code class="docutils literal notranslate"
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="13_imbalanced%20_data_weighting.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Dealing with imbalanced data by model weighting</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="13_imbalanced%20_data_weighting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Dealing with imbalanced data by model weighting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="15_imbalanced%20_data_threshold.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dealing with imbalanced data by changing classification cut-off levels</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="15_imbalanced%20_data_threshold.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Dealing with imbalanced data by changing classification cut-off levels</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Michael Allen<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

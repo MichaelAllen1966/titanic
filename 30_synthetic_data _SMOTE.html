@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Creating synthetic Titanic passenger data with SMOTE &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -32,17 +31,20 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -52,9 +54,12 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Explaining model predictions with Shapley values" href="26_logistic_regression_shap.html" />
+    <link rel="prev" title="Explaining model predictions with Shapley values - Random Forest" href="27_random_forest_shap.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -88,7 +93,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -100,7 +105,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -112,7 +117,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -159,7 +164,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Optimising machine learning models
  </span>
@@ -171,7 +176,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -198,7 +203,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -225,7 +230,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -242,7 +247,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -274,7 +279,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Model explainability
  </span>
@@ -282,11 +287,16 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="26_logistic_regression_shap.html">
-   Explaining model predictions with Shapley values
+   Explaining model predictions with Shapley values - Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_random_forest_shap.html">
+   Explaining model predictions with Shapley values - Random Forest
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Creating synthetic data
  </span>
@@ -343,7 +353,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -361,7 +371,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -550,21 +560,213 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Creating synthetic Titanic passenger data with SMOTE</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#description-of-smote">
+   Description of SMOTE
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-integer-binary-and-categorical-data">
+     Handling integer, binary, and categorical data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation-with-imblearn">
+     Implementation with IMBLEARN
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-code-sections">
+   Overview of code sections
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-packages">
+   Load packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-and-process-data">
+   Load and process data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+     Divide into X (features) and y (labels)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-training-and-test-sets">
+     Divide into training and test sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standardise-data">
+     Standardise data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-and-test-logistic-regression-model-on-real-data">
+   Fit and test logistic regression model on real data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-model">
+     Fit model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-values">
+     Predict values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-accuracy">
+     Calculate accuracy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-synthetic-data">
+   Make Synthetic data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#function-to-create-synthetic-data">
+     Function to create synthetic data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generate-raw-synthetic-data">
+     Generate raw synthetic data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processing-of-raw-synthetic-data">
+     Processing of raw synthetic data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#prepare-lists-of-categorical-integer-and-binary-features">
+       Prepare lists of categorical, integer, and binary features
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#function-to-process-raw-synthetic-categorical-data-to-one-hot-encoded">
+       Function to process raw synthetic categorical data to one-hot encoded
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#process-raw-synthetic-data">
+       Process raw synthetic data:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#remove-synthetic-data-that-is-a-duplication-of-original-data-or-close-to-original-data">
+     Remove synthetic data that is a duplication of original data or close to original data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#remove-identical-points">
+       Remove identical points
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#remove-closest-points-to-original-data">
+       Remove closest points to original data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#show-five-examples-with-their-closest-data-points-in-the-original-data">
+     Show five examples with their closest data points in the original data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sample-from-synthetic-data-to-get-same-size-balance-as-the-original-data">
+     Sample from synthetic data to get same size/balance as the original data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examine-distances-between-synthetic-real-and-real-real-near-neighbours">
+     Examine distances between synthetic-real and real-real near neighbours
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparison-of-means-and-standard-deviations-of-real-and-synthetic-data">
+   Comparison of means and standard deviations of real and synthetic data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-synthetic-data-for-training-a-logistic-regression-model">
+   Test synthetic data for training a logistic regression model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-model-using-synthetic-data-and-check-accuracy">
+     Fit model using synthetic data and check accuracy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#receiver-operator-characteristic-curves">
+     Receiver Operator Characteristic curves
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusions">
+   Conclusions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="creating-synthetic-titanic-passenger-data-with-smote">
+  <div class="tex2jax_ignore mathjax_ignore section" id="creating-synthetic-titanic-passenger-data-with-smote">
 <h1>Creating synthetic Titanic passenger data with SMOTE<a class="headerlink" href="#creating-synthetic-titanic-passenger-data-with-smote" title="Permalink to this headline">¶</a></h1>
 <p>Synthetic data may be useful to share when it is not possible to share original data.</p>
 <p>Here we use original Titanic passenger data to create new synthetic passenger data. We then train a logistic model on that synthetic data and test on real data that was not used to create the synthetic data.</p>
-<section id="description-of-smote">
+<div class="section" id="description-of-smote">
 <h2>Description of SMOTE<a class="headerlink" href="#description-of-smote" title="Permalink to this headline">¶</a></h2>
 <p>SMOTE stands for Synthetic Minority Oversampling Technique [1]. SMOTE is more commonly used to create additional data to enhance modelling fitting, especially when one or more classes have low prevalence in the data set. Hence the description of oversampling.</p>
 <p>SMOTE works by finding near-neighbor points in the original data, and creating new data points from interpolating between two near-neighbor points.</p>
 <p>Here we remove the real data used to create the synthetic data, leaving only the synthetic data. After generating synthetic data we remove any data points that, by chance, are identical to original real data points, and also remove 10% of points that are closest to the original data points. We measure ‘closeness’ by the Cartesian distance between standardised data values.</p>
 <p><img alt="" src="_images/smote.png" /></p>
 <p><em>Demonstration of SMOTE method. (a) Data points with two features (shown on x and y axes) are represented. Points are colour-coded by class label. (b) A data point from a class is picked at random, shown by the black point, and then the closest neighbours of the same class are identified, as shown by yellow points. Here we show 3 closest neighbours, but the default in the SMOTE <code class="docutils literal notranslate"><span class="pre">Imbalanced-Learn</span></code> library is 6. One of those near-neighbour points is selected at random (shown by the second black point). A new data point, shown in red, is created at a random distance between the two selected data points.</em></p>
-<section id="handling-integer-binary-and-categorical-data">
+<div class="section" id="handling-integer-binary-and-categorical-data">
 <h3>Handling integer, binary, and categorical data<a class="headerlink" href="#handling-integer-binary-and-categorical-data" title="Permalink to this headline">¶</a></h3>
 <p>The standard SMOTE method generates floating point non-integer) values between data points. There are alternative ways of handing integer, binary, and categorical data using the SMOTE method. Here the methods we use are:</p>
 <ul class="simple">
@@ -572,15 +774,15 @@
 <li><p><em>Binary</em>: Code the value as 0 or 1, and round the resulting synthetic data point value to the closest integer (0 or 1).</p></li>
 <li><p><em>Categorical</em>: One-hot encode the categorical feature. Generate the synthetic data for each category value. Identify the category with the highest value and set to 1 while setting all others to 0.</p></li>
 </ul>
-</section>
-<section id="implementation-with-imblearn">
+</div>
+<div class="section" id="implementation-with-imblearn">
 <h3>Implementation with IMBLEARN<a class="headerlink" href="#implementation-with-imblearn" title="Permalink to this headline">¶</a></h3>
 <p>Here use the implementation in the IMBLEARN IMBALANCED-LEARN [2]</p>
 <p>[1] Chawla, N.V., Bowyer, K.W., Hall, L.O., Kegelmeyer, W.P. “SMOTE: Synthetic minority over-sampling technique,” Journal of Artificial Intelligence Research, vol. 16, pp. 321-357, 2002.</p>
 <p>[2] Lemaitre, G., Nogueira, F. and Aridas, C. (2016), Imbalanced-learn: A Python Toolbox to Tackle the Curse of Imbalanced Datasets in Machine Learning. arXiv:1609.06570 (<a class="reference external" href="https://pypi.org/project/imbalanced-learn/">https://pypi.org/project/imbalanced-learn/</a>, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">imbalanced-learn</span></code>).</p>
-</section>
-</section>
-<section id="overview-of-code-sections">
+</div>
+</div>
+<div class="section" id="overview-of-code-sections">
 <h2>Overview of code sections<a class="headerlink" href="#overview-of-code-sections" title="Permalink to this headline">¶</a></h2>
 <p>Below is an outline of this notebook.</p>
 <ol class="simple">
@@ -630,8 +832,8 @@
 </ol>
 </li>
 </ol>
-</section>
-<section id="load-packages">
+</div>
+<div class="section" id="load-packages">
 <h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -657,10 +859,10 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-and-process-data">
+</div>
+<div class="section" id="load-and-process-data">
 <h2>Load and process data<a class="headerlink" href="#load-and-process-data" title="Permalink to this headline">¶</a></h2>
-<section id="load-data">
+<div class="section" id="load-data">
 <h3>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h3>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -709,8 +911,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-x-features-and-y-labels">
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -720,8 +922,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-training-and-test-sets">
+</div>
+<div class="section" id="divide-into-training-and-test-sets">
 <h3>Divide into training and test sets<a class="headerlink" href="#divide-into-training-and-test-sets" title="Permalink to this headline">¶</a></h3>
 <p>To demonstrate the method we will use a single train/test split for simplicity.</p>
 <div class="cell docutils container">
@@ -782,61 +984,13 @@ If data has already been downloaded that cell may be skipped.</p>
   </thead>
   <tbody>
     <tr>
-      <th>666</th>
-      <td>2.0</td>
-      <td>25.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>13.0000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>860</th>
+      <th>612</th>
       <td>3.0</td>
-      <td>41.0</td>
-      <td>2.0</td>
-      <td>0.0</td>
-      <td>14.1083</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>28.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>15.5000</td>
       <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>814</th>
-      <td>3.0</td>
-      <td>30.5</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>8.0500</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -854,12 +1008,12 @@ If data has already been downloaded that cell may be skipped.</p>
       <td>1.0</td>
     </tr>
     <tr>
-      <th>662</th>
+      <th>118</th>
       <td>1.0</td>
-      <td>47.0</td>
+      <td>24.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>25.5875</td>
+      <td>1.0</td>
+      <td>247.5208</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -868,6 +1022,30 @@ If data has already been downloaded that cell may be skipped.</p>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>707</th>
+      <td>1.0</td>
+      <td>42.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>26.2875</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -878,12 +1056,36 @@ If data has already been downloaded that cell may be skipped.</p>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>810</th>
+      <th>888</th>
       <td>3.0</td>
-      <td>26.0</td>
+      <td>28.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>23.4500</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>7.8875</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>3.0</td>
+      <td>18.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.0500</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -906,8 +1108,8 @@ If data has already been downloaded that cell may be skipped.</p>
 <p>5 rows × 24 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="standardise-data">
+</div>
+<div class="section" id="standardise-data">
 <h3>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h3>
 <p>To standardise the data we subtract the mean of the training set values, and divide by the standard deviation of the training data. Note that the mean and standard deviation of the training data are used to standardise the test set data as well. Here we use sklearn’s <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> method.</p>
 <div class="cell docutils container">
@@ -936,11 +1138,11 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="fit-and-test-logistic-regression-model-on-real-data">
+</div>
+</div>
+<div class="section" id="fit-and-test-logistic-regression-model-on-real-data">
 <h2>Fit and test logistic regression model on real data<a class="headerlink" href="#fit-and-test-logistic-regression-model-on-real-data" title="Permalink to this headline">¶</a></h2>
-<section id="fit-model">
+<div class="section" id="fit-model">
 <h3>Fit model<a class="headerlink" href="#fit-model" title="Permalink to this headline">¶</a></h3>
 <p>We will fit a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method.</p>
 <div class="cell docutils container">
@@ -956,8 +1158,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="predict-values">
+</div>
+<div class="section" id="predict-values">
 <h3>Predict values<a class="headerlink" href="#predict-values" title="Permalink to this headline">¶</a></h3>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
 <div class="cell docutils container">
@@ -969,8 +1171,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="calculate-accuracy">
+</div>
+<div class="section" id="calculate-accuracy">
 <h3>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h3>
 <p>Here we measure accuracy simply as the proportion of passengers where we make the correct prediction (later we will use Receiver Operator Characteristic curves for a more thorough analysis).</p>
 <div class="cell docutils container">
@@ -984,17 +1186,17 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.823
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.828
 Accuracy of predicting test data = 0.758
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="make-synthetic-data">
+</div>
+</div>
+<div class="section" id="make-synthetic-data">
 <h2>Make Synthetic data<a class="headerlink" href="#make-synthetic-data" title="Permalink to this headline">¶</a></h2>
-<section id="function-to-create-synthetic-data">
+<div class="section" id="function-to-create-synthetic-data">
 <h3>Function to create synthetic data<a class="headerlink" href="#function-to-create-synthetic-data" title="Permalink to this headline">¶</a></h3>
 <p>This function is to make synethetic data for two classes.</p>
 <div class="cell docutils container">
@@ -1039,8 +1241,8 @@ Accuracy of predicting test data = 0.758
 </div>
 </div>
 <p>We will generate twice as much raw synthetic data for each class as the current data has. This will allow us to remove points that are identical to, or close to, original data.</p>
-</section>
-<section id="generate-raw-synthetic-data">
+</div>
+<div class="section" id="generate-raw-synthetic-data">
 <h3>Generate raw synthetic data<a class="headerlink" href="#generate-raw-synthetic-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1059,10 +1261,10 @@ Accuracy of predicting test data = 0.758
 </div>
 </div>
 </div>
-</section>
-<section id="processing-of-raw-synthetic-data">
+</div>
+<div class="section" id="processing-of-raw-synthetic-data">
 <h3>Processing of raw synthetic data<a class="headerlink" href="#processing-of-raw-synthetic-data" title="Permalink to this headline">¶</a></h3>
-<section id="prepare-lists-of-categorical-integer-and-binary-features">
+<div class="section" id="prepare-lists-of-categorical-integer-and-binary-features">
 <h4>Prepare lists of categorical, integer, and binary features<a class="headerlink" href="#prepare-lists-of-categorical-integer-and-binary-features" title="Permalink to this headline">¶</a></h4>
 <p>These lists will be used to process raw syenthetic data to the appropriate data type.</p>
 <div class="cell docutils container">
@@ -1080,17 +1282,21 @@ Accuracy of predicting test data = 0.758
 <span class="n">integer_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Age&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Parch&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Fare&#39;</span><span class="p">]</span>
+                <span class="s1">&#39;Fare&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;SibSp&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;CabinNumber&#39;</span><span class="p">]</span>
 
 <span class="c1"># Set binary columns</span>
 <span class="n">binary_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;AgeImputed&#39;</span><span class="p">]</span>
+               <span class="s1">&#39;AgeImputed&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;EmbarkedImputed&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;CabinNumberImputed&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="function-to-process-raw-synthetic-categorical-data-to-one-hot-encoded">
+</div>
+<div class="section" id="function-to-process-raw-synthetic-categorical-data-to-one-hot-encoded">
 <h4>Function to process raw synthetic categorical data to one-hot encoded<a class="headerlink" href="#function-to-process-raw-synthetic-categorical-data-to-one-hot-encoded" title="Permalink to this headline">¶</a></h4>
 <p>Sets highest value to 1 and all others to 0.</p>
 <div class="cell docutils container">
@@ -1113,8 +1319,8 @@ Accuracy of predicting test data = 0.758
 </div>
 </div>
 </div>
-</section>
-<section id="process-raw-synthetic-data">
+</div>
+<div class="section" id="process-raw-synthetic-data">
 <h4>Process raw synthetic data:<a class="headerlink" href="#process-raw-synthetic-data" title="Permalink to this headline">¶</a></h4>
 <ol class="simple">
 <li><p>Transfer data to a DataFrame and add column names</p></li>
@@ -1214,17 +1420,17 @@ Accuracy of predicting test data = 0.758
   </thead>
   <tbody>
     <tr>
-      <th>820</th>
+      <th>1008</th>
       <td>2.0</td>
-      <td>34.0</td>
-      <td>1.000000</td>
-      <td>0.0</td>
-      <td>21.0</td>
+      <td>19.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
+      <td>11.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1238,89 +1444,89 @@ Accuracy of predicting test data = 0.758
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1332</th>
+      <th>1549</th>
+      <td>1.0</td>
+      <td>32.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>436.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>42.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1096</th>
+      <td>1.0</td>
+      <td>43.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>67.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>36.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1162</th>
       <td>3.0</td>
       <td>20.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1435</th>
+      <td>3.0</td>
+      <td>47.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>8.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1953</th>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>1.000000</td>
       <td>1.0</td>
-      <td>26.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.926149</td>
-      <td>0.147702</td>
-      <td>0.926149</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1567</th>
-      <td>2.0</td>
-      <td>5.0</td>
-      <td>0.765561</td>
-      <td>1.0</td>
-      <td>24.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1148</th>
-      <td>3.0</td>
-      <td>18.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>14.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1338,9 +1544,9 @@ Accuracy of predicting test data = 0.758
 <p>5 rows × 25 columns</p>
 </div></div></div>
 </div>
-</section>
-</section>
-<section id="remove-synthetic-data-that-is-a-duplication-of-original-data-or-close-to-original-data">
+</div>
+</div>
+<div class="section" id="remove-synthetic-data-that-is-a-duplication-of-original-data-or-close-to-original-data">
 <h3>Remove synthetic data that is a duplication of original data or close to original data<a class="headerlink" href="#remove-synthetic-data-that-is-a-duplication-of-original-data-or-close-to-original-data" title="Permalink to this headline">¶</a></h3>
 <p>For each synethetic data point find nearest neighbour in the real data set (based on Cartesian distance of standardised data)</p>
 <div class="cell docutils container">
@@ -1413,17 +1619,17 @@ Accuracy of predicting test data = 0.758
   </thead>
   <tbody>
     <tr>
-      <th>820</th>
+      <th>1008</th>
       <td>2.0</td>
-      <td>34.0</td>
-      <td>1.000000</td>
-      <td>0.0</td>
-      <td>21.0</td>
+      <td>19.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
+      <td>11.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1434,20 +1640,92 @@ Accuracy of predicting test data = 0.758
       <td>1.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>226</td>
+      <td>353</td>
     </tr>
     <tr>
-      <th>1332</th>
+      <th>1549</th>
+      <td>1.0</td>
+      <td>32.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>436.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>42.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>1096</th>
+      <td>1.0</td>
+      <td>43.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>67.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>36.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.240925</td>
+      <td>164</td>
+    </tr>
+    <tr>
+      <th>1162</th>
       <td>3.0</td>
       <td>20.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.000060</td>
+      <td>692</td>
+    </tr>
+    <tr>
+      <th>1435</th>
+      <td>3.0</td>
+      <td>47.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>8.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1457,80 +1735,8 @@ Accuracy of predicting test data = 0.758
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>4.110835</td>
-      <td>434</td>
-    </tr>
-    <tr>
-      <th>1953</th>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>1.000000</td>
-      <td>1.0</td>
-      <td>26.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.926149</td>
-      <td>0.147702</td>
-      <td>0.926149</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2.238864</td>
-      <td>581</td>
-    </tr>
-    <tr>
-      <th>1567</th>
-      <td>2.0</td>
-      <td>5.0</td>
-      <td>0.765561</td>
-      <td>1.0</td>
-      <td>24.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.720928</td>
-      <td>570</td>
-    </tr>
-    <tr>
-      <th>1148</th>
-      <td>3.0</td>
-      <td>18.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>14.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.516709</td>
-      <td>872</td>
+      <td>0.315861</td>
+      <td>338</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1557,41 +1763,17 @@ Accuracy of predicting test data = 0.758
       <td>...</td>
     </tr>
     <tr>
-      <th>1834</th>
-      <td>2.0</td>
-      <td>47.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>12.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.753809</td>
-      <td>114</td>
-    </tr>
-    <tr>
-      <th>1338</th>
+      <th>940</th>
       <td>3.0</td>
-      <td>28.0</td>
-      <td>0.000000</td>
+      <td>17.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>8.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1601,45 +1783,93 @@ Accuracy of predicting test data = 0.758
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.002648</td>
-      <td>591</td>
+      <td>3.098494</td>
+      <td>542</td>
     </tr>
     <tr>
-      <th>1546</th>
+      <th>947</th>
+      <td>3.0</td>
+      <td>32.0</td>
       <td>1.0</td>
-      <td>40.0</td>
-      <td>0.505813</td>
-      <td>1.0</td>
-      <td>134.0</td>
+      <td>0.0</td>
+      <td>15.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
-      <td>36.965120</td>
-      <td>0.000000</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.309213</td>
+      <td>0.0</td>
+      <td>1.755892</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>1770</th>
+      <td>1.0</td>
+      <td>33.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>119.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.000115</td>
+      <td>558</td>
+    </tr>
+    <tr>
+      <th>1483</th>
+      <td>1.0</td>
+      <td>47.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>135.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>71.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.934529</td>
       <td>255</td>
     </tr>
     <tr>
-      <th>1017</th>
+      <th>1014</th>
       <td>3.0</td>
-      <td>33.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>9.0</td>
+      <td>26.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1649,39 +1879,15 @@ Accuracy of predicting test data = 0.758
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>1.475366</td>
-      <td>723</td>
-    </tr>
-    <tr>
-      <th>731</th>
-      <td>2.0</td>
-      <td>18.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>11.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.045091</td>
-      <td>587</td>
+      <td>0.031457</td>
+      <td>474</td>
     </tr>
   </tbody>
 </table>
 <p>1336 rows × 27 columns</p>
 </div></div></div>
 </div>
-<section id="remove-identical-points">
+<div class="section" id="remove-identical-points">
 <h4>Remove identical points<a class="headerlink" href="#remove-identical-points" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1695,13 +1901,13 @@ Accuracy of predicting test data = 0.758
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of data points identical to real data points = 0.227
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportion of data points identical to real data points = 0.211
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="remove-closest-points-to-original-data">
+</div>
+<div class="section" id="remove-closest-points-to-original-data">
 <h4>Remove closest points to original data<a class="headerlink" href="#remove-closest-points-to-original-data" title="Permalink to this headline">¶</a></h4>
 <p>Remove 10% of points that are closest to original data</p>
 <div class="cell docutils container">
@@ -1723,9 +1929,9 @@ Accuracy of predicting test data = 0.758
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="show-five-examples-with-their-closest-data-points-in-the-original-data">
+</div>
+</div>
+<div class="section" id="show-five-examples-with-their-closest-data-points-in-the-original-data">
 <h3>Show five examples with their closest data points in the original data<a class="headerlink" href="#show-five-examples-with-their-closest-data-points-in-the-original-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1784,80 +1990,80 @@ Accuracy of predicting test data = 0.758
     <tr>
       <th>Pclass</th>
       <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <td>3.0</td>
       <td>2.0</td>
       <td>1.0</td>
       <td>3.0</td>
       <td>1.0</td>
-      <td>1.0</td>
       <td>3.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
       <td>3.0</td>
     </tr>
     <tr>
       <th>Age</th>
-      <td>69.0</td>
+      <td>27.0</td>
+      <td>16.0</td>
       <td>35.0</td>
-      <td>49.0</td>
-      <td>33.0</td>
-      <td>13.0</td>
-      <td>1.0</td>
-      <td>69.0</td>
-      <td>70.0</td>
       <td>28.0</td>
-      <td>25.0</td>
+      <td>39.0</td>
+      <td>17.0</td>
+      <td>12.0</td>
+      <td>44.0</td>
+      <td>36.0</td>
+      <td>28.0</td>
     </tr>
     <tr>
       <th>SibSp</th>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
-      <td>2.0</td>
       <td>0.0</td>
+      <td>1.0</td>
+      <td>5.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>Parch</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2.0</td>
       <td>2.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>Fare</th>
-      <td>69.0</td>
-      <td>90.0</td>
+      <td>203.0</td>
+      <td>20.0</td>
+      <td>11.0</td>
       <td>27.0</td>
-      <td>26.0</td>
-      <td>120.0</td>
-      <td>19.0</td>
-      <td>35.0</td>
-      <td>71.0</td>
-      <td>7.0</td>
       <td>8.0</td>
+      <td>109.0</td>
+      <td>47.0</td>
+      <td>26.0</td>
+      <td>26.0</td>
+      <td>14.0</td>
     </tr>
     <tr>
       <th>AgeImputed</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
     </tr>
     <tr>
       <th>EmbarkedImputed</th>
@@ -1875,49 +2081,49 @@ Accuracy of predicting test data = 0.758
     <tr>
       <th>CabinLetterImputed</th>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>CabinNumber</th>
-      <td>24.0</td>
-      <td>93.0</td>
-      <td>14.0</td>
+      <td>74.0</td>
       <td>0.0</td>
-      <td>96.0</td>
       <td>0.0</td>
-      <td>4.0</td>
-      <td>22.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>65.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CabinNumberImputed</th>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>male</th>
       <td>1.0</td>
-      <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1926,13 +2132,13 @@ Accuracy of predicting test data = 0.758
     </tr>
     <tr>
       <th>Embarked_C</th>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1952,13 +2158,13 @@ Accuracy of predicting test data = 0.758
     </tr>
     <tr>
       <th>Embarked_S</th>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1984,32 +2190,32 @@ Accuracy of predicting test data = 0.758
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CabinLetter_B</th>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CabinLetter_C</th>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2032,13 +2238,13 @@ Accuracy of predicting test data = 0.758
       <th>CabinLetter_E</th>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -2052,7 +2258,7 @@ Accuracy of predicting test data = 0.758
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>CabinLetter_G</th>
@@ -2083,22 +2289,22 @@ Accuracy of predicting test data = 0.758
     <tr>
       <th>CabinLetter_missing</th>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="sample-from-synthetic-data-to-get-same-size-balance-as-the-original-data">
+</div>
+<div class="section" id="sample-from-synthetic-data-to-get-same-size-balance-as-the-original-data">
 <h3>Sample from synthetic data to get same size/balance as the original data<a class="headerlink" href="#sample-from-synthetic-data-to-get-same-size-balance-as-the-original-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2134,8 +2340,8 @@ Number of synthetic data died:  549
 </div>
 </div>
 </div>
-</section>
-<section id="examine-distances-between-synthetic-real-and-real-real-near-neighbours">
+</div>
+<div class="section" id="examine-distances-between-synthetic-real-and-real-real-near-neighbours">
 <h3>Examine distances between synthetic-real and real-real near neighbours<a class="headerlink" href="#examine-distances-between-synthetic-real-and-real-real-near-neighbours" title="Permalink to this headline">¶</a></h3>
 <p>Distance are Cartesian distance between standardised data points.</p>
 <div class="cell docutils container">
@@ -2209,38 +2415,38 @@ Number of synthetic data died:  549
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.540284</td>
-      <td>1.122204</td>
+      <td>0.561514</td>
+      <td>1.047574</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.810622</td>
-      <td>1.318624</td>
+      <td>1.170308</td>
+      <td>1.206917</td>
     </tr>
     <tr>
       <th>min</th>
       <td>0.000000</td>
-      <td>0.037157</td>
+      <td>0.033606</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>0.001604</td>
-      <td>0.342842</td>
+      <td>0.001592</td>
+      <td>0.269491</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.152798</td>
-      <td>0.771272</td>
+      <td>0.152741</td>
+      <td>0.695202</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>0.875672</td>
-      <td>1.496522</td>
+      <td>0.906723</td>
+      <td>1.384847</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>5.405094</td>
-      <td>17.805561</td>
+      <td>26.081659</td>
+      <td>11.994999</td>
     </tr>
   </tbody>
 </table>
@@ -2265,9 +2471,9 @@ Number of data points in synthetic data with identical real data nearest neighbo
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="comparison-of-means-and-standard-deviations-of-real-and-synthetic-data">
+</div>
+</div>
+<div class="section" id="comparison-of-means-and-standard-deviations-of-real-and-synthetic-data">
 <h2>Comparison of means and standard deviations of real and synthetic data<a class="headerlink" href="#comparison-of-means-and-standard-deviations-of-real-and-synthetic-data" title="Permalink to this headline">¶</a></h2>
 <p>The charts below compare means and standard deviations of real and synthetic data, comparing passengers who survived or died separately.</p>
 <div class="cell docutils container">
@@ -2352,11 +2558,11 @@ Number of data points in synthetic data with identical real data nearest neighbo
 <img alt="_images/30_synthetic_data _SMOTE_58_0.png" src="_images/30_synthetic_data _SMOTE_58_0.png" />
 </div>
 </div>
-</section>
-<section id="test-synthetic-data-for-training-a-logistic-regression-model">
+</div>
+<div class="section" id="test-synthetic-data-for-training-a-logistic-regression-model">
 <h2>Test synthetic data for training a logistic regression model<a class="headerlink" href="#test-synthetic-data-for-training-a-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
 <p>Note that we create synethetic data using the training portion of our orginal train/test split. We then test the model on the original test data. The data used to create synthetic data is not present in the test data (this would cause leakage of test data into the training data and over-estimate performance).</p>
-<section id="fit-model-using-synthetic-data-and-check-accuracy">
+<div class="section" id="fit-model-using-synthetic-data-and-check-accuracy">
 <h3>Fit model using synthetic data and check accuracy<a class="headerlink" href="#fit-model-using-synthetic-data-and-check-accuracy" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2382,13 +2588,13 @@ Number of data points in synthetic data with identical real data nearest neighbo
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting test data from model trained on real data = 0.758
-Accuracy of predicting test data from model trained on synthetic data = 0.762
+Accuracy of predicting test data from model trained on synthetic data = 0.753
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="receiver-operator-characteristic-curves">
+</div>
+<div class="section" id="receiver-operator-characteristic-curves">
 <h3>Receiver Operator Characteristic curves<a class="headerlink" href="#receiver-operator-characteristic-curves" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2410,8 +2616,8 @@ Accuracy of predicting test data from model trained on synthetic data = 0.762
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC real training data: 0.83
-ROC AUC synthetic training data: 0.81
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC real training data: 0.79
+ROC AUC synthetic training data: 0.78
 </pre></div>
 </div>
 </div>
@@ -2443,15 +2649,15 @@ ROC AUC synthetic training data: 0.81
 <img alt="_images/30_synthetic_data _SMOTE_64_0.png" src="_images/30_synthetic_data _SMOTE_64_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="conclusions">
+</div>
+</div>
+<div class="section" id="conclusions">
 <h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
 <p>Here we have used the SMOTE method to create synthetic data. We have removed any data points that are identical to the original data, and have also removed 10% of synthetic data points that are closest to original data.</p>
 <p>Mean and standard deviations of the synthetic data are very similar to the original data.</p>
 <p>Synthetic trains a logistic regression model with minimal loss of accuracy when compared with training with original data.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -2475,45 +2681,35 @@ ROC AUC synthetic training data: 0.81
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="26_logistic_regression_shap.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Explaining model predictions with Shapley values</p>
-            </div>
-        </a>
-    </div>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="27_random_forest_shap.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Explaining model predictions with Shapley values - Random Forest</p>
+        </div>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Michael Allen<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

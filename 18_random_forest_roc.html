@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -32,17 +31,20 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -55,7 +57,10 @@
     <link rel="next" title="TensorFlow neural net" href="19_tensorflow_1.html" />
     <link rel="prev" title="A Random Forest model" href="17_random_forest.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -89,7 +94,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -101,7 +106,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -113,7 +118,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -160,7 +165,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Optimising machine learning models
  </span>
@@ -172,7 +177,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -199,7 +204,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -226,7 +231,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -243,7 +248,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -275,7 +280,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Model explainability
  </span>
@@ -283,11 +288,16 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="26_logistic_regression_shap.html">
-   Explaining model predictions with Shapley values
+   Explaining model predictions with Shapley values - Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_random_forest_shap.html">
+   Explaining model predictions with Shapley values - Random Forest
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Creating synthetic data
  </span>
@@ -344,7 +354,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -362,7 +372,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -417,10 +427,68 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-data-if-not-previously-downloaded">
+   Download data if not previously downloaded
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-function-to-calculate-accuracy-measurements">
+   Define function to calculate accuracy measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-model-and-collect-results">
+   Run model and collect results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-roc-curve">
+   Plot ROC curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-effects-of-changing-classification-probability-threshold">
+   Plot effects of changing classification probability threshold
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
+  <div class="tex2jax_ignore mathjax_ignore section" id="random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification">
 <h1>Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification<a class="headerlink" href="#random-forest-receiver-operator-characteristic-roc-curve-and-balancing-of-model-classification" title="Permalink to this headline">¶</a></h1>
 <p>In this model we apply ROC to a Random Forest model. As these components have been previously described, we’ll keep comments to a minimum.</p>
 <div class="cell docutils container">
@@ -432,7 +500,7 @@
 </div>
 </div>
 </div>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -446,8 +514,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="download-data-if-not-previously-downloaded">
+</div>
+<div class="section" id="download-data-if-not-previously-downloaded">
 <h2>Download data if not previously downloaded<a class="headerlink" href="#download-data-if-not-previously-downloaded" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -473,8 +541,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="define-function-to-calculate-accuracy-measurements">
+</div>
+<div class="section" id="define-function-to-calculate-accuracy-measurements">
 <h2>Define function to calculate accuracy measurements<a class="headerlink" href="#define-function-to-calculate-accuracy-measurements" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -587,8 +655,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -605,8 +673,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="run-model-and-collect-results">
+</div>
+<div class="section" id="run-model-and-collect-results">
 <h2>Run model and collect results<a class="headerlink" href="#run-model-and-collect-results" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -714,8 +782,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="plot-roc-curve">
+</div>
+<div class="section" id="plot-roc-curve">
 <h2>Plot ROC curve<a class="headerlink" href="#plot-roc-curve" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,8 +814,8 @@
 <img alt="_images/18_random_forest_roc_13_0.png" src="_images/18_random_forest_roc_13_0.png" />
 </div>
 </div>
-</section>
-<section id="plot-effects-of-changing-classification-probability-threshold">
+</div>
+<div class="section" id="plot-effects-of-changing-classification-probability-threshold">
 <h2>Plot effects of changing classification probability threshold<a class="headerlink" href="#plot-effects-of-changing-classification-probability-threshold" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -793,8 +861,8 @@
 <img alt="_images/18_random_forest_roc_15_0.png" src="_images/18_random_forest_roc_15_0.png" />
 </div>
 </div>
-</section>
-<section id="observations">
+</div>
+<div class="section" id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>The Random Forest model, with default settings, has an ROC AUC of 0.85.</p></li>
@@ -802,8 +870,8 @@
 <li><p>If needed, the probability threshold of the Random Forest model could be adjust to change the model characteristics, such as for use in screening where recall (the detection of true positives) needs to be minimised at the accepted cost of lower precision (the detection of true negatives). In a screening situation false positives are generally accepted (as they will be eliminated later), but false negatives (where a condition is missed in screening) is much less acceptable.</p></li>
 <li><p>You will see that many aspects of machine learning models are directly transferable between model types.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -827,54 +895,42 @@
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="17_random_forest.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">A Random Forest model</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="17_random_forest.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">A Random Forest model</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="19_tensorflow_1.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TensorFlow neural net</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="19_tensorflow_1.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">TensorFlow neural net</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Michael Allen<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Michael Allen<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
