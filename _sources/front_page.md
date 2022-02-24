@@ -38,6 +38,12 @@ The 'essentials' of machine learning, using a logistic regression model as our e
 
 * *Receiver Operator Characteristic (ROC) curve*: Many consider the ROC the 'gold standard' of measuring model performance.
 
+* *Checking model calibration*: Check that the model output probabilities are well calibrated.
+
+## OPTIMISING MACHINE LEARNING MODELS
+
+* *Optimising machine learning models with Optuna*. A modern easy-to-use machine learning hyperparamter optimiser.
+
 ## FEATURE SELECTION AND EXPANSION
 
 Should you use all features? Is it useful to create extra polynomial features?
@@ -84,9 +90,10 @@ A popular framework for building neural networks.
 
 * *TensorFlow Bagging*: Train multiple networks to improve accuracy and/or get a measure of prediction uncertainty.
 
-## EXTRAS
+## MODEL EXPLAINABILITY
 
-* *Checking model calibration*: Check that the model output probabilities are well calibrated.
+* *Explaining model predictions with Shapley values - Logistic Regression*: Shapley values provide the contribution of each feature to predictions (either for individual predictions or for the model as a whole). Here we provide an example using logistic regression.
 
+* *Explaining model predictions with Shapley values - Random Forest*: An example of using Shap with Random Forests, which requires a slightly different syntax to logistic regression.
 
 
