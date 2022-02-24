@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Explaining model predictions with Shapley values - Logistic Regression &#8212; Titanic Survival Machine Learning</title>
+    <title>Explaining model predictions with Shapley values - Random Forest &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -52,8 +52,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Explaining model predictions with Shapley values - Random Forest" href="27_random_forest_shap.html" />
-    <link rel="prev" title="TensorFlow Bagging" href="25_tensorflow_bagging.html" />
+    <link rel="next" title="Creating synthetic Titanic passenger data with SMOTE" href="30_synthetic_data%20_SMOTE.html" />
+    <link rel="prev" title="Explaining model predictions with Shapley values - Logistic Regression" href="26_logistic_regression_shap.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -281,13 +281,13 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="26_logistic_regression_shap.html">
    Explaining model predictions with Shapley values - Logistic Regression
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="27_random_forest_shap.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Explaining model predictions with Shapley values - Random Forest
   </a>
  </li>
@@ -344,7 +344,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/26_logistic_regression_shap.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/27_random_forest_shap.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -400,13 +400,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#standardise-data">
-     Standardise data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-logistic-regression-model">
-     Fit logistic regression model
+    <a class="reference internal nav-link" href="#fit-random-forest-model">
+     Fit Random Forest model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -422,8 +417,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examining-the-model-coefficients-weights">
-   Examining the model coefficients (weights)
+  <a class="reference internal nav-link" href="#examining-the-model-importances">
+   Examining the model importances
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -469,16 +464,17 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values-logistic-regression">
-<h1>Explaining model predictions with Shapley values - Logistic Regression<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-logistic-regression" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values-random-forest">
+<h1>Explaining model predictions with Shapley values - Random Forest<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-random-forest" title="Permalink to this headline">¶</a></h1>
 <p>Shapley values provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
 <p>Shapley values may be used across model types, and so provide a <em>model-agnostic</em> measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows <em>black box</em> models like neural networks to be explained, at least in part.</p>
-<p>Here we will demonstrate Shapley values with logistic regression.</p>
+<p>Here we will demonstrate Shapley values with random forests.</p>
 <p>For more on Shapley values in general see Chris Molner’s excellent book chapter:</p>
 <p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shapley.html">https://christophm.github.io/interpretable-ml-book/shapley.html</a></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">shap</span></code> package is installed if you have used the Titanic environment yasml file, but otherwise may be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code>.</p>
 <p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, inclusiong lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
-<p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with logistic regression. Logistic regression is the model type which least needs an <em>explainer</em> but it provides a useful example for learning about <code class="docutils literal notranslate"><span class="pre">shap</span></code> as Shapley values may be compared with model coefficients.</p>
+<p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with Random Forests.</p>
+<p>Shap values are retuened in a slightly different way to logistic regression  - there is a set of Shap values for each classification probablility (‘not survive’, ‘survive’) so we need slightly different syntax to access and use the Shap values.</p>
 <section id="load-data-and-fit-model">
 <h2>Load data and fit model<a class="headerlink" href="#load-data-and-fit-model" title="Permalink to this headline">¶</a></h2>
 <section id="load-modules">
@@ -489,9 +485,9 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1"># Import machine learning methods</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
 <span class="c1"># Import shap for shapley values</span>
 <span class="kn">import</span> <span class="nn">shap</span> <span class="c1"># `pip install shap` if neeed</span>
 </pre></div>
@@ -568,48 +564,17 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </section>
-<section id="standardise-data">
-<h3>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h3>
-<p>Use SciKit learn method for standardising data.</p>
+<section id="fit-random-forest-model">
+<h3>Fit Random Forest model<a class="headerlink" href="#fit-random-forest-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
-    
-    <span class="c1"># Initialise a new scaling object for normalising input data</span>
-    <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
-
-    <span class="c1"># Set up the scaler just on the training set</span>
-    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-
-    <span class="c1"># Apply the scaler to the training and test sets</span>
-    <span class="n">train_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    <span class="n">test_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">train_std</span><span class="p">,</span> <span class="n">test_std</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="fit-logistic-regression-model">
-<h3>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h3>
-<p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LogisticRegression(random_state=42)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomForestClassifier(class_weight=&#39;balanced&#39;, n_jobs=-1, random_state=42)
 </pre></div>
 </div>
 </div>
@@ -621,12 +586,12 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict training and test set labels</span>
-<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
 <span class="c1"># Predict probabilities of survival</span>
-<span class="n">y_prob_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">y_prob_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<span class="n">y_prob_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">y_prob_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -646,35 +611,24 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.808
-Accuracy of predicting test data = 0.798
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.984
+Accuracy of predicting test data = 0.794
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="examining-the-model-coefficients-weights">
-<h2>Examining the model coefficients (weights)<a class="headerlink" href="#examining-the-model-coefficients-weights" title="Permalink to this headline">¶</a></h2>
+<section id="examining-the-model-importances">
+<h2>Examining the model importances<a class="headerlink" href="#examining-the-model-importances" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get model co_efficients</span>
-<span class="n">co_eff</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Put in DataFrame and sort by effect size</span>
-<span class="n">co_eff_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1"># Get feature names from X</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;co_eff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co_eff</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">co_eff</span><span class="p">)</span>
-<span class="n">co_eff_df_sorted</span> <span class="o">=</span> \
-    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co_eff_df_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">feature_importances</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="n">importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+<span class="n">importances</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_importances</span>
+<span class="n">importances</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importances</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">importances</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -697,41 +651,35 @@ Accuracy of predicting test data = 0.798
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature</th>
-      <th>co_eff</th>
-      <th>abs_co_eff</th>
+      <th>importance</th>
+      <th>rank</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>10</th>
-      <td>male</td>
-      <td>-1.285766</td>
-      <td>1.285766</td>
+      <th>male</th>
+      <td>0.238135</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>0</th>
-      <td>Pclass</td>
-      <td>-0.599109</td>
-      <td>0.599109</td>
+      <th>Fare</th>
+      <td>0.235720</td>
+      <td>2.0</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Age</td>
-      <td>-0.443450</td>
-      <td>0.443450</td>
+      <th>Age</th>
+      <td>0.213044</td>
+      <td>3.0</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>CabinNumberImputed</td>
-      <td>-0.383161</td>
-      <td>0.383161</td>
+      <th>CabinNumber</th>
+      <td>0.051892</td>
+      <td>4.0</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>SibSp</td>
-      <td>-0.326892</td>
-      <td>0.326892</td>
+      <th>Pclass</th>
+      <td>0.051791</td>
+      <td>5.0</td>
     </tr>
   </tbody>
 </table>
@@ -739,36 +687,44 @@ Accuracy of predicting test data = 0.798
 </div>
 <p>The three most influential features are:</p>
 <ul class="simple">
-<li><p><em>male</em> (being male reduces probability of survival)</p></li>
-<li><p><em>Pclass</em> (lower class passengers, who have a higher class number, reduces probability of survival)</p></li>
-<li><p><em>age</em> (being older reduces probability of survival)</p></li>
+<li><p><em>male</em></p></li>
+<li><p><em>Fare</em></p></li>
+<li><p><em>age</em></p></li>
 </ul>
+<p>Note: random forest importances do not tell us anything about the direction of effect of features (as with random forests, the direction of effect may depend on the value oif other features).</p>
 </section>
 <section id="get-shapley-values">
 <h2>Get Shapley values<a class="headerlink" href="#get-shapley-values" title="Permalink to this headline">¶</a></h2>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">shap_values</span></code> method from the SHAP library to get Shapley values.
 We use the <code class="docutils literal notranslate"><span class="pre">explainer</span></code> method from the SHAP library to get Shapley values along with other data.</p>
+<p>We pass a sample to the explainer to speed up Shap (which can be slow with random forests - these values are used as expected baseline values for features).</p>
+<p><code class="docutils literal notranslate"><span class="pre">check_additivity</span></code> has been disabled as the fit reported a small differnce between between predicted probability and baseline probability with all Shap values summed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get list of features</span>
 <span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 
 <span class="c1"># Train explainer on Training set</span>
-<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_std</span><span class="p">)</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
     
 <span class="c1"># Get Shap values (extended version has other data returned as well as shap values)</span>
-<span class="n">shapley_values_train</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">shapley_values_train_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">shapley_values_test</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-<span class="n">shapley_values_test_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<span class="n">shapley_values_train_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">check_additivity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">shapley_values_train</span> <span class="o">=</span> <span class="n">shapley_values_train_extended</span><span class="o">.</span><span class="n">values</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">shapley_values_test_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">check_additivity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">shapley_values_test</span> <span class="o">=</span> <span class="n">shapley_values_test_extended</span><span class="o">.</span><span class="n">values</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Calculate mean Shapley value for each feature in trainign set</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">importances</span><span class="p">[</span><span class="s1">&#39;mean_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">shapley_values_train</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Calculate mean absolute Shapley value for each feature in trainign set</span>
 <span class="c1"># This will give us the average importance of each feature</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+<span class="n">importances</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shapley_values_train</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|=================== | 1291/1336 [00:15&lt;00:00]       
 </pre></div>
 </div>
 </div>
@@ -776,8 +732,8 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <p>Add Shapley values to coefficient table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">co_eff_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">importances</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">importances</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -800,93 +756,82 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature</th>
-      <th>co_eff</th>
-      <th>abs_co_eff</th>
+      <th>importance</th>
+      <th>rank</th>
       <th>mean_shapley_values</th>
       <th>mean_abs_shapley_values</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Pclass</td>
-      <td>-0.599109</td>
-      <td>0.599109</td>
-      <td>-0.075577</td>
-      <td>0.553688</td>
+      <th>Pclass</th>
+      <td>0.051791</td>
+      <td>5.0</td>
+      <td>-0.004146</td>
+      <td>0.060243</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Age</td>
-      <td>-0.443450</td>
-      <td>0.443450</td>
-      <td>0.021086</td>
-      <td>0.321889</td>
+      <th>Age</th>
+      <td>0.213044</td>
+      <td>3.0</td>
+      <td>0.002032</td>
+      <td>0.051654</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>SibSp</td>
-      <td>-0.326892</td>
-      <td>0.326892</td>
-      <td>0.021006</td>
-      <td>0.215346</td>
+      <th>SibSp</th>
+      <td>0.049641</td>
+      <td>6.0</td>
+      <td>-0.000486</td>
+      <td>0.018311</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Parch</td>
-      <td>-0.120718</td>
-      <td>0.120718</td>
-      <td>0.008693</td>
-      <td>0.091400</td>
+      <th>Parch</th>
+      <td>0.037600</td>
+      <td>7.0</td>
+      <td>-0.000857</td>
+      <td>0.013924</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Fare</td>
-      <td>0.201812</td>
-      <td>0.201812</td>
-      <td>0.017323</td>
-      <td>0.103516</td>
+      <th>Fare</th>
+      <td>0.235720</td>
+      <td>2.0</td>
+      <td>-0.000917</td>
+      <td>0.061949</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>AgeImputed</td>
-      <td>-0.209965</td>
-      <td>0.209965</td>
-      <td>-0.025102</td>
-      <td>0.152032</td>
+      <th>AgeImputed</th>
+      <td>0.019413</td>
+      <td>8.0</td>
+      <td>0.000780</td>
+      <td>0.016755</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>EmbarkedImputed</td>
-      <td>0.098489</td>
-      <td>0.098489</td>
-      <td>0.005397</td>
-      <td>0.005397</td>
+      <th>EmbarkedImputed</th>
+      <td>0.000133</td>
+      <td>23.0</td>
+      <td>0.000013</td>
+      <td>0.000013</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>CabinLetterImputed</td>
-      <td>0.080356</td>
-      <td>0.080356</td>
-      <td>0.010992</td>
-      <td>0.072992</td>
+      <th>CabinLetterImputed</th>
+      <td>0.007557</td>
+      <td>13.0</td>
+      <td>-0.000580</td>
+      <td>0.005038</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>CabinNumber</td>
-      <td>0.121569</td>
-      <td>0.121569</td>
-      <td>-0.021160</td>
-      <td>0.092512</td>
+      <th>CabinNumber</th>
+      <td>0.051892</td>
+      <td>4.0</td>
+      <td>-0.002880</td>
+      <td>0.029931</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>CabinNumberImputed</td>
-      <td>-0.383161</td>
-      <td>0.383161</td>
-      <td>-0.061586</td>
-      <td>0.349546</td>
+      <th>CabinNumberImputed</th>
+      <td>0.018340</td>
+      <td>9.0</td>
+      <td>-0.002088</td>
+      <td>0.021056</td>
     </tr>
   </tbody>
 </table>
@@ -896,16 +841,15 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get top 10 features</span>
-<span class="n">co_eff_top_10</span> <span class="o">=</span> \
-    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
-
+<span class="n">importance_top_10</span> <span class="o">=</span> \
+    <span class="n">importances</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
 <span class="n">shapley_top_10</span> <span class="o">=</span> \
-    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
-    <span class="n">by</span><span class="o">=</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
+    <span class="n">importances</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="n">by</span><span class="o">=</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
 
 <span class="c1"># Add to DataFrame</span>
 <span class="n">top_10_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Coefficients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co_eff_top_10</span><span class="o">.</span><span class="n">values</span>
+<span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;importances&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importance_top_10</span><span class="o">.</span><span class="n">values</span>
 <span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Shapley&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shapley_top_10</span><span class="o">.</span><span class="n">values</span>
 
 <span class="c1"># Display</span>
@@ -932,7 +876,7 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Coefficients</th>
+      <th>importances</th>
       <th>Shapley</th>
     </tr>
   </thead>
@@ -944,73 +888,73 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
     </tr>
     <tr>
       <th>1</th>
-      <td>Pclass</td>
-      <td>Pclass</td>
+      <td>Fare</td>
+      <td>Fare</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Age</td>
-      <td>CabinNumberImputed</td>
+      <td>Pclass</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>CabinNumberImputed</td>
+      <td>CabinNumber</td>
       <td>Age</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>SibSp</td>
-      <td>SibSp</td>
+      <td>Pclass</td>
+      <td>CabinNumber</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>CabinLetter_C</td>
-      <td>AgeImputed</td>
+      <td>SibSp</td>
+      <td>CabinNumberImputed</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>AgeImputed</td>
-      <td>CabinLetter_C</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Fare</td>
+      <td>Parch</td>
       <td>Embarked_S</td>
     </tr>
     <tr>
+      <th>7</th>
+      <td>AgeImputed</td>
+      <td>SibSp</td>
+    </tr>
+    <tr>
       <th>8</th>
-      <td>CabinLetter_E</td>
-      <td>Fare</td>
+      <td>CabinNumberImputed</td>
+      <td>Embarked_C</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>CabinLetter_T</td>
-      <td>CabinLetter_E</td>
+      <td>Embarked_S</td>
+      <td>AgeImputed</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <p>We can see a lot of overlap between the most import fatures as estimated by coefficients and those estimated using mean absolute Shapley values. But they are not identical.</p>
-<p>Plot comparison of Shapley and model coefficients:</p>
+<p>Plot comparison of Shapley and mode coefficients:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 <span class="c1"># Plot points</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">importances</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">importances</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Shapley value vs model weight (coefficient) for each feature&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mean absolute Shapley value&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Feature co-efficent (abs)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Feature importance&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_31_0.png" src="_images/26_logistic_regression_shap_31_0.png" />
+<img alt="_images/27_random_forest_shap_27_0.png" src="_images/27_random_forest_shap_27_0.png" />
 </div>
 </div>
 </section>
@@ -1036,7 +980,7 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_33_0.png" src="_images/26_logistic_regression_shap_33_0.png" />
+<img alt="_images/27_random_forest_shap_29_0.png" src="_images/27_random_forest_shap_29_0.png" />
 </div>
 </div>
 </section>
@@ -1058,7 +1002,7 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_35_0.png" src="_images/26_logistic_regression_shap_35_0.png" />
+<img alt="_images/27_random_forest_shap_31_0.png" src="_images/27_random_forest_shap_31_0.png" />
 </div>
 </div>
 </section>
@@ -1066,48 +1010,42 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <h3>Waterfall plot<a class="headerlink" href="#waterfall-plot" title="Permalink to this headline">¶</a></h3>
 <p>Waterfall plots show the influence of  individual features on model prediction. These are shown as the effect on <em>log odds ratio</em> of survival. <em>Log odds ratio</em> are usually shown as these are additive, whereas probabilities are not.</p>
 <p>Waterfall plots put the most influential features at the top.</p>
+<p>Get locations of passengers with low or high probability of survival.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Get the location of an example each where porbability of giving thrombolysis</span>
+<span class="c1"># is &lt;0.01 or &gt;0.99</span>
+
+<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob</span> <span class="o">&gt;</span> <span class="mf">0.95</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Waterfall plot for passenger with lowest probability of survival:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-
-<span class="c1"># For waterfall plot with feature names shap needs a df with feature names</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
-
-<span class="c1"># Fit explainer model and get Shap values</span>
-<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
-<span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="c1"># Get probability of survival</span>
-<span class="n">y_probs_survive</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">df</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># Get index of lowest survival probability</span>
-<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_probs</span> <span class="o">==</span> <span class="n">y_probs_survive</span><span class="o">.</span><span class="n">min</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Waterfall plot</span>
-<span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shapley_values_test_extended</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
+                     <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X has feature names, but LogisticRegression was fitted without feature names
-</pre></div>
-</div>
-<img alt="_images/26_logistic_regression_shap_38_1.png" src="_images/26_logistic_regression_shap_38_1.png" />
+<img alt="_images/27_random_forest_shap_36_0.png" src="_images/27_random_forest_shap_36_0.png" />
 </div>
 </div>
-<p>Waterfall plot for passenger with highest probability of survival:</p>
+<p>Waterfall plot for passenger with high probability of survival:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get index of lowest survival probability</span>
-<span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_probs</span> <span class="o">==</span> <span class="n">y_probs_survive</span><span class="o">.</span><span class="n">max</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Waterfall plot</span>
-<span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shapley_values_test_extended</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> 
+                     <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_40_0.png" src="_images/26_logistic_regression_shap_40_0.png" />
+<img alt="_images/27_random_forest_shap_38_0.png" src="_images/27_random_forest_shap_38_0.png" />
 </div>
 </div>
 </section>
@@ -1116,14 +1054,20 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <p>A scattter plot for one or more features shows the relationship between the feature value and the Shap value, along with a histogram of the frequency of the feature values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[:,[</span><span class="s1">&#39;Fare&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">]])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">shapley_top_10</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">feat_to_show</span><span class="p">:</span>
+    <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shapley_values_test_extended</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">x_jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_42_0.png" src="_images/26_logistic_regression_shap_42_0.png" />
+<img alt="_images/27_random_forest_shap_40_0.png" src="_images/27_random_forest_shap_40_0.png" />
+<img alt="_images/27_random_forest_shap_40_1.png" src="_images/27_random_forest_shap_40_1.png" />
+<img alt="_images/27_random_forest_shap_40_2.png" src="_images/27_random_forest_shap_40_2.png" />
 </div>
 </div>
+<p>Note: unlike a logistic regression model, Shap values are not linearly releated to feature values. This is because of the more flexible classification method in random forests.</p>
 </section>
 </section>
 </section>
@@ -1158,19 +1102,19 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="25_tensorflow_bagging.html" title="previous page">
+        <a class="left-prev" href="26_logistic_regression_shap.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">TensorFlow Bagging</p>
+                <p class="prevnext-title">Explaining model predictions with Shapley values - Logistic Regression</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="27_random_forest_shap.html" title="next page">
+        <a class="right-next" href="30_synthetic_data%20_SMOTE.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Explaining model predictions with Shapley values - Random Forest</p>
+                <p class="prevnext-title">Creating synthetic Titanic passenger data with SMOTE</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
