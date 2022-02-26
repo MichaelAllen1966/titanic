@@ -90,6 +90,14 @@ A popular framework for building neural networks.
 
 * *TensorFlow Bagging*: Train multiple networks to improve accuracy and/or get a measure of prediction uncertainty.
 
+## PyTORCH NEURAL NETS
+
+Another popular framework for building neural networks. PyTorch frequently requires more lines of code than TensorFlow, but is more Pythonic.
+
+* *PyTorch simple sequential neural net*: The simplest neural network architecture in PyTorch.
+
+* *PyTorch class-based neural net*: A more flexible PyTorch neural net architecture.
+
 ## MODEL EXPLAINABILITY
 
 * *Explaining model predictions with Shapley values - Logistic Regression*: Shapley values provide the contribution of each feature to predictions (either for individual predictions or for the model as a whole). Here we provide an example using logistic regression.
