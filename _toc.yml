@@ -43,6 +43,10 @@ parts:
   - file: 21_tensorflow_roc
   - file: 22_tensorflow_deep_wide
   - file: 25_tensorflow_bagging
+- caption: Pytorch neural nets
+  chapters:
+  - file: 45_pytorch_simple
+  - file: 46_pytorch_class
 - caption: Model explainability
   chapters:
   - file: 26_logistic_regression_shap
