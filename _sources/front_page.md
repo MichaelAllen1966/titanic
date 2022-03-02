@@ -104,4 +104,6 @@ Another popular framework for building neural networks. PyTorch frequently requi
 
 * *Explaining model predictions with Shapley values - Random Forest*: An example of using Shap with Random Forests, which requires a slightly different syntax to logistic regression.
 
+* *Explaining model predictions with Shapley values - Neural Network*: An example of using Shap with a TensorFlow/Keras neural network.
+
 

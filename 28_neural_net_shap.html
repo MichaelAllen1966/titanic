@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Explaining model predictions with Shapley values - Logistic Regression &#8212; Titanic Survival Machine Learning</title>
+    <title>Explaining model predictions with Shapley values - Neural Network &#8212; Titanic Survival Machine Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -52,8 +52,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Explaining model predictions with Shapley values - Random Forest" href="27_random_forest_shap.html" />
-    <link rel="prev" title="PyTorch class-based neural net" href="46_pytorch_class.html" />
+    <link rel="next" title="Creating synthetic Titanic passenger data with SMOTE" href="30_synthetic_data%20_SMOTE.html" />
+    <link rel="prev" title="Explaining model predictions with Shapley values - Random Forest" href="27_random_forest_shap.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -298,8 +298,8 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="26_logistic_regression_shap.html">
    Explaining model predictions with Shapley values - Logistic Regression
   </a>
  </li>
@@ -308,8 +308,8 @@
    Explaining model predictions with Shapley values - Random Forest
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="28_neural_net_shap.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Explaining model predictions with Shapley values - Neural Network
   </a>
  </li>
@@ -366,7 +366,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/26_logistic_regression_shap.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/28_neural_net_shap.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -411,6 +411,13 @@
      Load data
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-to-scale-data">
+   Function to scale data
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
      Divide into X (features) and y (labels)
@@ -422,20 +429,17 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#standardise-data">
-     Standardise data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-logistic-regression-model">
-     Fit logistic regression model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#predict-values-and-get-probabilities-of-survival">
      Predict values and get probabilities of survival
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-and-train-neural-net">
+   Build and train neural net
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#calculate-accuracy">
      Calculate accuracy
@@ -444,41 +448,19 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examining-the-model-coefficients-weights">
-   Examining the model coefficients (weights)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#get-shapley-values">
    Get Shapley values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plots-of-shapley-values">
-   Plots of Shapley values
+  <a class="reference internal nav-link" href="#shap-summary-plot-feature-influence">
+   Shap Summary plot - feature influence
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#summary-plot">
-     Summary plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#beeswarm-plot">
-     Beeswarm plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#waterfall-plot">
-     Waterfall plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#scatter-plot">
-     Scatter plot
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-relationship-between-feature-values-and-shap">
+   Show relationship between feature values and Shap
+  </a>
  </li>
 </ul>
 
@@ -491,16 +473,16 @@
         
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values-logistic-regression">
-<h1>Explaining model predictions with Shapley values - Logistic Regression<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-logistic-regression" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values-neural-network">
+<h1>Explaining model predictions with Shapley values - Neural Network<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-neural-network" title="Permalink to this headline">¶</a></h1>
 <p>Shapley values provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
 <p>Shapley values may be used across model types, and so provide a <em>model-agnostic</em> measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows <em>black box</em> models like neural networks to be explained, at least in part.</p>
-<p>Here we will demonstrate Shapley values with logistic regression.</p>
+<p>Here we will demonstrate Shapley values with random forests.</p>
 <p>For more on Shapley values in general see Chris Molner’s excellent book chapter:</p>
 <p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shapley.html">https://christophm.github.io/interpretable-ml-book/shapley.html</a></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">shap</span></code> package is installed if you have used the Titanic environment yasml file, but otherwise may be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code>.</p>
 <p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, inclusiong lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
-<p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with logistic regression. Logistic regression is the model type which least needs an <em>explainer</em> but it provides a useful example for learning about <code class="docutils literal notranslate"><span class="pre">shap</span></code> as Shapley values may be compared with model coefficients.</p>
+<p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with Neural Networks.</p>
 <section id="load-data-and-fit-model">
 <h2>Load data and fit model<a class="headerlink" href="#load-data-and-fit-model" title="Permalink to this headline">¶</a></h2>
 <section id="load-modules">
@@ -510,12 +492,31 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
 <span class="c1"># Import machine learning methods</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># TensorFlow api model</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="n">binary_crossentropy</span>
+
 <span class="c1"># Import shap for shapley values</span>
 <span class="kn">import</span> <span class="nn">shap</span> <span class="c1"># `pip install shap` if neeed</span>
+
+<span class="c1"># For tidying up output</span>
+<span class="c1"># Clear output</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-02 20:36:48.890756: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
 </pre></div>
 </div>
 </div>
@@ -561,6 +562,30 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </section>
+</section>
+<section id="function-to-scale-data">
+<h2>Function to scale data<a class="headerlink" href="#function-to-scale-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scale_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scale data 0-1 based on min and max in training set&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Initialise a new scaling object for normalising input data</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+    <span class="c1"># Set up the scaler just on the training set</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># Apply the scaler to the training and test sets</span>
+    <span class="n">train_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">test_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_sc</span><span class="p">,</span> <span class="n">test_sc</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
 <section id="divide-into-x-features-and-y-labels">
 <h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
@@ -590,70 +615,85 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </section>
-<section id="standardise-data">
-<h3>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h3>
-<p>Use SciKit learn method for standardising data.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
-    
-    <span class="c1"># Initialise a new scaling object for normalising input data</span>
-    <span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> 
-
-    <span class="c1"># Set up the scaler just on the training set</span>
-    <span class="n">sc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-
-    <span class="c1"># Apply the scaler to the training and test sets</span>
-    <span class="n">train_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    <span class="n">test_std</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">train_std</span><span class="p">,</span> <span class="n">test_std</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">X_test_std</span> <span class="o">=</span> <span class="n">standardise_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="fit-logistic-regression-model">
-<h3>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h3>
-<p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LogisticRegression(random_state=42)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="predict-values-and-get-probabilities-of-survival">
 <h3>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">¶</a></h3>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
+</section>
+</section>
+<section id="build-and-train-neural-net">
+<h2>Build and train neural net<a class="headerlink" href="#build-and-train-neural-net" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict training and test set labels</span>
-<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-
-<span class="c1"># Predict probabilities of survival</span>
-<span class="n">y_prob_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">y_prob_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">):</span>
+    
+    <span class="c1"># Clear Tensorflow</span>
+    <span class="n">K</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+    
+    <span class="c1"># Define layers</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">number_features</span><span class="p">)</span>
+    <span class="n">dense_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">dropout_1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">dense_1</span><span class="p">)</span>
+    <span class="n">dense_2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">dropout_1</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">dense_2</span><span class="p">)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+    
+    <span class="c1"># Compiling model</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">net</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale X data</span>
+<span class="n">X_train_sc</span><span class="p">,</span> <span class="n">X_test_sc</span> <span class="o">=</span> <span class="n">scale_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Define network</span>
+<span class="n">number_features</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
+
+<span class="c1"># Define save checkpoint callback (only save if new best validation results)</span>
+<span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="s1">&#39;model_checkpoint.h5&#39;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Define early stopping callback: Stop when no validation improvement</span>
+<span class="c1"># Restore weights to best validation accuracy</span>
+<span class="n">early_stopping_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Fit model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span>
+         <span class="n">y_train</span><span class="p">,</span>
+         <span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+         <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+         <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+         <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">,</span> <span class="n">early_stopping_cb</span><span class="p">],</span>
+         <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Clear output</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">clear_output</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict probabilities and class of survival</span>
+<span class="n">y_prob_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">)</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">y_prob_train</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">y_pred_train</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">y_prob_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">)</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">y_prob_test</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">y_pred_test</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="calculate-accuracy">
 <h3>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h3>
 <p>In this example we will measure accuracy simply as the proportion of passengers where we make the correct prediction. In a later notebook we will look at other measures of accuracy which explore false positives and false negatives in more detail.</p>
@@ -668,138 +708,61 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.808
-Accuracy of predicting test data = 0.798
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.831
+Accuracy of predicting test data = 0.812
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="examining-the-model-coefficients-weights">
-<h2>Examining the model coefficients (weights)<a class="headerlink" href="#examining-the-model-coefficients-weights" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get model co_efficients</span>
-<span class="n">co_eff</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Put in DataFrame and sort by effect size</span>
-<span class="n">co_eff_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1"># Get feature names from X</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;co_eff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co_eff</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">co_eff</span><span class="p">)</span>
-<span class="n">co_eff_df_sorted</span> <span class="o">=</span> \
-    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co_eff_df_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>feature</th>
-      <th>co_eff</th>
-      <th>abs_co_eff</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>10</th>
-      <td>male</td>
-      <td>-1.285766</td>
-      <td>1.285766</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Pclass</td>
-      <td>-0.599109</td>
-      <td>0.599109</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Age</td>
-      <td>-0.443450</td>
-      <td>0.443450</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CabinNumberImputed</td>
-      <td>-0.383161</td>
-      <td>0.383161</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>SibSp</td>
-      <td>-0.326892</td>
-      <td>0.326892</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>The three most influential features are:</p>
-<ul class="simple">
-<li><p><em>male</em> (being male reduces probability of survival)</p></li>
-<li><p><em>Pclass</em> (lower class passengers, who have a higher class number, reduces probability of survival)</p></li>
-<li><p><em>age</em> (being older reduces probability of survival)</p></li>
-</ul>
 </section>
 <section id="get-shapley-values">
 <h2>Get Shapley values<a class="headerlink" href="#get-shapley-values" title="Permalink to this headline">¶</a></h2>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">shap_values</span></code> method from the SHAP library to get Shapley values.
 We use the <code class="docutils literal notranslate"><span class="pre">explainer</span></code> method from the SHAP library to get Shapley values along with other data.</p>
+<p>We pass a sample to the explainer to speed up Shap (which can be slow with random forests - these values are used as expected baseline values for features).</p>
+<p><code class="docutils literal notranslate"><span class="pre">check_additivity</span></code> has been disabled as the fit reported a small differnce between between predicted probability and baseline probability with all Shap values summed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get list of features</span>
 <span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 
+<span class="c1"># Get reduced sample for the shap calculations</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train_sc_sample</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+    <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="p">:]</span>
+
 <span class="c1"># Train explainer on Training set</span>
-<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_std</span><span class="p">)</span>
-    
-<span class="c1"># Get Shap values (extended version has other data returned as well as shap values)</span>
-<span class="n">shapley_values_train</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">shapley_values_train_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">)</span>
-<span class="n">shapley_values_test</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-<span class="n">shapley_values_test_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<span class="n">explainer_d</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">DeepExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_sc_sample</span><span class="p">)</span>
 
-<span class="c1"># Calculate mean Shapley value for each feature in trainign set</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># Calculate mean absolute Shapley value for each feature in trainign set</span>
-<span class="c1"># This will give us the average importance of each feature</span>
-<span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shapley_values_train</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Clear output</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">clear_output</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Add Shapley values to coefficient table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">co_eff_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_values_deep_explainer</span> <span class="o">=</span> <span class="n">explainer_d</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">)</span>
+
+<span class="c1"># Clear output</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">clear_output</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But Shapley values in DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">shap_values_deep_explainer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_df</span>
 </pre></div>
 </div>
 </div>
@@ -822,235 +785,350 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature</th>
-      <th>co_eff</th>
-      <th>abs_co_eff</th>
-      <th>mean_shapley_values</th>
-      <th>mean_abs_shapley_values</th>
+      <th>Pclass</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+      <th>AgeImputed</th>
+      <th>EmbarkedImputed</th>
+      <th>CabinLetterImputed</th>
+      <th>CabinNumber</th>
+      <th>CabinNumberImputed</th>
+      <th>...</th>
+      <th>Embarked_missing</th>
+      <th>CabinLetter_A</th>
+      <th>CabinLetter_B</th>
+      <th>CabinLetter_C</th>
+      <th>CabinLetter_D</th>
+      <th>CabinLetter_E</th>
+      <th>CabinLetter_F</th>
+      <th>CabinLetter_G</th>
+      <th>CabinLetter_T</th>
+      <th>CabinLetter_missing</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Pclass</td>
-      <td>-0.599109</td>
-      <td>0.599109</td>
-      <td>-0.075577</td>
-      <td>0.553688</td>
+      <td>0.098445</td>
+      <td>0.001397</td>
+      <td>0.007442</td>
+      <td>0.003490</td>
+      <td>-0.000497</td>
+      <td>-0.034818</td>
+      <td>0.0</td>
+      <td>0.002282</td>
+      <td>0.035604</td>
+      <td>0.042212</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.001898</td>
+      <td>-0.003724</td>
+      <td>0.035959</td>
+      <td>-0.006157</td>
+      <td>-0.015634</td>
+      <td>-0.010641</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.017271</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Age</td>
-      <td>-0.443450</td>
-      <td>0.443450</td>
-      <td>0.021086</td>
-      <td>0.321889</td>
+      <td>-0.045416</td>
+      <td>0.006942</td>
+      <td>0.005792</td>
+      <td>0.001112</td>
+      <td>-0.004107</td>
+      <td>0.008882</td>
+      <td>0.0</td>
+      <td>-0.002975</td>
+      <td>-0.002125</td>
+      <td>-0.012360</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.001338</td>
+      <td>-0.003956</td>
+      <td>-0.000040</td>
+      <td>-0.003890</td>
+      <td>-0.010858</td>
+      <td>-0.006398</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.002217</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>SibSp</td>
-      <td>-0.326892</td>
-      <td>0.326892</td>
-      <td>0.021006</td>
-      <td>0.215346</td>
+      <td>0.098913</td>
+      <td>0.013724</td>
+      <td>0.017021</td>
+      <td>-0.026259</td>
+      <td>-0.006155</td>
+      <td>0.025613</td>
+      <td>0.0</td>
+      <td>0.012995</td>
+      <td>-0.005646</td>
+      <td>-0.009409</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.004275</td>
+      <td>-0.007673</td>
+      <td>0.001622</td>
+      <td>-0.009820</td>
+      <td>-0.021596</td>
+      <td>-0.017095</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.006917</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Parch</td>
-      <td>-0.120718</td>
-      <td>0.120718</td>
-      <td>0.008693</td>
-      <td>0.091400</td>
+      <td>-0.046223</td>
+      <td>0.013214</td>
+      <td>0.005890</td>
+      <td>0.001104</td>
+      <td>-0.004073</td>
+      <td>0.009331</td>
+      <td>0.0</td>
+      <td>-0.003120</td>
+      <td>-0.002150</td>
+      <td>-0.012497</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.001330</td>
+      <td>-0.004028</td>
+      <td>0.000003</td>
+      <td>-0.003903</td>
+      <td>-0.011039</td>
+      <td>-0.006508</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.002111</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Fare</td>
-      <td>0.201812</td>
-      <td>0.201812</td>
-      <td>0.017323</td>
-      <td>0.103516</td>
+      <td>0.127488</td>
+      <td>0.086945</td>
+      <td>-0.009431</td>
+      <td>-0.002687</td>
+      <td>0.023811</td>
+      <td>0.009654</td>
+      <td>0.0</td>
+      <td>-0.001463</td>
+      <td>-0.000684</td>
+      <td>0.042646</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.002405</td>
+      <td>-0.005786</td>
+      <td>0.011592</td>
+      <td>-0.004740</td>
+      <td>-0.018059</td>
+      <td>-0.011991</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.002778</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>AgeImputed</td>
-      <td>-0.209965</td>
-      <td>0.209965</td>
-      <td>-0.025102</td>
-      <td>0.152032</td>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>EmbarkedImputed</td>
-      <td>0.098489</td>
-      <td>0.098489</td>
-      <td>0.005397</td>
-      <td>0.005397</td>
+      <th>663</th>
+      <td>-0.114203</td>
+      <td>0.019386</td>
+      <td>0.012780</td>
+      <td>0.007201</td>
+      <td>-0.008669</td>
+      <td>0.015555</td>
+      <td>0.0</td>
+      <td>0.005439</td>
+      <td>-0.007165</td>
+      <td>-0.013847</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.003343</td>
+      <td>-0.009402</td>
+      <td>0.000524</td>
+      <td>-0.008870</td>
+      <td>-0.021366</td>
+      <td>-0.015232</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.001641</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>CabinLetterImputed</td>
-      <td>0.080356</td>
-      <td>0.080356</td>
-      <td>0.010992</td>
-      <td>0.072992</td>
+      <th>664</th>
+      <td>0.106357</td>
+      <td>0.000379</td>
+      <td>0.006967</td>
+      <td>0.002531</td>
+      <td>-0.000483</td>
+      <td>-0.065295</td>
+      <td>0.0</td>
+      <td>-0.000753</td>
+      <td>-0.003094</td>
+      <td>-0.011511</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.001676</td>
+      <td>-0.004879</td>
+      <td>-0.000939</td>
+      <td>-0.005136</td>
+      <td>-0.011329</td>
+      <td>-0.008402</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.001083</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>CabinNumber</td>
-      <td>0.121569</td>
-      <td>0.121569</td>
-      <td>-0.021160</td>
-      <td>0.092512</td>
+      <th>665</th>
+      <td>-0.039810</td>
+      <td>-0.022108</td>
+      <td>-0.018251</td>
+      <td>0.001077</td>
+      <td>-0.002772</td>
+      <td>0.007429</td>
+      <td>0.0</td>
+      <td>-0.003292</td>
+      <td>-0.002034</td>
+      <td>-0.011751</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.001192</td>
+      <td>-0.003412</td>
+      <td>-0.000191</td>
+      <td>-0.003612</td>
+      <td>-0.009277</td>
+      <td>-0.005902</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.003203</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>CabinNumberImputed</td>
-      <td>-0.383161</td>
-      <td>0.383161</td>
-      <td>-0.061586</td>
-      <td>0.349546</td>
+      <th>666</th>
+      <td>0.156572</td>
+      <td>0.032117</td>
+      <td>-0.007323</td>
+      <td>-0.009998</td>
+      <td>0.036647</td>
+      <td>0.014443</td>
+      <td>0.0</td>
+      <td>-0.007409</td>
+      <td>0.044108</td>
+      <td>0.034685</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.002717</td>
+      <td>0.114433</td>
+      <td>0.001810</td>
+      <td>-0.006423</td>
+      <td>-0.014260</td>
+      <td>-0.009320</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.007129</td>
+    </tr>
+    <tr>
+      <th>667</th>
+      <td>0.135308</td>
+      <td>0.024840</td>
+      <td>0.008454</td>
+      <td>-0.002092</td>
+      <td>0.015274</td>
+      <td>0.004051</td>
+      <td>0.0</td>
+      <td>-0.005559</td>
+      <td>0.002974</td>
+      <td>0.030481</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>-0.003455</td>
+      <td>-0.009557</td>
+      <td>0.000854</td>
+      <td>0.217715</td>
+      <td>-0.023287</td>
+      <td>-0.014338</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.008944</td>
     </tr>
   </tbody>
 </table>
+<p>668 rows × 24 columns</p>
 </div></div></div>
 </div>
-<p>Get top 10 influenctial features by co-effieceints or Shapley</p>
+<p>Get mean absolute Shap values and sort.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get top 10 features</span>
-<span class="n">co_eff_top_10</span> <span class="o">=</span> \
-    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
-
-<span class="n">shapley_top_10</span> <span class="o">=</span> \
-    <span class="n">co_eff_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
-    <span class="n">by</span><span class="o">=</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
-
-<span class="c1"># Add to DataFrame</span>
-<span class="n">top_10_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Coefficients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co_eff_top_10</span><span class="o">.</span><span class="n">values</span>
-<span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Shapley&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">shapley_top_10</span><span class="o">.</span><span class="n">values</span>
-
-<span class="c1"># Display</span>
-<span class="n">top_10_features</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_abs_shap</span> <span class="o">=</span> <span class="n">shap_df</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_abs_shap</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mean_abs_shap</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Coefficients</th>
-      <th>Shapley</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>male</td>
-      <td>male</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Pclass</td>
-      <td>Pclass</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Age</td>
-      <td>CabinNumberImputed</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CabinNumberImputed</td>
-      <td>Age</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>SibSp</td>
-      <td>SibSp</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CabinLetter_C</td>
-      <td>AgeImputed</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>AgeImputed</td>
-      <td>CabinLetter_C</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Fare</td>
-      <td>Embarked_S</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CabinLetter_E</td>
-      <td>Fare</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CabinLetter_T</td>
-      <td>CabinLetter_E</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>We can see a lot of overlap between the most import fatures as estimated by coefficients and those estimated using mean absolute Shapley values. But they are not identical.</p>
-<p>Plot comparison of Shapley and model coefficients:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="c1"># Plot points</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;abs_co_eff&#39;</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">co_eff_df</span><span class="p">[</span><span class="s1">&#39;mean_abs_shapley_values&#39;</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Shapley value vs model weight (coefficient) for each feature&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mean absolute Shapley value&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Feature co-efficent (abs)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>male                   0.206800
+Pclass                 0.074146
+Embarked_C             0.040149
+CabinLetter_E          0.023687
+Age                    0.021404
+AgeImputed             0.018218
+CabinNumberImputed     0.017475
+CabinLetter_F          0.013398
+SibSp                  0.012550
+CabinLetter_D          0.012345
+Embarked_Q             0.012108
+CabinLetter_B          0.010263
+Fare                   0.008442
+CabinLetterImputed     0.006899
+Embarked_S             0.006879
+CabinNumber            0.006602
+CabinLetter_missing    0.004991
+CabinLetter_A          0.004041
+Parch                  0.004005
+CabinLetter_C          0.002358
+Embarked_missing       0.000437
+CabinLetter_G          0.000417
+EmbarkedImputed        0.000266
+CabinLetter_T          0.000147
+dtype: float64
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_31_0.png" src="_images/26_logistic_regression_shap_31_0.png" />
 </div>
 </div>
 </section>
-<section id="plots-of-shapley-values">
-<h2>Plots of Shapley values<a class="headerlink" href="#plots-of-shapley-values" title="Permalink to this headline">¶</a></h2>
-<section id="summary-plot">
-<h3>Summary plot<a class="headerlink" href="#summary-plot" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> using a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code> gives us the overall importance of each feature across the population.</p>
-<p>Here we limit the num,ber of features shown to 15 (default is 20).</p>
+<section id="shap-summary-plot-feature-influence">
+<h2>Shap Summary plot - feature influence<a class="headerlink" href="#shap-summary-plot-feature-influence" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
-<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="p">,</span> 
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_deep_explainer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
                   <span class="n">features</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                   <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                   <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span>
-                  <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                  <span class="n">max_display</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                   <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1058,20 +1136,17 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_33_0.png" src="_images/26_logistic_regression_shap_33_0.png" />
+<img alt="_images/28_neural_net_shap_28_0.png" src="_images/28_neural_net_shap_28_0.png" />
 </div>
 </div>
-</section>
-<section id="beeswarm-plot">
-<h3>Beeswarm plot<a class="headerlink" href="#beeswarm-plot" title="Permalink to this headline">¶</a></h3>
-<p>Without specifying a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> gives us a <em>beeswarm</em> plot, showing the Shapley values for all instances.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
-<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">shapley_values_train</span><span class="p">,</span> 
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_deep_explainer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
                   <span class="n">features</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                   <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                  <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span>
                   <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
                   <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -1080,73 +1155,74 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_35_0.png" src="_images/26_logistic_regression_shap_35_0.png" />
+<img alt="_images/28_neural_net_shap_29_0.png" src="_images/28_neural_net_shap_29_0.png" />
 </div>
 </div>
-</section>
-<section id="waterfall-plot">
-<h3>Waterfall plot<a class="headerlink" href="#waterfall-plot" title="Permalink to this headline">¶</a></h3>
-<p>Waterfall plots show the influence of  individual features on model prediction. These are shown as the effect on <em>log odds ratio</em> of survival. <em>Log odds ratio</em> are usually shown as these are additive, whereas probabilities are not.</p>
-<p>Waterfall plots put the most influential features at the top.</p>
-<p>Waterfall plot for passenger with lowest probability of survival:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
-
-<span class="c1"># For waterfall plot with feature names shap needs a df with feature names</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
-
-<span class="c1"># Fit explainer model and get Shap values</span>
-<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
-<span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="c1"># Get probability of survival</span>
-<span class="n">y_probs_survive</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">df</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># Get index of lowest survival probability</span>
-<span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_probs</span> <span class="o">==</span> <span class="n">y_probs_survive</span><span class="o">.</span><span class="n">min</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Waterfall plot</span>
-<span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="n">location_low_probability</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">location_low_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob_train</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_prob_train</span> <span class="o">&gt;</span> <span class="mf">0.95</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">_waterfall</span><span class="o">.</span><span class="n">waterfall_legacy</span><span class="p">(</span>
+    <span class="n">explainer_d</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> 
+    <span class="n">shap_values_deep_explainer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">location_low_probability</span><span class="p">],</span>
+    <span class="n">max_display</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">feature_names</span> <span class="o">=</span> <span class="n">features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X has feature names, but LogisticRegression was fitted without feature names
-</pre></div>
-</div>
-<img alt="_images/26_logistic_regression_shap_38_1.png" src="_images/26_logistic_regression_shap_38_1.png" />
+<img alt="_images/28_neural_net_shap_31_0.png" src="_images/28_neural_net_shap_31_0.png" />
 </div>
 </div>
-<p>Waterfall plot for passenger with highest probability of survival:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get index of lowest survival probability</span>
-<span class="n">location_high_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_probs</span> <span class="o">==</span> <span class="n">y_probs_survive</span><span class="o">.</span><span class="n">max</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">_waterfall</span><span class="o">.</span><span class="n">waterfall_legacy</span><span class="p">(</span>
+    <span class="n">explainer_d</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> 
+    <span class="n">shap_values_deep_explainer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">location_high_probability</span><span class="p">],</span>
+    <span class="n">max_display</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">feature_names</span> <span class="o">=</span> <span class="n">features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/28_neural_net_shap_32_0.png" src="_images/28_neural_net_shap_32_0.png" />
+</div>
+</div>
+</section>
+<section id="show-relationship-between-feature-values-and-shap">
+<h2>Show relationship between feature values and Shap<a class="headerlink" href="#show-relationship-between-feature-values-and-shap" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">shap.plots.scatter</span></code>, as used for logistic regression and random forests, does not work with DeepExplainer for neural nets. Here we manually plot feature values and their matching Shap value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show four most influential features</span>
+<span class="n">feat_to_show</span> <span class="o">=</span> <span class="n">mean_abs_shap</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 
-<span class="c1"># Waterfall plot</span>
-<span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="n">location_high_probability</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">feat_to_show</span><span class="p">:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">shap_df</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1"> value&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Shap&#39;</span><span class="p">)</span>    
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_40_0.png" src="_images/26_logistic_regression_shap_40_0.png" />
+<img alt="_images/28_neural_net_shap_34_0.png" src="_images/28_neural_net_shap_34_0.png" />
+<img alt="_images/28_neural_net_shap_34_1.png" src="_images/28_neural_net_shap_34_1.png" />
+<img alt="_images/28_neural_net_shap_34_2.png" src="_images/28_neural_net_shap_34_2.png" />
+<img alt="_images/28_neural_net_shap_34_3.png" src="_images/28_neural_net_shap_34_3.png" />
 </div>
 </div>
-</section>
-<section id="scatter-plot">
-<h3>Scatter plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h3>
-<p>A scattter plot for one or more features shows the relationship between the feature value and the Shap value, along with a histogram of the frequency of the feature values.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[:,[</span><span class="s1">&#39;Fare&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/26_logistic_regression_shap_42_0.png" src="_images/26_logistic_regression_shap_42_0.png" />
-</div>
-</div>
-</section>
 </section>
 </section>
 
@@ -1180,19 +1256,19 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="46_pytorch_class.html" title="previous page">
+        <a class="left-prev" href="27_random_forest_shap.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">PyTorch class-based neural net</p>
+                <p class="prevnext-title">Explaining model predictions with Shapley values - Random Forest</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="27_random_forest_shap.html" title="next page">
+        <a class="right-next" href="30_synthetic_data%20_SMOTE.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Explaining model predictions with Shapley values - Random Forest</p>
+                <p class="prevnext-title">Creating synthetic Titanic passenger data with SMOTE</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
