@@ -2,6 +2,8 @@ name: titanic
 channels:
   - defaults
 dependencies:
+  - jupyter
+  - jupyterlab
   - matplotlib
   - numpy
   - pandas
@@ -9,12 +11,13 @@ dependencies:
   - python=3.8
   - scikit-learn
   - tensorflow-gpu=2.4
+  - tensorflow-estimator=2.4
   - pip:
-    - jupyterlab
     - pydot
     - graphviz
     - imblearn
     - imbalanced-learn
+    - ipywidgets
     - shap
     - diffprivlib
     - optuna
