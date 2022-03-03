@@ -397,6 +397,11 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validation-and-testing-when-optimising-hyperparameters">
+   Validation and testing when optimising hyperparameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#optimize-a-simple-problem">
    Optimize a simple problem
   </a>
@@ -412,6 +417,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-train-and-test-hold-out-sets">
+   Create train and test (hold-out) sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#optimize-hyperparameters">
    Optimize Hyperparameters
   </a>
@@ -424,6 +434,16 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#optimize-hyperparameters-of-the-model">
      Optimize hyperparameters of the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#passing-arguments-to-a-trial">
+     Passing arguments to a trial
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-model-accuracy-on-the-hold-out-test-set">
+     Checking model accuracy on the hold-out test set
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -459,6 +479,11 @@
    Random search
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-hyperparamters-may-be-changed">
+   What hyperparamters may be changed?
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -472,17 +497,28 @@
                 
   <section class="tex2jax_ignore mathjax_ignore" id="optimising-machine-learning-models-with-optuna">
 <h1>Optimising machine learning models with Optuna<a class="headerlink" href="#optimising-machine-learning-models-with-optuna" title="Permalink to this headline">¶</a></h1>
-<p>Many machien learning models have many hyperparameters that may be changed, and each may have many different possible levels to choose from. How do you find the best combination (though most machine learning packages come with sensible defaults which may already give optimal or close to optimal results).</p>
-<p>Optuna (<a class="reference external" href="http://optuna.org">optuna.org</a>) is a machine learning model optimizer that may be used on any machine learning model type. Optuna uses heuristic (searching) algorithms to find the best combination of model hyperparameters. It also allows more traditional alternatives to heuristic algorithms, such as grid dearch and random serach.</p>
+<p>A model <em>hyperparamter</em> is a setting in the model that is set prior to learning from a data set. It may affect how well the model learns from data. Examples include the level of regularisation in a logistic regression model, or the number of trees in a random forest model</p>
+<p>Many machine learning models have many hyperparameters that may be changed, and each may have many different possible levels to choose from. How do you find the best combination (though most machine learning packages come with sensible defaults which may already give optimal or close to optimal results).</p>
+<p>Optuna (<a class="reference external" href="http://optuna.org">optuna.org</a>) is a machine learning model optimizer that may be used on any machine learning model type. Optuna uses heuristic (searching) algorithms to find the best combination of model hyperparameters. It also allows more traditional alternatives to heuristic algorithms, such as grid search and random search.</p>
 <p>To install optuna (if not installed as part of the Titanic environment’: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">optuna</span></code>. The visualisations require plotly (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">plotly</span></code>).</p>
+<section id="validation-and-testing-when-optimising-hyperparameters">
+<h2>Validation and testing when optimising hyperparameters<a class="headerlink" href="#validation-and-testing-when-optimising-hyperparameters" title="Permalink to this headline">¶</a></h2>
+<p>A model <em>hyperparamter</em> is a setting in the model that is set prior to learning from a data set. It may affect how well the model learns from data. Examples include the level of regularisation in a logistic regression model, or the number of trees in a random forest model</p>
+<p>Many machine learning models have many hyperparameters that may be changed, and each may have many different possible levels to choose from. How do you find the best combination (though most machine learning packages come with sensible defaults which may already give optimal or close to optimal results).</p>
+<p>When optimising model hyperparameters, we use only the training set of data, and test independently with a test set not used to optimise those hyperparameters. This avoids reporting a spuriously high accuracy level due to over-fitting of model hyperparameters to the training set.</p>
+<p>During optimisation we create new k-fold train/test splits from the training set. The model hyperparameters are then trained on the average accuracy of these new k-fold test splits. Here we will use simple accuracy (the proportion of tets instances correctly classified), but you may choose to use other measures such as receiver operator characteristic curve AUC, or mean squared error (for a regression model).</p>
+<p><img alt="Validation and testing in model hyperparameter optimisation" src="_images/optuna_validation.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">import</span> <span class="nn">sklearn.ensemble</span>
 <span class="kn">import</span> <span class="nn">sklearn.model_selection</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="c1"># The following are needed only to show Optuna images in a Jupyter Book</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -505,6 +541,7 @@
 </div>
 </div>
 </div>
+</section>
 <section id="optimize-a-simple-problem">
 <h2>Optimize a simple problem<a class="headerlink" href="#optimize-a-simple-problem" title="Permalink to this headline">¶</a></h2>
 <p>Find <em>x</em> that minmises <em>(x-2)^2</em></p>
@@ -528,7 +565,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 2.001276506463566}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.9855265063747605}
 </pre></div>
 </div>
 </div>
@@ -582,8 +619,18 @@
 <span class="n">y_df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span>
 
 <span class="c1"># Convert DataFrames to NumPy arrays</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">y_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_all</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_all</span> <span class="o">=</span> <span class="n">y_df</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-train-and-test-hold-out-sets">
+<h2>Create train and test (hold-out) sets<a class="headerlink" href="#create-train-and-test-hold-out-sets" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -604,16 +651,16 @@
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span> 
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">objective</span><span class="p">()</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy in optimisation cross-validation: </span><span class="si">{</span><span class="n">objective</span><span class="p">()</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.751
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy in optimisation cross-validation: 0.760
 </pre></div>
 </div>
 </div>
@@ -636,7 +683,7 @@
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
@@ -655,13 +702,90 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.831
-Best hyperparameters: {&#39;n_estimators&#39;: 33, &#39;max_depth&#39;: 8.064950654641935}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
+Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.392886745849486}
 </pre></div>
 </div>
 </div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> is a float. This is because we asked for it to be varied over a log scale, and that requires a float. The actual <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> used is the corresponding integer of that flaot.</p>
+</section>
+<section id="passing-arguments-to-a-trial">
+<h3>Passing arguments to a trial<a class="headerlink" href="#passing-arguments-to-a-trial" title="Permalink to this headline">¶</a></h3>
+<p>In the above example we passed onlyy a trial object to Optuna. The data to use was defined outside of the function and is avilable through Python’s ability of functions to access data defined in the main program.</p>
+<p>We may wish to pass arguments (such as the data to use) to Optuna. To do that requires defining the objective as a Lambda function as below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    
+    <span class="c1"># Set Optuna trial parameters and ranges</span>
+    <span class="n">n_estimators</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    
+    <span class="c1"># Set up model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
+    
+    <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">accuracy</span>
+
+<span class="c1"># Wrap the objective inside a lambda and call objective inside it</span>
+<span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">trial</span><span class="p">:</span> <span class="n">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Set up Optuna study - we need to specifiy that we wish to maximise objective</span>
+<span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;maximize&#39;</span><span class="p">)</span>
+
+<span class="c1"># Run optimisation</span>
+<span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Get best model run</span>
+<span class="n">trial</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{</span><span class="n">trial</span><span class="o">.</span><span class="n">params</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
+Best hyperparameters: {&#39;n_estimators&#39;: 51, &#39;max_depth&#39;: 10.889577948723115}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-model-accuracy-on-the-hold-out-test-set">
+<h3>Checking model accuracy on the hold-out test set<a class="headerlink" href="#checking-model-accuracy-on-the-hold-out-test-set" title="Permalink to this headline">¶</a></h3>
+<p>After optimising the hyperparamters we should test accuracy on the hold out test set (we will only do that here, and not later in the notebook to keep the notebook shorter - but you shoudl always follow model hyperparamter optimisation with testing on an independent test set).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get hyperparamters from best model</span>
+<span class="n">n_estimators</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">]</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">study</span><span class="o">.</span><span class="n">best_trial</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set up model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">(</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Fit model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Test accuracy</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy on test set: </span><span class="si">{</span><span class="n">accuracy_test</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.812
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="building-in-conditional-if-statements">
 <h3>Building in conditional <code class="docutils literal notranslate"><span class="pre">if</span></code> statements<a class="headerlink" href="#building-in-conditional-if-statements" title="Permalink to this headline">¶</a></h3>
@@ -692,7 +816,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 33, &#39;max_depth&#39;: 8.064950
         
     <span class="c1"># Run selected model        </span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">accuracy</span>
 
@@ -711,8 +835,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 33, &#39;max_depth&#39;: 8.064950
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.820
-Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 41, &#39;max_depth&#39;: 7.919719131102597}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.814
+Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 23, &#39;max_depth&#39;: 6.344110079840397}
 </pre></div>
 </div>
 </div>
@@ -736,7 +860,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_19_0.jpg" src="_images/40_optuna_19_0.jpg" />
+<img alt="_images/40_optuna_26_0.jpg" src="_images/40_optuna_26_0.jpg" />
 </div>
 </div>
 <p>Plotting the accuracies for each hyperparameter for each trial.</p>
@@ -755,7 +879,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_21_0.jpg" src="_images/40_optuna_21_0.jpg" />
+<img alt="_images/40_optuna_28_0.jpg" src="_images/40_optuna_28_0.jpg" />
 </div>
 </div>
 <p>Plotting the accuracy surface for the hyperparameters involved in the random forest model.</p>
@@ -774,7 +898,7 @@ Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_esti
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_23_0.jpg" src="_images/40_optuna_23_0.jpg" />
+<img alt="_images/40_optuna_30_0.jpg" src="_images/40_optuna_30_0.jpg" />
 </div>
 </div>
 </section>
@@ -807,7 +931,7 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
@@ -828,8 +952,8 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.824
-Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.399816861388263}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
+Best hyperparameters: {&#39;n_estimators&#39;: 31, &#39;max_depth&#39;: 10.126198926290941}
 </pre></div>
 </div>
 </div>
@@ -849,7 +973,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.399816
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_27_0.jpg" src="_images/40_optuna_27_0.jpg" />
+<img alt="_images/40_optuna_34_0.jpg" src="_images/40_optuna_34_0.jpg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -867,7 +991,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.399816
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_28_0.jpg" src="_images/40_optuna_28_0.jpg" />
+<img alt="_images/40_optuna_35_0.jpg" src="_images/40_optuna_35_0.jpg" />
 </div>
 </div>
 </section>
@@ -888,7 +1012,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.399816
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
@@ -914,8 +1038,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.399816
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.820
-Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.810
+Best hyperparameters: {&#39;n_estimators&#39;: 60, &#39;max_depth&#39;: 5}
 </pre></div>
 </div>
 </div>
@@ -935,7 +1059,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_31_0.jpg" src="_images/40_optuna_31_0.jpg" />
+<img alt="_images/40_optuna_38_0.jpg" src="_images/40_optuna_38_0.jpg" />
 </div>
 </div>
 </section>
@@ -956,7 +1080,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
     
     <span class="c1"># Assess accuracy with sklearn.model_selection.cross_val_score</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
@@ -976,8 +1100,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 20, &#39;max_depth&#39;: 10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.825
-Best hyperparameters: {&#39;n_estimators&#39;: 58, &#39;max_depth&#39;: 7.827814992503194}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.819
+Best hyperparameters: {&#39;n_estimators&#39;: 10, &#39;max_depth&#39;: 11.596635753956788}
 </pre></div>
 </div>
 </div>
@@ -997,7 +1121,78 @@ Best hyperparameters: {&#39;n_estimators&#39;: 58, &#39;max_depth&#39;: 7.827814
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40_optuna_34_0.jpg" src="_images/40_optuna_34_0.jpg" />
+<img alt="_images/40_optuna_41_0.jpg" src="_images/40_optuna_41_0.jpg" />
+</div>
+</div>
+</section>
+<section id="what-hyperparamters-may-be-changed">
+<h2>What hyperparamters may be changed?<a class="headerlink" href="#what-hyperparamters-may-be-changed" title="Permalink to this headline">¶</a></h2>
+<p>Each model type will have different hyperparameters that may be tuned. Here we have used only a limited set for illustration.</p>
+<p>Below are examples fo showing available hyperparameters for SciKit-Learn’s random forest and logistic regression classifiers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">RandomForestClassifier</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parameters currently in use:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parameters currently in use:
+
+{&#39;bootstrap&#39;: True,
+ &#39;ccp_alpha&#39;: 0.0,
+ &#39;class_weight&#39;: None,
+ &#39;criterion&#39;: &#39;gini&#39;,
+ &#39;max_depth&#39;: None,
+ &#39;max_features&#39;: &#39;auto&#39;,
+ &#39;max_leaf_nodes&#39;: None,
+ &#39;max_samples&#39;: None,
+ &#39;min_impurity_decrease&#39;: 0.0,
+ &#39;min_samples_leaf&#39;: 1,
+ &#39;min_samples_split&#39;: 2,
+ &#39;min_weight_fraction_leaf&#39;: 0.0,
+ &#39;n_estimators&#39;: 100,
+ &#39;n_jobs&#39;: None,
+ &#39;oob_score&#39;: False,
+ &#39;random_state&#39;: None,
+ &#39;verbose&#39;: 0,
+ &#39;warm_start&#39;: False}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parameters currently in use:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parameters currently in use:
+
+{&#39;C&#39;: 1.0,
+ &#39;class_weight&#39;: None,
+ &#39;dual&#39;: False,
+ &#39;fit_intercept&#39;: True,
+ &#39;intercept_scaling&#39;: 1,
+ &#39;l1_ratio&#39;: None,
+ &#39;max_iter&#39;: 100,
+ &#39;multi_class&#39;: &#39;auto&#39;,
+ &#39;n_jobs&#39;: None,
+ &#39;penalty&#39;: &#39;l2&#39;,
+ &#39;random_state&#39;: None,
+ &#39;solver&#39;: &#39;lbfgs&#39;,
+ &#39;tol&#39;: 0.0001,
+ &#39;verbose&#39;: 0,
+ &#39;warm_start&#39;: False}
+</pre></div>
+</div>
 </div>
 </div>
 </section>
