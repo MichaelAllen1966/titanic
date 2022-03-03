@@ -565,7 +565,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.9855265063747605}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 2.003453991305076}
 </pre></div>
 </div>
 </div>
@@ -660,7 +660,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy in optimisation cross-validation: 0.760
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy in optimisation cross-validation: 0.752
 </pre></div>
 </div>
 </div>
@@ -702,8 +702,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
-Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.392886745849486}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.816
+Best hyperparameters: {&#39;n_estimators&#39;: 34, &#39;max_depth&#39;: 12.594235950405126}
 </pre></div>
 </div>
 </div>
@@ -732,13 +732,13 @@ Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.392886
     
     <span class="k">return</span> <span class="n">accuracy</span>
 
-<span class="c1"># Wrap the objective inside a lambda and call objective inside it</span>
+<span class="c1"># Wrap the objective inside a lambda function with included arguments</span>
 <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">trial</span><span class="p">:</span> <span class="n">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Set up Optuna study - we need to specifiy that we wish to maximise objective</span>
 <span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;maximize&#39;</span><span class="p">)</span>
 
-<span class="c1"># Run optimisation</span>
+<span class="c1"># Run optimisation using the lambda function</span>
 <span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># Get best model run</span>
@@ -751,7 +751,7 @@ Best hyperparameters: {&#39;n_estimators&#39;: 32, &#39;max_depth&#39;: 8.392886
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
-Best hyperparameters: {&#39;n_estimators&#39;: 51, &#39;max_depth&#39;: 10.889577948723115}
+Best hyperparameters: {&#39;n_estimators&#39;: 35, &#39;max_depth&#39;: 8.077515056973361}
 </pre></div>
 </div>
 </div>
@@ -835,8 +835,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 51, &#39;max_depth&#39;: 10.88957
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.814
-Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 23, &#39;max_depth&#39;: 6.344110079840397}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
+Best hyperparameters: {&#39;classifier&#39;: &#39;RandomForest&#39;, &#39;n_estimators&#39;: 25, &#39;max_depth&#39;: 7.35702553078595}
 </pre></div>
 </div>
 </div>
@@ -952,8 +952,8 @@ More detailed explanation of how samplers suggest parameters is in :class:<code 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
-Best hyperparameters: {&#39;n_estimators&#39;: 31, &#39;max_depth&#39;: 10.126198926290941}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.819
+Best hyperparameters: {&#39;n_estimators&#39;: 31, &#39;max_depth&#39;: 6.042386622291878}
 </pre></div>
 </div>
 </div>
@@ -1038,8 +1038,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 31, &#39;max_depth&#39;: 10.12619
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.810
-Best hyperparameters: {&#39;n_estimators&#39;: 60, &#39;max_depth&#39;: 5}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.808
+Best hyperparameters: {&#39;n_estimators&#39;: 30, &#39;max_depth&#39;: 10}
 </pre></div>
 </div>
 </div>
@@ -1100,8 +1100,8 @@ Best hyperparameters: {&#39;n_estimators&#39;: 60, &#39;max_depth&#39;: 5}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.819
-Best hyperparameters: {&#39;n_estimators&#39;: 10, &#39;max_depth&#39;: 11.596635753956788}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.817
+Best hyperparameters: {&#39;n_estimators&#39;: 25, &#39;max_depth&#39;: 7.31826690278078}
 </pre></div>
 </div>
 </div>
