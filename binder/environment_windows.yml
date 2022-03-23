@@ -1,7 +1,7 @@
 name: titanic
 channels:
   - defaults
-  - conda-forge 
+  - conda-forge
 dependencies:
   - jupyter
   - jupyterlab
@@ -11,7 +11,6 @@ dependencies:
   - pip
   - python=3.8
   - scikit-learn
-  - tensorflow=2.4
   - pip:
     - pydot
     - graphviz
@@ -23,5 +22,6 @@ dependencies:
     - optuna
     - plotly
     - kaleido
+    - tensorflow==2.4
   
 
