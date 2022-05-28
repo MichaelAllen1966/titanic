@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checking model calibration &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -32,30 +31,35 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Optimising machine learning models with Optuna" href="40_optuna.html" />
     <link rel="prev" title="Receiver Operator Characteristic (ROC) curve" href="08_roc.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -89,7 +93,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -101,7 +105,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -113,7 +117,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -160,7 +164,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Optimising machine learning models
  </span>
@@ -172,7 +176,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -199,7 +203,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -226,7 +230,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -243,7 +247,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -275,7 +279,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Pytorch neural nets
  </span>
@@ -292,7 +296,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Model explainability
  </span>
@@ -314,7 +318,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Creating synthetic data
  </span>
@@ -371,7 +375,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -389,7 +393,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -470,10 +474,94 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Checking model calibration</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-modules">
+   Load modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+     Divide into X (features) and y (labels)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-run-method">
+   Single run method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-training-and-calibration-test-sets">
+     Divide into training and calibration test sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-random-forest-model">
+     Fit Random Forest model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-probabilities-for-calibration">
+     Predict probabilities for calibration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reliablity-plot">
+     Reliablity plot
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method">
+   Using stratfied k-fold validation and sklearn’s calibration curve method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-results">
+     Plot results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observations">
+     Observations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-do-do-if-a-model-is-poorly-calibrated">
+   What do do if a model is poorly calibrated
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="checking-model-calibration">
+  <div class="tex2jax_ignore mathjax_ignore section" id="checking-model-calibration">
 <h1>Checking model calibration<a class="headerlink" href="#checking-model-calibration" title="Permalink to this headline">¶</a></h1>
 <p>As well as classifying a case into a specific class (e.g. survived or died), it may be useful to look at the probability that the model assigns to a case being a specific class. Examples of when probability may be important include:</p>
 <ul class="simple">
@@ -489,7 +577,7 @@
 <p>In this work book we will look at checking model calibration. We will first perform a single run working through the steps ‘manually’, and then put it in to a stratified k-fold loop using sklearn’s <code class="docutils literal notranslate"><span class="pre">calibration_curve</span></code> method.</p>
 <p>When checking probability calibration it is important, just like when check accuracy, that we test calibration on a test set that has not been used to train the model. Like checking accuracy, we can also use stratified k-fold validation to get a more accurate assessment of calibration (which we will use when we use sklearn’s built-in methods).</p>
 <p>In this example we will use a random forest model.</p>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -502,8 +590,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -553,7 +641,7 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-<section id="divide-into-x-features-and-y-labels">
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survive or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -565,12 +653,12 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="single-run-method">
+</div>
+</div>
+<div class="section" id="single-run-method">
 <h2>Single run method<a class="headerlink" href="#single-run-method" title="Permalink to this headline">¶</a></h2>
 <p>Here we will go through the steps of calibration to illustrate how it is performed. We will then put this code inside a stratified k-fold loop below.</p>
-<section id="divide-into-training-and-calibration-test-sets">
+<div class="section" id="divide-into-training-and-calibration-test-sets">
 <h3>Divide into training and calibration test sets<a class="headerlink" href="#divide-into-training-and-calibration-test-sets" title="Permalink to this headline">¶</a></h3>
 <p>We will divide the data in training and calibration test sets (75:25 split).</p>
 <div class="cell docutils container">
@@ -580,8 +668,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="fit-random-forest-model">
+</div>
+<div class="section" id="fit-random-forest-model">
 <h3>Fit Random Forest model<a class="headerlink" href="#fit-random-forest-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,8 +685,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="predict-probabilities-for-calibration">
+</div>
+<div class="section" id="predict-probabilities-for-calibration">
 <h3>Predict probabilities for calibration<a class="headerlink" href="#predict-probabilities-for-calibration" title="Permalink to this headline">¶</a></h3>
 <p>Now we can use the trained model to predict the probability of survival using the model’s <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> method.</p>
 <div class="cell docutils container">
@@ -608,8 +696,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="reliablity-plot">
+</div>
+<div class="section" id="reliablity-plot">
 <h3>Reliablity plot<a class="headerlink" href="#reliablity-plot" title="Permalink to this headline">¶</a></h3>
 <p>In the reliability plot we will bin cases by their predicted probability, into 10 bins of probability of surviving.</p>
 <div class="cell docutils container">
@@ -775,9 +863,9 @@ By convention our features are called <code class="docutils literal notranslate"
 <li><p>Points below the diagonal: The model has over-forecast - the calculated probabilities are too large.</p></li>
 <li><p>Points above the diagonal: The model has under-forecast - the calculated probabilities are too small.</p></li>
 </ul>
-</section>
-</section>
-<section id="using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method">
+</div>
+</div>
+<div class="section" id="using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method">
 <h2>Using stratfied k-fold validation and sklearn’s calibration curve method<a class="headerlink" href="#using-stratfied-k-fold-validation-and-sklearn-s-calibration-curve-method" title="Permalink to this headline">¶</a></h2>
 <p>The method below will take the output probabilities from the Random Forest model and use sklearn’s <code class="docutils literal notranslate"><span class="pre">calibration_curve</span></code> method to create bins of model probability and the fraction positive in each bin. We will use ‘quantile’ binning which creates bins of equal size. Use of uniform bins (bins of uniform width) can cause problems if a bin is empty.</p>
 <div class="cell docutils container">
@@ -841,7 +929,7 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-<section id="plot-results">
+<div class="section" id="plot-results">
 <h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
 <p>Plot individual runs and means for bins.</p>
 <div class="cell docutils container">
@@ -884,22 +972,22 @@ By convention our features are called <code class="docutils literal notranslate"
 <img alt="_images/50_check_calibration_26_0.png" src="_images/50_check_calibration_26_0.png" />
 </div>
 </div>
-</section>
-<section id="observations">
+</div>
+<div class="section" id="observations">
 <h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Using k-fold splits and taking the mean we can see our model probability is reasonably well calibrated.</p></li>
 <li><p>Testing the model calibration gives us confidence that the probabilities reported by the model are reasonable.</p></li>
 </ul>
-</section>
-</section>
-<section id="what-do-do-if-a-model-is-poorly-calibrated">
+</div>
+</div>
+<div class="section" id="what-do-do-if-a-model-is-poorly-calibrated">
 <h2>What do do if a model is poorly calibrated<a class="headerlink" href="#what-do-do-if-a-model-is-poorly-calibrated" title="Permalink to this headline">¶</a></h2>
 <p>If a model is poorly calibrated (if the calibration curve is significantly offset from the diagonal) then the model may be recalibrated. The most common method of recalibration is to take the probability output of the calibration data set(s) and fit a logistic regression model using those outputs and the known <code class="docutils literal notranslate"><span class="pre">y</span></code> values (survived or not) for those probabilities. This is known as <em>Platt scaling</em>. Another method is known as isotonic scaling, but is prone to over-fitting, so is only suitable for large data sets.</p>
 <p>Platt scaling may be easily implemented by adding in a logistic regression model fitted to the output of the calibration test. Platt scaling and isotonic scaling may also be performed by using the <code class="docutils literal notranslate"><span class="pre">CalibratedClassifier</span></code> method built in to sklearn:</p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html">https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html</a></p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -923,54 +1011,42 @@ By convention our features are called <code class="docutils literal notranslate"
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="08_roc.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Receiver Operator Characteristic (ROC) curve</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="08_roc.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Receiver Operator Characteristic (ROC) curve</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="40_optuna.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Optimising machine learning models with Optuna</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="40_optuna.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Optimising machine learning models with Optuna</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Michael Allen & Kerry Pearn<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Michael Allen & Kerry Pearn<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

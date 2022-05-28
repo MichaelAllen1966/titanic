@@ -4,12 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Explaining model predictions with Shapley values - Logistic Regression &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -32,30 +31,35 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Explaining model predictions with Shapley values - Random Forest" href="27_random_forest_shap.html" />
     <link rel="prev" title="PyTorch class-based neural net" href="46_pytorch_class.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -89,7 +93,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -101,7 +105,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Data preprocessing
  </span>
@@ -113,7 +117,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basic methods
  </span>
@@ -160,7 +164,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Optimising machine learning models
  </span>
@@ -172,7 +176,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature selection and expansion
  </span>
@@ -199,7 +203,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Working with imbalanced data sets
  </span>
@@ -226,7 +230,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Random forest model
  </span>
@@ -243,7 +247,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   TensorFlow neural nets
  </span>
@@ -275,7 +279,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Pytorch neural nets
  </span>
@@ -292,7 +296,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Model explainability
  </span>
@@ -314,7 +318,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Creating synthetic data
  </span>
@@ -371,7 +375,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -389,7 +393,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -488,10 +492,112 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Explaining model predictions with Shapley values - Logistic Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data-and-fit-model">
+   Load data and fit model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-modules">
+     Load modules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-x-features-and-y-labels">
+     Divide into X (features) and y (labels)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#divide-into-training-and-tets-sets">
+     Divide into training and tets sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standardise-data">
+     Standardise data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-logistic-regression-model">
+     Fit logistic regression model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-values-and-get-probabilities-of-survival">
+     Predict values and get probabilities of survival
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-accuracy">
+     Calculate accuracy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examining-the-model-coefficients-weights">
+   Examining the model coefficients (weights)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-shapley-values">
+   Get Shapley values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots-of-shapley-values">
+   Plots of Shapley values
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary-plot">
+     Summary plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#beeswarm-plot">
+     Beeswarm plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#waterfall-plot">
+     Waterfall plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scatter-plot">
+     Scatter plot
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values-logistic-regression">
+  <div class="tex2jax_ignore mathjax_ignore section" id="explaining-model-predictions-with-shapley-values-logistic-regression">
 <h1>Explaining model predictions with Shapley values - Logistic Regression<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-logistic-regression" title="Permalink to this headline">¶</a></h1>
 <p>Shapley values provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
 <p>Shapley values may be used across model types, and so provide a <em>model-agnostic</em> measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows <em>black box</em> models like neural networks to be explained, at least in part.</p>
@@ -501,9 +607,9 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">shap</span></code> package is installed if you have used the Titanic environment yasml file, but otherwise may be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code>.</p>
 <p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, inclusiong lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
 <p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with logistic regression. Logistic regression is the model type which least needs an <em>explainer</em> but it provides a useful example for learning about <code class="docutils literal notranslate"><span class="pre">shap</span></code> as Shapley values may be compared with model coefficients.</p>
-<section id="load-data-and-fit-model">
+<div class="section" id="load-data-and-fit-model">
 <h2>Load data and fit model<a class="headerlink" href="#load-data-and-fit-model" title="Permalink to this headline">¶</a></h2>
-<section id="load-modules">
+<div class="section" id="load-modules">
 <h3>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -520,8 +626,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="load-data">
+</div>
+<div class="section" id="load-data">
 <h3>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h3>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
@@ -560,8 +666,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-x-features-and-y-labels">
+</div>
+<div class="section" id="divide-into-x-features-and-y-labels">
 <h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survived or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
@@ -577,8 +683,8 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</section>
-<section id="divide-into-training-and-tets-sets">
+</div>
+<div class="section" id="divide-into-training-and-tets-sets">
 <h3>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h3>
 <p>When we test a machine learning model we should always test it on data that has not been used to train the model.
 We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
@@ -589,8 +695,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="standardise-data">
+</div>
+<div class="section" id="standardise-data">
 <h3>Standardise data<a class="headerlink" href="#standardise-data" title="Permalink to this headline">¶</a></h3>
 <p>Use SciKit learn method for standardising data.</p>
 <div class="cell docutils container">
@@ -619,8 +725,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="fit-logistic-regression-model">
+</div>
+<div class="section" id="fit-logistic-regression-model">
 <h3>Fit logistic regression model<a class="headerlink" href="#fit-logistic-regression-model" title="Permalink to this headline">¶</a></h3>
 <p>Now we will fir a logistic regression model, using sklearn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> method.</p>
 <div class="cell docutils container">
@@ -636,8 +742,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="predict-values-and-get-probabilities-of-survival">
+</div>
+<div class="section" id="predict-values-and-get-probabilities-of-survival">
 <h3>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">¶</a></h3>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
 <div class="cell docutils container">
@@ -653,8 +759,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</section>
-<section id="calculate-accuracy">
+</div>
+<div class="section" id="calculate-accuracy">
 <h3>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h3>
 <p>In this example we will measure accuracy simply as the proportion of passengers where we make the correct prediction. In a later notebook we will look at other measures of accuracy which explore false positives and false negatives in more detail.</p>
 <div class="cell docutils container">
@@ -674,9 +780,9 @@ Accuracy of predicting test data = 0.798
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="examining-the-model-coefficients-weights">
+</div>
+</div>
+<div class="section" id="examining-the-model-coefficients-weights">
 <h2>Examining the model coefficients (weights)<a class="headerlink" href="#examining-the-model-coefficients-weights" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -765,8 +871,8 @@ Accuracy of predicting test data = 0.798
 <li><p><em>Pclass</em> (lower class passengers, who have a higher class number, reduces probability of survival)</p></li>
 <li><p><em>age</em> (being older reduces probability of survival)</p></li>
 </ul>
-</section>
-<section id="get-shapley-values">
+</div>
+<div class="section" id="get-shapley-values">
 <h2>Get Shapley values<a class="headerlink" href="#get-shapley-values" title="Permalink to this headline">¶</a></h2>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">shap_values</span></code> method from the SHAP library to get Shapley values.
 We use the <code class="docutils literal notranslate"><span class="pre">explainer</span></code> method from the SHAP library to get Shapley values along with other data.</p>
@@ -1035,10 +1141,10 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_31_0.png" src="_images/26_logistic_regression_shap_31_0.png" />
 </div>
 </div>
-</section>
-<section id="plots-of-shapley-values">
+</div>
+<div class="section" id="plots-of-shapley-values">
 <h2>Plots of Shapley values<a class="headerlink" href="#plots-of-shapley-values" title="Permalink to this headline">¶</a></h2>
-<section id="summary-plot">
+<div class="section" id="summary-plot">
 <h3>Summary plot<a class="headerlink" href="#summary-plot" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> using a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code> gives us the overall importance of each feature across the population.</p>
 <p>Here we limit the num,ber of features shown to 15 (default is 20).</p>
@@ -1061,8 +1167,8 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_33_0.png" src="_images/26_logistic_regression_shap_33_0.png" />
 </div>
 </div>
-</section>
-<section id="beeswarm-plot">
+</div>
+<div class="section" id="beeswarm-plot">
 <h3>Beeswarm plot<a class="headerlink" href="#beeswarm-plot" title="Permalink to this headline">¶</a></h3>
 <p>Without specifying a <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> option of <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">summary_plot</span></code> gives us a <em>beeswarm</em> plot, showing the Shapley values for all instances.</p>
 <div class="cell docutils container">
@@ -1083,8 +1189,8 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_35_0.png" src="_images/26_logistic_regression_shap_35_0.png" />
 </div>
 </div>
-</section>
-<section id="waterfall-plot">
+</div>
+<div class="section" id="waterfall-plot">
 <h3>Waterfall plot<a class="headerlink" href="#waterfall-plot" title="Permalink to this headline">¶</a></h3>
 <p>Waterfall plots show the influence of  individual features on model prediction. These are shown as the effect on <em>log odds ratio</em> of survival. <em>Log odds ratio</em> are usually shown as these are additive, whereas probabilities are not.</p>
 <p>Waterfall plots put the most influential features at the top.</p>
@@ -1132,8 +1238,8 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_40_0.png" src="_images/26_logistic_regression_shap_40_0.png" />
 </div>
 </div>
-</section>
-<section id="scatter-plot">
+</div>
+<div class="section" id="scatter-plot">
 <h3>Scatter plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h3>
 <p>A scattter plot for one or more features shows the relationship between the feature value and the Shap value, along with a histogram of the frequency of the feature values.</p>
 <div class="cell docutils container">
@@ -1146,9 +1252,9 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 <img alt="_images/26_logistic_regression_shap_42_0.png" src="_images/26_logistic_regression_shap_42_0.png" />
 </div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1172,54 +1278,42 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="46_pytorch_class.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">PyTorch class-based neural net</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="46_pytorch_class.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">PyTorch class-based neural net</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="27_random_forest_shap.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explaining model predictions with Shapley values - Random Forest</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="27_random_forest_shap.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Explaining model predictions with Shapley values - Random Forest</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Michael Allen & Kerry Pearn<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Michael Allen & Kerry Pearn<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
