@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A simple worked example of Shap &#8212; Titanic Survival Machine Learning</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Explaining model predictions with Shapley values - Logistic Regression" href="26_logistic_regression_shap.html" />
+    <link rel="prev" title="PyTorch class-based neural net" href="46_pytorch_class.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Titanic Survival Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="front_page.html">
+   Titanic Survival
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up an environment file to run these notebooks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Setting up an environment
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data preprocessing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_preprocessing.html">
+   Kaggle Titanic survival - data preprocessing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Basic methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_logistic_regression.html">
+   Logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_k_fold.html">
+   Measuring model accuracy with K-fold stratification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_regularisation.html">
+   Avoiding over-fitting with regularisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_accuracy_standalone.html">
+   Accuracy measurements in machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_accuracy_logistic_regression.html">
+   Application of alternative accuracy measurements to a logistic regression model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_learning_curve.html">
+   Learning curves - how much data do we need?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_roc.html">
+   Receiver Operator Characteristic (ROC) curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="50_check_calibration.html">
+   Checking model calibration
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimising machine learning models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="40_optuna.html">
+   Optimising machine learning models with Optuna
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Feature selection and expansion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_feature_selection_1_univariate.html">
+   Feature selection using univariate statistical selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_feature_selection_2_forward.html">
+   Feature selection using forward selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_feature_selection_3_backward.html">
+   Feature selection using backward elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_feature_expansion.html">
+   Feature expansion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Working with imbalanced data sets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_imbalanced%20_data_weighting.html">
+   Dealing with imbalanced data by model weighting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_imbalanced%20_data_sampling.html">
+   Dealing with imbalanced data by under or over sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_imbalanced%20_data_threshold.html">
+   Dealing with imbalanced data by changing classification cut-off levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_imbalanced%20_data_smote.html">
+   Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Random forest model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_random_forest.html">
+   A Random Forest model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_random_forest_roc.html">
+   Random Forest Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  TensorFlow neural nets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_tensorflow_1.html">
+   TensorFlow neural net
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_tensorflow_api.html">
+   TensorFlow api-based neural net.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_tensorflow_roc.html">
+   TensorFlow Receiver Operator Characteristic (ROC) curve and balancing of model classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_tensorflow_deep_wide.html">
+   TensorFlow ‘Wide and Deep’ neural nets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_tensorflow_bagging.html">
+   TensorFlow Bagging
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch neural nets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="45_pytorch_simple.html">
+   PyTorch simple sequential neural net
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="46_pytorch_class.html">
+   PyTorch class-based neural net
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Model explainability
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   A simple worked example of Shap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="26_logistic_regression_shap.html">
+   Explaining model predictions with Shapley values - Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_random_forest_shap.html">
+   Explaining model predictions with Shapley values - Random Forest
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="28_neural_net_shap.html">
+   Explaining model predictions with Shapley values - Neural Network
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Creating synthetic data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_synthetic_data%20_SMOTE.html">
+   Creating synthetic Titanic passenger data with SMOTE
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/31_shap_worked_example.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-average-of-all-games">
+   Calculate average of all games
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-averages-by-whether-player-is-present-or-not">
+   Show averages by whether player is present or not
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#split-into-x-and-y-and-fit-xgboost-regressor-model">
+   Split into X and y and fit XGBoost regressor model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-predictions-and-plot-observed-vs-predicted">
+   Get predictions and plot observed vs. predicted
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-shap-model">
+   Train Shap model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-beeswarm-of-shap">
+   Show beeswarm of Shap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-shap-for-each-player-when-present-or-not">
+   Calculate Shap for each player when present or not
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-waterfall-plots-for-lowest-and-highest-scores">
+   Show waterfall plots for lowest and highest scores
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A simple worked example of Shap</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-average-of-all-games">
+   Calculate average of all games
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-averages-by-whether-player-is-present-or-not">
+   Show averages by whether player is present or not
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#split-into-x-and-y-and-fit-xgboost-regressor-model">
+   Split into X and y and fit XGBoost regressor model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-predictions-and-plot-observed-vs-predicted">
+   Get predictions and plot observed vs. predicted
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-shap-model">
+   Train Shap model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-beeswarm-of-shap">
+   Show beeswarm of Shap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-shap-for-each-player-when-present-or-not">
+   Calculate Shap for each player when present or not
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#show-waterfall-plots-for-lowest-and-highest-scores">
+   Show waterfall plots for lowest and highest scores
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-simple-worked-example-of-shap">
+<h1>A simple worked example of Shap<a class="headerlink" href="#a-simple-worked-example-of-shap" title="Permalink to this headline">¶</a></h1>
+<p>This notebook shows a very simple example of Shap. We examine scores in a pub quiz. Those scores depend on the players present (Tim, Mark, and Carrie). The pub quiz team can have any number and combination of players - including none of the team turning up!</p>
+<p>Data has been generated according to a known algorithm:</p>
+<ol class="simple">
+<li><p>Add 3 marks if Tim is present</p></li>
+<li><p>Add 6 marks if Mark is present</p></li>
+<li><p>Add 9 marks if Carrie is present</p></li>
+<li><p>Add 0-20% (as an integer)</p></li>
+</ol>
+<p>We then fit an XGBoost regressor model to predict the score given any number and combination of players, and then fit a Shap model to explore the XGBoost model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn warnings off to keep notebook tidy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="load-data">
+<h2>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;shap_example.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show first eight scores (a single set of all combinations).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tim</th>
+      <th>Mark</th>
+      <th>Carrie</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>19</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="calculate-average-of-all-games">
+<h2>Calculate average of all games<a class="headerlink" href="#calculate-average-of-all-games" title="Permalink to this headline">¶</a></h2>
+<p>Shap values show change from the global average of all scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">global_average</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Global average: </span><span class="si">{</span><span class="n">global_average</span><span class="si">:</span><span class="s1">0.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Global average: 9.8
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="show-averages-by-whether-player-is-present-or-not">
+<h2>Show averages by whether player is present or not<a class="headerlink" href="#show-averages-by-whether-player-is-present-or-not" title="Permalink to this headline">¶</a></h2>
+<p>Show averages by whether player is present or not, and show difference from average score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tim&#39;</span><span class="p">,</span> <span class="s1">&#39;Mark&#39;</span><span class="p">,</span> <span class="s1">&#39;Carrie&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Average scores wrt </span><span class="si">{</span><span class="n">player</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">average_scores</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">player</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">average_scores</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Difference from average:&#39;</span><span class="p">)</span>
+    <span class="n">difference</span> <span class="o">=</span> <span class="n">average_scores</span> <span class="o">-</span> <span class="n">global_average</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">difference</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average scores wrt Tim
+Tim
+0     8.1
+1    11.6
+Name: Score, dtype: float64
+
+Difference from average:
+Tim
+0   -1.8
+1    1.8
+Name: Score, dtype: float64
+
+
+Average scores wrt Mark
+Mark
+0     6.8
+1    12.8
+Name: Score, dtype: float64
+
+Difference from average:
+Mark
+0   -3.0
+1    3.0
+Name: Score, dtype: float64
+
+
+Average scores wrt Carrie
+Carrie
+0     5.2
+1    14.4
+Name: Score, dtype: float64
+
+Difference from average:
+Carrie
+0   -4.6
+1    4.6
+Name: Score, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="split-into-x-and-y-and-fit-xgboost-regressor-model">
+<h2>Split into X and y and fit XGBoost regressor model<a class="headerlink" href="#split-into-x-and-y-and-fit-xgboost-regressor-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
+
+<span class="c1"># Fit model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
+             colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+             gamma=0, gpu_id=-1, importance_type=None,
+             interaction_constraints=&#39;&#39;, learning_rate=0.300000012,
+             max_delta_step=0, max_depth=6, min_child_weight=1, missing=nan,
+             monotone_constraints=&#39;()&#39;, n_estimators=100, n_jobs=36,
+             num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
+             reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method=&#39;exact&#39;,
+             validate_parameters=1, verbosity=None)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="get-predictions-and-plot-observed-vs-predicted">
+<h2>Get predictions and plot observed vs. predicted<a class="headerlink" href="#get-predictions-and-plot-observed-vs-predicted" title="Permalink to this headline">¶</a></h2>
+<p>(Predicted includes a random component to score, so no model can be exact).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_pred_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">slr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">slr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y_array</span><span class="p">,</span> <span class="n">y_pred_array</span><span class="p">)</span>
+<span class="n">y_pred_best_fit</span> <span class="o">=</span> <span class="n">slr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">y_array</span><span class="p">)</span>
+<span class="n">r_square</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_array</span><span class="p">,</span> <span class="n">y_pred_best_fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">slr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">y_array</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;R squared: </span><span class="si">{</span><span class="n">r_square</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/31_shap_worked_example_17_0.png" src="_images/31_shap_worked_example_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="train-shap-model">
+<h2>Train Shap model<a class="headerlink" href="#train-shap-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train explainer on Training set</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Get Shapley values along with base and features</span>
+<span class="n">shap_values_extended</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="show-beeswarm-of-shap">
+<h2>Show beeswarm of Shap<a class="headerlink" href="#show-beeswarm-of-shap" title="Permalink to this headline">¶</a></h2>
+<p>The Beeswarm plot shows the Shap values for each instance predicted. Each player has a Shap value for their presence or absence in a team, which shows the effect of their presence/absence compared with the global average of all scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values</span><span class="o">=</span><span class="n">shap_values</span><span class="p">,</span> 
+                  <span class="n">features</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
+                  <span class="n">feature_names</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
+                  <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/31_shap_worked_example_21_0.png" src="_images/31_shap_worked_example_21_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="calculate-shap-for-each-player-when-present-or-not">
+<h2>Calculate Shap for each player when present or not<a class="headerlink" href="#calculate-shap-for-each-player-when-present-or-not" title="Permalink to this headline">¶</a></h2>
+<p>Here we calculate the average Shap values for the absence and presence of a player in the team.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shap_summary_by_player</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">player_shap_values</span> <span class="o">=</span> <span class="n">shap_values_extended</span><span class="p">[:,</span> <span class="n">player</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player_present&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player_shap_values</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;shap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player_shap_values</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">shap_summary</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;player_present&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">shap_summary_by_player</span><span class="p">[</span><span class="n">player</span><span class="p">]</span> <span class="o">=</span> <span class="n">shap_summary</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shap for </span><span class="si">{</span><span class="n">player</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shap_summary_by_player</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shap for Tim:
+                shap
+player_present      
+0               -1.7
+1                1.7
+
+Shap for Mark:
+                shap
+player_present      
+0               -3.0
+1                3.0
+
+Shap for Carrie:
+                shap
+player_present      
+0               -4.6
+1                4.6
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="show-waterfall-plots-for-lowest-and-highest-scores">
+<h2>Show waterfall plots for lowest and highest scores<a class="headerlink" href="#show-waterfall-plots-for-lowest-and-highest-scores" title="Permalink to this headline">¶</a></h2>
+<p>Waterfall plots show the influence of features on the predicted outcome starting from a baseline model prediction.</p>
+<p>Here we show the lowest and highest score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the location of an example each where probability of giving thrombolysis</span>
+<span class="c1"># is &lt;0.1 or &gt;0.9</span>
+
+<span class="n">location_low_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">location_high_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_low_score</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/31_shap_worked_example_27_0.png" src="_images/31_shap_worked_example_27_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">location_high_score</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/31_shap_worked_example_28_0.png" src="_images/31_shap_worked_example_28_0.png" />
+</div>
+</div>
+<p>Pick a random example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_location</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">waterfall</span><span class="p">(</span><span class="n">shap_values_extended</span><span class="p">[</span><span class="n">random_location</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/31_shap_worked_example_30_0.png" src="_images/31_shap_worked_example_30_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="46_pytorch_class.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">PyTorch class-based neural net</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="26_logistic_regression_shap.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explaining model predictions with Shapley values - Logistic Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Michael Allen & Kerry Pearn<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
