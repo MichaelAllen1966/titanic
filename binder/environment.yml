@@ -5,13 +5,13 @@ channels:
 dependencies:
   - jupyter
   - jupyterlab
-  - matplotlib
+  - matplotlib=3.4
   - numpy
   - pandas
   - pip
   - python=3.8
   - scikit-learn
-  - tensorflow=2.4
+  - tensorflow-gpu=2.4
   - pip:
     - pydot
     - graphviz
@@ -23,5 +23,4 @@ dependencies:
     - optuna
     - plotly
     - kaleido
-  
-
+    - xgboost
