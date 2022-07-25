@@ -955,9 +955,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The layers of the network are:</p>
 <ol class="simple">
 <li><p>An input layer (which does not need to be defined)</p></li>
-<li><p>A fully-connected (dense) layer.This is defined by the number of inputs (the number of input features) and the number of outputs. We will expand out feature data set up to 240 outputs. The output of the layer uses ReLU  (rectified linear unit) activation. ReLU activation is most common for the inner layers of a neural network. Negative input values are set to zero. Positive input values are left unchanged.</p></li>
-<li><p>A second fully connected layer which reduces the network down to 50 nodes. This again uses ReLU activation and is followed by batch normalisation, and dropout layers.</p></li>
-<li><p>A final fully connected linear layer of one nodes (more nodes could be used for more classes, in which case use <code class="docutils literal notranslate"><span class="pre">softmax</span></code> activation and <code class="docutils literal notranslate"><span class="pre">categorical_crossentropy</span></code> in the loss function).</p></li>
+<li><p>Three hidden layers of 128 nodes.</p></li>
+<li><p>A final fully connected linear layer of one node (more nodes could be used for more classes, in which case use <code class="docutils literal notranslate"><span class="pre">softmax</span></code> activation and <code class="docutils literal notranslate"><span class="pre">categorical_crossentropy</span></code> in the loss function).</p></li>
 </ol>
 <p>The output of the net is the probability of surviving (usually a probability of &gt;= 0.5 will be classes as ‘survived’).</p>
 <div class="cell docutils container">
