@@ -704,9 +704,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.942
-Recall: 0.898
-Precision: 0.754
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.949
+Recall: 0.915
+Precision: 0.685
 </pre></div>
 </div>
 </div>
@@ -730,9 +730,9 @@ Precision: 0.754
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.948
-Recall: 0.426
-Precision: 0.881
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.953
+Recall: 0.490
+Precision: 0.877
 </pre></div>
 </div>
 </div>
@@ -756,9 +756,9 @@ Precision: 0.881
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.947
-Recall: 0.459
-Precision: 0.873
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.953
+Recall: 0.484
+Precision: 0.881
 </pre></div>
 </div>
 </div>
@@ -783,9 +783,9 @@ Precision: 0.873
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.947
-Recall: 0.463
-Precision: 0.869
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.953
+Recall: 0.475
+Precision: 0.889
 </pre></div>
 </div>
 </div>
@@ -840,7 +840,7 @@ Precision: 0.869
 <p>Here we recalibrate the SMOTE model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calibrated_SMOTE_model</span> <span class="o">=</span> <span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">model_smote</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calibrated_SMOTE_model</span> <span class="o">=</span> <span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">model_smote</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">calibrated_SMOTE_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
@@ -851,9 +851,9 @@ Precision: 0.869
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.942
-Recall: 0.898
-Precision: 0.754
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.949
+Recall: 0.904
+Precision: 0.685
 </pre></div>
 </div>
 </div>
