@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Explaining model predictions with Shapley values - Neural Network &#8212; Titanic Survival Machine Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -62,7 +61,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -71,9 +84,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
       
@@ -86,14 +100,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="front_page.html">
-   Titanic Survival
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="front_page.html">
+                    Titanic Survival
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Setting up an environment file to run these notebooks
  </span>
@@ -229,6 +244,11 @@ const thebe_selector_output = ".output, .cell_output"
    Dealing with imbalanced data by enhancing the minority class with synthetic data (SMOTE: Synthetic Minority Over-sampling Technique)
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="51_sampling_and_calibration.html">
+   The effect of over-sampling and under-sampling on model calibration
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -303,11 +323,6 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="31_shap_worked_example.html">
-   A simple worked example of Shap
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="26_logistic_regression_shap.html">
    Explaining model predictions with Shapley values - Logistic Regression
   </a>
@@ -337,12 +352,17 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -350,61 +370,128 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+    <div class="header-article row sticky-top noprint">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/28_neural_net_shap.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/28_neural_net_shap.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-            <!-- Source interaction buttons -->
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-data-and-fit-model">
    Load data and fit model
@@ -473,12 +560,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Explaining model predictions with Shapley values - Neural Network</h1>
@@ -563,11 +649,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="explaining-model-predictions-with-shapley-values-neural-network">
-<h1>Explaining model predictions with Shapley values - Neural Network<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-neural-network" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="explaining-model-predictions-with-shapley-values-neural-network">
+<h1>Explaining model predictions with Shapley values - Neural Network<a class="headerlink" href="#explaining-model-predictions-with-shapley-values-neural-network" title="Permalink to this headline">#</a></h1>
 <p>Shapley values provide an estimate of how much any particular feature influences the model decision. When Shapley values are averaged they provide a measure of the overall influence of a feature.</p>
 <p>Shapley values may be used across model types, and so provide a <em>model-agnostic</em> measure of a feature’s influence. This means that the influence of features may be compared across model types, and it allows <em>black box</em> models like neural networks to be explained, at least in part.</p>
 <p>Here we will demonstrate Shapley values with random forests.</p>
@@ -576,10 +663,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The <code class="docutils literal notranslate"><span class="pre">shap</span></code> package is installed if you have used the Titanic environment yasml file, but otherwise may be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">shap</span></code>.</p>
 <p>More information on the <code class="docutils literal notranslate"><span class="pre">shap</span></code> library, inclusiong lots of useful examples may be found at: <a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
 <p>Here we provide an example of using <code class="docutils literal notranslate"><span class="pre">shap</span></code> with Neural Networks.</p>
-<div class="section" id="load-data-and-fit-model">
-<h2>Load data and fit model<a class="headerlink" href="#load-data-and-fit-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="load-modules">
-<h3>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h3>
+<section id="load-data-and-fit-model">
+<h2>Load data and fit model<a class="headerlink" href="#load-data-and-fit-model" title="Permalink to this headline">#</a></h2>
+<section id="load-modules">
+<h3>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -602,20 +689,21 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">shap</span> <span class="c1"># `pip install shap` if neeed</span>
 
 <span class="c1"># For tidying up output</span>
+<span class="c1"># Clear output</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-02 20:43:01.214960: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-02 20:36:48.890756: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="load-data">
-<h3>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="load-data">
+<h3>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h3>
 <p>The section below downloads pre-processed data, and saves it to a subfolder (from where this code is run).
 If data has already been downloaded that cell may be skipped.</p>
 <p>Code that was used to pre-process the data ready for machine learning may be found at:
@@ -653,10 +741,10 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="function-to-scale-data">
-<h2>Function to scale data<a class="headerlink" href="#function-to-scale-data" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="function-to-scale-data">
+<h2>Function to scale data<a class="headerlink" href="#function-to-scale-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scale_data</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
@@ -678,8 +766,8 @@ If data has already been downloaded that cell may be skipped.</p>
 </div>
 </div>
 </div>
-<div class="section" id="divide-into-x-features-and-y-labels">
-<h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">¶</a></h3>
+<section id="divide-into-x-features-and-y-labels">
+<h3>Divide into X (features) and y (labels)<a class="headerlink" href="#divide-into-x-features-and-y-labels" title="Permalink to this headline">#</a></h3>
 <p>We will separate out our features (the data we use to make a prediction) from our label (what we are truing to predict).
 By convention our features are called <code class="docutils literal notranslate"><span class="pre">X</span></code> (usually upper case to denote multiple features), and the label (survived or not) <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell docutils container">
@@ -694,9 +782,9 @@ By convention our features are called <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="divide-into-training-and-tets-sets">
-<h3>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="divide-into-training-and-tets-sets">
+<h3>Divide into training and tets sets<a class="headerlink" href="#divide-into-training-and-tets-sets" title="Permalink to this headline">#</a></h3>
 <p>When we test a machine learning model we should always test it on data that has not been used to train the model.
 We will use sklearn’s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> method to randomly split the data: 75% for training, and 25% for testing.</p>
 <div class="cell docutils container">
@@ -706,14 +794,14 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="predict-values-and-get-probabilities-of-survival">
-<h3>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="predict-values-and-get-probabilities-of-survival">
+<h3>Predict values and get probabilities of survival<a class="headerlink" href="#predict-values-and-get-probabilities-of-survival" title="Permalink to this headline">#</a></h3>
 <p>Now we can use the trained model to predict survival. We will test the accuracy of both the training and test data sets.</p>
-</div>
-</div>
-<div class="section" id="build-and-train-neural-net">
-<h2>Build and train neural net<a class="headerlink" href="#build-and-train-neural-net" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="build-and-train-neural-net">
+<h2>Build and train neural net<a class="headerlink" href="#build-and-train-neural-net" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">):</span>
@@ -786,8 +874,8 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-<div class="section" id="calculate-accuracy">
-<h3>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">¶</a></h3>
+<section id="calculate-accuracy">
+<h3>Calculate accuracy<a class="headerlink" href="#calculate-accuracy" title="Permalink to this headline">#</a></h3>
 <p>In this example we will measure accuracy simply as the proportion of passengers where we make the correct prediction. In a later notebook we will look at other measures of accuracy which explore false positives and false negatives in more detail.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -800,16 +888,16 @@ We will use sklearn’s <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.846
-Accuracy of predicting test data = 0.825
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy of predicting training data = 0.831
+Accuracy of predicting test data = 0.812
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="get-shapley-values">
-<h2>Get Shapley values<a class="headerlink" href="#get-shapley-values" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="get-shapley-values">
+<h2>Get Shapley values<a class="headerlink" href="#get-shapley-values" title="Permalink to this headline">#</a></h2>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">shap_values</span></code> method from the SHAP library to get Shapley values.
 We use the <code class="docutils literal notranslate"><span class="pre">explainer</span></code> method from the SHAP library to get Shapley values along with other data.</p>
 <p>We pass a sample to the explainer to speed up Shap (which can be slow with random forests - these values are used as expected baseline values for features).</p>
@@ -903,123 +991,123 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.075572</td>
-      <td>0.001335</td>
-      <td>0.009926</td>
-      <td>0.005914</td>
-      <td>-0.000414</td>
-      <td>-0.029717</td>
+      <td>0.098445</td>
+      <td>0.001397</td>
+      <td>0.007442</td>
+      <td>0.003490</td>
+      <td>-0.000497</td>
+      <td>-0.034818</td>
       <td>0.0</td>
-      <td>0.023811</td>
-      <td>0.029840</td>
-      <td>0.016865</td>
+      <td>0.002282</td>
+      <td>0.035604</td>
+      <td>0.042212</td>
       <td>...</td>
       <td>0.0</td>
-      <td>0.000032</td>
-      <td>-0.006387</td>
-      <td>0.083045</td>
-      <td>-0.007510</td>
-      <td>-0.020528</td>
-      <td>-0.007048</td>
+      <td>-0.001898</td>
+      <td>-0.003724</td>
+      <td>0.035959</td>
+      <td>-0.006157</td>
+      <td>-0.015634</td>
+      <td>-0.010641</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.030139</td>
+      <td>0.017271</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-0.037421</td>
-      <td>0.011806</td>
-      <td>0.005616</td>
-      <td>-0.002301</td>
-      <td>-0.004596</td>
-      <td>0.011370</td>
+      <td>-0.045416</td>
+      <td>0.006942</td>
+      <td>0.005792</td>
+      <td>0.001112</td>
+      <td>-0.004107</td>
+      <td>0.008882</td>
       <td>0.0</td>
-      <td>-0.008416</td>
-      <td>0.000688</td>
-      <td>-0.016243</td>
+      <td>-0.002975</td>
+      <td>-0.002125</td>
+      <td>-0.012360</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.000692</td>
-      <td>-0.005140</td>
-      <td>-0.000671</td>
-      <td>-0.002963</td>
-      <td>-0.014568</td>
-      <td>-0.003892</td>
+      <td>-0.001338</td>
+      <td>-0.003956</td>
+      <td>-0.000040</td>
+      <td>-0.003890</td>
+      <td>-0.010858</td>
+      <td>-0.006398</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.002242</td>
+      <td>-0.002217</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.124528</td>
-      <td>0.018880</td>
-      <td>0.016585</td>
-      <td>-0.026200</td>
-      <td>-0.009034</td>
-      <td>0.025034</td>
+      <td>0.098913</td>
+      <td>0.013724</td>
+      <td>0.017021</td>
+      <td>-0.026259</td>
+      <td>-0.006155</td>
+      <td>0.025613</td>
       <td>0.0</td>
-      <td>0.016241</td>
-      <td>-0.003461</td>
-      <td>0.011704</td>
+      <td>0.012995</td>
+      <td>-0.005646</td>
+      <td>-0.009409</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.006854</td>
-      <td>-0.009216</td>
-      <td>0.004273</td>
-      <td>-0.007369</td>
-      <td>-0.015456</td>
-      <td>-0.010374</td>
+      <td>-0.004275</td>
+      <td>-0.007673</td>
+      <td>0.001622</td>
+      <td>-0.009820</td>
+      <td>-0.021596</td>
+      <td>-0.017095</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.008978</td>
+      <td>0.006917</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>-0.038174</td>
-      <td>0.024566</td>
-      <td>0.005719</td>
-      <td>-0.002587</td>
-      <td>-0.004567</td>
-      <td>0.011729</td>
+      <td>-0.046223</td>
+      <td>0.013214</td>
+      <td>0.005890</td>
+      <td>0.001104</td>
+      <td>-0.004073</td>
+      <td>0.009331</td>
       <td>0.0</td>
-      <td>-0.008319</td>
-      <td>0.000756</td>
-      <td>-0.016870</td>
+      <td>-0.003120</td>
+      <td>-0.002150</td>
+      <td>-0.012497</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.000678</td>
-      <td>-0.005315</td>
-      <td>-0.000735</td>
-      <td>-0.002984</td>
-      <td>-0.015141</td>
-      <td>-0.004057</td>
+      <td>-0.001330</td>
+      <td>-0.004028</td>
+      <td>0.000003</td>
+      <td>-0.003903</td>
+      <td>-0.011039</td>
+      <td>-0.006508</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.002025</td>
+      <td>-0.002111</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.085266</td>
-      <td>0.183139</td>
-      <td>-0.008362</td>
-      <td>0.009907</td>
-      <td>0.015364</td>
-      <td>0.017181</td>
+      <td>0.127488</td>
+      <td>0.086945</td>
+      <td>-0.009431</td>
+      <td>-0.002687</td>
+      <td>0.023811</td>
+      <td>0.009654</td>
       <td>0.0</td>
-      <td>0.005304</td>
-      <td>0.000066</td>
-      <td>0.049170</td>
+      <td>-0.001463</td>
+      <td>-0.000684</td>
+      <td>0.042646</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.000747</td>
-      <td>-0.009141</td>
-      <td>-0.012562</td>
-      <td>-0.004166</td>
-      <td>-0.021306</td>
-      <td>-0.009163</td>
+      <td>-0.002405</td>
+      <td>-0.005786</td>
+      <td>0.011592</td>
+      <td>-0.004740</td>
+      <td>-0.018059</td>
+      <td>-0.011991</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.022110</td>
+      <td>0.002778</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1047,123 +1135,123 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
     </tr>
     <tr>
       <th>663</th>
-      <td>-0.115406</td>
-      <td>0.030129</td>
-      <td>0.012399</td>
-      <td>0.005401</td>
-      <td>-0.009427</td>
-      <td>0.009339</td>
+      <td>-0.114203</td>
+      <td>0.019386</td>
+      <td>0.012780</td>
+      <td>0.007201</td>
+      <td>-0.008669</td>
+      <td>0.015555</td>
       <td>0.0</td>
-      <td>0.005040</td>
-      <td>-0.006502</td>
-      <td>-0.008975</td>
+      <td>0.005439</td>
+      <td>-0.007165</td>
+      <td>-0.013847</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.003310</td>
-      <td>-0.011315</td>
-      <td>0.000735</td>
-      <td>-0.006115</td>
-      <td>-0.019638</td>
-      <td>-0.009100</td>
+      <td>-0.003343</td>
+      <td>-0.009402</td>
+      <td>0.000524</td>
+      <td>-0.008870</td>
+      <td>-0.021366</td>
+      <td>-0.015232</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.002392</td>
+      <td>0.001641</td>
     </tr>
     <tr>
       <th>664</th>
-      <td>0.098737</td>
-      <td>-0.003349</td>
-      <td>0.005826</td>
-      <td>0.000884</td>
-      <td>-0.000960</td>
-      <td>-0.081945</td>
+      <td>0.106357</td>
+      <td>0.000379</td>
+      <td>0.006967</td>
+      <td>0.002531</td>
+      <td>-0.000483</td>
+      <td>-0.065295</td>
       <td>0.0</td>
-      <td>-0.000329</td>
-      <td>-0.002000</td>
-      <td>-0.000011</td>
+      <td>-0.000753</td>
+      <td>-0.003094</td>
+      <td>-0.011511</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.001544</td>
-      <td>-0.008443</td>
-      <td>-0.001345</td>
-      <td>-0.005211</td>
-      <td>-0.014437</td>
-      <td>-0.005528</td>
+      <td>-0.001676</td>
+      <td>-0.004879</td>
+      <td>-0.000939</td>
+      <td>-0.005136</td>
+      <td>-0.011329</td>
+      <td>-0.008402</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.005835</td>
+      <td>-0.001083</td>
     </tr>
     <tr>
       <th>665</th>
-      <td>-0.035101</td>
-      <td>-0.044933</td>
-      <td>-0.017845</td>
-      <td>-0.000542</td>
-      <td>-0.003212</td>
-      <td>0.009145</td>
+      <td>-0.039810</td>
+      <td>-0.022108</td>
+      <td>-0.018251</td>
+      <td>0.001077</td>
+      <td>-0.002772</td>
+      <td>0.007429</td>
       <td>0.0</td>
-      <td>-0.009507</td>
-      <td>0.001200</td>
-      <td>-0.013155</td>
+      <td>-0.003292</td>
+      <td>-0.002034</td>
+      <td>-0.011751</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.000549</td>
-      <td>-0.004755</td>
-      <td>-0.000182</td>
-      <td>-0.002929</td>
-      <td>-0.011753</td>
-      <td>-0.003452</td>
+      <td>-0.001192</td>
+      <td>-0.003412</td>
+      <td>-0.000191</td>
+      <td>-0.003612</td>
+      <td>-0.009277</td>
+      <td>-0.005902</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.004094</td>
+      <td>-0.003203</td>
     </tr>
     <tr>
       <th>666</th>
-      <td>0.202985</td>
-      <td>0.028220</td>
-      <td>-0.001028</td>
-      <td>-0.009791</td>
-      <td>0.044339</td>
-      <td>0.011547</td>
+      <td>0.156572</td>
+      <td>0.032117</td>
+      <td>-0.007323</td>
+      <td>-0.009998</td>
+      <td>0.036647</td>
+      <td>0.014443</td>
       <td>0.0</td>
-      <td>-0.024470</td>
-      <td>0.024025</td>
-      <td>-0.020985</td>
+      <td>-0.007409</td>
+      <td>0.044108</td>
+      <td>0.034685</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.003756</td>
-      <td>0.132058</td>
-      <td>0.002969</td>
-      <td>-0.006732</td>
-      <td>-0.007577</td>
-      <td>-0.005568</td>
+      <td>-0.002717</td>
+      <td>0.114433</td>
+      <td>0.001810</td>
+      <td>-0.006423</td>
+      <td>-0.014260</td>
+      <td>-0.009320</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.008388</td>
+      <td>-0.007129</td>
     </tr>
     <tr>
       <th>667</th>
-      <td>0.083500</td>
-      <td>0.041321</td>
-      <td>0.000287</td>
-      <td>0.008006</td>
-      <td>0.013138</td>
-      <td>0.007958</td>
+      <td>0.135308</td>
+      <td>0.024840</td>
+      <td>0.008454</td>
+      <td>-0.002092</td>
+      <td>0.015274</td>
+      <td>0.004051</td>
       <td>0.0</td>
-      <td>-0.008014</td>
-      <td>0.000537</td>
-      <td>0.047562</td>
+      <td>-0.005559</td>
+      <td>0.002974</td>
+      <td>0.030481</td>
       <td>...</td>
       <td>0.0</td>
-      <td>-0.002877</td>
-      <td>-0.015563</td>
-      <td>0.002524</td>
-      <td>0.159677</td>
-      <td>-0.023824</td>
-      <td>-0.013539</td>
+      <td>-0.003455</td>
+      <td>-0.009557</td>
+      <td>0.000854</td>
+      <td>0.217715</td>
+      <td>-0.023287</td>
+      <td>-0.014338</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.010407</td>
+      <td>-0.008944</td>
     </tr>
   </tbody>
 </table>
@@ -1180,38 +1268,38 @@ We use the <code class="docutils literal notranslate"><span class="pre">explaine
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>male                   0.180821
-Pclass                 0.071823
-Embarked_C             0.050799
-Age                    0.037584
-CabinLetter_E          0.024956
-AgeImputed             0.019712
-CabinNumberImputed     0.017179
-Embarked_S             0.013422
-CabinLetter_B          0.012590
-CabinLetterImputed     0.010740
-SibSp                  0.010634
-CabinLetter_D          0.010042
-Fare                   0.009586
-Embarked_Q             0.008864
-CabinLetter_F          0.008677
-CabinNumber            0.005763
-Parch                  0.005661
-CabinLetter_missing    0.005528
-CabinLetter_A          0.003994
-CabinLetter_C          0.003767
-CabinLetter_G          0.000623
-EmbarkedImputed        0.000294
-Embarked_missing       0.000286
-CabinLetter_T          0.000247
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>male                   0.206800
+Pclass                 0.074146
+Embarked_C             0.040149
+CabinLetter_E          0.023687
+Age                    0.021404
+AgeImputed             0.018218
+CabinNumberImputed     0.017475
+CabinLetter_F          0.013398
+SibSp                  0.012550
+CabinLetter_D          0.012345
+Embarked_Q             0.012108
+CabinLetter_B          0.010263
+Fare                   0.008442
+CabinLetterImputed     0.006899
+Embarked_S             0.006879
+CabinNumber            0.006602
+CabinLetter_missing    0.004991
+CabinLetter_A          0.004041
+Parch                  0.004005
+CabinLetter_C          0.002358
+Embarked_missing       0.000437
+CabinLetter_G          0.000417
+EmbarkedImputed        0.000266
+CabinLetter_T          0.000147
 dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="shap-summary-plot-feature-influence">
-<h2>Shap Summary plot - feature influence<a class="headerlink" href="#shap-summary-plot-feature-influence" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="shap-summary-plot-feature-influence">
+<h2>Shap Summary plot - feature influence<a class="headerlink" href="#shap-summary-plot-feature-influence" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1286,9 +1374,9 @@ dtype: float64
 <img alt="_images/28_neural_net_shap_32_0.png" src="_images/28_neural_net_shap_32_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="show-relationship-between-feature-values-and-shap">
-<h2>Show relationship between feature values and Shap<a class="headerlink" href="#show-relationship-between-feature-values-and-shap" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="show-relationship-between-feature-values-and-shap">
+<h2>Show relationship between feature values and Shap<a class="headerlink" href="#show-relationship-between-feature-values-and-shap" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">shap.plots.scatter</span></code>, as used for logistic regression and random forests, does not work with DeepExplainer for neural nets. Here we manually plot feature values and their matching Shap value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1315,8 +1403,8 @@ dtype: float64
 <img alt="_images/28_neural_net_shap_34_3.png" src="_images/28_neural_net_shap_34_3.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1340,9 +1428,11 @@ dtype: float64
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="27_random_forest_shap.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1358,24 +1448,28 @@ dtype: float64
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Allen & Kerry Pearn<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Michael Allen & Kerry Pearn<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
