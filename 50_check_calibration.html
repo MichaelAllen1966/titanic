@@ -1078,6 +1078,7 @@ By convention our features are called <code class="docutils literal notranslate"
 <p>If a model is poorly calibrated (if the calibration curve is significantly offset from the diagonal) then the model may be recalibrated. The most common method of recalibration is to take the probability output of the calibration data set(s) and fit a logistic regression model using those outputs and the known <code class="docutils literal notranslate"><span class="pre">y</span></code> values (survived or not) for those probabilities. This is known as <em>Platt scaling</em>. Another method is known as isotonic scaling, but is prone to over-fitting, so is only suitable for large data sets.</p>
 <p>Platt scaling may be easily implemented by adding in a logistic regression model fitted to the output of the calibration test. Platt scaling and isotonic scaling may also be performed by using the <code class="docutils literal notranslate"><span class="pre">CalibratedClassifier</span></code> method built in to sklearn:</p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html">https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html</a></p>
+<p>For an example of recalibration here, see the notebook: “The effect of over-sampling and under-sampling on model calibration” (in the section on working with imbalanced data sets).</p>
 </section>
 </section>
 
