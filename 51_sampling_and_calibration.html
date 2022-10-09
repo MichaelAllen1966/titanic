@@ -505,8 +505,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-models-to-originl-data-or-data-with-oversampling-or-undersampling">
-   Fit models to originl data, or data with oversampling or undersampling
+  <a class="reference internal nav-link" href="#fit-models-to-original-data-or-data-with-oversampling-or-undersampling">
+   Fit models to original data, or data with oversampling or undersampling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -515,13 +515,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-random-undersampled-majority-data">
-     Fit model to random undersampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-randomly-undersampled-majority-data">
+     Fit model to randomly undersampled majority data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-random-oversampled-majority-data">
-     Fit model to random oversampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-randomly-oversampled-majority-data">
+     Fit model to randomly oversampled majority data
     </a>
    </li>
   </ul>
@@ -573,8 +573,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-models-to-originl-data-or-data-with-oversampling-or-undersampling">
-   Fit models to originl data, or data with oversampling or undersampling
+  <a class="reference internal nav-link" href="#fit-models-to-original-data-or-data-with-oversampling-or-undersampling">
+   Fit models to original data, or data with oversampling or undersampling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -583,13 +583,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-random-undersampled-majority-data">
-     Fit model to random undersampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-randomly-undersampled-majority-data">
+     Fit model to randomly undersampled majority data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-random-oversampled-majority-data">
-     Fit model to random oversampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-randomly-oversampled-majority-data">
+     Fit model to randomly oversampled majority data
     </a>
    </li>
   </ul>
@@ -687,8 +687,8 @@ title="Print to PDF"
 </div>
 </section>
 </section>
-<section id="fit-models-to-originl-data-or-data-with-oversampling-or-undersampling">
-<h2>Fit models to originl data, or data with oversampling or undersampling<a class="headerlink" href="#fit-models-to-originl-data-or-data-with-oversampling-or-undersampling" title="Permalink to this headline">#</a></h2>
+<section id="fit-models-to-original-data-or-data-with-oversampling-or-undersampling">
+<h2>Fit models to original data, or data with oversampling or undersampling<a class="headerlink" href="#fit-models-to-original-data-or-data-with-oversampling-or-undersampling" title="Permalink to this headline">#</a></h2>
 <section id="fit-model-to-original-data-balance">
 <h3>Fit model to original data balance<a class="headerlink" href="#fit-model-to-original-data-balance" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
@@ -712,8 +712,9 @@ Precision: 0.931
 </div>
 </div>
 </section>
-<section id="fit-model-to-random-undersampled-majority-data">
-<h3>Fit model to random undersampled majority data<a class="headerlink" href="#fit-model-to-random-undersampled-majority-data" title="Permalink to this headline">#</a></h3>
+<section id="fit-model-to-randomly-undersampled-majority-data">
+<h3>Fit model to randomly undersampled majority data<a class="headerlink" href="#fit-model-to-randomly-undersampled-majority-data" title="Permalink to this headline">#</a></h3>
+<p>Fitting the model to randomly undersampled majority data enhances recall (What proportion of actual positives was identified correctly?) at the cost of worsened precision (What proportion of positive identifications was actually correct?). Or in other words we identify more real positives, but at the cost of more false positives.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">undersampler</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -738,8 +739,9 @@ Precision: 0.496
 </div>
 </div>
 </section>
-<section id="fit-model-to-random-oversampled-majority-data">
-<h3>Fit model to random oversampled majority data<a class="headerlink" href="#fit-model-to-random-oversampled-majority-data" title="Permalink to this headline">#</a></h3>
+<section id="fit-model-to-randomly-oversampled-majority-data">
+<h3>Fit model to randomly oversampled majority data<a class="headerlink" href="#fit-model-to-randomly-oversampled-majority-data" title="Permalink to this headline">#</a></h3>
+<p>Fitting the model to randomly oversampled majority data again enhances recall at the cost of worsened precision.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">oversampler</span> <span class="o">=</span> <span class="n">RandomOverSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -767,6 +769,7 @@ Precision: 0.483
 </section>
 <section id="fit-model-to-smote-over-sampled-data">
 <h2>Fit model to SMOTE over-sampled data<a class="headerlink" href="#fit-model-to-smote-over-sampled-data" title="Permalink to this headline">#</a></h2>
+<p>SMOTE creates synthetic data by hyrdising data points. Fitting the model to SMOTE oversampled minority data again enhances recall at the cost of worsened precision.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
