@@ -696,6 +696,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="the-effect-of-over-sampling-and-under-sampling-on-model-calibration">
 <h1>The effect of over-sampling and under-sampling on model calibration<a class="headerlink" href="#the-effect-of-over-sampling-and-under-sampling-on-model-calibration" title="Permalink to this headline">#</a></h1>
 <p>This note book examines the effect of under-sampling or over-sampling (including SMOTE) to balance training examples for imbalanced data, and shows alternative methods of recalibrating the model.</p>
+<p>Note: a well-calibrated model is especially important when model prediction probabilities are read as risks (e.g. risk of emergency hopsital admission for any given patient).</p>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
 <p>Using under-sampling or over-sampling to balance classes in training and test sets improved the recall of the model, at the expense of the precision of the model. Use of under-sampling or over-sampling led to an overestimation of the frequency of the minority class, and led to significant perturbation of the model calibration.</p>
