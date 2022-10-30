@@ -1037,9 +1037,11 @@ Predicted positive rate: 0.133
 <span class="n">smote_test_pred</span> <span class="o">=</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">smote_test_pred</span> <span class="o">=</span> <span class="n">smote_test_pred</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># fit logistic calibrator</span>
+<span class="c1"># Fit logistic calibrator</span>
 <span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">9999</span><span class="p">)</span>
 <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smote_test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c1"># Get calibrated probablilities</span>
 <span class="n">lr_calibrated</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">cal_proba</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
@@ -1071,9 +1073,11 @@ Predicted positive rate: 0.106
 <h3>SMOTE fit calibrated with isotonic regression<a class="headerlink" href="#smote-fit-calibrated-with-isotonic-regression" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit isotonic calibrator</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit isotonic calibrator</span>
 <span class="n">iso</span> <span class="o">=</span> <span class="n">IsotonicRegression</span><span class="p">()</span>
 <span class="n">iso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smote_test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c1"># Get calibrated probablilities</span>
 <span class="n">iso_calibrated</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">cal_proba</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
@@ -1105,9 +1109,11 @@ Predicted positive rate: 0.090
 <h3>SMOTE fit calibrated with beta regression<a class="headerlink" href="#smote-fit-calibrated-with-beta-regression" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit isotonic calibrator</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit isotonic calibrator</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="n">BetaCalibration</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="s2">&quot;abm&quot;</span><span class="p">)</span>
 <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smote_test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c1"># Get calibrated probablilities</span>
 <span class="n">beta_calibrated</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">cal_proba</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
