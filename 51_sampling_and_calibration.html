@@ -493,20 +493,30 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-packages">
+   Load packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generate-data-set">
    Generate data set
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#split-into-training-and-test-sets">
-     Split into training and test sets
+    <a class="reference internal nav-link" href="#split-into-training-test-and-calibration-check-sets">
+     Split into training, test and calibration check sets
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-models-to-original-data-or-data-with-oversampling-or-undersampling">
-   Fit models to original data, or data with oversampling or undersampling
+  <a class="reference internal nav-link" href="#fit-model-to-original-data-and-oversampled-or-undersampled-data">
+   Fit model to original data and oversampled or undersampled data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -515,29 +525,56 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-randomly-undersampled-majority-data">
-     Fit model to randomly undersampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-randomly-oversampled-majority-data">
+     Fit model to randomly oversampled majority data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-randomly-oversampled-majority-data">
-     Fit model to randomly oversampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-smote-over-sampled-data">
+     Fit model to SMOTE over-sampled data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-model-to-random-undersampled-majority-data">
+     Fit model to random undersampled majority data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-model-to-smote-over-sampled-data">
-   Fit model to SMOTE over-sampled data
+  <a class="reference internal nav-link" href="#show-calibration-curves-for-models-trained-on-data-sets">
+   Show calibration curves for models trained on data sets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-sk-learn-calibrator-to-calibrate-over-sampled-smote-data">
-   Using SK-Learn calibrator to calibrate over-sampled (SMOTE) data
+  <a class="reference internal nav-link" href="#calibrate-model-results-with-three-methods">
+   Calibrate model results with three methods
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-fitted-to-raw-smote-data-without-calibration">
+     Model fitted to raw SMOTE data without calibration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smote-fit-calibrated-with-logistic-regression">
+     SMOTE fit calibrated with logistic regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smote-fit-calibrated-with-isotonic-regression">
+     SMOTE fit calibrated with isotonic regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smote-fit-calibrated-with-beta-regression">
+     SMOTE fit calibrated with beta regression
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -561,20 +598,30 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-packages">
+   Load packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generate-data-set">
    Generate data set
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#split-into-training-and-test-sets">
-     Split into training and test sets
+    <a class="reference internal nav-link" href="#split-into-training-test-and-calibration-check-sets">
+     Split into training, test and calibration check sets
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-models-to-original-data-or-data-with-oversampling-or-undersampling">
-   Fit models to original data, or data with oversampling or undersampling
+  <a class="reference internal nav-link" href="#fit-model-to-original-data-and-oversampled-or-undersampled-data">
+   Fit model to original data and oversampled or undersampled data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -583,29 +630,56 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-randomly-undersampled-majority-data">
-     Fit model to randomly undersampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-randomly-oversampled-majority-data">
+     Fit model to randomly oversampled majority data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fit-model-to-randomly-oversampled-majority-data">
-     Fit model to randomly oversampled majority data
+    <a class="reference internal nav-link" href="#fit-model-to-smote-over-sampled-data">
+     Fit model to SMOTE over-sampled data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-model-to-random-undersampled-majority-data">
+     Fit model to random undersampled majority data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fit-model-to-smote-over-sampled-data">
-   Fit model to SMOTE over-sampled data
+  <a class="reference internal nav-link" href="#show-calibration-curves-for-models-trained-on-data-sets">
+   Show calibration curves for models trained on data sets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-sk-learn-calibrator-to-calibrate-over-sampled-smote-data">
-   Using SK-Learn calibrator to calibrate over-sampled (SMOTE) data
+  <a class="reference internal nav-link" href="#calibrate-model-results-with-three-methods">
+   Calibrate model results with three methods
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-fitted-to-raw-smote-data-without-calibration">
+     Model fitted to raw SMOTE data without calibration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smote-fit-calibrated-with-logistic-regression">
+     SMOTE fit calibrated with logistic regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smote-fit-calibrated-with-isotonic-regression">
+     SMOTE fit calibrated with isotonic regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smote-fit-calibrated-with-beta-regression">
+     SMOTE fit calibrated with beta regression
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#observations">
+  <a class="reference internal nav-link" href="#id1">
    Observations
   </a>
  </li>
@@ -621,36 +695,57 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="the-effect-of-over-sampling-and-under-sampling-on-model-calibration">
 <h1>The effect of over-sampling and under-sampling on model calibration<a class="headerlink" href="#the-effect-of-over-sampling-and-under-sampling-on-model-calibration" title="Permalink to this headline">#</a></h1>
-<p>This note book examines the effect of under-sampling or over-sampling (including SMOTE) to balance training examples for imbalanced data.</p>
+<p>This note book examines the effect of under-sampling or over-sampling (including SMOTE) to balance training examples for imbalanced data, and shows alternative methods of recalibrating the model.</p>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
+<p>Using under-sampling or over-sampling to balance classes in training and test sets improved the recall of the model, at the expense of the precision of the model. Use of under-sampling or over-sampling led to an overestimation of the frequency of the minority class, and led to significant perturbation of the model calibration.</p>
+<p>Recalibration of the model could restore calibration accuracy (at the loss of improved recall). The best calibration type was beta-calibration (<a class="reference external" href="https://pypi.org/project/betacal/">https://pypi.org/project/betacal/</a>).</p>
+</section>
+<section id="load-packages">
+<h2>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install beta calibration package if not installed</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">betacal</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="o">!</span>pip install betacal
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span>
 <span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">RandomOverSampler</span>
 <span class="kn">from</span> <span class="nn">imblearn.under_sampling</span> <span class="kn">import</span> <span class="n">RandomUnderSampler</span>
-<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span>
+
+<span class="kn">from</span> <span class="nn">betacal</span> <span class="kn">import</span> <span class="n">BetaCalibration</span>
+
 <span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">CalibrationDisplay</span>
-<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">CalibratedClassifierCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">plot_roc_curve</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">RocCurveDisplay</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">recall_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.isotonic</span> <span class="kn">import</span> <span class="n">IsotonicRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="generate-data-set">
 <h2>Generate data set<a class="headerlink" href="#generate-data-set" title="Permalink to this headline">#</a></h2>
 <p>We will generate a set of data where 90% of examples are the negative class, and 10% the positive class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">0.60</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">hypercube</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -673,22 +768,33 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/51_sampling_and_calibration_4_0.png" src="_images/51_sampling_and_calibration_4_0.png" />
+<img alt="_images/51_sampling_and_calibration_6_0.png" src="_images/51_sampling_and_calibration_6_0.png" />
 </div>
 </div>
-<section id="split-into-training-and-test-sets">
-<h3>Split into training and test sets<a class="headerlink" href="#split-into-training-and-test-sets" title="Permalink to this headline">#</a></h3>
+<section id="split-into-training-test-and-calibration-check-sets">
+<h3>Split into training, test and calibration check sets<a class="headerlink" href="#split-into-training-test-and-calibration-check-sets" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split full data into training and test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Split test into test and calibration check </span>
+<span class="n">X_cal</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_cal</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_test</span><span class="p">)</span>
+
+<span class="c1"># Expand training set with SMOTE</span>
+<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_smote</span><span class="p">,</span> <span class="n">y_smote</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="fit-models-to-original-data-or-data-with-oversampling-or-undersampling">
-<h2>Fit models to original data, or data with oversampling or undersampling<a class="headerlink" href="#fit-models-to-original-data-or-data-with-oversampling-or-undersampling" title="Permalink to this headline">#</a></h2>
+<section id="fit-model-to-original-data-and-oversampled-or-undersampled-data">
+<h2>Fit model to original data and oversampled or undersampled data<a class="headerlink" href="#fit-model-to-original-data-and-oversampled-or-undersampled-data" title="Permalink to this headline">#</a></h2>
+<p>Note what happens to ROC AUC, recall (what proportion of actual positives was identified correctly?), precision (what proportion of positive identifications was actually correct?), and predicted positive rate (the real data has a positive rate of 0.10).</p>
 <section id="fit-model-to-original-data-balance">
 <h3>Fit model to original data balance<a class="headerlink" href="#fit-model-to-original-data-balance" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
@@ -697,43 +803,25 @@ title="Print to PDF"
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.944
-Recall: 0.623
-Precision: 0.931
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="fit-model-to-randomly-undersampled-majority-data">
-<h3>Fit model to randomly undersampled majority data<a class="headerlink" href="#fit-model-to-randomly-undersampled-majority-data" title="Permalink to this headline">#</a></h3>
-<p>Fitting the model to randomly undersampled majority data enhances recall (What proportion of actual positives was identified correctly?) at the cost of worsened precision (What proportion of positive identifications was actually correct?). Or in other words we identify more real positives, but at the cost of more false positives.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">undersampler</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">X_undersampled</span><span class="p">,</span> <span class="n">y_undersampled</span> <span class="o">=</span> <span class="n">undersampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">model_undersampled</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">model_undersampled</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_undersampled</span><span class="p">,</span><span class="n">y_undersampled</span><span class="p">)</span>
-
-<span class="c1"># Get acuracy scores</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.950
-Recall: 0.837
-Precision: 0.496
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.989
+Recall: 0.866
+Precision: 0.982
+Predicted positive rate: 0.100
 </pre></div>
 </div>
 </div>
@@ -741,7 +829,6 @@ Precision: 0.496
 </section>
 <section id="fit-model-to-randomly-oversampled-majority-data">
 <h3>Fit model to randomly oversampled majority data<a class="headerlink" href="#fit-model-to-randomly-oversampled-majority-data" title="Permalink to this headline">#</a></h3>
-<p>Fitting the model to randomly oversampled majority data again enhances recall at the cost of worsened precision.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">oversampler</span> <span class="o">=</span> <span class="n">RandomOverSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -751,25 +838,32 @@ Precision: 0.496
 <span class="n">model_oversampled</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_oversampled</span><span class="p">,</span><span class="n">y_oversampled</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.950
-Recall: 0.845
-Precision: 0.483
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.991
+Recall: 0.942
+Precision: 0.725
+Predicted positive rate: 0.158
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-</section>
 <section id="fit-model-to-smote-over-sampled-data">
-<h2>Fit model to SMOTE over-sampled data<a class="headerlink" href="#fit-model-to-smote-over-sampled-data" title="Permalink to this headline">#</a></h2>
-<p>SMOTE creates synthetic data by hyrdising data points. Fitting the model to SMOTE oversampled minority data again enhances recall at the cost of worsened precision.</p>
+<h3>Fit model to SMOTE over-sampled data<a class="headerlink" href="#fit-model-to-smote-over-sampled-data" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -779,20 +873,68 @@ Precision: 0.483
 <span class="n">model_smote</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_smote</span><span class="p">,</span> <span class="n">y_smote</span><span class="p">)</span>
 
 <span class="c1"># Get acuracy scores</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.950
-Recall: 0.837
-Precision: 0.490
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.991
+Recall: 0.942
+Precision: 0.722
+Predicted positive rate: 0.158
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="fit-model-to-random-undersampled-majority-data">
+<h3>Fit model to random undersampled majority data<a class="headerlink" href="#fit-model-to-random-undersampled-majority-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">undersampler</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_undersampled</span><span class="p">,</span> <span class="n">y_undersampled</span> <span class="o">=</span> <span class="n">undersampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">model_undersampled</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model_undersampled</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_undersampled</span><span class="p">,</span><span class="n">y_undersampled</span><span class="p">)</span>
+
+<span class="c1"># Get acuracy scores</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.991
+Recall: 0.942
+Precision: 0.745
+Predicted positive rate: 0.163
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="show-calibration-curves-for-models-trained-on-data-sets">
+<h2>Show calibration curves for models trained on data sets<a class="headerlink" href="#show-calibration-curves-for-models-trained-on-data-sets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -813,77 +955,22 @@ Precision: 0.490
 
 <span class="c1"># ROC</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">disp1</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">disp1</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
     <span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Original data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">disp2</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_undersampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">disp2</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
     <span class="n">model_undersampled</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random undersampled data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">disp3</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_oversampled</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">disp3</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
     <span class="n">model_oversampled</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random oversampled data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">disp4</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">disp4</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
     <span class="n">model_smote</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;SMOTE data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic curves&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/51_sampling_and_calibration_16_0.png" src="_images/51_sampling_and_calibration_16_0.png" />
-</div>
-</div>
-</section>
-<section id="using-sk-learn-calibrator-to-calibrate-over-sampled-smote-data">
-<h2>Using SK-Learn calibrator to calibrate over-sampled (SMOTE) data<a class="headerlink" href="#using-sk-learn-calibrator-to-calibrate-over-sampled-smote-data" title="Permalink to this headline">#</a></h2>
-<p>Here we recalibrate the SMOTE model.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calibrated_SMOTE_model</span> <span class="o">=</span> <span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">model_smote</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">calibrated_SMOTE_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="c1"># Get acuracy scores</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">calibrated_SMOTE_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">calibrated_SMOTE_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">calibrated_SMOTE_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.944
-Recall: 0.628
-Precision: 0.926
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note: By recalibration we have lost the enhanced recall gained by using SMOTE.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># Calibration</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">disp1</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
-    <span class="n">model_smote</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Uncalibrated SMOTE&#39;</span><span class="p">)</span>
-<span class="n">disp2</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
-    <span class="n">calibrated_SMOTE_model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Calibrated SMOTE&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Calibration curves&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
-<span class="c1"># ROC</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">disp1</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
-    <span class="n">model_smote</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Uncalibrated SMOTE </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">disp1</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
-    <span class="n">calibrated_SMOTE_model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Calibrated SMOTE </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic curves&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
@@ -898,10 +985,214 @@ Precision: 0.926
 </div>
 </div>
 </section>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h2>
-<p>Using under-sampling of the majority class, or over-sampling of the minority class (including use of SMOTE), significantly disrupts model calibration.</p>
-<p>This effect could be especially significant if the model probabilities are being used to report risk, in which case over-sampling or under-sampling should be avoided, or the model recalibrated (which will lose the improved recall that comes by balancing the classes).</p>
+<section id="calibrate-model-results-with-three-methods">
+<h2>Calibrate model results with three methods<a class="headerlink" href="#calibrate-model-results-with-three-methods" title="Permalink to this headline">#</a></h2>
+<p>We will calibrate the data with three methods:</p>
+<ul class="simple">
+<li><p>Logistic regression (Platt sclaing)</p></li>
+<li><p>Isotonic regresssion</p></li>
+<li><p>Beta calibratio (betacal)</p></li>
+</ul>
+<p>Here will will demonstrate these methods with SMOTE oversampling.</p>
+<p>We will fit the calibrator to the test data, and test against the calibration check data.</p>
+<section id="model-fitted-to-raw-smote-data-without-calibration">
+<h3>Model fitted to raw SMOTE data without calibration<a class="headerlink" href="#model-fitted-to-raw-smote-data-without-calibration" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get calibration check set predictions</span>
+<span class="n">cal_proba</span> <span class="o">=</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_cal</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">cal_proba</span> <span class="o">=</span> <span class="n">cal_proba</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Get acuracy scores</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">cal_proba</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">cal_proba</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">cal_proba</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cal_proba</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.993
+Recall: 0.948
+Precision: 0.714
+Predicted positive rate: 0.133
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="smote-fit-calibrated-with-logistic-regression">
+<h3>SMOTE fit calibrated with logistic regression<a class="headerlink" href="#smote-fit-calibrated-with-logistic-regression" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get test set predicitons</span>
+<span class="n">smote_test_pred</span> <span class="o">=</span> <span class="n">model_smote</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">smote_test_pred</span> <span class="o">=</span> <span class="n">smote_test_pred</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># fit logistic calibrator</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">9999</span><span class="p">)</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smote_test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">lr_calibrated</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">cal_proba</span><span class="p">)</span>
+
+<span class="c1"># Get acuracy scores</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">lr_calibrated</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">lr_calibrated</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">lr_calibrated</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lr_calibrated</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.993
+Recall: 0.928
+Precision: 0.874
+Predicted positive rate: 0.106
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="smote-fit-calibrated-with-isotonic-regression">
+<h3>SMOTE fit calibrated with isotonic regression<a class="headerlink" href="#smote-fit-calibrated-with-isotonic-regression" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit isotonic calibrator</span>
+<span class="n">iso</span> <span class="o">=</span> <span class="n">IsotonicRegression</span><span class="p">()</span>
+<span class="n">iso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smote_test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">iso_calibrated</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">cal_proba</span><span class="p">)</span>
+
+<span class="c1"># Get acuracy scores</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">iso_calibrated</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">iso_calibrated</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">iso_calibrated</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iso_calibrated</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.992
+Recall: 0.862
+Precision: 0.956
+Predicted positive rate: 0.090
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="smote-fit-calibrated-with-beta-regression">
+<h3>SMOTE fit calibrated with beta regression<a class="headerlink" href="#smote-fit-calibrated-with-beta-regression" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit isotonic calibrator</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">BetaCalibration</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="s2">&quot;abm&quot;</span><span class="p">)</span>
+<span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smote_test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">beta_calibrated</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">cal_proba</span><span class="p">)</span>
+
+<span class="c1"># Get acuracy scores</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">beta_calibrated</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">beta_calibrated</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">beta_calibrated</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">predicted_positive_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">beta_calibrated</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted positive rate: </span><span class="si">{</span><span class="n">predicted_positive_rate</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC: 0.993
+Recall: 0.882
+Precision: 0.946
+Predicted positive rate: 0.093
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Calibration</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+
+<span class="n">disp1</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">cal_proba</span><span class="p">,</span>
+     <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Uncalibrated&#39;</span><span class="p">)</span>
+
+<span class="n">disp2</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">lr_calibrated</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+     <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Logistic regression&#39;</span><span class="p">)</span>
+
+<span class="n">disp3</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">iso_calibrated</span><span class="p">,</span>
+     <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Isotonic regression&#39;</span><span class="p">)</span>
+
+<span class="n">disp4</span> <span class="o">=</span> <span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">beta_calibrated</span><span class="p">,</span>
+     <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Beta calibration&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ROC</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">cal_proba</span><span class="p">)</span>
+<span class="n">disp1</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span>
+    <span class="n">y_cal</span><span class="p">,</span> <span class="n">cal_proba</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Original data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">lr_calibrated</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">disp2</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">lr_calibrated</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random undersampled data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">iso_calibrated</span><span class="p">)</span>
+<span class="n">disp3</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">iso_calibrated</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random oversampled data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">beta_calibrated</span><span class="p">)</span>
+<span class="n">disp4</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_cal</span><span class="p">,</span> <span class="n">beta_calibrated</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random oversampled data </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic curves&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/51_sampling_and_calibration_31_0.png" src="_images/51_sampling_and_calibration_31_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id1">
+<h2>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>Using under-sampling or over-sampling to balance classes in training and test sets improved the recall of the model, at the expense of the precision of the model. Use of under-sampling or over-sampling led to an overestimation of the frequency of the minority class, and led to significant perturbation of the model calibration.</p>
+<p>Recalibration of the model could restore calibration accuracy (at the loss of improved recall). The best calibration type was beta-calibration (<a class="reference external" href="https://pypi.org/project/betacal/">https://pypi.org/project/betacal/</a>).</p>
 </section>
 </section>
 

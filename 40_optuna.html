@@ -709,7 +709,7 @@ title="Print to PDF"
 <p>Many machine learning models have many hyperparameters that may be changed, and each may have many different possible levels to choose from. How do you find the best combination (though most machine learning packages come with sensible defaults which may already give optimal or close to optimal results).</p>
 <p>When optimising model hyperparameters, we use only the training set of data, and test independently with a test set not used to optimise those hyperparameters. This avoids reporting a spuriously high accuracy level due to over-fitting of model hyperparameters to the training set.</p>
 <p>During optimisation we create new k-fold train/test splits from the training set. The model hyperparameters are then trained on the average accuracy of these new k-fold test splits. Here we will use simple accuracy (the proportion of tets instances correctly classified), but you may choose to use other measures such as receiver operator characteristic curve AUC, or mean squared error (for a regression model).</p>
-<p><img alt="Validation and testing in model hyperparameter optimisation" src="images/optuna_validation.png" /></p>
+<p><img alt="Validation and testing in model hyperparameter optimisation" src="_images/optuna_validation.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
