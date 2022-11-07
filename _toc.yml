@@ -56,4 +56,7 @@ parts:
 - caption: Creating synthetic data
   chapters:
   - file: 30_synthetic_data _SMOTE
+- caption: Other
+  chapters:
+  - file: 52_pytorch_softmax_sigmoid
   
