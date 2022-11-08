@@ -48,6 +48,7 @@ parts:
   chapters:
   - file: 45_pytorch_simple
   - file: 46_pytorch_class
+  - file: 47_pytorch_gpu
 - caption: Model explainability
   chapters:
   - file: 26_logistic_regression_shap
