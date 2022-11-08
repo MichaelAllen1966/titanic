@@ -53,6 +53,7 @@ parts:
   - file: 26_logistic_regression_shap
   - file: 27_random_forest_shap
   - file: 28_neural_net_shap
+  - file: 90_shap_interactions_on_titanic
 - caption: Creating synthetic data
   chapters:
   - file: 30_synthetic_data _SMOTE
