@@ -754,8 +754,8 @@ title="Print to PDF"
 <li><p>A dropout layer. This layer randomly sets outputs from the preceding layer to zero during training (a different set of outputs is zeroed for each training iteration). This helps prevent over-fitting of the model to the training data. Typically between 0.1 and 0.5 outputs are set to zero (<code class="docutils literal notranslate"><span class="pre">p=0.1</span></code> means 10% of outputs are set to zero).</p></li>
 <li><p>An activation layer. In this case ReLU (rectified linear unit). ReLU activation is most common for the inner layers of a neural network. Negative input values are set to zero. Positive input values are left unchanged.</p></li>
 <li><p>A second linear fully connected layer (again twice the number of input features). This is again followed by batch normalisation, dropout and ReLU activation layers.</p></li>
-<li><p>A final fully connected linear layer of two nodes (more nodes could be used for more classes).</p></li>
-<li><p>Apply sigmoid activation to convert each output node to range 0-1 output.</p></li>
+<li><p>A final fully connected linear layer of a single node.</p></li>
+<li><p>Apply sigmoid activation to convert the output node to range 0-1 output.</p></li>
 </ol>
 <p>The output of the net are two numbers (corresponding to scored for died/survived) between 0 and 1. These do not necessarily add up exactly to one (if Sigmoid is replaced with SoftMax then they will add up to 1, but here we will stick to sigmoid). The one with the highest value is taken as the classification result. This structure of neural net allows for any number of classes (e.g 10 classes for digit recognition).</p>
 </section>
@@ -772,7 +772,7 @@ title="Print to PDF"
         <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bn2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="c1"># Define sequence of layers</span>
@@ -822,9 +822,6 @@ title="Print to PDF"
     <span class="n">number_features</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>        
     <span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
     
-    <span class="c1">### Train model</span>
-    <span class="c1"># Note: Lots of these parameters may be fine tuned</span>
-    
     <span class="c1"># Set batch size (cases per batch - commonly 8-64)</span>
     <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
     <span class="c1"># Epochs (number of times to pass over data)</span>
@@ -835,8 +832,11 @@ title="Print to PDF"
     <span class="n">batch_no</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span>
     
     <span class="c1"># Set up optimizer for classification</span>
-    <span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+    <span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    
+    <span class="c1"># Set net to training mode</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
     
     <span class="c1"># Train model by passing through the data the required number of epochs</span>
     <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
@@ -844,21 +844,18 @@ title="Print to PDF"
         <span class="c1"># Shuffle the training data</span>
         <span class="n">X_train_sc</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-        <span class="c1"># Set net to training mode</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_no</span><span class="p">):</span>
             
             <span class="c1"># Get X and y batch data</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">batch_size</span>
             <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">batch_size</span>
             <span class="n">x_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]))</span>
-            <span class="n">y_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]))</span>
+            <span class="n">y_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]))</span>
             
             <span class="c1"># These steps train the model: Forward + Backward + Optimize</span>
             <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span> <span class="c1"># reset optimizer</span>
             <span class="n">ypred_var</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">x_var</span><span class="p">)</span> <span class="c1"># predict y</span>
-            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">ypred_var</span><span class="p">,</span> <span class="n">y_var</span><span class="p">)</span> <span class="c1"># Calculate loss</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">ypred_var</span><span class="p">,</span> <span class="n">y_var</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Calculate loss</span>
             <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># Back propagate loss through network</span>
             <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span> <span class="c1"># Update network to reduce loss</span>
             
@@ -870,16 +867,16 @@ title="Print to PDF"
     <span class="c1"># Get training accuracy</span>
     <span class="n">test_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">test_var</span><span class="p">)</span>
-    <span class="n">values</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">values</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
     <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
     <span class="n">training_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
  
     <span class="c1"># Get test accuracy</span>
     <span class="n">test_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">test_var</span><span class="p">)</span>
-    <span class="n">values</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">values</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
     <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">accuracy_test</span><span class="si">:</span><span class="s1">0.3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">test_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">)</span>
@@ -887,11 +884,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K_fold 1: 0.765
-K_fold 2: 0.815
-K_fold 3: 0.826
-K_fold 4: 0.798
-K_fold 5: 0.848
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K_fold 1: 0.777
+K_fold 2: 0.798
+K_fold 3: 0.854
+K_fold 4: 0.775
+K_fold 5: 0.837
 </pre></div>
 </div>
 </div>
@@ -907,11 +904,11 @@ K_fold 5: 0.848
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8637640449438202,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8778089887640449,
+ 0.8877980364656382,
+ 0.85273492286115,
  0.8709677419354839,
- 0.8709677419354839,
- 0.8779803646563815,
- 0.8513323983169705]
+ 0.8653576437587658]
 </pre></div>
 </div>
 </div>
@@ -924,11 +921,11 @@ K_fold 5: 0.848
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.7653631284916201,
- 0.8146067415730337,
- 0.8258426966292135,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.776536312849162,
  0.797752808988764,
- 0.848314606741573]
+ 0.8539325842696629,
+ 0.7752808988764045,
+ 0.8370786516853933]
 </pre></div>
 </div>
 </div>
@@ -945,7 +942,7 @@ K_fold 5: 0.848
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.867, 0.810
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.871, 0.808
 </pre></div>
 </div>
 </div>
