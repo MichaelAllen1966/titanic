@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>PyTorch simple sequential neural net &#8212; Titanic Survival Machine Learning</title>
+    <title>PyTorch class-based neural net using GPU if avaliable &#8212; Titanic Survival Machine Learning</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="PyTorch class-based neural net" href="46_pytorch_class.html" />
-    <link rel="prev" title="TensorFlow Bagging" href="25_tensorflow_bagging.html" />
+    <link rel="next" title="Explaining model predictions with Shapley values - Logistic Regression" href="26_logistic_regression_shap.html" />
+    <link rel="prev" title="PyTorch class-based neural net" href="46_pytorch_class.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -305,8 +305,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="45_pytorch_simple.html">
    PyTorch simple sequential neural net
   </a>
  </li>
@@ -315,8 +315,8 @@ const thebe_selector_output = ".output, .cell_output"
    PyTorch class-based neural net
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="47_pytorch_gpu.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    PyTorch class-based neural net using GPU if avaliable
   </a>
  </li>
@@ -443,7 +443,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/45_pytorch_simple.ipynb"
+        <a href="_sources/47_pytorch_gpu.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -504,7 +504,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   PyTorch simple sequential neural net
+   PyTorch class-based neural net using GPU if avaliable
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -527,13 +527,28 @@ title="Print to PDF"
      Load data
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-whether-a-gpu-is-available">
+     Check whether a GPU is available
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-up-neural-net">
    Set up neural net
   </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Set up neural net
+  </a>
   <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#select-device-depedning-on-whether-a-gpu-is-available">
+     Select device depedning on whether a GPU is available
+    </a>
+   </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#run-the-model-with-k-fold-validation">
      Run the model with k-fold validation
@@ -560,7 +575,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>PyTorch simple sequential neural net</h1>
+                <h1>PyTorch class-based neural net using GPU if avaliable</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -572,7 +587,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   PyTorch simple sequential neural net
+   PyTorch class-based neural net using GPU if avaliable
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -595,13 +610,28 @@ title="Print to PDF"
      Load data
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-whether-a-gpu-is-available">
+     Check whether a GPU is available
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-up-neural-net">
    Set up neural net
   </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Set up neural net
+  </a>
   <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#select-device-depedning-on-whether-a-gpu-is-available">
+     Select device depedning on whether a GPU is available
+    </a>
+   </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#run-the-model-with-k-fold-validation">
      Run the model with k-fold validation
@@ -629,32 +659,19 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="pytorch-simple-sequential-neural-net">
-<h1>PyTorch simple sequential neural net<a class="headerlink" href="#pytorch-simple-sequential-neural-net" title="Permalink to this headline">#</a></h1>
-<p>In this workbook we build a neural network to predict survival. The two common frameworks used for neural networks (as of 2020) are TensorFlow and PyTorch. Both are excellent frameworks. TensorFlow frequently requires fewer lines of code, but PyTorch is more natively Python in its syntax, and also allows for easier debugging as the model may be interrupted, with a breakpoint, and debugged as necessary. This makes PyTorch particularly suitable for research and experimentation. A disadvantage of using PyTorch is that, compared with TensorFlow, there are fewer training materials and examples available.</p>
-<p>Both TensorFlow and PyTorch allow the neural network to be trained on a GPU, which is beneficial for large neural networks (especially those processing image, sound or free-text data). In order to lever the benefits of GPU (which perform many calculations simultaneously), data is grouped into batches. These batches are presented to the CPU in a single object called a Tensor (a multi-dimensional array).</p>
-<p>Installation instructions for PyTorch may be found at <a class="reference external" href="http://pytorch.org">pytorch.org</a>. (If in doubt about what installation to use, use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> and use CPU-only, not CUDA). If you are using Anaconda then it is advised to create a new environment, and install pytorch, numpy, pandas, sci-kit learn and matplotlib into that new environment. For more on Anaconda environments see: <a class="reference external" href="https://docs.anaconda.com/anaconda/navigator/tutorials/manage-environments/">https://docs.anaconda.com/anaconda/navigator/tutorials/manage-environments/</a></p>
-<p>There are two versions of this workbook. This version uses a simpler form of constructing the neural network, which assumes all layers of the network occur in a simple sequence. The alternative version uses a class-based method which offers more flexibility (but at the cost of a little simplicity). It is recommended to work through both methods.</p>
-<p>It is not the intention here to describe neural networks in any detail, but rather give some introductory code to using a neural network for a classification problem. For an introduction to neural networks see: <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">https://en.wikipedia.org/wiki/Artificial_neural_network</a></p>
-<p>The code for PyTorch here keeps all calculations on the CPU rather than passing to a GPU (if you have one). Running neural networks on CPUs is fine for small sets of structured data such as our Titanic data. GPUs come in to their own for large data sets or unstructured data like images, sound clips, or free text.</p>
-<p>The training process of a neural network consists of three general phases which are repeated across all the data. All of the data is passed through the network multiple times (the number of iterations, which may be as few as 3-5 or may be 100+). The three phases are:</p>
-<ul class="simple">
-<li><p>Pass training X data to the network and predict y</p></li>
-<li><p>Calculate the ‘loss’ (error) between the predicted and observed (actual) values of y</p></li>
-<li><p>Adjust the network a little (as defined by the learning rate) so that the error is reduced. The correction of the network is performed by PyTorch or TensorFlow using a technique called ‘back-propagation’.</p></li>
-</ul>
-<p>The learning is repeated until maximum accuracy is achieved (but keep an eye on accuracy of test data as well as training data as the network may develop significant over-fitting to training data unless steps are taken to offset the potential for over-fitting, such as use of ‘drop-out’ layers described below).</p>
-<p>Note: Neural Networks are most often used for complex unstructured data. For structured data, other techniques, such as Random Forest,s may frequently be preferred.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="pytorch-class-based-neural-net-using-gpu-if-avaliable">
+<h1>PyTorch class-based neural net using GPU if avaliable<a class="headerlink" href="#pytorch-class-based-neural-net-using-gpu-if-avaliable" title="Permalink to this headline">#</a></h1>
+<p>This notebook is a repeat of the class-based method for PyTorch, but checks whether a GPU is available. GPUs signfocantly speed up neural network training when there are many features present, batch sizes are large, or the network is large.</p>
+<p>For smaller numbers of features, and for small networks, running on CPU may be faster (especially with modern multi-core CPUs).</p>
+<p>As opposed to TensorFlow, we must modify the code a little to use the GPU if it is available. We need to pass both the model and the data to the GPU as part of the code.</p>
 <section id="load-modules">
 <h2>Load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># General</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="c1"># sklearn</span>
+<span class="c1"># sklearn for pre-processing</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
@@ -662,6 +679,7 @@ title="Print to PDF"
 <span class="c1"># pytorch</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 </pre></div>
 </div>
 </div>
@@ -680,6 +698,8 @@ title="Print to PDF"
                 <span class="s1">&#39;1804_python_healthcare/master/titanic/data/processed_data.csv&#39;</span>
     
     <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="c1"># Make all data &#39;float&#39; type</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="c1"># Create a data subfolder if one does not already exist</span>
     <span class="kn">import</span> <span class="nn">os</span>
@@ -713,7 +733,6 @@ title="Print to PDF"
     <span class="n">test_sc</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">train_sc</span><span class="p">,</span> <span class="n">test_sc</span>
-    
 </pre></div>
 </div>
 </div>
@@ -724,8 +743,6 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/processed_data.csv&#39;</span><span class="p">)</span>
-<span class="c1"># Make all data &#39;float&#39; type</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># X = all &#39;data&#39; except the &#39;survived&#39; column</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span> <span class="c1"># y = &#39;survived&#39; column from &#39;data&#39;</span>
@@ -737,10 +754,26 @@ title="Print to PDF"
 </div>
 </div>
 </section>
+<section id="check-whether-a-gpu-is-available">
+<h2>Check whether a GPU is available<a class="headerlink" href="#check-whether-a-gpu-is-available" title="Permalink to this headline">#</a></h2>
+<p>The GPU must be of the ‘CUDA’ type (usually a NVIDIA GPU).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="set-up-neural-net">
 <h1>Set up neural net<a class="headerlink" href="#set-up-neural-net" title="Permalink to this headline">#</a></h1>
-<p>Here we use the <code class="docutils literal notranslate"><span class="pre">sequential</span></code> method to set up a PyTorch neural network. This simpler method assumes each layer occurs in sequence. Though simpler, it lacks some flexibility, and does not allow for easy debugging by setting a breakpoint in the middle of the training sequence.</p>
+<p>Here we use the class-based method to set up a PyTorch neural network. The network is the same as the sequential network we previously used, but is built using</p>
 <p>We will put construction of the neural net into a separate function.</p>
 <p>The neural net is a relatively simple network. The inputs are connected to two hidden layers (of 240 and 50 nodes) before being connected to two output nodes corresponding to each class (died and survived). It also contains some useful additions (batch normalisation and dropout) as described below.</p>
 <p>The layers of the network are:</p>
@@ -755,27 +788,60 @@ title="Print to PDF"
 <li><p>Apply sigmoid activation to convert the output node to range 0-1 output.</p></li>
 </ol>
 <p>The output of the net are two numbers (corresponding to scored for died/survived) between 0 and 1. These do not necessarily add up exactly to one (if Sigmoid is replaced with SoftMax then they will add up to 1, but here we will stick to sigmoid). The one with the highest value is taken as the classification result. This structure of neural net allows for any number of classes (e.g 10 classes for digit recognition).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Set up neural net<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">):</span>
-
-    <span class="n">net</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span><span class="p">,</span> <span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>            
-            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     
-    <span class="k">return</span> <span class="n">net</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_features</span><span class="p">):</span>
+        <span class="c1"># Define layers</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span><span class="p">,</span> <span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">number_features</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Define sequence of layers</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Fully connected layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Batch normalisation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># Apply dropout</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># ReLU activation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Fully connected layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Batch normalisation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># Apply dropout</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># ReLU activation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Fully connected layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Sigmoid output (0-1)</span>
+        
+        <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="select-device-depedning-on-whether-a-gpu-is-available">
+<h2>Select device depedning on whether a GPU is available<a class="headerlink" href="#select-device-depedning-on-whether-a-gpu-is-available" title="Permalink to this headline">#</a></h2>
+<p>Thi smethod would also allow you to set a device manually, such as if you want to force CPU use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>  
+  <span class="n">dev</span> <span class="o">=</span> <span class="s2">&quot;cuda:0&quot;</span> 
+<span class="k">else</span><span class="p">:</span>  
+  <span class="n">dev</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>  
+
+<span class="c1"># dev = &quot;cpu&quot;  # Force CPU use of wished (for small numebrs of features)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>  
+<span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>    
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="run-the-model-with-k-fold-validation">
 <h2>Run the model with k-fold validation<a class="headerlink" href="#run-the-model-with-k-fold-validation" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -804,10 +870,16 @@ title="Print to PDF"
     
     <span class="c1"># Define network</span>
     <span class="n">number_features</span> <span class="o">=</span> <span class="n">X_train_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>        
-    <span class="n">net</span> <span class="o">=</span> <span class="n">make_net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="n">number_features</span><span class="p">)</span>
+
+    <span class="c1"># Set use of devise (GPU or CPU)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    
+    <span class="c1">### Train model</span>
+    <span class="c1"># Note: Lots of these parameters may be fine tuned</span>
     
     <span class="c1"># Set batch size (cases per batch - commonly 8-64)</span>
-    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
     <span class="c1"># Epochs (number of times to pass over data)</span>
     <span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">200</span>
     <span class="c1"># Learning rate (how much each bacth updates the model)</span>
@@ -819,14 +891,14 @@ title="Print to PDF"
     <span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
     
-    <span class="c1"># Set net to training mode</span>
-    <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-    
     <span class="c1"># Train model by passing through the data the required number of epochs</span>
     <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
 
         <span class="c1"># Shuffle the training data</span>
         <span class="n">X_train_sc</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+        <span class="c1"># Set net to training mode</span>
+        <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_no</span><span class="p">):</span>
             
@@ -835,6 +907,10 @@ title="Print to PDF"
             <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">batch_size</span>
             <span class="n">x_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]))</span>
             <span class="n">y_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]))</span>
+
+            <span class="c1"># Set use of devise (GPU or CPU)</span>
+            <span class="n">x_var</span> <span class="o">=</span> <span class="n">x_var</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">y_var</span> <span class="o">=</span> <span class="n">y_var</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
             
             <span class="c1"># These steps train the model: Forward + Backward + Optimize</span>
             <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span> <span class="c1"># reset optimizer</span>
@@ -847,19 +923,21 @@ title="Print to PDF"
 
     <span class="c1"># Set net to evaluation mode</span>
     <span class="n">net</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-    
+
     <span class="c1"># Get training accuracy</span>
     <span class="n">test_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">))</span>
+    <span class="n">test_var</span> <span class="o">=</span> <span class="n">test_var</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">test_var</span><span class="p">)</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
     <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">values</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
     <span class="n">accuracy_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_train</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
     <span class="n">training_acc_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">)</span>
  
     <span class="c1"># Get test accuracy</span>
     <span class="n">test_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_test_sc</span><span class="p">))</span>
+    <span class="n">test_var</span> <span class="o">=</span> <span class="n">test_var</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">test_var</span><span class="p">)</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
     <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">values</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
     <span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_test</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">accuracy_test</span><span class="si">:</span><span class="s1">0.3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -868,11 +946,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K_fold 1: 0.799
-K_fold 2: 0.781
-K_fold 3: 0.848
-K_fold 4: 0.792
-K_fold 5: 0.86
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K_fold 1: 0.777
+K_fold 2: 0.77
+K_fold 3: 0.843
+K_fold 4: 0.815
+K_fold 5: 0.876
 </pre></div>
 </div>
 </div>
@@ -888,11 +966,11 @@ K_fold 5: 0.86
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8848314606741573,
- 0.8877980364656382,
- 0.876577840112202,
- 0.8737727910238429,
- 0.8723702664796634]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8820224719101124,
+ 0.8990182328190743,
+ 0.879382889200561,
+ 0.8976157082748948,
+ 0.85273492286115]
 </pre></div>
 </div>
 </div>
@@ -905,11 +983,11 @@ K_fold 5: 0.86
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.7988826815642458,
- 0.7808988764044944,
- 0.848314606741573,
- 0.7921348314606742,
- 0.8595505617977528]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.776536312849162,
+ 0.7696629213483146,
+ 0.8426966292134831,
+ 0.8146067415730337,
+ 0.8764044943820225]
 </pre></div>
 </div>
 </div>
@@ -926,7 +1004,7 @@ K_fold 5: 0.86
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.879, 0.816
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.882, 0.816
 </pre></div>
 </div>
 </div>
@@ -934,12 +1012,12 @@ K_fold 5: 0.86
 </section>
 <section id="plot-results-box-plot">
 <h2>Plot results: Box Plot<a class="headerlink" href="#plot-results-box-plot" title="Permalink to this headline">#</a></h2>
-<p>Box plots show median (orange line), the second and third quartiles (the box), the range (excluding outliers), and any outliers as ‘whisker’ points. Outliers, by convention, are considered to be any points outside of the quartiles +/- 1.5 times the interquartile range. The limit for outliers may be changed using the optional <code class="docutils literal notranslate"><span class="pre">whis</span></code> argument in the boxplot.</p>
-<p>Medians tend to be an easy reliable guide to the centre of a distribution (i.e. look at the medians to see whether a fit is improving or not, but also look at the box plot to see how much variability there is).</p>
-<p>Test sets tend to be more variable in their accuracy measures. Can you think why?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up X data </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Set up X data </span>
 <span class="n">x_for_box</span> <span class="o">=</span> <span class="p">[</span><span class="n">training_acc_results</span><span class="p">,</span> <span class="n">test_acc_results</span><span class="p">]</span>
 
 <span class="c1"># Set up X labels</span>
@@ -966,7 +1044,7 @@ K_fold 5: 0.86
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/45_pytorch_simple_18_0.png" src="_images/45_pytorch_simple_18_0.png" />
+<img alt="_images/47_pytorch_gpu_23_0.png" src="_images/47_pytorch_gpu_23_0.png" />
 </div>
 </div>
 </section>
@@ -999,17 +1077,17 @@ K_fold 5: 0.86
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="25_tensorflow_bagging.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="46_pytorch_class.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">TensorFlow Bagging</p>
+            <p class="prev-next-title">PyTorch class-based neural net</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="46_pytorch_class.html" title="next page">
+    <a class='right-next' id="next-link" href="26_logistic_regression_shap.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PyTorch class-based neural net</p>
+        <p class="prev-next-title">Explaining model predictions with Shapley values - Logistic Regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
