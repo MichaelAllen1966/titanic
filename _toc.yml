@@ -55,6 +55,8 @@ parts:
   - file: 27_random_forest_shap
   - file: 28_neural_net_shap
   - file: 90_shap_interactions_on_titanic
-- caption: Creating synthetic data
+- caption: Other
   chapters:
   - file: 30_synthetic_data _SMOTE
+  - file: 52_pytorch_softmax_sigmoid
+  
