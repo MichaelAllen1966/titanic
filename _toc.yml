@@ -33,10 +33,11 @@ parts:
   - file: 15_imbalanced _data_threshold
   - file: 16_imbalanced _data_smote
   - file: 51_sampling_and_calibration
-- caption: Random forest model
+- caption: Random forest and XGBoost models
   chapters:
   - file: 17_random_forest
   - file: 18_random_forest_roc
+  - file: 32_xgboost
 - caption: TensorFlow neural nets
   chapters:
   - file: 19_tensorflow_1
