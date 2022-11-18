@@ -17,6 +17,7 @@ parts:
   - file: 07_learning_curve
   - file: 08_roc
   - file: 50_check_calibration
+  - file: 53_bagging
 - caption: Optimising machine learning models
   chapters:
   - file: 40_optuna
