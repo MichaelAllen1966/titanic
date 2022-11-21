@@ -748,7 +748,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-11-21 08:44:01.761823: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-11-21 08:54:57.333109: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
 </pre></div>
 </div>
 </div>
@@ -944,8 +944,8 @@ title="Print to PDF"
 <p>Here we use the api-based method to set up a TensorFlow neural network. This method allows us
 to more flexibly define the inputs for each layer, rather than assuming there is a simple sequence as with the Sequential method.</p>
 <p>We will put construction of the neural net into a separate function.</p>
-<p>The neural net is a relatively simple network. The inputs are connected to two hidden layers (of 240 and 50 nodes) before being connected to two output nodes corresponding to each class (died and survived). It also contains some useful additions (batch normalisation and dropout) as described below.
-The layers of the network are:</p>
+<p>The neural net is a relatively simple network. The inputs are connected to two hidden layers (of 240 and 50 nodes) before being connected to two output nodes corresponding to each class (died and survived). It also contains some useful additions (batch normalisation and dropout) as described below.</p>
+<p>The layers of the network are:</p>
 <ol class="simple">
 <li><p>An input layer (which does need to be defined)</p></li>
 <li><p>A linear fully-connected (dense) layer.This is defined by the number of inputs (the number of input features) and the number of nodes/outputs. Each node will receive the values of all the inputs (which will either be the feature data for the input layer, or the outputs from the previous layer - so that if the previous layer had 10 nodes, then each node of the current layer would have 10 inputs, one from each node of the previous layer). It is a linear layer because the output of the node at this point is a linear function of the dot product of the weights and input values. We will expand out feature data set up to twice the number of input features. ral network. Negative input values are set to zero. Positive input values are left unchanged.</p></li>
@@ -975,6 +975,7 @@ The layers of the network are:</p>
     <span class="n">net</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
     <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span>
     <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    
     <span class="k">return</span> <span class="n">net</span>
 </pre></div>
 </div>
@@ -1013,49 +1014,49 @@ Non-trainable params: 40
 _________________________________________________________________
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-11-21 08:44:03.415667: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2022-11-21 08:44:03.416875: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
-2022-11-21 08:44:03.421591: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:03.421735: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-11-21 08:54:58.431875: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-11-21 08:54:58.432493: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-11-21 08:54:58.445854: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:58.445952: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
 pciBusID: 0000:01:00.0 name: NVIDIA GeForce RTX 3050 Ti Laptop GPU computeCapability: 8.6
 coreClock: 1.035GHz coreCount: 20 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 163.94GiB/s
-2022-11-21 08:44:03.421757: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2022-11-21 08:44:03.423052: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2022-11-21 08:44:03.423115: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2022-11-21 08:44:03.424573: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2022-11-21 08:44:03.424816: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2022-11-21 08:44:03.426100: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2022-11-21 08:44:03.426594: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2022-11-21 08:44:03.429126: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2022-11-21 08:44:03.429250: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:03.429417: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:03.429486: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2022-11-21 08:44:03.429995: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+2022-11-21 08:54:58.445973: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-11-21 08:54:58.446719: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-11-21 08:54:58.446772: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-11-21 08:54:58.447653: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-11-21 08:54:58.447863: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-11-21 08:54:58.448566: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-11-21 08:54:58.448899: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-11-21 08:54:58.450847: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-11-21 08:54:58.450954: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:58.451065: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:58.451115: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-11-21 08:54:58.451722: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2022-11-21 08:44:03.431185: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2022-11-21 08:44:03.431308: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:03.431450: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+2022-11-21 08:54:58.455159: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-11-21 08:54:58.455417: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:58.455617: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
 pciBusID: 0000:01:00.0 name: NVIDIA GeForce RTX 3050 Ti Laptop GPU computeCapability: 8.6
 coreClock: 1.035GHz coreCount: 20 deviceMemorySize: 3.82GiB deviceMemoryBandwidth: 163.94GiB/s
-2022-11-21 08:44:03.431490: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2022-11-21 08:44:03.431512: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2022-11-21 08:44:03.431530: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2022-11-21 08:44:03.431543: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2022-11-21 08:44:03.431568: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2022-11-21 08:44:03.431585: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2022-11-21 08:44:03.431599: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2022-11-21 08:44:03.431611: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2022-11-21 08:44:03.431688: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:03.431844: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:03.431932: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2022-11-21 08:44:03.431961: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2022-11-21 08:44:04.486872: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
-2022-11-21 08:44:04.486894: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
-2022-11-21 08:44:04.486899: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
-2022-11-21 08:44:04.487152: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:04.487308: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:04.487397: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-11-21 08:44:04.487473: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3376 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA GeForce RTX 3050 Ti Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.6)
+2022-11-21 08:54:58.455672: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-11-21 08:54:58.455697: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-11-21 08:54:58.455714: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-11-21 08:54:58.455733: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-11-21 08:54:58.455748: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-11-21 08:54:58.455765: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-11-21 08:54:58.455780: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-11-21 08:54:58.455796: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-11-21 08:54:58.455868: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:58.456010: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:58.456083: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-11-21 08:54:58.456110: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-11-21 08:54:59.329867: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-11-21 08:54:59.329881: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2022-11-21 08:54:59.329884: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2022-11-21 08:54:59.330039: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:59.330142: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:59.330202: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-11-21 08:54:59.330258: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3376 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA GeForce RTX 3050 Ti Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.6)
 </pre></div>
 </div>
 </div>
@@ -1106,7 +1107,7 @@ coreClock: 1.035GHz coreCount: 20 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_sc</span><span class="p">,</span>
              <span class="n">y_train</span><span class="p">,</span>
              <span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
-             <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+             <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
              <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             
     <span class="c1">### Test model (print results for each k-fold iteration)</span>
@@ -1128,9 +1129,9 @@ coreClock: 1.035GHz coreCount: 20 deviceMemorySize: 3.82GiB deviceMemoryBandwidt
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K_fold 1
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-11-21 08:44:04.856216: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2022-11-21 08:44:04.856464: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2918400000 Hz
-2022-11-21 08:44:05.181177: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-11-21 08:54:59.692599: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2022-11-21 08:54:59.692874: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2918400000 Hz
+2022-11-21 08:54:59.968047: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K_fold 2
@@ -1152,11 +1153,11 @@ K_fold 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8792134831460674,
- 0.8807854137447405,
- 0.8709677419354839,
- 0.8695652173913043,
- 0.8513323983169705]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.901685393258427,
+ 0.9046283309957924,
+ 0.8906030855539971,
+ 0.8934081346423562,
+ 0.8737727910238429]
 </pre></div>
 </div>
 </div>
@@ -1169,11 +1170,11 @@ K_fold 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.7988826815642458,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.7430167597765364,
+ 0.7921348314606742,
  0.8146067415730337,
- 0.8089887640449438,
- 0.7865168539325843,
- 0.8539325842696629]
+ 0.7640449438202247,
+ 0.8370786516853933]
 </pre></div>
 </div>
 </div>
@@ -1190,7 +1191,7 @@ K_fold 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.870, 0.813
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.893, 0.79
 </pre></div>
 </div>
 </div>
@@ -1342,19 +1343,19 @@ K_fold 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.26932237, -0.17859136,  0.09411943, ...,  0.13712375,
-        -0.12985896,  0.05574609],
-       [-0.10145489, -0.5881801 , -0.24259445, ..., -0.12916577,
-         0.46420005,  0.27985376],
-       [-0.20380598, -0.11370286,  0.08681864, ..., -0.5642095 ,
-        -0.02050319, -0.00750731],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.25289223,  0.0089573 , -0.27491435, ...,  0.0426338 ,
+        -0.03406185,  0.34181413],
+       [-0.11349136,  0.22068281, -0.5531101 , ..., -0.3987295 ,
+        -0.35948583, -0.14833109],
+       [ 0.24423613,  0.21060422, -0.6320418 , ...,  0.55794257,
+         0.76699865,  0.36112458],
        ...,
-       [ 0.1503304 ,  0.08761366,  0.0223806 , ...,  0.09824327,
-        -0.03598559, -0.17728117],
-       [ 0.06476289, -0.1573125 ,  0.06645566, ..., -0.07762478,
-        -0.04783489,  0.13783987],
-       [-0.19626084,  0.14286877,  0.03267904, ..., -0.13957883,
-         0.13629165,  0.02640205]], dtype=float32)
+       [ 0.14193854, -0.08188624,  0.1892125 , ...,  0.14804359,
+         0.10430929, -0.17817934],
+       [ 0.2838201 , -0.07639708, -0.2817484 , ..., -0.19457579,
+        -0.23896515,  0.15054658],
+       [-0.06116315, -0.15682226, -0.22222073, ..., -0.18413118,
+        -0.22550723,  0.06565644]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -1370,10 +1371,10 @@ K_fold 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7/7 [==============================] - 0s 2ms/step - loss: 0.5277 - accuracy: 0.7937
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7/7 [==============================] - 0s 1ms/step - loss: 0.5215 - accuracy: 0.8341
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.5277444124221802, 0.7937219738960266]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.5215047597885132, 0.834080696105957]
 </pre></div>
 </div>
 </div>
