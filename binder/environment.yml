@@ -11,7 +11,7 @@ dependencies:
   - pip
   - python=3.8
   - scikit-learn
-  - tensorflow-gpu=2.4
+  - tensorflow
   - pip:
     - pydot
     - graphviz
@@ -22,5 +22,6 @@ dependencies:
     - diffprivlib
     - optuna
     - plotly
+    - pytorch
     - kaleido
     - xgboost
